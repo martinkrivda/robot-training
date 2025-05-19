@@ -53,3 +53,10 @@ Login Should Have Failed
     Element Text Should Be    //*[@id="messages"]/center    ${Invalid Login Message}
     Element Text Should Be    username    ${EMPTY}
     Element Text Should Be    password    ${EMPTY}
+
+Open Browser And Logged In
+    Open Browser To Login Page
+    Type In Valid Username
+    Type In Valid Password
+    Submit Credentials
+    Welcome Page Should Be Open

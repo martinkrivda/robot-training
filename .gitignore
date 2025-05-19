@@ -6,5 +6,5 @@ log.html
 report.html
 output.xml
 selenium-screenshot-*.png
-credentials.py
 __pycache__
+*.log
