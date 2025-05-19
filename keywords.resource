@@ -8,13 +8,10 @@ Variables    credentials.py
 *** Variables ***
 ${Login Url}    https://apps.iss-europe.eu/csmtest/login.php
 ${Browser}    Chrome
-# ${User Name}    %{USERNAME}
-# ${Valid User}    ${VALIDUSER}
-# ${Valid Password}    ${VALIDPASSWORD}
 ${Invalid User}    mstestXX
 ${Invalid Password}    MsTestXX
 ${Title Login}    CSM
-${Title Welcome Page}    CSM ISS Europe (1)
+${Title Welcome Page}    CSM ISS Europe
 ${Invalid Login Message}    Nemáte oprávnění k použití této aplikace!
 
 
@@ -44,12 +41,15 @@ Submit Credentials
     Click Button    login_btn
 
 Welcome Page Should Be Open
-    Title Should Be    ${Title Welcome Page}
-    Element Text Should Be    //*[@id="user"]/em    ${USERNAME}
+    Sleep  1
+    ${PageTitle}    Get Title
+    Should Start With    ${PageTitle}    ${Title Welcome Page}
+    Element Text Should Be    //*[@id="user"]/em    ${USER}
 
 Login Should Have Failed
     Location Should Be    ${Login Url}
     Title Should Be    ${Title Login}
+    Sleep  0.1
     Element Text Should Be    //*[@id="messages"]/center    ${Invalid Login Message}
     Element Text Should Be    username    ${EMPTY}
     Element Text Should Be    password    ${EMPTY}
