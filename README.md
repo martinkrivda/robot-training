@@ -62,7 +62,7 @@ Install the Selenium library for Robot Framework:
 pip install robotframework-seleniumlibrary
 ```
 
-### ✅ 5. Install Chrome and ChromeDriver
+### ✅ 5. Install Chrome and ChromeDriver (may be skipped)
 
 🔹 a) Install Google Chrome
 If you don't already have it, download Chrome from:
@@ -102,10 +102,10 @@ chromedriver --version
 ## 🚀 Setup
 
 ```bash
-git clone https://github.com/your-username/robot-training.git
+git clone https://github.com/martinkrivda/robot-training
 cd robot-training
 
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 pip install -r requirements.txt
@@ -139,8 +139,12 @@ robot tests/GoogleSearch.robot
 
 ### 🧩 Project Application
 
-- Implement automated tests for the **Centris** application
+- Implement automated tests for the **Centris** application:
+  - URL: [https://apps.iss-europe.eu/csmtest](https://apps.iss-europe.eu/csmtest)
   - Focus on the **Settings** section under **Contracts**
+  - Use valid login credentials stored **outside the Git repository**, e.g.:
+    - `.env` file with environment variables
+    - or `credentials.yaml` (ignored via `.gitignore`)
 
 ### 🤝 Consultation
 
