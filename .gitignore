@@ -1,0 +1,8 @@
+.vscode
+venv*
+.venv*
+.env
+log.html
+report.html
+output.xml
+selenium-screenshot-*.png
