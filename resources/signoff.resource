@@ -1,6 +1,6 @@
 *** Settings ***
-Documentation    This is a resource file, that can contain variables and keywords.
-...              Keywords defined here can be used where this "keywords.resource" is loaded.
+Documentation    This is a resource file for signoff schemas.
+...              Keywords defined here can be used where this "signoff.resource" is loaded.
 Library    OperatingSystem
 Library    SeleniumLibrary
 Variables    ../credentials.py
@@ -56,9 +56,18 @@ Add User
     Select From List By Label    id=s_level  1
     Wait Until Element Is Visible    id=s_logic    timeout=5s
     Select From List By Label    id=s_logic    Všichni schvalují
+    Click Button    //button[normalize-space(text())="Dokončit"]
+Edit User
+    Click Element    //td[normalize-space(text())='Michal Švadlena']
+    Click Button    ts_edit_schemauser_btn
+    Wait Until Element Is Visible    id=s_level    timeout=5s
+    Select From List By Label    id=s_level  2
+    Wait Until Element Is Visible    id=s_logic    timeout=5s
+    Select From List By Label    id=s_logic    Jeden schvaluje
+    Click Button    //button[normalize-space(text())="Dokončit"]
 
-
-
-
-
-
+Delete User
+    Click Element    //td[normalize-space(text())='Michal Švadlena']
+    Click Button    ts_del_schemauser_btn
+    Wait Until Element Is Visible    //button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
+    Click Button    //button[normalize-space(.)="Odstranit" and not(@id)]

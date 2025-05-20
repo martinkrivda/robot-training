@@ -1,18 +1,25 @@
 *** Settings ***
-Documentation    A test suite for login.
-...              Keywords are imported from keywords.resource
-Resource    ../../resources/settings.resource
+Documentation    A test suite for signoff schemas.
+...              Keywords are imported from signoff.resource
+Resource    ${EXECDIR}/resources/signoff.resource
 Test Setup    Open Browser And Logged In
 Test Teardown    Close Browser
 
 *** Test Cases ***
-Open Settings
+Add Edit Delete Signoff Schema
+    [Documentation]    A test case for signoff schemas.
     Go To Settings
     Click On Administration
     Click On SignOff Schemas
     Add SignOff Schema
-    Sleep    3
+    Sleep    1
     Edit SignOff Schema
-    Sleep    2
+    Sleep    1
     Add User
-    Sleep    2
+    Sleep    1
+    Edit User
+    Sleep    1
+    Delete User
+    Sleep    1
+    Delete SignOff Schema
+    Sleep    1
