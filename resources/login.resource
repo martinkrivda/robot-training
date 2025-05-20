@@ -3,7 +3,7 @@ Documentation    This is a resource file, that can contain variables and keyword
 ...              Keywords defined here can be used where this "keywords.resource" is loaded.
 Library    OperatingSystem
 Library    SeleniumLibrary
-Variables    credentials.py
+Variables    ../credentials.py
 
 *** Variables ***
 ${Login Url}    https://apps.iss-europe.eu/csmtest/login.php
@@ -60,14 +60,3 @@ Open Browser And Logged In
     Type In Valid Password
     Submit Credentials
     Welcome Page Should Be Open
-
-Go To Settings
-    Click Element    //a[@class="main_tabs" and @href="#tab_settings"]
-
-Click On Administration
-    Wait Until Element Is Visible    id=admin_config    timeout=5s
-    Click Element    id=admin_config
-
-Click On SignOff Schemas
-    Wait Until Element Is Visible    id=settings_schemas    timeout=5s
-    Click Element    id=settings_schemas

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    A test suite for login.
 ...              Keywords are imported from keywords.resource
-Resource    keywords.resource
+Resource    ../resources/login.resource
 Test Setup    Open Browser To Login Page
 Test Teardown    Close Browser
 
