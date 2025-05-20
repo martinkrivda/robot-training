@@ -113,3 +113,43 @@ Add Empty SignOff Levels
     Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
     Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
     Click Button    xpath=//button[@title='Close']
+
+Add Empty Schema User And Levels
+    Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
+    Click Button    id=ts_add_schemauser_btn
+    Wait Until Element Is Visible    //button[normalize-space(text())="Dokončit"]    timeout=5s
+    Click Button    //button[normalize-space(text())="Dokončit"]
+    Wait Until Element Is Visible    id=alert_area    5s
+    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
+    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
+    Click Button    xpath=//button[@title='Close']
+
+Add Empty Schema Levels
+    Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
+    Click Button    id=ts_add_schemauser_btn
+    Wait Until Element Is Visible    id=s_username    timeout=5s
+    Select From List By Label    id=s_username    Vodárek, Dominik
+    Wait Until Element Is Visible    //button[normalize-space(text())="Dokončit"]    timeout=5s
+    Click Button    //button[normalize-space(text())="Dokončit"]
+    Wait Until Element Is Visible    id=alert_area    5s
+    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
+    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
+    Click Button    xpath=//button[@title='Close']
+
+Add Empty Schema User
+    Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
+    Click Button    id=ts_add_schemauser_btn
+    Wait Until Element Is Visible    id=s_level    timeout=5s
+    Select From List By Label    id=s_level  1
+    Wait Until Element Is Visible    //button[normalize-space(text())="Dokončit"]    timeout=5s
+    Click Button    //button[normalize-space(text())="Dokončit"]
+    Wait Until Element Is Visible    id=alert_area    5s
+    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
+    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
+    Click Button    xpath=//button[@title='Close']
+
+Delete SignOff Schema User Test
+    Click Element    //td[normalize-space(text())="dvtest1"]
+    Click Button    id=ts_del_schema_btn
+    Wait Until Element Is Visible    //button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
+    Click Button    //button[normalize-space(.)="Odstranit" and not(@id)]
