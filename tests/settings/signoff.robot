@@ -36,7 +36,9 @@ Invalid Addition Of Signoff Schema (Empty Schema and Level)
     [Documentation]    A test case for adding signoff schema with empty schema and level.
     Add Empty SignOff Schema And Levels
     Sleep    1
+
 Invalid Addition Of Schema User (Empty User)
+    [Documentation]    A test case for adding signoff user with empty schema and level.
     Add SignOff Schema
     Sleep    1
     Click Element    //td[normalize-space(text())="dvtest1"]
@@ -44,10 +46,12 @@ Invalid Addition Of Schema User (Empty User)
     Sleep    1
 
 Invalid Addition Of Schema User (Empty Level)
+    [Documentation]    A test case for adding signoff user with empty schema and level.
     Add Empty Schema Levels
     Sleep    1
 
 Invalid Addition Of Schema User (Empty User and Level)
+    [Documentation]    A test case for adding signoff user with empty schema and level.
     Add Empty Schema User And Levels
     Sleep    1
     Delete SignOff Schema User Test
