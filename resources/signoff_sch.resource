@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    This is a resource file for signoff schemas.
-...              Keywords defined here can be used where this "signoff.resource" is loaded.
+...              Keywords defined here can be used where this "signoff_sch.resource" is loaded.
 Library    OperatingSystem
 Library    SeleniumLibrary
 Variables    ../credentials.py
