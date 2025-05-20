@@ -60,3 +60,14 @@ Open Browser And Logged In
     Type In Valid Password
     Submit Credentials
     Welcome Page Should Be Open
+
+Go To Settings
+    Click Element    //a[@class="main_tabs" and @href="#tab_settings"]
+
+Click On Administration
+    Wait Until Element Is Visible    id=admin_config    timeout=5s
+    Click Element    id=admin_config
+
+Click On SignOff Schemas
+    Wait Until Element Is Visible    id=settings_schemas    timeout=5s
+    Click Element    id=settings_schemas
