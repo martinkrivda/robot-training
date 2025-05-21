@@ -8,7 +8,7 @@ Resource    ${EXECDIR}/resources/commenting_sch.resource
 *** Test Cases ***
 Add Edit Delete Commenting Schemas
     [Documentation]    A test case for commenting schemas.
-    [Setup]    Go To Commenting Schemas
+    [Setup]    Prepare Test
     Add Commenting Schemas
     Sleep    1
     Edit Commenting Schema

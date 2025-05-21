@@ -27,6 +27,7 @@ Go To Settings
 Click On Administration
     Wait Until Element Is Visible    id=admin_config    timeout=5s
     Click Element    id=admin_config
+    Sleep    0.2
 
 Click On SignOff Schemas
     Wait Until Element Is Visible    id=settings_schemas    timeout=5s
@@ -163,3 +164,22 @@ Delete SignOff Schema User Test
     Click Button    id=ts_del_schema_btn
     Wait Until Element Is Visible    //button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
     Click Button    //button[normalize-space(.)="Odstranit" and not(@id)]
+
+Delete Test Data If Exists
+    [Arguments]    ${schema_name}
+    ${exists}=    Run Keyword And Return Status    Wait Until Element Is Visible    xpath=//td[normalize-space(text())="${schema_name}"]    timeout=3s
+    Run Keyword If    ${exists}    Delete Test Data    ${schema_name}
+
+Delete Test Data
+    [Arguments]    ${schema_name}
+    Click Element    xpath=//td[normalize-space(text())="${schema_name}"]
+    Click Button    ts_del_schema_btn
+    Wait Until Element Is Visible    xpath=//button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
+    Click Button    xpath=//button[normalize-space(.)="Odstranit" and not(@id)]
+    Sleep    1
+
+Prepare Test
+    Go To SignOff Schemas
+    Delete Test Data If Exists    ${SignOff Schema Name}
+    Delete Test Data If Exists    ${SignOff Schema Edited Name}
+

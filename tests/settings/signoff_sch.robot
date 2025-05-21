@@ -8,7 +8,7 @@ Resource    ${EXECDIR}/resources/signoff_sch.resource
 *** Test Cases ***
 Add Edit Delete Signoff Schema
     [Documentation]    A test case for signoff schemas.
-    [Setup]    Go To SignOff Schemas
+    [Setup]    Prepare Test
     Add SignOff Schema
     Sleep    1
     Edit SignOff Schema
