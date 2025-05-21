@@ -8,5 +8,9 @@ Resource    ${EXECDIR}/resources/change_pw.resource
 Valid Password Change
     [Documentation]    A test case for valid password change.
     Go To Password Change
+    Type In Current Password
+    Type In New Password
+    Retype In New Password
+    Submit Password Change
     Sleep    3
 
