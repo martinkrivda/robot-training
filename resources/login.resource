@@ -13,6 +13,9 @@ ${Invalid Password}    MsTestXX
 ${Title Login}    CSM
 ${Title Welcome Page}    CSM ISS Europe
 ${Invalid Login Message}    Nemáte oprávnění k použití této aplikace!
+${Id Login Button}    login_btn
+${Id Username}    username
+${Id Password}    password
 
 
 *** Keywords ***
@@ -26,19 +29,19 @@ Go To Login Page
     Title Should Be    ${Title Login}
 
 Type In Valid Username
-    Input Text    username    ${VALIDUSER}
+    Input Text    ${Id Username}    ${VALIDUSER}
 
 Type In Invalid Username
-    Input Text    username    ${Invalid User}
+    Input Text    ${Id Username}    ${Invalid User}
 
 Type In Valid Password
-    Input Text    password    ${VALIDPASSWORD}
+    Input Text    ${Id Password}    ${VALIDPASSWORD}
 
 Type In Invalid Password
-    Input Text    password    ${Invalid Password}
+    Input Text    ${Id Password}    ${Invalid Password}
 
 Submit Credentials
-    Click Button    login_btn
+    Click Button    ${Id Login Button}
 
 Welcome Page Should Be Open
     Sleep  1
@@ -51,8 +54,8 @@ Login Should Have Failed
     Title Should Be    ${Title Login}
     Sleep  0.1
     Element Text Should Be    //*[@id="messages"]/center    ${Invalid Login Message}
-    Element Text Should Be    username    ${EMPTY}
-    Element Text Should Be    password    ${EMPTY}
+    Element Text Should Be    ${Id Username}    ${EMPTY}
+    Element Text Should Be    ${Id Password}    ${EMPTY}
 
 Open Browser And Logged In
     Open Browser To Login Page

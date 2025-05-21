@@ -1,15 +1,12 @@
 *** Settings ***
-Documentation    A test suite for login.
-...              Keywords are imported from keywords.resource
-Resource    ${EXECDIR}/resources/login.resource
-Test Setup    Open Browser And Logged In
-Test Teardown    Close Browser
+Documentation    A test suite for password change.
+...              Keywords are imported from change_pw.resource
+Resource    ${EXECDIR}/resources/change_pw.resource
+# Test Teardown    Close Browser
 
 *** Test Cases ***
-Valid login
-    [Documentation]    A test case for valid login.
-    Type In Valid Username
-    Type In Valid Password
-    Submit Credentials
-    Welcome Page Should Be Open
+Valid Password Change
+    [Documentation]    A test case for valid password change.
+    Go To Password Change
+    Sleep    3
 

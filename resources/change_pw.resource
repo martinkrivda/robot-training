@@ -7,15 +7,23 @@ Variables    ../credentials.py
 Resource    login.resource
 
 *** Variables ***
-
+${Id Personal Settings}    personal_settings
+${Id Password Change}    password_change
 *** Keywords ***
-Go To Settings
-    Click Element    //a[@class="main_tabs" and @href="#tab_settings"]
+# Go To Personal Space
+#     # Wait Until Element Is Visible
+#     Click Element    //a[@class="addMenu" and @href="#tab_personal"]
 
-Click On Administration
-    Wait Until Element Is Visible    id=personal_settings    timeout=5s
-    Click Element    id=admin_config
+Click On Personal Settings
+    Wait Until Element Is Visible    ${Id Personal Settings}    timeout=5s
+    Click Element    ${Id Personal Settings}
 
-Click On SignOff Schemas
-    Wait Until Element Is Visible    id=settings_schemas    timeout=5s
-    Click Element    id=settings_schemas
+Click On Password Change
+    Wait Until Element Is Visible    ${Id Password Change}    timeout=5s
+    Click Element    ${Id Password Change}
+
+Go To Password Change
+    Open Browser And Logged In
+    # Go To Personal Space
+    Click On Personal Settings
+    Click On Password Change
