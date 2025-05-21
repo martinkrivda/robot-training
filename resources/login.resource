@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    This is a resource file, that can contain variables and keywords.
-...              Keywords defined here can be used where this "keywords.resource" is loaded.
+...              Keywords defined here can be used where this "login.resource" is loaded.
 Library    OperatingSystem
 Library    SeleniumLibrary
 Variables    ../credentials.py

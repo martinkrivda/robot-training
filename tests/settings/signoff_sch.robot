@@ -2,8 +2,6 @@
 Documentation    A test suite for signoff schemas.
 ...              Keywords are imported from signoff_sch.resource
 Resource    ${EXECDIR}/resources/signoff_sch.resource
-# Test Setup    Go To SignOff Schemas
-# Test Teardown    Close Browser
 
 *** Test Cases ***
 Add Edit Delete Signoff Schema

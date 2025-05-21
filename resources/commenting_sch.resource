@@ -36,6 +36,7 @@ ${Id Edit User Button}    ts_edit_comm_schemauser_btn
 ${Id Edit User Required Checkbox}    s_req
 ${Id Alert}    alert_area
 ${Alert Message}    Vyplňte prosím všechna povinná pole!
+${Timeout}    5s
 
 *** Keywords ***
 
@@ -45,11 +46,11 @@ Go To Settings
     Click Element    //a[@class="main_tabs" and @href="#tab_settings"]
 
 Click On Administration
-    Wait Until Element Is Visible    ${Id Administration and Configuration}    timeout=5s
+    Wait Until Ready    ${Id Administration and Configuration}
     Click Element    ${Id Administration and Configuration}
 
 Click On Commenting Schemas
-    Wait Until Element Is Visible    ${Id Settings}    timeout=5s
+    Wait Until Ready    ${Id Settings}
     Click Element    ${Id Settings}
 
 Go To Commenting Schemas
@@ -59,32 +60,30 @@ Go To Commenting Schemas
     Click On Commenting Schemas
 
 Add Commenting Schemas
-    Wait Until Element Is Visible    ${Id Commenting Schema Add Button}    timeout=5s
+    Wait Until Ready    ${Id Commenting Schema Add Button}
     Click Button    ${Id Commenting Schema Add Button}
-    Wait Until Element Is Visible    ${Id Add Commenting Schema}    timeout=5s
-    Click Element    ${Id Add Commenting Schema}
+    Wait Until Ready    ${Id Add Commenting Schema}
     Input Text    ${Id Add Commenting Schema}    ${Commenting Schema Name}
     Click Button    ${Finish Button}
 
 Edit Commenting Schema
     Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
     Click Button    ${Id Commenting Schema Edit Button}
-    Wait Until Element Is Visible    ${Id Add Commenting Schema}    timeout=5s
-    Click Element    ${Id Add Commenting Schema}
+    Wait Until Ready    ${Id Add Commenting Schema}
     Input Text    ${Id Add Commenting Schema}    ${Commenting Schema Edited Name}
     Select From List By Label    ${Id Commenting Schema Edit Field}    ${Commenting Schema Edit Field}
     Select From List By Label    ${Id Commenting Schema Edit Document Type}    ${Commenting Schema Edit Document type}
     Wait Until Element Contains    ${Id Commenting Schema Edit Document Type}    ${Commenting Schema Edit Document type}
     Click Button    ${Id Commenting Schema Edit Applicable Law}
-    Wait Until Element Is Visible    xpath=//a[@class="ui-multiselect-all"]    timeout=5s
+    Wait Until Ready    xpath=//a[@class="ui-multiselect-all"]
     Click Element    xpath=//a[@class="ui-multiselect-all"]
     Click Element    xpath=//a[@class="ui-multiselect-none"]
-    Wait Until Element Is Visible    ${Id Commenting Schema Edit Applicable Law Select0}    5s
+    Wait Until Ready    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select1}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Button    ${Id Commenting Schema Edit Applicable Law Add Button}
-    Wait Until Element Is Visible    xpath=//tr[td[normalize-space(.)="${Commenting Schema Edit Field}"] and td[normalize-space(.)="${Commenting Schema Edit Document type}"] and td[normalize-space(.)="České"]]
+    Wait Until Ready    xpath=//tr[td[normalize-space(.)="${Commenting Schema Edit Field}"] and td[normalize-space(.)="${Commenting Schema Edit Document type}"] and td[normalize-space(.)="České"]]
     Click Element    xpath=//tr[td[normalize-space(text())="${Commenting Schema Edit Field}"] and td[normalize-space(text())="${Commenting Schema Edit Document type}"] and td[normalize-space(text())="České"]]
     Click Button    ${Id Commenting Schema Edit Applicable Law Delete Button}
     Click Button    ${Finish Button}
@@ -92,13 +91,13 @@ Edit Commenting Schema
 Delete Commenting Schema
     Click Element    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
     Click Button    ${Id Commenting Schema Delete Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Add User
     Click Element    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
     Click Button    ${Id Add User Button}
-    Wait Until Element Is Visible    ${Id Add Commenting Schema User}    timeout=5s
+    Wait Until Ready    ${Id Add Commenting Schema User}
     Select From List By Label    ${Id Add Commenting Schema User}    ${Add User1}
     Select Checkbox    ${Id Edit User Required Checkbox}
     Click Button    ${Finish Button}
@@ -106,7 +105,7 @@ Add User
 Edit User
     Click Element    xpath=//td[normalize-space(.)="${User1}"]
     Click Button    ${Id Edit User Button}
-    Wait Until Element Is Visible    ${Id Add Commenting Schema User}    timeout=5s
+    Wait Until Ready    ${Id Add Commenting Schema User}
     Select From List By Label    ${Id Add Commenting Schema User}    ${Add User2}
     Unselect Checkbox    ${Id Edit User Required Checkbox}
     Click Button    ${Finish Button}
@@ -114,49 +113,53 @@ Edit User
 Delete User
     Click Element    //td[normalize-space(text())='${User2}']
     Click Button    ts_del_comm_schemauser_btn
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Add Empty Commenting Schema
-    Wait Until Element Is Visible    ${Id Commenting Schema Add Button}    timeout=5s
+    Wait Until Ready    ${Id Commenting Schema Add Button}
     Click Button    ${Id Commenting Schema Add Button}
-    Wait Until Element Is Visible    ${Finish Button}    timeout=5s
+    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
+    Wait Until Ready    xpath=//button[@title='Close']
     Click Button    xpath=//button[@title='Close']
 
 Add Empty Commenting Schema User
-    Wait Until Element Is Visible    ${Id Add User Button}    timeout=5s
+    Wait Until Ready    ${Id Add User Button}
     Click Button    ${Id Add User Button}
-    Wait Until Element Is Visible    ${Finish Button}    timeout=5s
+    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
+    Wait Until Ready    xpath=//button[@title='Close']
     Click Button    xpath=//button[@title='Close']
 
 Delete Commenting Schema User Test
     Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
     Click Button    ${Id Commenting Schema Delete Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Delete Test Data If Exists
     [Arguments]    ${commenting_name}
-    ${exists}=    Run Keyword And Return Status    Wait Until Element Is Visible    xpath=//td[normalize-space(text())="${commenting_name}"]    timeout=3s
+    ${exists}=    Run Keyword And Return Status    Wait Until Ready    xpath=//td[normalize-space(text())="${commenting_name}"]
     Run Keyword If    ${exists}    Delete Test Data    ${commenting_name}
 
 Delete Test Data
     [Arguments]    ${commenting_name}
     Click Element    xpath=//td[normalize-space(text())="${commenting_name}"]
     Click Button    ${Id Commenting Schema Delete Button}
-    Wait Until Element Is Visible    xpath=${Delete Button}    timeout=5s
+    Wait Until Ready    xpath=${Delete Button}
     Click Button    xpath=${Delete Button}
-    Sleep    1
 
 Prepare Test
     Go To Commenting Schemas
     Delete Test Data If Exists    ${Commenting Schema Name}
     Delete Test Data If Exists    ${Commenting Schema Edited Name}
+
+Wait Until Ready
+    [Arguments]    ${locator}
+    Wait Until Element Is Visible    ${locator}    timeout=${Timeout}
+    Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}
