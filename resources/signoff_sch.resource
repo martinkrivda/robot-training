@@ -7,9 +7,19 @@ Variables    ../credentials.py
 Resource    login.resource
 
 *** Variables ***
-
+${SignOff Schema Name}    dvtest1
+${SignOff Schema Edited Name}    dvtestEdited
+${SignOff Schema Logic1}    Jeden schvaluje
+${SignOff Schema Logic2}    Všichni schvalují
+${SignOff Schema Level1}    1
+${SignOff Schema Level2}    2
+${Add User1}    Švadlena, Michal
+${User1}    Michal Švadlena
+${Add User2}    Vodárek, Dominik
 
 *** Keywords ***
+
+# ToDo: Change name to id
 
 Go To Settings
     Click Element    //a[@class="main_tabs" and @href="#tab_settings"]
@@ -33,49 +43,49 @@ Add SignOff Schema
     Click Button    id=ts_add_schema_btn
     Wait Until Element Is Visible    id=s_schema    timeout=5s
     Click Element    id=s_schema
-    Input Text    id=s_schema    dvtest1
+    Input Text    id=s_schema    ${SignOff Schema Name}
     Click Element    id=s_levels
-    Input Text    id=s_levels    1
+    Input Text    id=s_levels    ${SignOff Schema Level1}
     Click Button    //button[normalize-space(text())="Dokončit"]
 
 Edit SignOff Schema
-    Click Element    //td[normalize-space(text())="dvtest1"]
+    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Button    id=ts_edit_schema_btn
     Wait Until Element Is Visible    id=s_schema    timeout=5s
     Click Element    id=s_schema
-    Input Text    id=s_schema    dvtestEdited
+    Input Text    id=s_schema    ${SignOff Schema Edited Name}
     Click Element    id=s_levels
-    Input Text    id=s_levels    2
+    Input Text    id=s_levels    ${SignOff Schema Level2}
     Click Button    //button[normalize-space(text())="Dokončit"]
 
 Delete SignOff Schema
-    Click Element    //td[normalize-space(text())="dvtestEdited"]
+    Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Button    id=ts_del_schema_btn
     Wait Until Element Is Visible    //button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
     Click Button    //button[normalize-space(.)="Odstranit" and not(@id)]
 
 Add User
-    Click Element    //td[normalize-space(text())="dvtestEdited"]
+    Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Button    ts_add_schemauser_btn
     Wait Until Element Is Visible    id=s_username    timeout=5s
-    Select From List By Label    id=s_username    Švadlena, Michal
+    Select From List By Label    id=s_username     ${Add User1}
     Wait Until Element Is Visible    id=s_level    timeout=5s
-    Select From List By Label    id=s_level  1
+    Select From List By Label    id=s_level  ${SignOff Schema Level1}
     Wait Until Element Is Visible    id=s_logic    timeout=5s
-    Select From List By Label    id=s_logic    Všichni schvalují
+    Select From List By Label    id=s_logic    ${SignOff Schema Logic2}
     Click Button    //button[normalize-space(text())="Dokončit"]
 
 Edit User
-    Click Element    //td[normalize-space(text())='Michal Švadlena']
+    Click Element    //td[normalize-space(text())='${User1}']
     Click Button    ts_edit_schemauser_btn
     Wait Until Element Is Visible    id=s_level    timeout=5s
-    Select From List By Label    id=s_level  2
+    Select From List By Label    id=s_level  ${SignOff Schema Level2}
     Wait Until Element Is Visible    id=s_logic    timeout=5s
-    Select From List By Label    id=s_logic    Jeden schvaluje
+    Select From List By Label    id=s_logic    ${SignOff Schema Logic1}
     Click Button    //button[normalize-space(text())="Dokončit"]
 
 Delete User
-    Click Element    //td[normalize-space(text())='Michal Švadlena']
+    Click Element    //td[normalize-space(text())='${User1}']
     Click Button    ts_del_schemauser_btn
     Wait Until Element Is Visible    //button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
     Click Button    //button[normalize-space(.)="Odstranit" and not(@id)]
@@ -95,7 +105,7 @@ Add Empty SignOff Schema
     Click Button    id=ts_add_schema_btn
     Wait Until Element Is Visible    id=s_levels    timeout=5s
     Click Element    id=s_levels
-    Input Text    id=s_levels    1
+    Input Text    id=s_levels    ${SignOff Schema Level1}
     Click Button    //button[normalize-space(text())="Dokončit"]
     Wait Until Element Is Visible    id=alert_area    5s
     Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
@@ -107,7 +117,7 @@ Add Empty SignOff Levels
     Click Button    id=ts_add_schema_btn
     Wait Until Element Is Visible    id=s_schema    timeout=5s
     Click Element    id=s_schema
-    Input Text    id=s_schema    dvtest1
+    Input Text    id=s_schema    ${SignOff Schema Name}
     Click Button    //button[normalize-space(text())="Dokončit"]
     Wait Until Element Is Visible    id=alert_area    5s
     Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
@@ -140,7 +150,7 @@ Add Empty Schema User
     Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
     Click Button    id=ts_add_schemauser_btn
     Wait Until Element Is Visible    id=s_level    timeout=5s
-    Select From List By Label    id=s_level  1
+    Select From List By Label    id=s_level  ${SignOff Schema Level1}
     Wait Until Element Is Visible    //button[normalize-space(text())="Dokončit"]    timeout=5s
     Click Button    //button[normalize-space(text())="Dokončit"]
     Wait Until Element Is Visible    id=alert_area    5s
@@ -149,7 +159,7 @@ Add Empty Schema User
     Click Button    xpath=//button[@title='Close']
 
 Delete SignOff Schema User Test
-    Click Element    //td[normalize-space(text())="dvtest1"]
+    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Button    id=ts_del_schema_btn
     Wait Until Element Is Visible    //button[normalize-space(.)="Odstranit" and not(@id)]    timeout=5s
     Click Button    //button[normalize-space(.)="Odstranit" and not(@id)]
