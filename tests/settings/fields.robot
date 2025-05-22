@@ -1,13 +1,20 @@
 *** Settings ***
-Documentation       A test suite for commenting schemas.
-...                 Keywords are imported from commenting_sch.resource
+Documentation       A test suite for fields.
+...                 Keywords are imported from fields.resource
 
 Resource            ${EXECDIR}/resources/fields.resource
 
 
 *** Test Cases ***
-Field
-    [Documentation]    A test case for commenting schemas.
-    [Setup]    Go To Fields
+Test Fields
+    [Documentation]    A test case for fields.
+    [Setup]    Field Setup
+    Check If Tender Number Is Not Visible
     Edit Fields
-    Sleep    2
+    Check If Tender Number Is Visible
+    Check If Tender Number Is Optional
+    Add Required To Tender Number
+    Check If Tender Number Is Required
+    Try To Create Contract Without Required Tender Number
+    Create Contract With All Required
+    Delete Contract
