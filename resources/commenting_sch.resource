@@ -39,14 +39,14 @@ ${Id Edit User Required Checkbox}                               s_req
 ${Id Alert}                                                     alert_area
 ${Alert Message}                                                Vyplňte prosím všechna povinná pole!
 ${Timeout}                                                      5s
-
+${Settings}                                                     //a[@class="main_tabs" and @href="#tab_settings"]
 
 *** Keywords ***
 # ToDo: Change name to id
 # ToDo: Wait until ready ????
 
 Go To Settings
-    Click Element    //a[@class="main_tabs" and @href="#tab_settings"]
+    Click Element    ${Settings}
 
 Click On Administration
     Wait Until Ready    ${Id Administration and Configuration}
