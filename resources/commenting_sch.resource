@@ -40,6 +40,10 @@ ${Id Alert}                                                     alert_area
 ${Alert Message}                                                Vyplňte prosím všechna povinná pole!
 ${Timeout}                                                      5s
 ${Settings}                                                     //a[@class="main_tabs" and @href="#tab_settings"]
+${Select All}                                                   //a[@class="ui-multiselect-all"]
+${Select None}                                                  //a[@class="ui-multiselect-none"]
+${Id Delete Commenting Schema User}                             ts_del_comm_schemauser_btn
+${Close Button}                                                 //button[@title='Close']
 
 *** Keywords ***
 # ToDo: Change name to id
@@ -81,9 +85,9 @@ Edit Commenting Schema
     ...    ${Id Commenting Schema Edit Document Type}
     ...    ${Commenting Schema Edit Document type}
     Click Button    ${Id Commenting Schema Edit Applicable Law}
-    Wait Until Ready    xpath=//a[@class="ui-multiselect-all"]
-    Click Element    xpath=//a[@class="ui-multiselect-all"]
-    Click Element    xpath=//a[@class="ui-multiselect-none"]
+    Wait Until Ready    ${Select All}
+    Click Element    ${Select All}
+    Click Element    ${Select None}
     Wait Until Ready    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select1}
@@ -97,6 +101,7 @@ Edit Commenting Schema
     Click Button    ${Finish Button}
 
 Delete Commenting Schema
+    Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
     Click Element    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
     Click Button    ${Id Commenting Schema Delete Button}
     Wait Until Ready    ${Delete Button}
@@ -123,7 +128,7 @@ Edit User
 Delete User
     Wait Until Ready    //td[normalize-space(text())='${User2}']
     Click Element    //td[normalize-space(text())='${User2}']
-    Click Button    ts_del_comm_schemauser_btn
+    Click Button    ${Id Delete Commenting Schema User}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
@@ -134,8 +139,8 @@ Add Empty Commenting Schema
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    xpath=//button[@title='Close']
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Ready    ${Close Button}
+    Click Button    ${Close Button}
 
 Add Empty Commenting Schema User
     Wait Until Ready    ${Id Add User Button}
@@ -144,8 +149,8 @@ Add Empty Commenting Schema User
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    xpath=//button[@title='Close']
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Ready    ${Close Button}
+    Click Button    ${Close Button}
 
 Delete Commenting Schema User Test
     Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Name}"]

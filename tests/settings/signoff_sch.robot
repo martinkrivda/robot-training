@@ -29,7 +29,7 @@ Invalid Addition Of Signoff Schema (Empty Schema and Level)
 Invalid Addition Of Schema User (Empty User)
     [Documentation]    A test case for adding signoff user with empty user.
     Add SignOff Schema
-    Click Element    //td[normalize-space(text())="dvtest1"]
+    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Add Empty Schema User
 
 Invalid Addition Of Schema User (Empty Level)
