@@ -73,8 +73,6 @@ Wait Until Ready
     Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}
 
 Check If Tender Number Is Not Visible
-    Wait Until Ready    ${Personal Space}
-    Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
@@ -82,7 +80,6 @@ Check If Tender Number Is Not Visible
     Click Element    ${Close Button}
 
 Edit Fields
-    Go To Settings
     Wait Until Ready    ${Field Name}
     Click Element    ${Field Name}
     Wait Until Ready    ${Id Fields Edit Button}
@@ -135,7 +132,11 @@ Check If Tender Number Is Required
 
 Field Setup
     Open Browser And Logged In
+    Check If Tender Number Is Not Visible
     Go To Fields
+
+Edit Field Back To Normal
+    Go To Settings
     Wait Until Ready    ${Field Name}
     Click Element    ${Field Name}
     Wait Until Ready    ${Id Fields Edit Button}
