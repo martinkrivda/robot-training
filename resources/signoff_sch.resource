@@ -25,7 +25,16 @@ ${Id Add Levels}                                                s_levels
 ${Delete Button}                                                //button[normalize-space(.)="Odstranit" and not(@id)]
 ${Finish Button}                                                //button[normalize-space(text())="Dokončit"]
 ${Id Edit SignOff Button}                                       ts_edit_schema_btn
-
+${Id Delete SignOff Button}                                     ts_del_schema_btn
+${Id Add SignOff User Button}                                   ts_add_schemauser_btn
+${Id Select Username}                                           s_username
+${Id Select Level}                                              s_level
+${Id Select Logic}                                              s_logic
+${Id Edit SignOff User Button}                                  ts_edit_schemauser_btn
+${Id Delete SignOff User Button}                                ts_del_schemauser_btn
+${Id Alert}                                                     alert_area
+${Alert Message}                                                Vyplňte prosím všechna povinná pole!
+${Close Button}                                                 //button[@title='Close']
 
 *** Keywords ***
 
@@ -71,107 +80,107 @@ Edit SignOff Schema
 
 Delete SignOff Schema
     Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
-    Click Button    id=ts_del_schema_btn
+    Click Button    ${Id Delete SignOff Button}
     Wait Until Element Is Visible    ${Delete Button}    timeout=5s
     Click Button    ${Delete Button}
 
 Add User
     Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
-    Click Button    ts_add_schemauser_btn
-    Wait Until Element Is Visible    id=s_username    timeout=5s
-    Select From List By Label    id=s_username     ${Add User1}
-    Wait Until Element Is Visible    id=s_level    timeout=5s
-    Select From List By Label    id=s_level  ${SignOff Schema Level1}
-    Wait Until Element Is Visible    id=s_logic    timeout=5s
-    Select From List By Label    id=s_logic    ${SignOff Schema Logic2}
+    Click Button    ${Id Add SignOff User Button}
+    Wait Until Element Is Visible    ${Id Select Username}    timeout=5s
+    Select From List By Label    ${Id Select Username}     ${Add User1}
+    Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
+    Select From List By Label    ${Id Select Level}  ${SignOff Schema Level1}
+    Wait Until Element Is Visible    ${Id Select Logic}    timeout=5s
+    Select From List By Label    ${Id Select Logic}    ${SignOff Schema Logic2}
     Click Button    ${Finish Button}
 
 Edit User
     Click Element    //td[normalize-space(text())='${User1}']
-    Click Button    ts_edit_schemauser_btn
-    Wait Until Element Is Visible    id=s_level    timeout=5s
-    Select From List By Label    id=s_level  ${SignOff Schema Level2}
-    Wait Until Element Is Visible    id=s_logic    timeout=5s
-    Select From List By Label    id=s_logic    ${SignOff Schema Logic1}
+    Click Button    ${Id Edit SignOff User Button}
+    Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
+    Select From List By Label    ${Id Select Level}  ${SignOff Schema Level2}
+    Wait Until Element Is Visible    ${Id Select Logic}    timeout=5s
+    Select From List By Label    ${Id Select Logic}    ${SignOff Schema Logic1}
     Click Button    ${Finish Button}
 
 Delete User
     Click Element    //td[normalize-space(text())='${User1}']
-    Click Button    ts_del_schemauser_btn
+    Click Button    ${Id Delete SignOff User Button}
     Wait Until Element Is Visible    ${Delete Button}    timeout=5s
     Click Button    ${Delete Button}
 
 Add Empty SignOff Schema And Levels
-    Wait Until Element Is Visible    id=ts_add_schema_btn    timeout=5s
-    Click Button    id=ts_add_schema_btn
+    Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Click Button    ${Id Add SignOff Schemas}
     Wait Until Element Is Visible    ${Finish Button}    timeout=5s
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    id=alert_area    5s
-    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Element Is Visible    ${Id Alert}    5s
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
+    Wait Until Element Is Visible    ${Close Button}    5s
+    Click Button    ${Close Button}
 
 Add Empty SignOff Schema
-    Wait Until Element Is Visible    id=ts_add_schema_btn    timeout=5s
-    Click Button    id=ts_add_schema_btn
+    Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Click Button    ${Id Add SignOff Schemas}
     Wait Until Element Is Visible    ${Id Add Levels}    timeout=5s
     Click Element    ${Id Add Levels}
     Input Text    ${Id Add Levels}    ${SignOff Schema Level1}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    id=alert_area    5s
-    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Element Is Visible    ${Id Alert}    5s
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
+    Wait Until Element Is Visible    ${Close Button}    5s
+    Click Button    ${Close Button}
 
 Add Empty SignOff Levels
-     Wait Until Element Is Visible    id=ts_add_schema_btn    timeout=5s
-    Click Button    id=ts_add_schema_btn
+     Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Click Button    ${Id Add SignOff Schemas}
     Wait Until Element Is Visible    ${Id Add Schemas}    timeout=5s
     Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Name}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    id=alert_area    5s
-    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Element Is Visible    ${Id Alert}    5s
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
+    Wait Until Element Is Visible    ${Close Button}    5s
+    Click Button    ${Close Button}
 
 Add Empty Schema User And Levels
-    Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
-    Click Button    id=ts_add_schemauser_btn
+    Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
+    Click Button    ${Id Add SignOff User Button}
     Wait Until Element Is Visible    ${Finish Button}    timeout=5s
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    id=alert_area    5s
-    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Element Is Visible    ${Id Alert}    5s
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
+    Wait Until Element Is Visible    ${Close Button}    5s
+    Click Button    ${Close Button}
 
 Add Empty Schema Levels
-    Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
-    Click Button    id=ts_add_schemauser_btn
-    Wait Until Element Is Visible    id=s_username    timeout=5s
-    Select From List By Label    id=s_username    Vodárek, Dominik
+    Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
+    Click Button    ${Id Add SignOff User Button}
+    Wait Until Element Is Visible    ${Id Select Username}    timeout=5s
+    Select From List By Label    ${Id Select Username}    ${Add User2}
     Wait Until Element Is Visible    ${Finish Button}    timeout=5s
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    id=alert_area    5s
-    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Element Is Visible    ${Id Alert}    5s
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
+    Wait Until Element Is Visible    ${Close Button}    5s
+    Click Button    ${Close Button}
 
 Add Empty Schema User
-    Wait Until Element Is Visible    id=ts_add_schemauser_btn    timeout=5s
-    Click Button    id=ts_add_schemauser_btn
-    Wait Until Element Is Visible    id=s_level    timeout=5s
-    Select From List By Label    id=s_level  ${SignOff Schema Level1}
+    Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
+    Click Button    ${Id Add SignOff User Button}
+    Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
+    Select From List By Label    ${Id Select Level}  ${SignOff Schema Level1}
     Wait Until Element Is Visible    ${Finish Button}    timeout=5s
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    id=alert_area    5s
-    Element Text Should Be    id=alert_area    Vyplňte prosím všechna povinná pole!
-    Wait Until Element Is Visible    xpath=//button[@title='Close']    5s
-    Click Button    xpath=//button[@title='Close']
+    Wait Until Element Is Visible    ${Id Alert}    5s
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
+    Wait Until Element Is Visible    ${Close Button}    5s
+    Click Button    ${Close Button}
 
 Delete SignOff Schema User Test
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
-    Click Button    id=ts_del_schema_btn
+    Click Button    ${Id Delete SignOff Button}
     Wait Until Element Is Visible    ${Delete Button}    timeout=5s
     Click Button    ${Delete Button}
 
@@ -183,7 +192,7 @@ Delete Test Data If Exists
 Delete Test Data
     [Arguments]    ${schema_name}
     Click Element    xpath=//td[normalize-space(text())="${schema_name}"]
-    Click Button    ts_del_schema_btn
+    Click Button    ${Id Delete SignOff Button}
     Wait Until Element Is Visible    ${Delete Button}    timeout=5s
     Click Button    ${Delete Button}
     Sleep    1
