@@ -49,6 +49,15 @@ ${Id Contract Subject}                                          c_subject
 ${Contract Subject}                                             TESTCONRACTDV
 ${Delete Contract}                                              //a[@class="ui-corner-all" and @href="#contract_delete_file"]
 ${Contract Name Detail}                                         //a[@id="tab_contract_contract"]
+${Item Field Name}                                              //tr[td[1][normalize-space()='Balení']]
+${Contract Items}                                               //a[@href='#tc_contract_items' and contains(@class, 'sub_tabs')]
+${Id Add Item Button}                                           tc_add_item_btn
+${Id Packing}                                                   c_packing
+${Id Unit Price}                                                c_unit_price
+${Id Commodity/service}                                         c_commodity
+${Commodity/service}                                            Doprava
+${Unit Price}                                                   1568
+
 
 *** Keywords ***
 Go To Settings
@@ -180,3 +189,91 @@ Delete Contract
     Click Element    ${Delete Contract}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
+
+Edit Item Fields
+    Go To Settings
+    Wait Until Ready    ${Item Field Name}
+    Click Element    ${Item Field Name}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Contract creation1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+
+Check If Packing Is Not Visible
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
+    Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Ready    ${Contract Name Detail}
+    Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Unit Price}
+    Element Should Not Be Visible    ${Id Packing}
+    Click Element    ${Close Button}
+
+Check If Packing Is Visible
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
+    Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Ready    ${Contract Name Detail}
+    Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Unit Price}
+    Element Should Be Visible    ${Id Packing}
+
+Check If Packing Is Optional
+    ${class}=    Get Element Attribute    ${Id Packing}    class
+    Should Not Contain    ${class}    required
+    Click Element    ${Close Button}
+
+Add Required To Packing
+    Go To Settings
+    Wait Until Ready    ${Item Field Name}
+    Click Element    ${Item Field Name}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Contract creation1}
+    Click Element    ${Contract creation1}
+    Click Element    ${Finish Button}
+
+Check If Packing Is Required
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
+    Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Ready    ${Contract Name Detail}
+    Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Unit Price}
+    ${class}=    Get Element Attribute    ${Id Packing}    class
+    Should Contain    ${class}    required
+
+Try To Create Contract Item Without Required Packing
+    Select From List By Label    ${Id Commodity/service}    ${Commodity/service}
+    Input Text    ${Id Unit Price}    ${Unit Price}
+    Click Element    ${Finish Button}
+    Element Should Be Visible       ${Id Alert}
+    Element Text Should Be          ${Id Alert}    ${Alert Message}
+    Click Element    ${Close Button}
+
+Edit Item Field Back To Normal
+    Go To Settings
+    Wait Until Ready    ${Item Field Name}
+    Click Element    ${Item Field Name}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Contract creation2}
+    Click Element    ${Contract creation2}
+    Click Element    ${Sign-off2}
+    Click Element    ${Visibility2}
+    Click Element    ${Data source1}
+    Click Element    ${Value from SAP2}
+    Click Element    ${Finish Button}
