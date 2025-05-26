@@ -167,6 +167,7 @@ Add Empty Schema Levels
     Click Button    ${Close Button}
 
 Add Empty Schema User
+    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
     Click Button    ${Id Add SignOff User Button}
     Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
@@ -193,9 +194,8 @@ Delete Test Data
     [Arguments]    ${schema_name}
     Click Element    xpath=//td[normalize-space(text())="${schema_name}"]
     Click Button    ${Id Delete SignOff Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Element Is Visible    ${Delete Button}    timeout=3s
     Click Button    ${Delete Button}
-    Sleep    1
 
 Prepare Test
     Go To SignOff Schemas
