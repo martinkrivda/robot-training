@@ -25,7 +25,7 @@ Open Browser To Login Page
     Open Browser    ${Login Url}    ${Browser}
     Maximize Browser Window
     Title Should Be    ${Title Login}
-    Set Selenium Speed    0.1s
+    Set Selenium Speed    0.05s
 
 Go To Login Page
     Go To    ${Login Url}

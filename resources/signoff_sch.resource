@@ -35,6 +35,7 @@ ${Id Delete SignOff User Button}                                ts_del_schemause
 ${Id Alert}                                                     alert_area
 ${Alert Message}                                                Vyplňte prosím všechna povinná pole!
 ${Close Button}                                                 //button[@title='Close']
+${Timeout}                                                      5s
 
 *** Keywords ***
 
@@ -44,11 +45,11 @@ Go To Settings
     Click Element    ${Settings}
 
 Click On Administration
-    Wait Until Element Is Visible    ${Id Administration and Configuration}    timeout=5s
+    Wait Until Ready    ${Id Administration and Configuration}
     Click Element    ${Id Administration and Configuration}
 
 Click On SignOff Schemas
-    Wait Until Element Is Visible    ${Id SignOff Schemas}    timeout=5s
+    Wait Until Ready    ${Id SignOff Schemas}
     Click Element    ${Id SignOff Schemas}
 
 Go To SignOff Schemas
@@ -58,9 +59,9 @@ Go To SignOff Schemas
     Click On SignOff Schemas
 
 Add SignOff Schema
-    Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
-    Wait Until Element Is Visible    ${Id Add Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add Schemas}
     Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Name}
     Click Element    ${Id Add Levels}
@@ -68,10 +69,10 @@ Add SignOff Schema
     Click Button    ${Finish Button}
 
 Edit SignOff Schema
-    Wait Until Element Is Visible    //td[normalize-space(text())="${SignOff Schema Name}"]
+    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Button    ${Id Edit SignOff Button}
-    Wait Until Element Is Visible    ${Id Add Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add Schemas}
     Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Edited Name}
     Click Element    ${Id Add Levels}
@@ -79,122 +80,125 @@ Edit SignOff Schema
     Click Button    ${Finish Button}
 
 Delete SignOff Schema
+    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Button    ${Id Delete SignOff Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Add User
     Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Button    ${Id Add SignOff User Button}
-    Wait Until Element Is Visible    ${Id Select Username}    timeout=5s
+    Wait Until Ready    ${Id Select Username}
     Select From List By Label    ${Id Select Username}     ${Add User1}
-    Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
+    Wait Until Ready    ${Id Select Level}
     Select From List By Label    ${Id Select Level}  ${SignOff Schema Level1}
-    Wait Until Element Is Visible    ${Id Select Logic}    timeout=5s
+    Wait Until Ready    ${Id Select Logic}
     Select From List By Label    ${Id Select Logic}    ${SignOff Schema Logic2}
     Click Button    ${Finish Button}
 
 Edit User
+    Wait Until Ready    //td[normalize-space(text())='${User1}']
     Click Element    //td[normalize-space(text())='${User1}']
+    Wait Until Ready    ${Id Edit SignOff User Button}
     Click Button    ${Id Edit SignOff User Button}
-    Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
+    Wait Until Ready    ${Id Select Level}
     Select From List By Label    ${Id Select Level}  ${SignOff Schema Level2}
-    Wait Until Element Is Visible    ${Id Select Logic}    timeout=5s
+    Wait Until Ready    ${Id Select Logic}
     Select From List By Label    ${Id Select Logic}    ${SignOff Schema Logic1}
     Click Button    ${Finish Button}
 
 Delete User
     Click Element    //td[normalize-space(text())='${User1}']
     Click Button    ${Id Delete SignOff User Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Add Empty SignOff Schema And Levels
-    Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
-    Wait Until Element Is Visible    ${Finish Button}    timeout=5s
+    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    ${Close Button}    5s
+    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty SignOff Schema
-    Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
-    Wait Until Element Is Visible    ${Id Add Levels}    timeout=5s
+    Wait Until Ready    ${Id Add Levels}
     Click Element    ${Id Add Levels}
     Input Text    ${Id Add Levels}    ${SignOff Schema Level1}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    ${Close Button}    5s
+    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty SignOff Levels
-     Wait Until Element Is Visible    ${Id Add SignOff Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
-    Wait Until Element Is Visible    ${Id Add Schemas}    timeout=5s
+    Wait Until Ready    ${Id Add Schemas}
     Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Name}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    ${Close Button}    5s
+    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty Schema User And Levels
-    Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff User Button}
     Click Button    ${Id Add SignOff User Button}
-    Wait Until Element Is Visible    ${Finish Button}    timeout=5s
+    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    ${Close Button}    5s
+    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty Schema Levels
-    Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff User Button}
     Click Button    ${Id Add SignOff User Button}
-    Wait Until Element Is Visible    ${Id Select Username}    timeout=5s
+    Wait Until Ready    ${Id Select Username}
     Select From List By Label    ${Id Select Username}    ${Add User2}
-    Wait Until Element Is Visible    ${Finish Button}    timeout=5s
+    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    ${Close Button}    5s
+    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty Schema User
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
-    Wait Until Element Is Visible    ${Id Add SignOff User Button}    timeout=5s
+    Wait Until Ready    ${Id Add SignOff User Button}
     Click Button    ${Id Add SignOff User Button}
-    Wait Until Element Is Visible    ${Id Select Level}    timeout=5s
+    Wait Until Ready    ${Id Select Level}
     Select From List By Label    ${Id Select Level}  ${SignOff Schema Level1}
-    Wait Until Element Is Visible    ${Finish Button}    timeout=5s
+    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
-    Wait Until Element Is Visible    ${Id Alert}    5s
+    Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Element Is Visible    ${Close Button}    5s
+    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Delete SignOff Schema User Test
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Button    ${Id Delete SignOff Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=5s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Delete Test Data If Exists
     [Arguments]    ${schema_name}
-    ${exists}=    Run Keyword And Return Status    Wait Until Element Is Visible    xpath=//td[normalize-space(text())="${schema_name}"]    timeout=3s
+    ${exists}=    Run Keyword And Return Status    Wait Until Ready    xpath=//td[normalize-space(text())="${schema_name}"]
     Run Keyword If    ${exists}    Delete Test Data    ${schema_name}
 
 Delete Test Data
     [Arguments]    ${schema_name}
     Click Element    xpath=//td[normalize-space(text())="${schema_name}"]
     Click Button    ${Id Delete SignOff Button}
-    Wait Until Element Is Visible    ${Delete Button}    timeout=3s
+    Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Prepare Test
@@ -202,3 +206,7 @@ Prepare Test
     Delete Test Data If Exists    ${SignOff Schema Name}
     Delete Test Data If Exists    ${SignOff Schema Edited Name}
 
+Wait Until Ready
+    [Arguments]    ${locator}
+    Wait Until Element Is Visible    ${locator}    timeout=${Timeout}
+    Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}

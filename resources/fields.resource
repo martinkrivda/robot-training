@@ -193,6 +193,7 @@ Create Contract With All Required
     Click Button    ${Create Contract File Button}
 
 Delete Contract
+    Wait Until Ready    ${Id Add Item Button}
     Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}
     Wait Until Ready    ${Delete Button}
