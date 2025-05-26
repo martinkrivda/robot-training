@@ -143,6 +143,7 @@ Add Empty Commenting Schema
     Click Button    ${Close Button}
 
 Add Empty Commenting Schema User
+    Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
     Wait Until Ready    ${Id Add User Button}
     Click Button    ${Id Add User Button}
     Wait Until Ready    ${Finish Button}

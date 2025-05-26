@@ -23,7 +23,5 @@ Invalid Addition Of Commenting Schema
 Invalid Addition Of Commenting Schema User
     [Documentation]    A test case for adding commenting user with empty user.
     Add Commenting Schemas
-    Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
     Add Empty Commenting Schema User
     Delete Commenting Schema User Test
-    [Teardown]    Close Browser
