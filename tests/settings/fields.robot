@@ -9,6 +9,8 @@ Resource            ${EXECDIR}/resources/fields.resource
 Turn Off/On Visibility of Header Field
     [Documentation]    A test case for visibility of fields.
     [Setup]    Field Setup
+    Check If Tender Number Is Not Visible
+    Go To Fields
     Edit Fields
     Check If Tender Number Is Visible
 
@@ -39,8 +41,11 @@ Turn Off/On Required of Item Field
 Not Possible To Create a Contract Item Without a Required Field
     [Documentation]    A test case for creating contract items.
     Try To Create Contract Item Without Required Packing
+    Create Contract Item With All Required
     Edit Item Field Back To Normal
 
- Delete Contract
-     [Documentation]    A test case for deleting contract.
-     Delete Contract
+ Delete Contract Item and Contract
+    [Documentation]    A test case for deleting contract.
+    Delete Contract Item
+    Delete Contract
+    Disable Packing Item

@@ -57,10 +57,24 @@ ${Id Unit Price}                                                c_unit_price
 ${Id Commodity/service}                                         c_commodity
 ${Commodity/service}                                            Doprava
 ${Unit Price}                                                   1568
-
+${Id Contract Items}                                            settings_pl_items
+${Id Item Packing}                                              settings_item_packing
+${Id Add Item Packing Button}                                   ts_add_item_packing_btn
+${Disabled Checkbox}                                            //input[@type="checkbox" and @id="s_disabled"]
+${Id Edit Item Packing Button}                                  ts_edit_item_packing_btn
+${Packing Name}                                                 //tr[td[text()="test"] and td[text()="autotest"]]
+${Id Add Packing}                                               s_field1
+${Packing}                                                      test
+${Id Add Description}                                           s_field2
+${Description}                                                  autotest
+${Select Packing}                                               test autotest
+${Contract Item}                                                //tr[td[normalize-space(text())="Doprava"] and td[contains(normalize-space(text()), "1 568")]]
+${Id Delete Contract Item Button}                               tc_del_item_btn
+${Id Proposal Lists}                                            proposals
 
 *** Keywords ***
 Go To Settings
+    Wait Until Ready    ${Settings}
     Click Element    ${Settings}
 
 Click On Administration
@@ -82,6 +96,8 @@ Wait Until Ready
     Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}
 
 Check If Tender Number Is Not Visible
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
@@ -139,11 +155,6 @@ Check If Tender Number Is Required
     ${class}=    Get Element Attribute    ${Id Tender Number}    class
     Should Contain    ${class}    required
 
-Field Setup
-    Open Browser And Logged In
-    Check If Tender Number Is Not Visible
-    Go To Fields
-
 Edit Field Back To Normal
     Go To Settings
     Wait Until Ready    ${Field Name}
@@ -182,12 +193,7 @@ Create Contract With All Required
     Click Button    ${Create Contract File Button}
 
 Delete Contract
-    Wait Until Ready    ${Personal Space}
-    Click Element    ${Personal Space}
-    Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
-    Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
-    Wait Until Ready    ${Contract Name Detail}
-    Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
+    Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
@@ -278,4 +284,76 @@ Edit Item Field Back To Normal
     Click Element    ${Visibility2}
     Click Element    ${Data source1}
     Click Element    ${Value from SAP2}
+    Click Element    ${Finish Button}
+
+Click Row Or Add Record
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Packing Name}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Packing
+    ...    ELSE
+    ...    Add Packing
+
+Enable Packing
+    Wait Until Ready    ${Packing Name}
+    Click Element    ${Packing Name}
+    Click Button    ${Id Edit Item Packing Button}
+    Wait Until Ready    ${Disabled Checkbox}
+    Unselect Checkbox    ${Disabled Checkbox}
+    Click Element    ${Finish Button}
+
+Add Packing
+    Wait Until Ready    ${Id Add Item Packing Button}
+    Click Button    ${Id Add Item Packing Button}
+    Wait Until Ready    ${Id Add Packing}
+    Input Text    ${Id Add Packing}    ${Packing}
+    Input Text    ${Id Add Description}    ${Description}
+    Click Element    ${Finish Button}
+
+Field Setup
+    Open Browser And Logged In
+    Go To Settings
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Wait Until Ready    ${Id Item Packing}
+    Click Element    ${Id Item Packing}
+    Click Row Or Add Record
+
+Create Contract Item With All Required
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Unit Price}
+    Select From List By Label    ${Id Commodity/service}    ${Commodity/service}
+    Input Text    ${Id Unit Price}    ${Unit Price}
+    Select From List By Label    ${Id Packing}    ${Select Packing}
+    Click Element    ${Finish Button}
+
+Delete Contract Item
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
+    Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Ready    ${Contract Name Detail}
+    Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Contract Item}
+    Click Element    ${Contract Item}
+    Click Button    ${Id Delete Contract Item Button}
+    Wait Until Ready    ${Delete Button}
+    Click Element    ${Delete Button}
+
+Disable Packing Item
+    Go To Settings
+    Wait Until Ready    ${Id Proposal Lists}
+    Click Element    ${Id Proposal Lists}
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Wait Until Ready    ${Id Item Packing}
+    Click Element    ${Id Item Packing}
+    Wait Until Ready    ${Packing Name}
+    Click Element    ${Packing Name}
+    Click Button    ${Id Edit Item Packing Button}
+    Wait Until Ready    ${Disabled Checkbox}
+    Select Checkbox    ${Disabled Checkbox}
     Click Element    ${Finish Button}
