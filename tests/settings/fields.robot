@@ -39,6 +39,8 @@ Turn Off/On Required of Item Field
 Not Possible To Create a Contract Item Without a Required Field
     [Documentation]    A test case for creating contracts items.
     Try To Create Contract Item Without Required Packing
+    Edit Item Field Back To Normal
 
-# Delete Contract and Contract Item
-#     [Documentation]    A test case for creating contracts items.
+ Delete Contract and Contract Item
+     [Documentation]    A test case for deleting contract items.
+     Delete Contract

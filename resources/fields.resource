@@ -182,6 +182,8 @@ Create Contract With All Required
     Click Button    ${Create Contract File Button}
 
 Delete Contract
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
     Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
     Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Ready    ${Contract Name Detail}
