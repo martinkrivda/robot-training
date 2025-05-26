@@ -87,6 +87,7 @@ Delete SignOff Schema
     Click Button    ${Delete Button}
 
 Add User
+    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
     Click Button    ${Id Add SignOff User Button}
     Wait Until Ready    ${Id Select Username}
@@ -109,6 +110,7 @@ Edit User
     Click Button    ${Finish Button}
 
 Delete User
+    Wait Until Ready    //td[normalize-space(text())='${User1}']
     Click Element    //td[normalize-space(text())='${User1}']
     Click Button    ${Id Delete SignOff User Button}
     Wait Until Ready    ${Delete Button}
@@ -171,6 +173,7 @@ Add Empty Schema Levels
     Click Button    ${Close Button}
 
 Add Empty Schema User
+    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Wait Until Ready    ${Id Add SignOff User Button}
     Click Button    ${Id Add SignOff User Button}

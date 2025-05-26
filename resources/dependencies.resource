@@ -80,6 +80,7 @@ Edit Master Field
     Click Button    ${Id Master Field Edit Button}
     Wait Until Ready    ${Id Select Master Field}
     Select From List By Label    ${Id Select Master Field}    ${Master Field}
+    Wait Until Ready    ${Value Name}
     Select From List By Label    ${Value Name}    ${Value}
     Click Element    ${Finish Button}
 
@@ -97,6 +98,7 @@ Add Slave Field
 Edit Slave Field
     Wait Until Ready    //tr[td[text()="${Value}"]]
     Click Element    //tr[td[text()="${Value}"]]
+    Wait Until Ready    xpath=//tr[td[text()="${Slave Field2}"]]/td[2]
     Click Element    xpath=//tr[td[text()="${Slave Field2}"]]/td[2]
     Click Button    ${Id Slave Field Edit Button}
     Wait Until Ready    ${Id Select Slave Field}
@@ -107,6 +109,7 @@ Edit Slave Field
 # Delete Slave Field
 
 Check If Applicable Law Is Optional
+    Wait Until Ready    ${Id Master Field Add Button}
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
