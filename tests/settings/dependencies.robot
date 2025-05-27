@@ -20,3 +20,11 @@ Edit Dependencies Master and Slave Field
 Check If Applicable Law Is Optional/Required
     Check If Applicable Law Is Optional
     Check If Applicable Law Is Required
+
+Not Possible To Create a Contract Without a Required Field
+    Try To Create Contract Without Required Applicable Law
+    Create Contract With All Required
+
+Delete Contract and Added Dependencies
+    Delete Contract
+    Delete Dependencies

@@ -35,10 +35,26 @@ ${Required}                                                     //label[@for="s_
 ${Id Master Field Edit Button}                                  ts_edit_dep_master_btn
 ${Id Slave Field Edit Button}                                   ts_edit_dep_slave_btn
 ${Id Applicable Law}                                            c_appl_law
+${Applicable Law}                                               České
 ${Id Number Sequence}                                           c_number
 ${Create Contract}                                              //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
 ${Id Contract Status}                                           c_status
-
+${Field}                                                        Obchod, podnikání, obchodní právo § 261 - 775
+${Confidentiality}                                              Přísně tajné
+${Contract kind}                                                Smlouva o úvěru - § 497 - 507
+${Language}                                                     Čeština
+${Id Field}                                                     c_legalfield
+${Id Confidentiality}                                           c_confid
+${Id Contract kind}                                             c_kind
+${Number Sequence}                                              ISSTEST
+${Id Language}                                                  c_lang
+${Create Contract File Button}                                  //button[normalize-space(.)='Vytvoření smluvní složky']
+${Id Contract Subject}                                          c_subject
+${Contract Subject}                                             TESTCONRACTDV
+${Delete Contract}                                              //a[@class="ui-corner-all" and @href="#contract_delete_file"]
+${Contract Name Detail}                                         //a[@id="tab_contract_contract"]
+${Id Slave Field Delete Button}                                 ts_del_dep_slave_btn
+${Id Master Field Delete Button}                                ts_del_dep_master_btn
 
 *** Keywords ***
 Go To Settings
@@ -84,7 +100,12 @@ Edit Master Field
     Select From List By Label    ${Value Name}    ${Value}
     Click Element    ${Finish Button}
 
-# Delete Master Field
+Delete Master Field
+    Wait Until Ready    //tr[td[text()="${Value}"]]
+    Click Element    //tr[td[text()="${Value}"]]
+    Click Button    ${Id Master Field Delete Button}
+    Wait Until Ready    ${Delete Button}
+    Click Element    ${Delete Button}
 
 Add Slave Field
     Wait Until Ready    //tr[td[text()="${Value2}"]]
@@ -106,7 +127,14 @@ Edit Slave Field
     Click Element    ${Required}
     Click Element    ${Finish Button}
 
-# Delete Slave Field
+Delete Slave Field
+    Wait Until Ready    //tr[td[text()="${Value}"]]
+    Click Element    //tr[td[text()="${Value}"]]
+    Wait Until Ready    xpath=//tr[td[text()="${Slave Field}"]]/td[2]
+    Click Element    xpath=//tr[td[text()="${Slave Field}"]]/td[2]
+    Click Button    ${Id Slave Field Delete Button}
+    Wait Until Ready    ${Delete Button}
+    Click Element    ${Delete Button}
 
 Check If Applicable Law Is Optional
     Wait Until Ready    ${Id Master Field Add Button}
@@ -122,3 +150,42 @@ Check If Applicable Law Is Required
     Select From List By Label    ${Id Contract Status}    ${Value}
     ${class}=    Get Element Attribute    ${Id Applicable Law}    class
     Should Contain    ${class}    required
+
+Try To Create Contract Without Required Applicable Law
+    Fill In Required Fields
+    Click Button    ${Create Contract File Button}
+    Element Should Be Visible       ${Id Alert}
+    Element Text Should Be          ${Id Alert}    ${Alert Message}
+    Click Element    ${Close Button}
+
+Fill In Required Fields
+    Wait Until Ready    ${Id Number Sequence}
+    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
+    Select From List By Label    ${Id Field}    ${Field}
+    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
+    Select From List By Label    ${Id Contract kind}    ${Contract kind}
+    Select From List By Label    ${Id Language}    ${Language}
+    Select From List By Label    ${Id Contract Status}    ${Value}
+    Input Text    ${Id Contract Subject}    ${Contract Subject}
+
+Create Contract With All Required
+    Wait Until Ready    ${Create Contract}
+    Click Element    ${Create Contract}
+    Fill In Required Fields
+    Select From List By Label    ${Id Applicable Law}    ${Applicable Law}
+    Click Button    ${Create Contract File Button}
+
+Delete Contract
+    Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Ready    ${Contract Name Detail}
+    Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
+    Wait Until Ready    ${Delete Contract}
+    Click Element    ${Delete Contract}
+    Wait Until Ready    ${Delete Button}
+    Click Button    ${Delete Button}
+
+Delete Dependencies
+    Go To Settings
+    Delete Slave Field
+    Delete Master Field
