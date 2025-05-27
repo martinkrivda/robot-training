@@ -16,6 +16,8 @@ ${Id New Password}              new_pw
 ${Id Retype New Password}       new_pw2
 ${New Password}                 MsTestNewPW26
 ${Id PW Change Button}          pw_change_button
+${PW Succesful Change Msg}      Heslo úspěšně změněno!
+${Id Alert Area}                //*[@id="alert_area"]/span
 
 
 *** Keywords ***
@@ -46,5 +48,19 @@ Type In New Password
 Retype In New Password
     Input Text    ${Id Retype New Password}    ${New Password}
 
+Type In Changed Password
+    Wait Until Element Is Not Visible    please_wait
+    Input Text    ${Id Old Password}    ${New Password}
+
+Type In Old Password
+    Input Text    ${Id New Password}    ${VALIDPASSWORD}
+
+Retype In Old Password
+    Input Text    ${Id Retype New Password}    ${VALIDPASSWORD}
+
 Submit Password Change
     Click Button    ${Id PW Change Button}
+
+Password Should Be Changed
+    Wait Until Element Is Visible    ${Id Alert Area}
+    Element Text Should Be    ${Id Alert Area}    ${PW Succesful Change Msg}
