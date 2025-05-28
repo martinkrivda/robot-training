@@ -26,8 +26,55 @@ Add Edit Contract Type
     Enable Contract Type Or Add Contract Type
     Edit Contract Type
 
-# Add Edit SAP contract kind
+Add Edit SAP Contract Kind
+    [Documentation]    A test case for SAP contract kind.
+    Go To SAP Contract Kind
+    Enable Sap Or Add Sap
+    Edit Sap
 
+Add Edit Accounting area
+    [Documentation]    A test case for accounting area.
+    Go To Accounting area
+    Enable Accounting area Or Add Accounting area
+    Edit Accounting area
+
+Add Edit Profit Center
+    [Documentation]    A test case for profit center.
+    Go To Profit Center
+    Enable Profit Center Or Add Profit Center
+    Edit Profit Centrum
+
+Add Edit Contract Status
+    [Documentation]    A test case for contract status.
+    Go To Contract Status
+    Enable Contract Status Or Add Contract Status
+    Edit Contract Status
+
+Add Edit Partner Role
+    [Documentation]    A test case for partner role.
+    Go To Partner Role
+    Enable Parner Role Or Add Partner Role
+    Edit Partner Role
+
+Add Edit Confidentiality level
+    [Documentation]    A test case for confidentiality level.
+    Go To Confidentiality level
+    Enable Confidentiality level Or Add Confidentiality level
+    Edit Confidentiality level
+
+Add Edit Internal Partner
+    [Documentation]    A test case for internal partner.
+    Go To Internal Partner
+    Enable Internal Partner Or Add Internal Partner
+    Enable Organization Unit Or Add Organization Unit
+    Edit Internal Partner
+    Edit Organization Unit
+
+Add Edit Business Case
+    [Documentation]    A test case for business case.
+    Go To Business Case
+    Enable Business Case Or Add Business Case
+    Edit Business Case
 
 Check Created Main Data
     [Documentation]    A test case for creating contract, contract template.
@@ -41,9 +88,33 @@ Delete Template And Disable Field
     Disable Fields
     Disable Contract Kind
 
-Disable Contract Type
-    [Documentation]    A test case for disabling contract type.
+Disable Contract Type And Sap
+    [Documentation]    A test case for disabling contract type, SAP contract kind.
     Disable Contract Type
+    Disable Sap
+
+Disable Accounting area And Profit Centrum
+    [Documentation]    A test case for disabling Accounting area, profit centrum.
+    Disable Accounting area
+    Disable Profic Centrum
+
+Disable Contract Status And Partner Role
+    [Documentation]    A test case for disabling contract status, partner role.
+    Disable Contract Status
+    Disable Partner Role
+
+Disable Confidentiality level And Internal Partner
+    [Documentation]    A test case for disabling confidentiality level, internal partner.
+    Disable Confidentiality level
+    Disable Internal Partner
+    Disable Organization Unit
+
+Disable Business Case And Sequences
+    [Documentation]    A test case for disabling business case, Sequences.
+    Disable Business Case
+
+
+
+
 
 # Set Fields Visibility Back to Normal
-

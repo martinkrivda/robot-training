@@ -53,7 +53,6 @@ ${Contract Kind Edited Name}                                    dvtestKindEdited
 ${Contract Kind Edited Name Path}                               xpath=//td[text()="dvtestKindEdited"]
 ${Create Contract}                                              //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
 ${Id Number Sequence}                                           c_number
-${Id Confidentiality}                                           c_confid
 ${Id Contract kind}                                             c_kind
 ${Id Language}                                                  c_lang
 ${Id Field Contract}                                            c_legalfield
@@ -84,6 +83,60 @@ ${Id Edit Contract Type Button}                                 ts_edit_contract
 ${Contract Type Checkbox}                                       xpath=//input[@type='checkbox' and @id='s_disabled']
 ${Id Create Contract Type}                                      c_type
 ${Id SAP}                                                       settings_sap_contract_kind
+${Id Edit SAP Button}                                           ts_edit_sap_contract_kind_btn
+${Id Add SAP Button}                                            ts_add_sap_contract_kind_btn
+${Id Select SAP}                                                c_sap_doctype
+${Id Accounting Area}                                           settings_acc_area
+${Id Edit Accounting Area Button}                               ts_edit_acc_area_btn
+${Id Add Accounting Area Button}                                ts_add_acc_area_btn
+${Id Select Accounting Area}                                    c_acc_area
+${Select Accounting Area}                                       DVE - dvtestEdited
+${Id Profit Center}                                             settings_profcenter
+${Id Edit Profit Center Button}                                 ts_edit_profcenter_btn
+${Id Add Profit Center Button}                                  ts_add_profcenter_btn
+${Id Add Responsible}                                           s_field3
+${Responsible}                                                  testdv
+${Edited Responsible}                                           testdve
+${Id Select Profit Centrum}                                     c_profit_center
+${Id Contract Status}                                           settings_contract_status
+${Id Edit Contract Status Button}                               ts_edit_contract_status_btn
+${Id Add Contract Status Button}                                ts_add_contract_status_btn
+${Id Select Contract Status}                                    c_status
+${Id Partner Roles}                                             settings_partner_roles
+${Id Edit Partner Roles Button}                                 ts_edit_partner_role_btn
+${Id Add Partner Roles Button}                                  ts_add_partner_role_btn
+${Id Add Partner Roles}                                         s_role
+${Id Add Partner Type}                                          s_type
+${Add Partner Type1}                                            Odběratel
+${Add Partner Type2}                                            Dodavatel
+${Id Select Partner Role}                                       c_part_role
+${Select Partner Role}                                          dvtestEdited (dodavatel)
+${Partner Role Checkbox}                                        xpath=//input[@type='checkbox' and @id='s_role_disabled']
+${Id Confidentiality level}                                     settings_conf
+${Id Edit Confidentiality level Button}                         ts_edit_conf_btn
+${Id Add Confidentiality level Button}                          ts_add_conf_btn
+${Id Select Confidentiality level}                              c_confid
+${Id Internal Partner}                                          settings_int_partners
+${Id Add Internal Partner Button}                               ts_add_int_partner_btn
+${Id Edit Internal Partner Button}                              ts_edit_int_partner_btn
+${Id Add Internal Partner}                                      s_intpart
+${Id Select Internal Partner}                                   c_intpart
+${Internal Partner Checkbox}                                    xpath=//input[@type="checkbox" and @name="s_intpart_disabled"]
+${Id Add Organization Button}                                   ts_add_org_unit_btn
+${Id Edit Organization Button}                                  ts_edit_org_unit_btn
+${Id Add Organization Unit}                                     s_org_unit
+${Id Select Organization Unit}                                  c_orgunit
+${Organization Unit Checkbox}                                   xpath=//input[@type='checkbox' and @name='s_org_unit_disabled']
+${Id Business Case}                                             settings_business_case
+${Id Add Business Case Button}                                  ts_add_business_case_btn
+${Id Edit Business Case Button}                                 ts_edit_business_case_btn
+${Id Select Business Case}                                      c_buscase
+${Id Sequences}                                                 settings_sequences
+${Id Add Sequences Button}                                      ts_add_sequence_btn
+${Id Edit Sequences Button}                                     ts_edit_sequence_btn
+${Id Delete Sequences Button}                                   ts_del_sequence_btn
+
+
 
 *** Keywords ***
 Go To Settings
@@ -208,6 +261,7 @@ Enable Contract Kind Or Add Contract Kind
     ...    Add Contract Kind
 
 Edit Contract Kind
+    Wait Until Ready    ${Id Add Contract Kind Button}
     Wait Until Ready    ${Contract Kind Name Path}
     Click Element    ${Contract Kind Name Path}
     Wait Until Ready    ${Id Edit Contract Kind Button}
@@ -219,7 +273,6 @@ Edit Contract Kind
 
 Fill In Required Fields
     Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
     Select From List By Label    ${Id Language}    ${Language}
 
 Check Created Contract Data
@@ -233,6 +286,17 @@ Check Created Contract Data
     Input Text    ${Id Contract Subject}    ${Contract Subject}
     Select From List By Label    ${Id Contract kind}    ${Contract Kind Edited Name}
     Select From List By Label    ${Id Create Contract Type}    ${Edited Name}
+    Select From List By Label    ${Id Select SAP}    ${Edited Name}
+    Select From List By Label    ${Id Select Accounting Area}    ${Select Accounting Area}
+    Select From List By Label    ${Id Select Contract Status}    ${Edited Name}
+    Select From List By Label    ${Id Select Partner Role}    ${Select Partner Role}
+    Select From List By Label    ${Id Select Internal Partner}    ${Edited Name}
+    Select From List By Label    ${Id Select Confidentiality level}    ${Edited Name}
+    Select From List By Label    ${Id Select Organization Unit}    ${Contract Kind Edited Name}
+    Select From List By Label    ${Id Select Business Case}    ${Edited Name}
+    Input Text        ${Id Select Profit Centrum}       ${Edited Name}
+    Wait Until Page Contains Element    //ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]    5s
+    Click Element     xpath=//ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
     Click Button    ${Create Contract File Button}
 
 Check Created Template
@@ -342,6 +406,459 @@ Disable Contract Type
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
 
-SAP contract kind
+Go To SAP Contract Kind
     Wait Until Ready    ${Id SAP}
     Click Element    ${Id SAP}
+
+Enable Sap Or Add Sap
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Sap
+    ...    ELSE
+    ...    Add Sap
+
+Enable Sap
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit SAP Button}
+    Click Button    ${Id Edit SAP Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Sap
+    Wait Until Ready    ${Id Add SAP Button}
+    Click Button    ${Id Add SAP Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type}
+    Input Text    ${Id Add Contract Type Description}    ${Name}
+    Click Element    ${Finish Button}
+
+Edit Sap
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit SAP Button}
+    Click Button    ${Id Edit SAP Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type Edited}
+    Input Text    ${Id Add Contract Type Description}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Sap
+    Go To SAP Contract Kind
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready     ${Id Edit SAP Button}
+    Click Button     ${Id Edit SAP Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type}
+    Input Text    ${Id Add Contract Type Description}    ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Accounting area
+    Wait Until Ready    ${Id Accounting Area}
+    Click Element    ${Id Accounting Area}
+
+Enable Accounting area Or Add Accounting area
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Accounting area
+    ...    ELSE
+    ...    Add Accounting area
+
+
+Enable Accounting area
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Accounting Area Button}
+    Click Button    ${Id Edit Accounting Area Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Accounting area
+    Wait Until Ready    ${Id Add Accounting Area Button}
+    Click Button    ${Id Add Accounting Area Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type}
+    Input Text    ${Id Add Contract Type Description}    ${Name}
+    Click Element    ${Finish Button}
+
+Edit Accounting area
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Accounting Area Button}
+    Click Button    ${Id Edit Accounting Area Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type Edited}
+    Input Text    ${Id Add Contract Type Description}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Accounting area
+    Go To Accounting area
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready     ${Id Edit Accounting Area Button}
+    Click Button     ${Id Edit Accounting Area Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type}
+    Input Text    ${Id Add Contract Type Description}    ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Profit Center
+    Wait Until Ready    ${Id Profit Center}
+    Click Element    ${Id Profit Center}
+
+Enable Profit Center Or Add Profit Center
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Profit Center
+    ...    ELSE
+    ...    Add Profit Center
+
+Enable Profit Center
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Profit Center Button}
+    Click Button    ${Id Edit Profit Center Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Profit Center
+    Wait Until Ready    ${Id Add Profit Center Button}
+    Click Button    ${Id Add Profit Center Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type}
+    Input Text    ${Id Add Contract Type Description}    ${Name}
+    Input Text    ${Id Add Responsible}    ${Responsible}
+    Click Element    ${Finish Button}
+
+Edit Profit Centrum
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Profit Center Button}
+    Click Button    ${Id Edit Profit Center Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type Edited}
+    Input Text    ${Id Add Contract Type Description}    ${Edited Name}
+    Input Text    ${Id Add Responsible}    ${Edited Responsible}
+    Click Element    ${Finish Button}
+
+Disable Profic Centrum
+    Go To Profit Center
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Profit Center Button}
+    Click Button    ${Id Edit Profit Center Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Add Contract Type}
+    Input Text    ${Id Add Contract Type Description}    ${Name}
+    Input Text    ${Id Add Responsible}    ${Responsible}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Contract Status
+    Wait Until Ready    ${Id Contract Status}
+    Click Element    ${Id Contract Status}
+
+Enable Contract Status Or Add Contract Status
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Contract Status
+    ...    ELSE
+    ...    Add Contract Status
+
+Enable Contract Status
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Contract Status Button}
+    Click Button    ${Id Edit Contract Status Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Contract Status
+    Wait Until Ready    ${Id Add Contract Status Button}
+    Click Button    ${Id Add Contract Status Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit Contract Status
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Contract Status Button}
+    Click Button    ${Id Edit Contract Status Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Contract Status
+    Go To Contract Status
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Contract Status Button}
+    Click Button    ${Id Edit Contract Status Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Partner Role
+    Wait Until Ready    ${Id Partner Roles}
+    Click Element    ${Id Partner Roles}
+
+Enable Parner Role Or Add Partner Role
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Partner Role
+    ...    ELSE
+    ...    Add Partner Role
+
+Enable Partner Role
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Partner Roles Button}
+    Click Button    ${Id Edit Partner Roles Button}
+    Wait Until Ready    ${Partner Role Checkbox}
+    Unselect Checkbox    ${Partner Role Checkbox}
+    Click Element    ${Finish Button}
+
+Add Partner Role
+    Wait Until Ready    ${Id Add Partner Roles Button}
+    Click Button    ${Id Add Partner Roles Button}
+    Wait Until Ready    ${Id Add Partner Roles}
+    Input Text    ${Id Add Partner Roles}    ${Name}
+    Select From List By Label    ${Id Add Partner Type}    ${Add Partner Type1}
+    Click Element    ${Finish Button}
+
+Edit Partner Role
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Partner Roles Button}
+    Click Button    ${Id Edit Partner Roles Button}
+    Wait Until Ready    ${Id Add Partner Roles}
+    Input Text    ${Id Add Partner Roles}    ${Edited Name}
+    Select From List By Label    ${Id Add Partner Type}    ${Add Partner Type2}
+    Click Element    ${Finish Button}
+
+Disable Partner Role
+    Go To Partner Role
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Partner Roles Button}
+    Click Button    ${Id Edit Partner Roles Button}
+    Wait Until Ready    ${Id Add Partner Roles}
+    Input Text    ${Id Add Partner Roles}    ${Name}
+    Select From List By Label    ${Id Add Partner Type}    ${Add Partner Type1}
+    Select Checkbox    ${Partner Role Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Confidentiality level
+    Wait Until Ready    ${Id Confidentiality level}
+    Click Element    ${Id Confidentiality level}
+
+Enable Confidentiality level Or Add Confidentiality level
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Confidentiality level
+    ...    ELSE
+    ...    Add Confidentiality level
+
+Enable Confidentiality level
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Confidentiality level Button}
+    Click Button    ${Id Edit Confidentiality level Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Confidentiality level
+    Wait Until Ready    ${Id Add Confidentiality level Button}
+    Click Button    ${Id Add Confidentiality level Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit Confidentiality level
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Confidentiality level Button}
+    Click Button    ${Id Edit Confidentiality level Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Confidentiality level
+    Go To Confidentiality level
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Confidentiality level Button}
+    Click Button    ${Id Edit Confidentiality level Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Internal Partner
+    Wait Until Ready    ${Id Internal Partner}
+    Click Element    ${Id Internal Partner}
+
+Enable Internal Partner Or Add Internal Partner
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Internal Partner
+    ...    ELSE
+    ...    Add Internal Partner
+
+Enable Internal Partner
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Internal Partner Button}
+    Click Button    ${Id Edit Internal Partner Button}
+    Wait Until Ready    ${Internal Partner Checkbox}
+    Unselect Checkbox    ${Internal Partner Checkbox}
+    Click Element    ${Finish Button}
+
+Add Internal Partner
+    Wait Until Ready    ${Id Add Internal Partner Button}
+    Click Button    ${Id Add Internal Partner Button}
+    Wait Until Ready    ${Id Add Internal Partner}
+    Input Text    ${Id Add Internal Partner}     ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+
+Edit Internal Partner
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Internal Partner Button}
+    Click Button    ${Id Edit Internal Partner Button}
+    Wait Until Ready    ${Id Add Internal Partner}
+    Input Text    ${Id Add Internal Partner}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Internal Partner
+    Go To Internal Partner
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Internal Partner Button}
+    Click Button    ${Id Edit Internal Partner Button}
+    Wait Until Ready    ${Id Add Internal Partner}
+    Input Text    ${Id Add Internal Partner}     ${Name}
+    Select Checkbox    ${Internal Partner Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Organization Unit Or Add Organization Unit
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Contract Kind Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Organization Unit
+    ...    ELSE
+    ...    Add Organization Unit
+
+Enable Organization Unit
+    Wait Until Ready    ${Contract Kind Name Path}
+    Click Element    ${Contract Kind Name Path}
+    Wait Until Ready    ${Id Edit Organization Button}
+    Click Button    ${Id Edit Organization Button}
+    Wait Until Ready    ${Organization Unit Checkbox}
+    Unselect Checkbox    ${Organization Unit Checkbox}
+    Click Element    ${Finish Button}
+
+Add Organization Unit
+    Wait Until Ready    ${Id Add Organization Button}
+    Click Button    ${Id Add Organization Button}
+    Wait Until Ready    ${Id Add Organization Unit}
+    Input Text    ${Id Add Organization Unit}      ${Contract Kind Name}
+    Click Element    ${Finish Button}
+
+Edit Organization Unit
+    Wait Until Ready    ${Id Edit Organization Button}
+    Wait Until Ready    ${Contract Kind Name Path}
+    Click Element    ${Contract Kind Name Path}
+    Wait Until Ready    ${Id Edit Organization Button}
+    Click Button    ${Id Edit Organization Button}
+    Wait Until Ready    ${Id Add Organization Unit}
+    Input Text    ${Id Add Organization Unit}     ${Contract Kind Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Organization Unit
+    Wait Until Ready    ${Contract Kind Edited Name Path}
+    Click Element    ${Contract Kind Edited Name Path}
+    Wait Until Ready    ${Id Edit Organization Button}
+    Click Button    ${Id Edit Organization Button}
+    Wait Until Ready    ${Id Add Organization Unit}
+    Input Text    ${Id Add Organization Unit}     ${Contract Kind Name}
+    Select Checkbox    ${Organization Unit Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Business Case
+    Wait Until Ready    ${Id Business Case}
+    Click Element    ${Id Business Case}
+
+Enable Business Case Or Add Business Case
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Business Case
+    ...    ELSE
+    ...    Add Business Case
+
+Enable Business Case
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Business Case Button}
+    Click Button    ${Id Edit Business Case Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Business Case
+    Wait Until Ready    ${Id Add Business Case Button}
+    Click Button    ${Id Add Business Case Button}
+    Wait Until Ready    ${Id Add Contract Type Description}
+    Input Text    ${Id Add Contract Type Description}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit Business Case
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Business Case Button}
+    Click Button    ${Id Edit Business Case Button}
+    Wait Until Ready    ${Id Add Contract Type Description}
+    Input Text    ${Id Add Contract Type Description}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Business Case
+    Go To Business Case
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Business Case Button}
+    Click Button    ${Id Edit Business Case Button}
+    Wait Until Ready    ${Id Add Contract Type Description}
+    Input Text    ${Id Add Contract Type Description}     ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+
