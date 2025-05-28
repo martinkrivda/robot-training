@@ -76,6 +76,18 @@ Add Edit Business Case
     Enable Business Case Or Add Business Case
     Edit Business Case
 
+Add Edit Contract Language
+    [Documentation]    A test case for contract language.
+    Go To Contract Language
+    Enable Contract Language Or Add Contract Language
+    Edit Contract Language
+
+Add Edit VAD ID
+    [Documentation]    A test case for VAD ID.
+    Go To VAT ID
+    Enable VAT ID Or Add VAD ID
+    Edit VAT ID
+
 Check Created Main Data
     [Documentation]    A test case for creating contract, contract template.
     Check Created Contract Data
@@ -109,12 +121,13 @@ Disable Confidentiality level And Internal Partner
     Disable Internal Partner
     Disable Organization Unit
 
-Disable Business Case And Sequences
-    [Documentation]    A test case for disabling business case, Sequences.
+Disable Business Case
+    [Documentation]    A test case for disabling business case.
     Disable Business Case
 
-
-
-
+Disable Contract Language And VAD ID
+    [Documentation]    A test case for disabling contract language, VAD ID.
+    Disable Contract Language
+    Disable VAT ID
 
 # Set Fields Visibility Back to Normal

@@ -54,7 +54,7 @@ ${Contract Kind Edited Name Path}                               xpath=//td[text(
 ${Create Contract}                                              //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
 ${Id Number Sequence}                                           c_number
 ${Id Contract kind}                                             c_kind
-${Id Language}                                                  c_lang
+${Id Select Language}                                           c_lang
 ${Id Field Contract}                                            c_legalfield
 ${Create Contract File Button}                                  //button[normalize-space(.)='Vytvoření smluvní složky']
 ${Number Sequence}                                              ISSTEST
@@ -135,8 +135,14 @@ ${Id Sequences}                                                 settings_sequenc
 ${Id Add Sequences Button}                                      ts_add_sequence_btn
 ${Id Edit Sequences Button}                                     ts_edit_sequence_btn
 ${Id Delete Sequences Button}                                   ts_del_sequence_btn
-
-
+${Id Add Sequence}                                              s_sequence
+${Id Contract Language}                                         settings_language
+${Id Add Contract Language Button}                              ts_add_language_btn
+${Id Edit Contract Language Button}                             ts_edit_language_btn
+${Id VAT ID}                                                    settings_vatid
+${Id Add VAT ID Button}                                         ts_add_vatid_btn
+${Id Edit VAT ID Button}                                        ts_edit_vatid_btn
+${Id Select VAT ID}                                             c_part_vatid
 
 *** Keywords ***
 Go To Settings
@@ -270,18 +276,13 @@ Edit Contract Kind
     Input Text    ${Id Add Contract Kind}    ${Contract Kind Edited Name}
     Click Element    ${Finish Button}
 
-
-Fill In Required Fields
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Language}    ${Language}
-
 Check Created Contract Data
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Field Contract}
-    Fill In Required Fields
+    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
     Select From List By Label    ${Id Field Contract}    ${Edited Name}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
     Select From List By Label    ${Id Contract kind}    ${Contract Kind Edited Name}
@@ -294,6 +295,8 @@ Check Created Contract Data
     Select From List By Label    ${Id Select Confidentiality level}    ${Edited Name}
     Select From List By Label    ${Id Select Organization Unit}    ${Contract Kind Edited Name}
     Select From List By Label    ${Id Select Business Case}    ${Edited Name}
+    Select From List By Label    ${Id Select Language}    ${Edited Name}
+    Select From List By Label    ${Id Select VAT ID}    ${Edited Name}
     Input Text        ${Id Select Profit Centrum}       ${Edited Name}
     Wait Until Page Contains Element    //ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]    5s
     Click Element     xpath=//ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
@@ -860,5 +863,106 @@ Disable Business Case
     Input Text    ${Id Add Contract Type Description}     ${Name}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+
+Go To Contract Language
+    Wait Until Ready    ${Id Contract Language}
+    Click Element    ${Id Contract Language}
+
+Enable Contract Language Or Add Contract Language
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Contract Language
+    ...    ELSE
+    ...    Add Contract Language
+
+Enable Contract Language
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Contract Language Button}
+    Click Button    ${Id Edit Contract Language Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Contract Language
+    Wait Until Ready    ${Id Add Contract Language Button}
+    Click Button    ${Id Add Contract Language Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit Contract Language
+    Wait Until Ready    ${Id Edit Contract Language Button}
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Contract Language Button}
+    Click Button    ${Id Edit Contract Language Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Contract Language
+    Go To Contract Language
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Contract Language Button}
+    Click Button    ${Id Edit Contract Language Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To VAT ID
+    Wait Until Ready    ${Id VAT ID}
+    Click Element    ${Id VAT ID}
+
+Enable VAT ID Or Add VAD ID
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable VAT ID
+    ...    ELSE
+    ...    Add VAT ID
+
+Enable VAT ID
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit VAT ID Button}
+    Click Button    ${Id Edit VAT ID Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add VAT ID
+    Wait Until Ready    ${Id Add VAT ID Button}
+    Click Button    ${Id Add VAT ID Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit VAT ID
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit VAT ID Button}
+    Click Button    ${Id Edit VAT ID Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable VAT ID
+    Go To VAT ID
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit VAT ID Button}
+    Click Button    ${Id Edit VAT ID Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+
 
 
