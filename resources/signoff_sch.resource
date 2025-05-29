@@ -62,9 +62,7 @@ Add SignOff Schema
     Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
     Wait Until Ready    ${Id Add Schemas}
-    Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Name}
-    Click Element    ${Id Add Levels}
     Input Text    ${Id Add Levels}    ${SignOff Schema Level1}
     Click Button    ${Finish Button}
 
@@ -73,9 +71,7 @@ Edit SignOff Schema
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
     Click Button    ${Id Edit SignOff Button}
     Wait Until Ready    ${Id Add Schemas}
-    Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Edited Name}
-    Click Element    ${Id Add Levels}
     Input Text    ${Id Add Levels}    ${SignOff Schema Level2}
     Click Button    ${Finish Button}
 
@@ -92,9 +88,7 @@ Add User
     Click Button    ${Id Add SignOff User Button}
     Wait Until Ready    ${Id Select Username}
     Select From List By Label    ${Id Select Username}     ${Add User1}
-    Wait Until Ready    ${Id Select Level}
     Select From List By Label    ${Id Select Level}  ${SignOff Schema Level1}
-    Wait Until Ready    ${Id Select Logic}
     Select From List By Label    ${Id Select Logic}    ${SignOff Schema Logic2}
     Click Button    ${Finish Button}
 
@@ -105,7 +99,6 @@ Edit User
     Click Button    ${Id Edit SignOff User Button}
     Wait Until Ready    ${Id Select Level}
     Select From List By Label    ${Id Select Level}  ${SignOff Schema Level2}
-    Wait Until Ready    ${Id Select Logic}
     Select From List By Label    ${Id Select Logic}    ${SignOff Schema Logic1}
     Click Button    ${Finish Button}
 
@@ -123,31 +116,26 @@ Add Empty SignOff Schema And Levels
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty SignOff Schema
     Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
     Wait Until Ready    ${Id Add Levels}
-    Click Element    ${Id Add Levels}
     Input Text    ${Id Add Levels}    ${SignOff Schema Level1}
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty SignOff Levels
     Wait Until Ready    ${Id Add SignOff Schemas}
     Click Button    ${Id Add SignOff Schemas}
     Wait Until Ready    ${Id Add Schemas}
-    Click Element    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Name}
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty Schema User And Levels
@@ -157,7 +145,6 @@ Add Empty Schema User And Levels
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty Schema Levels
@@ -169,7 +156,6 @@ Add Empty Schema Levels
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Add Empty Schema User
@@ -179,11 +165,9 @@ Add Empty Schema User
     Click Button    ${Id Add SignOff User Button}
     Wait Until Ready    ${Id Select Level}
     Select From List By Label    ${Id Select Level}  ${SignOff Schema Level1}
-    Wait Until Ready    ${Finish Button}
     Click Button    ${Finish Button}
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
-    Wait Until Ready    ${Close Button}
     Click Button    ${Close Button}
 
 Delete SignOff Schema User Test
@@ -194,7 +178,7 @@ Delete SignOff Schema User Test
 
 Delete Test Data If Exists
     [Arguments]    ${schema_name}
-    ${exists}=    Run Keyword And Return Status    Wait Until Ready    xpath=//td[normalize-space(text())="${schema_name}"]
+    ${exists}=    Run Keyword And Return Status    Wait Until Element Is Visible    xpath=//td[normalize-space(text())="${schema_name}"]    timeout=1s
     Run Keyword If    ${exists}    Delete Test Data    ${schema_name}
 
 Delete Test Data
