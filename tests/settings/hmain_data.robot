@@ -88,6 +88,18 @@ Add Edit VAD ID
     Enable VAT ID Or Add VAD ID
     Edit VAT ID
 
+Add Edit Bank Account
+    [Documentation]    A test case for bank account.
+    Go To Bank Account
+    Enable Bank Account Or Add Bank Account
+    Edit Bank Account
+
+Add Edit Applicable Law
+    [Documentation]    A test case for applicable law.
+    Go To Applicable Law
+    Enable Applicable Law Or Add Applicable Law
+    Edit Applicable Law
+
 Check Created Main Data
     [Documentation]    A test case for creating contract, contract template.
     Check Created Contract Data
@@ -130,4 +142,13 @@ Disable Contract Language And VAD ID
     Disable Contract Language
     Disable VAT ID
 
-# Set Fields Visibility Back to Normal
+Disable Bank Account And Applicable Law
+    [Documentation]    A test case for disabling bank account, applicable law.
+    Disable Bank Account
+    Disable Applicable Law
+
+Set Fields Visibility Back to Normal
+    [Documentation]    A test case for fileds visibility.
+    Click On Administration
+    Set SAP Visibility Back to Invisible
+    Set Accounting area Visibility Back to Invisible

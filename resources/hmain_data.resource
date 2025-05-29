@@ -142,6 +142,14 @@ ${Id VAT ID}                                                    settings_vatid
 ${Id Add VAT ID Button}                                         ts_add_vatid_btn
 ${Id Edit VAT ID Button}                                        ts_edit_vatid_btn
 ${Id Select VAT ID}                                             c_part_vatid
+${Id Bank Account}                                              settings_bank_account
+${Id Add Bank Account Button}                                   ts_add_bank_account_btn
+${Id Edit Bank Account Button}                                  ts_edit_bank_account_btn
+${Id Select Bank Account}                                       c_account
+${Id Applicable Law}                                            settings_appl_law
+${Id Add Applicable Law Button}                                 ts_add_appl_law_btn
+${Id Edit Applicable Law Button}                                ts_edit_appl_law_btn
+${Id Select Applicable Law}                                     c_appl_law
 
 *** Keywords ***
 Go To Settings
@@ -295,6 +303,8 @@ Check Created Contract Data
     Select From List By Label    ${Id Select Organization Unit}    ${Contract Kind Edited Name}
     Select From List By Label    ${Id Select Business Case}    ${Edited Name}
     Select From List By Label    ${Id Select Language}    ${Edited Name}
+    Select From List By Label    ${Id Select Applicable Law}    ${Edited Name}
+    # Select From List By Label    ${Id Select Bank Account}    ${Edited Name}
     # Select From List By Label    ${Id Select VAT ID}    ${Edited Name}
     Input Text        ${Id Select Profit Centrum}       ${Edited Name}
     Wait Until Page Contains Element    //ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]    5s
@@ -962,6 +972,117 @@ Disable VAT ID
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
 
+Go To Bank Account
+    Wait Until Ready    ${Id Bank Account}
+    Click Element    ${Id Bank Account}
 
+Enable Bank Account Or Add Bank Account
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
 
+    Run Keyword If    ${row_exists}
+    ...    Enable Bank Account
+    ...    ELSE
+    ...    Add Bank Account
 
+Enable Bank Account
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Bank Account Button}
+    Click Button    ${Id Edit Bank Account Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Bank Account
+    Wait Until Ready    ${Id Add Bank Account Button}
+    Click Button    ${Id Add Bank Account Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit Bank Account
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Bank Account Button}
+    Click Button    ${Id Edit Bank Account Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Bank Account
+    Go To Bank Account
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Bank Account Button}
+    Click Button    ${Id Edit Bank Account Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Applicable Law
+    Wait Until Ready    ${Id Applicable Law}
+    Click Element    ${Id Applicable Law}
+
+Enable Applicable Law Or Add Applicable Law
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+
+    Run Keyword If    ${row_exists}
+    ...    Enable Applicable Law
+    ...    ELSE
+    ...    Add Applicable Law
+
+Enable Applicable Law
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Applicable Law Button}
+    Click Button    ${Id Edit Applicable Law Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Add Applicable Law
+    Wait Until Ready    ${Id Add Applicable Law Button}
+    Click Button    ${Id Add Applicable Law Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Click Element    ${Finish Button}
+
+Edit Applicable Law
+    Wait Until Ready    ${Field Name Path}
+    Click Element    ${Field Name Path}
+    Wait Until Ready    ${Id Edit Applicable Law Button}
+    Click Button    ${Id Edit Applicable Law Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Applicable Law
+    Go To Applicable Law
+    Wait Until Ready    ${Edited Name Path}
+    Click Element    ${Edited Name Path}
+    Wait Until Ready    ${Id Edit Applicable Law Button}
+    Click Button    ${Id Edit Applicable Law Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}     ${Name}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Set SAP Visibility Back to Invisible
+    Wait Until Ready    ${Field Name}
+    Click Element    ${Field Name}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Accounting area Visibility Back to Invisible
+    Wait Until Ready    ${Id Fields Edit Button}
+    Wait Until Ready    ${Field Name2}
+    Click Element    ${Field Name2}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
