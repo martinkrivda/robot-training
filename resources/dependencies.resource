@@ -9,52 +9,53 @@ Resource            login.resource
 
 
 *** Variables ***
-${Finish Button}                                                //button[normalize-space(text())="Dokončit"]
-${Close Button}                                                 //span[contains(@class, "ui-icon-closethick")]/..
-${Delete Button}                                                //button[normalize-space(.)="Odstranit" and not(@id)]
-${Id Alert}                                                     alert_area
-${Alert Message}                                                Vyplňte prosím všechna povinná pole!
-${Timeout}                                                      5s
-${Personal Space}                                               //a[@class="main_tabs" and @href="#tab_personal"]
-${Id Administration and Configuration}                          admin_config
-${Settings}                                                     //a[@class="main_tabs" and @href="#tab_settings"]
-${Id Dependencies}                                              settings_custom_dependencies
-${Id Master Field Add Button}                                   ts_add_dep_master_btn
-${Id Select Master Field}                                       s_master_field
-${Master Field}                                                 Stav smlouvy
-${Master Field2}                                                Oblast
-${Value Name}                                                   name=s_from
-${Value}                                                        Ve zpracování
-${Value2}                                                       Občanské právo
-${Id Slave Field Add Button}                                    ts_add_dep_slave_btn
-${Id Select Slave Field}                                        s_slave_field
-${Slave Field}                                                  Rozhodné právo
-${Slave Field2}                                                 Typ smlouvy
-${Optional}                                                     //label[@for="s_optional"]
-${Required}                                                     //label[@for="s_required"]
-${Id Master Field Edit Button}                                  ts_edit_dep_master_btn
-${Id Slave Field Edit Button}                                   ts_edit_dep_slave_btn
-${Id Applicable Law}                                            c_appl_law
-${Applicable Law}                                               České
-${Id Number Sequence}                                           c_number
-${Create Contract}                                              //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
-${Id Contract Status}                                           c_status
-${Field}                                                        Obchod, podnikání, obchodní právo § 261 - 775
-${Confidentiality}                                              Přísně tajné
-${Contract kind}                                                Smlouva o úvěru - § 497 - 507
-${Language}                                                     Čeština
-${Id Field}                                                     c_legalfield
-${Id Confidentiality}                                           c_confid
-${Id Contract kind}                                             c_kind
-${Number Sequence}                                              ISSTEST
-${Id Language}                                                  c_lang
-${Create Contract File Button}                                  //button[normalize-space(.)='Vytvoření smluvní složky']
-${Id Contract Subject}                                          c_subject
-${Contract Subject}                                             TESTCONRACTDV
-${Delete Contract}                                              //a[@class="ui-corner-all" and @href="#contract_delete_file"]
-${Contract Name Detail}                                         //a[@id="tab_contract_contract"]
-${Id Slave Field Delete Button}                                 ts_del_dep_slave_btn
-${Id Master Field Delete Button}                                ts_del_dep_master_btn
+${Finish Button}                            //button[normalize-space(text())="Dokončit"]
+${Close Button}                             //span[contains(@class, "ui-icon-closethick")]/..
+${Delete Button}                            //button[normalize-space(.)="Odstranit" and not(@id)]
+${Id Alert}                                 alert_area
+${Alert Message}                            Vyplňte prosím všechna povinná pole!
+${Timeout}                                  5s
+${Personal Space}                           //a[@class="main_tabs" and @href="#tab_personal"]
+${Id Administration and Configuration}      admin_config
+${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
+${Id Dependencies}                          settings_custom_dependencies
+${Id Master Field Add Button}               ts_add_dep_master_btn
+${Id Select Master Field}                   s_master_field
+${Master Field}                             Stav smlouvy
+${Master Field2}                            Oblast
+${Value Name}                               name=s_from
+${Value}                                    Ve zpracování
+${Value2}                                   Občanské právo
+${Id Slave Field Add Button}                ts_add_dep_slave_btn
+${Id Select Slave Field}                    s_slave_field
+${Slave Field}                              Rozhodné právo
+${Slave Field2}                             Typ smlouvy
+${Optional}                                 //label[@for="s_optional"]
+${Required}                                 //label[@for="s_required"]
+${Id Master Field Edit Button}              ts_edit_dep_master_btn
+${Id Slave Field Edit Button}               ts_edit_dep_slave_btn
+${Id Applicable Law}                        c_appl_law
+${Applicable Law}                           České
+${Id Number Sequence}                       c_number
+${Create Contract}                          //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
+${Id Contract Status}                       c_status
+${Field}                                    Obchod, podnikání, obchodní právo § 261 - 775
+${Confidentiality}                          Přísně tajné
+${Contract kind}                            Smlouva o úvěru - § 497 - 507
+${Language}                                 Čeština
+${Id Field}                                 c_legalfield
+${Id Confidentiality}                       c_confid
+${Id Contract kind}                         c_kind
+${Number Sequence}                          ISSTEST
+${Id Language}                              c_lang
+${Create Contract File Button}              //button[normalize-space(.)='Vytvoření smluvní složky']
+${Id Contract Subject}                      c_subject
+${Contract Subject}                         TESTCONRACTDV
+${Delete Contract}                          //a[@class="ui-corner-all" and @href="#contract_delete_file"]
+${Contract Name Detail}                     //a[@id="tab_contract_contract"]
+${Id Slave Field Delete Button}             ts_del_dep_slave_btn
+${Id Master Field Delete Button}            ts_del_dep_master_btn
+
 
 *** Keywords ***
 Go To Settings
@@ -117,10 +118,10 @@ Add Slave Field
     Click Element    ${Finish Button}
 
 Edit Slave Field
-    Wait Until Ready    //tr[td[text()="${Value}"]]
-    Click Element    //tr[td[text()="${Value}"]]
-    Wait Until Ready    xpath=//tr[td[text()="${Slave Field2}"]]/td[2]
-    Click Element    xpath=//tr[td[text()="${Slave Field2}"]]/td[2]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Wait Until Ready    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field2}"]
+    Click Element    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field2}"]
     Click Button    ${Id Slave Field Edit Button}
     Wait Until Ready    ${Id Select Slave Field}
     Select From List By Label    ${Id Select Slave Field}    ${Slave Field}
@@ -128,10 +129,10 @@ Edit Slave Field
     Click Element    ${Finish Button}
 
 Delete Slave Field
-    Wait Until Ready    //tr[td[text()="${Value}"]]
-    Click Element    //tr[td[text()="${Value}"]]
-    Wait Until Ready    xpath=//tr[td[text()="${Slave Field}"]]/td[2]
-    Click Element    xpath=//tr[td[text()="${Slave Field}"]]/td[2]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Wait Until Ready    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field}"]
+    Click Element    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field}"]
     Click Button    ${Id Slave Field Delete Button}
     Wait Until Ready    ${Delete Button}
     Click Element    ${Delete Button}
@@ -154,8 +155,8 @@ Check If Applicable Law Is Required
 Try To Create Contract Without Required Applicable Law
     Fill In Required Fields
     Click Button    ${Create Contract File Button}
-    Element Should Be Visible       ${Id Alert}
-    Element Text Should Be          ${Id Alert}    ${Alert Message}
+    Element Should Be Visible    ${Id Alert}
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Element    ${Close Button}
 
 Fill In Required Fields
