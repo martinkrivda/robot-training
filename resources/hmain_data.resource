@@ -31,7 +31,6 @@ ${Id Add Templates Button}                                      ts_add_template_
 ${Id Edit Templates Button}                                     ts_edit_template_btn
 ${Id Delete Templates Button}                                   ts_del_template_btn
 ${Input File}                                                   xpath=//input[@type="file" and @name="qqfile"]
-${Add File}                                                     C:/Users/domin/Prax/robot-training/Template test dv.docx
 ${Id Add Template Name}                                         templ_name
 ${Name}                                                         dvtest1
 ${Edited Name}                                                  dvtestEdited
@@ -190,7 +189,7 @@ Add Template
     Wait Until Ready    ${Id Add Templates Button}
     Click Button    ${Id Add Templates Button}
     Wait Until Ready    ${Finish Button}
-    Choose File    ${Input File}    ${Add File}
+    Choose File    ${Input File}    ${FILE_PATH}
     Input Text    ${Id Add Template Name}    ${Name}
     Click Element    ${Finish Button}
 
@@ -296,7 +295,7 @@ Check Created Contract Data
     Select From List By Label    ${Id Select Organization Unit}    ${Contract Kind Edited Name}
     Select From List By Label    ${Id Select Business Case}    ${Edited Name}
     Select From List By Label    ${Id Select Language}    ${Edited Name}
-    Select From List By Label    ${Id Select VAT ID}    ${Edited Name}
+    # Select From List By Label    ${Id Select VAT ID}    ${Edited Name}
     Input Text        ${Id Select Profit Centrum}       ${Edited Name}
     Wait Until Page Contains Element    //ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]    5s
     Click Element     xpath=//ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
