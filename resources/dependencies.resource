@@ -10,7 +10,7 @@ Resource            login.resource
 
 *** Variables ***
 ${Finish Button}                            //button[normalize-space(text())="Dokončit"]
-${Close Button}                             //span[contains(@class, "ui-icon-closethick")]/..
+${Close Button}                             xpath=//button[@title="Close"]
 ${Delete Button}                            //button[normalize-space(.)="Odstranit" and not(@id)]
 ${Id Alert}                                 alert_area
 ${Alert Message}                            Vyplňte prosím všechna povinná pole!
