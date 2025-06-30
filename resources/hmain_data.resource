@@ -150,6 +150,7 @@ ${Id Applicable Law}                            settings_appl_law
 ${Id Add Applicable Law Button}                 ts_add_appl_law_btn
 ${Id Edit Applicable Law Button}                ts_edit_appl_law_btn
 ${Id Select Applicable Law}                     c_appl_law
+${File Path}                                    ${EXECDIR}/template_test.docx
 
 
 *** Keywords ***
@@ -198,7 +199,7 @@ Add Template
     Wait Until Ready    ${Id Add Templates Button}
     Click Button    ${Id Add Templates Button}
     Wait Until Ready    ${Finish Button}
-    Choose File    ${Input File}    ${FILE_PATH}
+    Choose File    ${Input File}    ${File Path}
     Input Text    ${Id Add Template Name}    ${Name}
     Click Element    ${Finish Button}
 
