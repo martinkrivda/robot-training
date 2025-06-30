@@ -9,68 +9,69 @@ Resource            login.resource
 
 
 *** Variables ***
-${Finish Button}                                                //button[normalize-space(text())="Dokončit"]
-${Id Administration and Configuration}                          admin_config
-${Delete Button}                                                //button[normalize-space(.)="Odstranit" and not(@id)]
-${Id Alert}                                                     alert_area
-${Alert Message}                                                Vyplňte prosím všechna povinná pole!
-${Timeout}                                                      5s
-${Id Fields}                                                    settings_custom_fields
-${Id Fields Edit Button}                                        ts_edit_custom_fields_btn
-${Field Name}                                                   //tr[td[normalize-space(.)="Číslo výb.řízení"]]/td[1]
-${Contract creation1}                                           //label[@for="s_required"]
-${Contract creation2}                                           //label[@for="s_optional"]
-${Sign-off1}                                                    //label[@for="s_sorequired"]
-${Sign-off2}                                                    //label[@for="s_sooptional"]
-${Visibility1}                                                  //label[@for="s_visible"]
-${Visibility2}                                                  //label[@for="s_invisible"]
-${Data source1}                                                 //label[@for="s_source_csm"]
-${Data source2}                                                 //label[@for="s_source_sap"]
-${Value from SAP1}                                              //label[@for="s_editable"]
-${Value from SAP2}                                              //label[@for="s_readonly"]
-${Id Tender Number}                                             c_tender_number
-${Tender Number}                                                1234
-${Create Contract}                                              //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
-${Id Number Sequence}                                           c_number
-${Close Button}                                                 //span[contains(@class, "ui-icon-closethick")]/..
-${Personal Space}                                               //a[@class="main_tabs" and @href="#tab_personal"]
-${Settings}                                                     //a[@class="main_tabs" and @href="#tab_settings"]
-${Id Field}                                                     c_legalfield
-${Id Confidentiality}                                           c_confid
-${Id Contract kind}                                             c_kind
-${Id Language}                                                  c_lang
-${Create Contract File Button}                                  //button[normalize-space(.)='Vytvoření smluvní složky']
-${Number Sequence}                                              ISSTEST
-${Field}                                                        Obchod, podnikání, obchodní právo § 261 - 775
-${Confidentiality}                                              Přísně tajné
-${Contract kind}                                                Smlouva o úvěru - § 497 - 507
-${Language}                                                     Čeština
-${Id Contract Subject}                                          c_subject
-${Contract Subject}                                             TESTCONRACTDV
-${Delete Contract}                                              //a[@class="ui-corner-all" and @href="#contract_delete_file"]
-${Contract Name Detail}                                         //a[@id="tab_contract_contract"]
-${Item Field Name}                                              //tr[td[1][normalize-space()='Balení']]
-${Contract Items}                                               //a[@href='#tc_contract_items' and contains(@class, 'sub_tabs')]
-${Id Add Item Button}                                           tc_add_item_btn
-${Id Packing}                                                   c_packing
-${Id Unit Price}                                                c_unit_price
-${Id Commodity/service}                                         c_commodity
-${Commodity/service}                                            Doprava
-${Unit Price}                                                   1568
-${Id Contract Items}                                            settings_pl_items
-${Id Item Packing}                                              settings_item_packing
-${Id Add Item Packing Button}                                   ts_add_item_packing_btn
-${Disabled Checkbox}                                            //input[@type="checkbox" and @id="s_disabled"]
-${Id Edit Item Packing Button}                                  ts_edit_item_packing_btn
-${Packing Name}                                                 //tr[td[text()="test"] and td[text()="autotest"]]
-${Id Add Packing}                                               s_field1
-${Packing}                                                      test
-${Id Add Description}                                           s_field2
-${Description}                                                  autotest
-${Select Packing}                                               test autotest
-${Contract Item}                                                //tr[td[normalize-space(text())="Doprava"] and td[contains(normalize-space(text()), "1 568")]]
-${Id Delete Contract Item Button}                               tc_del_item_btn
-${Id Proposal Lists}                                            proposals
+${Finish Button}                            //button[normalize-space(text())="Dokončit"]
+${Id Administration and Configuration}      admin_config
+${Delete Button}                            //button[normalize-space(.)="Odstranit" and not(@id)]
+${Id Alert}                                 alert_area
+${Alert Message}                            Vyplňte prosím všechna povinná pole!
+${Timeout}                                  5s
+${Id Fields}                                settings_custom_fields
+${Id Fields Edit Button}                    ts_edit_custom_fields_btn
+${Field Name}                               //tr[td[normalize-space(.)="Číslo výb.řízení"]]/td[1]
+${Contract creation1}                       //label[@for="s_required"]
+${Contract creation2}                       //label[@for="s_optional"]
+${Sign-off1}                                //label[@for="s_sorequired"]
+${Sign-off2}                                //label[@for="s_sooptional"]
+${Visibility1}                              //label[@for="s_visible"]
+${Visibility2}                              //label[@for="s_invisible"]
+${Data source1}                             //label[@for="s_source_csm"]
+${Data source2}                             //label[@for="s_source_sap"]
+${Value from SAP1}                          //label[@for="s_editable"]
+${Value from SAP2}                          //label[@for="s_readonly"]
+${Id Tender Number}                         c_tender_number
+${Tender Number}                            1234
+${Create Contract}                          //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
+${Id Number Sequence}                       c_number
+${Close Button}                             xpath=//button[@title="Close"]
+${Personal Space}                           //a[@class="main_tabs" and @href="#tab_personal"]
+${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
+${Id Field}                                 c_legalfield
+${Id Confidentiality}                       c_confid
+${Id Contract kind}                         c_kind
+${Id Language}                              c_lang
+${Create Contract File Button}              //button[normalize-space(.)='Vytvoření smluvní složky']
+${Number Sequence}                          ISSTEST
+${Field}                                    Obchod, podnikání, obchodní právo § 261 - 775
+${Confidentiality}                          Přísně tajné
+${Contract kind}                            Smlouva o úvěru - § 497 - 507
+${Language}                                 Čeština
+${Id Contract Subject}                      c_subject
+${Contract Subject}                         TESTCONRACTDV
+${Delete Contract}                          //a[@class="ui-corner-all" and @href="#contract_delete_file"]
+${Contract Name Detail}                     //a[@id="tab_contract_contract"]
+${Item Field Name}                          //tr[td[1][normalize-space()='Balení']]
+${Contract Items}                           //a[@href='#tc_contract_items' and contains(@class, 'sub_tabs')]
+${Id Add Item Button}                       tc_add_item_btn
+${Id Packing}                               c_packing
+${Id Unit Price}                            c_unit_price
+${Id Commodity/service}                     c_commodity
+${Commodity/service}                        Doprava
+${Unit Price}                               1568
+${Id Contract Items}                        settings_pl_items
+${Id Item Packing}                          settings_item_packing
+${Id Add Item Packing Button}               ts_add_item_packing_btn
+${Disabled Checkbox}                        //input[@type="checkbox" and @id="s_disabled"]
+${Id Edit Item Packing Button}              ts_edit_item_packing_btn
+${Packing Name}                             //tr[td[text()="test"] and td[text()="autotest"]]
+${Id Add Packing}                           s_field1
+${Packing}                                  test
+${Id Add Description}                       s_field2
+${Description}                              autotest
+${Select Packing}                           test autotest
+${Contract Item}                            //tr[td[normalize-space(text())="Doprava"] and td[contains(normalize-space(text()), "1 568")]]
+${Id Delete Contract Item Button}           tc_del_item_btn
+${Id Proposal Lists}                        proposals
+
 
 *** Keywords ***
 Go To Settings
@@ -180,8 +181,8 @@ Fill In Required Fields
 Try To Create Contract Without Required Tender Number
     Fill In Required Fields
     Click Button    ${Create Contract File Button}
-    Element Should Be Visible       ${Id Alert}
-    Element Text Should Be          ${Id Alert}    ${Alert Message}
+    Element Should Be Visible    ${Id Alert}
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Element    ${Close Button}
 
 Create Contract With All Required
@@ -269,8 +270,8 @@ Try To Create Contract Item Without Required Packing
     Select From List By Label    ${Id Commodity/service}    ${Commodity/service}
     Input Text    ${Id Unit Price}    ${Unit Price}
     Click Element    ${Finish Button}
-    Element Should Be Visible       ${Id Alert}
-    Element Text Should Be          ${Id Alert}    ${Alert Message}
+    Element Should Be Visible    ${Id Alert}
+    Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Element    ${Close Button}
 
 Edit Item Field Back To Normal
@@ -286,15 +287,13 @@ Edit Item Field Back To Normal
     Click Element    ${Data source1}
     Click Element    ${Value from SAP2}
     Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
 
 Click Row Or Add Record
     ${row_exists}=    Run Keyword And Return Status
     ...    Wait Until Element Is Visible    ${Packing Name}    timeout=${Timeout}
 
-    Run Keyword If    ${row_exists}
-    ...    Enable Packing
-    ...    ELSE
-    ...    Add Packing
+    IF    ${row_exists}    Enable Packing    ELSE    Add Packing
 
 Enable Packing
     Wait Until Ready    ${Packing Name}
