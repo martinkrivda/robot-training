@@ -40,8 +40,8 @@ ${Id Alert}                                                     alert_area
 ${Alert Message}                                                Vyplňte prosím všechna povinná pole!
 ${Timeout}                                                      5s
 ${Settings}                                                     //a[@class="main_tabs" and @href="#tab_settings"]
-${Select All}                                                   xpath=//a[span[text()="Vybrat vše"]]
-${Select None}                                                  //a[@class="ui-multiselect-none"]
+${Check All}                                                    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Vybrat vše"]
+${Uncheck All}                                                  xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Zrušit vše"]
 ${Id Delete Commenting Schema User}                             ts_del_comm_schemauser_btn
 ${Close Button}                                                 //button[@title='Close']
 
@@ -86,15 +86,10 @@ Edit Commenting Schema
     ...    ${Id Commenting Schema Edit Document Type}
     ...    ${Commenting Schema Edit Document type}
     Click Element    ${Id Commenting Schema Edit Applicable Law}
-    Wait Until Element Is Visible
-    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Vybrat vše"]
-    ...    timeout=10s
-    Click Element
-    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Vybrat vše"]
-    Wait Until Element Is Visible
-    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Zrušit vše"]
-    Click Element
-    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Zrušit vše"]
+    Wait Until Element Is Visible    ${Check All}    timeout=10s
+    Click Element    ${Check All}
+    Wait Until Element Is Visible    ${Uncheck All}    timeout=10s
+    Click Element    ${Uncheck All}
     Wait Until Element Is Visible    ${Id Commenting Schema Edit Applicable Law Select0}
     Wait Until Ready    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select0}
