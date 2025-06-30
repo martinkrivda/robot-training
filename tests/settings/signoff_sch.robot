@@ -1,7 +1,9 @@
 *** Settings ***
-Documentation    A test suite for signoff schemas.
-...              Keywords are imported from signoff_sch.resource
-Resource    ${EXECDIR}/resources/signoff_sch.resource
+Documentation       A test suite for signoff schemas.
+...                 Keywords are imported from signoff_sch.resource
+
+Resource            ${EXECDIR}/resources/signoff_sch.resource
+
 
 *** Test Cases ***
 Add Edit Delete Signoff Schema

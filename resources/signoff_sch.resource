@@ -78,15 +78,17 @@ Edit SignOff Schema
     Click Button    ${Finish Button}
 
 Delete SignOff Schema
-    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
-    Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_schemas_tbl"]//td[contains(normalize-space(.), "${SignOff Schema Edited Name}")]
+    Click Element    xpath=//*[@id="ts_schemas_tbl"]//td[contains(normalize-space(.), "${SignOff Schema Edited Name}")]
     Click Button    ${Id Delete SignOff Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Add User
-    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
-    Click Element    //td[normalize-space(text())="${SignOff Schema Edited Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_schemas_tbl"]//td[contains(normalize-space(.), "${SignOff Schema Edited Name}")]
+    Click Element    xpath=//*[@id="ts_schemas_tbl"]//td[contains(normalize-space(.), "${SignOff Schema Edited Name}")]
     Click Button    ${Id Add SignOff User Button}
     Wait Until Ready    ${Id Select Username}
     Select From List By Label    ${Id Select Username}    ${Add User1}
@@ -119,6 +121,8 @@ Add Empty SignOff Schema And Levels
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Button    ${Close Button}
+    Wait Until Ready    ${Id Add SignOff Schemas}
+    Sleep    0.5
 
 Add Empty SignOff Schema
     Wait Until Ready    ${Id Add SignOff Schemas}
@@ -129,6 +133,8 @@ Add Empty SignOff Schema
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Button    ${Close Button}
+    Wait Until Ready    ${Id Add SignOff Schemas}
+    Sleep    0.5
 
 Add Empty SignOff Levels
     Wait Until Ready    ${Id Add SignOff Schemas}
@@ -139,6 +145,8 @@ Add Empty SignOff Levels
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Button    ${Close Button}
+    Wait Until Ready    ${Id Add SignOff Schemas}
+    Sleep    0.5
 
 Add Empty Schema User And Levels
     Wait Until Ready    ${Id Add SignOff User Button}
@@ -148,6 +156,7 @@ Add Empty Schema User And Levels
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Button    ${Close Button}
+    Wait Until Ready    ${Id Add SignOff Schemas}
 
 Add Empty Schema Levels
     Wait Until Ready    ${Id Add SignOff User Button}
@@ -159,6 +168,7 @@ Add Empty Schema Levels
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Button    ${Close Button}
+    Wait Until Ready    ${Id Add SignOff Schemas}
 
 Add Empty Schema User
     Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Name}"]
@@ -171,6 +181,7 @@ Add Empty Schema User
     Wait Until Ready    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
     Click Button    ${Close Button}
+    Wait Until Ready    ${Id Add SignOff Schemas}
 
 Delete SignOff Schema User Test
     Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
@@ -182,21 +193,21 @@ Delete Test Data If Exists
     [Arguments]    ${schema_name}
     ${exists}=    Run Keyword And Return Status
     ...    Wait Until Element Is Visible
-    ...    xpath=//td[normalize-space(text())="${schema_name}"]
+    ...    xpath=//*[@id="ts_schemas_tbl"]//td[contains(normalize-space(.), "${schema_name}")]
     ...    timeout=1s
     IF    ${exists}    Delete Test Data    ${schema_name}
 
 Delete Test Data
     [Arguments]    ${schema_name}
-    Click Element    xpath=//td[normalize-space(text())="${schema_name}"]
+    Click Element    xpath=//*[@id="ts_schemas_tbl"]//td[contains(normalize-space(.), "${schema_name}")]
     Click Button    ${Id Delete SignOff Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Prepare Test
     Go To SignOff Schemas
-    Delete Test Data If Exists    ${SignOff Schema Name}
     Delete Test Data If Exists    ${SignOff Schema Edited Name}
+    Delete Test Data If Exists    ${SignOff Schema Name}
 
 Wait Until Ready
     [Arguments]    ${locator}
