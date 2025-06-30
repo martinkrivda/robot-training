@@ -26,8 +26,8 @@ ${Id Commenting Schema Edit Button}                             ts_edit_comm_sch
 ${Id Commenting Schema Edit Field}                              add_comm_mand_field_select
 ${Id Commenting Schema Edit Document Type}                      add_comm_mand_doc_type_select
 ${Id Commenting Schema Edit Applicable Law}                     add_comm_mand_appl_law_select_ms
-${Id Commenting Schema Edit Applicable Law Select0}             ui-multiselect-0-add_comm_mand_appl_law_select-option-0
-${Id Commenting Schema Edit Applicable Law Select1}             ui-multiselect-0-add_comm_mand_appl_law_select-option-1
+${Id Commenting Schema Edit Applicable Law Select0}             xpath=//input[@id="ui-multiselect-1-add_comm_mand_appl_law_select-option-0"]
+${Id Commenting Schema Edit Applicable Law Select1}             xpath=//input[@id="ui-multiselect-1-add_comm_mand_appl_law_select-option-1"]
 ${Id Commenting Schema Edit Applicable Law Add Button}          u_add_comm_mand
 ${Id Commenting Schema Edit Applicable Law Delete Button}       u_delete_comm_mand
 ${Id Commenting Schema Delete Button}                           ts_del_comm_schema_btn
@@ -40,10 +40,11 @@ ${Id Alert}                                                     alert_area
 ${Alert Message}                                                Vyplňte prosím všechna povinná pole!
 ${Timeout}                                                      5s
 ${Settings}                                                     //a[@class="main_tabs" and @href="#tab_settings"]
-${Select All}                                                   //a[@class="ui-multiselect-all"]
+${Select All}                                                   xpath=//a[span[text()="Vybrat vše"]]
 ${Select None}                                                  //a[@class="ui-multiselect-none"]
 ${Id Delete Commenting Schema User}                             ts_del_comm_schemauser_btn
 ${Close Button}                                                 //button[@title='Close']
+
 
 *** Keywords ***
 # ToDo: Change name to id
@@ -84,10 +85,17 @@ Edit Commenting Schema
     Wait Until Element Contains
     ...    ${Id Commenting Schema Edit Document Type}
     ...    ${Commenting Schema Edit Document type}
-    Click Button    ${Id Commenting Schema Edit Applicable Law}
-    Wait Until Ready    ${Select All}
-    Click Element    ${Select All}
-    Click Element    ${Select None}
+    Click Element    ${Id Commenting Schema Edit Applicable Law}
+    Wait Until Element Is Visible
+    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Vybrat vše"]
+    ...    timeout=10s
+    Click Element
+    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Vybrat vše"]
+    Wait Until Element Is Visible
+    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Zrušit vše"]
+    Click Element
+    ...    xpath=//div[contains(@class,"ui-multiselect-menu") and contains(@style,"display: block")]//span[text()="Zrušit vše"]
+    Wait Until Element Is Visible    ${Id Commenting Schema Edit Applicable Law Select0}
     Wait Until Ready    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select0}
     Click Element    ${Id Commenting Schema Edit Applicable Law Select1}
@@ -101,15 +109,19 @@ Edit Commenting Schema
     Click Button    ${Finish Button}
 
 Delete Commenting Schema
-    Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
-    Click Element    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Edited Name}")]
+    Click Element
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Edited Name}")]
     Click Button    ${Id Commenting Schema Delete Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
 Add User
-    Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
-    Click Element    //td[normalize-space(text())="${Commenting Schema Edited Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Edited Name}")]
+    Click Element
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Edited Name}")]
     Click Button    ${Id Add User Button}
     Wait Until Ready    ${Id Add Commenting Schema User}
     Select From List By Label    ${Id Add Commenting Schema User}    ${Add User1}
@@ -164,13 +176,15 @@ Delete Commenting Schema User Test
 Delete Test Data If Exists
     [Arguments]    ${commenting_name}
     ${exists}=    Run Keyword And Return Status
-    ...    Wait Until Ready
-    ...    xpath=//td[normalize-space(text())="${commenting_name}"]
+    ...    Wait Until Element Is Visible
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${commenting_name}")]
+    ...    timeout=1s
     IF    ${exists}    Delete Test Data    ${commenting_name}
 
 Delete Test Data
     [Arguments]    ${commenting_name}
-    Click Element    xpath=//td[normalize-space(text())="${commenting_name}"]
+    Click Element
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${commenting_name}")]
     Click Button    ${Id Commenting Schema Delete Button}
     Wait Until Ready    xpath=${Delete Button}
     Click Button    xpath=${Delete Button}
