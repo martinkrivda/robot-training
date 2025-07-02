@@ -69,8 +69,8 @@ Add SignOff Schema
     Click Button    ${Finish Button}
 
 Edit SignOff Schema
-    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Name}"]
-    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
+    Wait Until Ready    xpath=//table[@id="ts_schemas_tbl"]//td[normalize-space(.)="${SignOff Schema Name}"]
+    Click Element    xpath=//table[@id="ts_schemas_tbl"]//td[normalize-space(.)="${SignOff Schema Name}"]
     Click Button    ${Id Edit SignOff Button}
     Wait Until Ready    ${Id Add Schemas}
     Input Text    ${Id Add Schemas}    ${SignOff Schema Edited Name}
@@ -171,8 +171,8 @@ Add Empty Schema Levels
     Wait Until Ready    ${Id Add SignOff Schemas}
 
 Add Empty Schema User
-    Wait Until Ready    //td[normalize-space(text())="${SignOff Schema Name}"]
-    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
+    Wait Until Ready    xpath=//table[@id="ts_schemas_tbl"]//td[normalize-space(.)="${SignOff Schema Name}"]
+    Click Element    xpath=//table[@id="ts_schemas_tbl"]//td[normalize-space(.)="${SignOff Schema Name}"]
     Wait Until Ready    ${Id Add SignOff User Button}
     Click Button    ${Id Add SignOff User Button}
     Wait Until Ready    ${Id Select Level}
@@ -184,7 +184,7 @@ Add Empty Schema User
     Wait Until Ready    ${Id Add SignOff Schemas}
 
 Delete SignOff Schema User Test
-    Click Element    //td[normalize-space(text())="${SignOff Schema Name}"]
+    Click Element    xpath=//table[@id="ts_schemas_tbl"]//td[normalize-space(.)="${SignOff Schema Name}"]
     Click Button    ${Id Delete SignOff Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
