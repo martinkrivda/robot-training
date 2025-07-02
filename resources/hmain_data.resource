@@ -219,12 +219,12 @@ Add Field In Header Main Data
     Wait Until Ready    ${Add Field}
     Input Text    ${Add Field}    ${Name}
     Click Element    ${Finish Button}
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
 
 Enable Field
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
     Click Button    ${Id Edit Field Button}
     Wait Until Ready    ${Field Checkbox}
     Unselect Checkbox    ${Field Checkbox}
@@ -232,7 +232,9 @@ Enable Field
 
 Enable Fields Or Add Field
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Field    ELSE    Add Field In Header Main Data
 
@@ -241,8 +243,8 @@ Go To Header Main Data Fields
     Click Element    ${Id Field}
 
 Edit Field
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Name}"]
     Click Button    ${Id Edit Field Button}
     Wait Until Ready    ${Add Field}
     Input Text    ${Add Field}    ${Edited Name}
