@@ -75,8 +75,10 @@ Add Commenting Schemas
     Click Button    ${Finish Button}
 
 Edit Commenting Schema
-    Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Name}"]
-    Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Name}")]
+    Click Element
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Name}")]
     Click Button    ${Id Commenting Schema Edit Button}
     Wait Until Ready    ${Id Add Commenting Schema}
     Input Text    ${Id Add Commenting Schema}    ${Commenting Schema Edited Name}
@@ -150,8 +152,10 @@ Add Empty Commenting Schema
     Click Button    ${Close Button}
 
 Add Empty Commenting Schema User
-    Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Name}"]
-    Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Name}")]
+    Click Element
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Name}")]
     Wait Until Ready    ${Id Add User Button}
     Click Button    ${Id Add User Button}
     Wait Until Ready    ${Finish Button}
@@ -162,8 +166,10 @@ Add Empty Commenting Schema User
     Click Button    ${Close Button}
 
 Delete Commenting Schema User Test
-    Wait Until Ready    //td[normalize-space(text())="${Commenting Schema Name}"]
-    Click Element    //td[normalize-space(text())="${Commenting Schema Name}"]
+    Wait Until Ready
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Name}")]
+    Click Element
+    ...    xpath=//*[@id="ts_comm_schemas_tbl_wrapper"]//td[contains(normalize-space(.), "${Commenting Schema Name}")]
     Click Button    ${Id Commenting Schema Delete Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
