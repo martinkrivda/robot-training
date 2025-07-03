@@ -60,6 +60,9 @@ ${Id Administration and Configuration}          admin_config
 ${Id Fields}                                    settings_custom_fields
 ${Field Name}                                   //tr[td[normalize-space(.)='Typ položky']]
 ${Field Name2}                                  //tr[td[normalize-space(.)='Typ přiřazení účtu']]
+${Field Name3}                                  xpath=//tr[td[normalize-space(.)="Incoterms"] and td[normalize-space(.)="Položka"]]
+${Field Name4}                                  //tr[td[normalize-space(.)='Závod']]
+${Field Name5}                                  //tr[td[normalize-space(.)='Sklad']]
 ${Visibility1}                                  //label[@for="s_visible"]
 ${Visibility2}                                  //label[@for="s_invisible"]
 ${Id Fields Edit Button}                        ts_edit_custom_fields_btn
@@ -74,6 +77,18 @@ ${Id Account Assignment Type}                   settings_item_acc_ass_type
 ${Id Edit Account Assignment Type Button}       ts_edit_item_acc_ass_type_btn
 ${Id Add Account Assignment Type Button}        ts_add_item_acc_ass_type_btn
 ${Id Add Account Assignment Type}               c_acc_ass_type
+${Id Incoterms}                                 settings_item_incoterms
+${Id Edit Incoterms Button}                     ts_edit_item_incoterms_btn
+${Id Add Incoterms Button}                      ts_add_item_incoterms_btn
+${Id Add Incoterms}                             c_incoterms
+${Id Plant}                                     settings_item_plant
+${Id Edit Plant Button}                         ts_edit_item_plant_btn
+${Id Add Plant Button}                          ts_add_item_plant_btn
+${Id Add Plant}                                 c_plant
+${Id Store}                                     settings_item_store
+${Id Edit Store Button}                         ts_edit_item_store_btn
+${Id Add Store Button}                          ts_add_item_store_btn
+${Id Add Store}                                 c_store
 
 
 *** Keywords ***
@@ -113,6 +128,27 @@ Contract Items Setup
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Fields Edit Button}
+    Wait Until Ready    ${Field Name3}
+    Click Element    ${Field Name3}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Wait Until Ready    ${Field Name4}
+    Click Element    ${Field Name4}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Wait Until Ready    ${Field Name5}
+    Click Element    ${Field Name5}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
     Click Element    ${Id Proposal lists}
     Wait Until Ready    ${Id Contract Items}
     Click Element    ${Id Contract Items}
@@ -129,6 +165,30 @@ Set Item Type Back To Invisible
 Set Account Assignment Type Back To Invisible
     Wait Until Ready    ${Field Name2}
     Click Element    ${Field Name2}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Incoterms Back To Invisible
+    Wait Until Ready    ${Field Name3}
+    Click Element    ${Field Name3}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Plant Back To Invisible
+    Wait Until Ready    ${Field Name4}
+    Click Element    ${Field Name4}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Store Back To Invisible
+    Wait Until Ready    ${Field Name5}
+    Click Element    ${Field Name5}
     Click Button    ${Id Fields Edit Button}
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
@@ -165,6 +225,9 @@ Check Created Items
     Select From List By Label    ${Id Add Invoicing date}    ${Edited Name}
     Select From List By Label    ${Id Add Item type}    ${Name3}
     Select From List By Label    ${Id Add Account Assignment Type}    ${Edited Name3}
+    Select From List By Label    ${Id Add Incoterms}    ${Name3}
+    Select From List By Label    ${Id Add Plant}    ${Name3}
+    Select From List By Label    ${Id Add Store}    ${Name3}
     Click Element    ${Finish Button}
 
 Delete Contract
@@ -371,6 +434,210 @@ Disable Account Assignment Type
     Click Button    ${Id Edit Account Assignment Type Button}
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${Name4}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Incoterms
+    Wait Until Ready    ${Id Incoterms}
+    Click Element    ${Id Incoterms}
+    Wait Until Ready    ${Id Add Incoterms Button}
+
+Enable Incoterms
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Incoterms Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Incoterms
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Incoterms
+        ...    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Incoterms
+        ...    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Incoterms
+
+Add Incoterms
+    Wait Until Ready    ${Id Add Incoterms Button}
+    Click Button    ${Id Add Incoterms Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Incoterms
+    Wait Until Ready    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Incoterms Button}
+    Click Button    ${Id Edit Incoterms Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Incoterms
+    Go To Incoterms
+    Wait Until Ready    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Incoterms Button}
+    Click Button    ${Id Edit Incoterms Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Plant
+    Wait Until Ready    ${Id Plant}
+    Click Element    ${Id Plant}
+    Wait Until Ready    ${Id Add Plant Button}
+
+Enable Plant
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Plant Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Plant
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Plant
+        ...    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Plant
+        ...    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Plant
+
+Add Plant
+    Wait Until Ready    ${Id Add Plant Button}
+    Click Button    ${Id Add Plant Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Plant
+    Wait Until Ready    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Plant Button}
+    Click Button    ${Id Edit Plant Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Plant
+    Go To Plant
+    Wait Until Ready    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Plant Button}
+    Click Button    ${Id Edit Plant Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Store
+    Wait Until Ready    ${Id Store}
+    Click Element    ${Id Store}
+    Wait Until Ready    ${Id Add Store Button}
+
+Enable Store
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Store Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Store
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Store
+        ...    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Store
+        ...    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Store
+
+Add Store
+    Wait Until Ready    ${Id Add Store Button}
+    Click Button    ${Id Add Store Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Store
+    Wait Until Ready    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Store Button}
+    Click Button    ${Id Edit Store Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Store
+    Go To Store
+    Wait Until Ready    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Store Button}
+    Click Button    ${Id Edit Store Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
     Input Text    ${Id Add Field2}    ${Name}
     Select Checkbox    ${Checkbox}
     Click Element    ${Finish Button}
