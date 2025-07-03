@@ -120,7 +120,7 @@ Disable Contract Type And Sap
 Disable Accounting area And Profit Centrum
     [Documentation]    A test case for disabling Accounting area, profit centrum.
     Disable Accounting area
-    Disable Profic Centrum
+    Disable Profit Centrum
 
 Disable Contract Status And Partner Role
     [Documentation]    A test case for disabling contract status, partner role.

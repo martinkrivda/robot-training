@@ -258,8 +258,8 @@ Add Contract Kind
     Click Element    ${Finish Button}
 
 Enable Contract Kind
-    Wait Until Ready    ${Contract Kind Name Path}
-    Click Element    ${Contract Kind Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+    Click Element    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
     Click Button    ${Id Edit Contract Kind Button}
     Wait Until Ready    ${Contract Kind Checkbox}
     Unselect Checkbox    ${Contract Kind Checkbox}
@@ -267,14 +267,16 @@ Enable Contract Kind
 
 Enable Contract Kind Or Add Contract Kind
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Contract Kind Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Contract Kind    ELSE    Add Contract Kind
 
 Edit Contract Kind
     Wait Until Ready    ${Id Add Contract Kind Button}
-    Wait Until Ready    ${Contract Kind Name Path}
-    Click Element    ${Contract Kind Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+    Click Element    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
     Wait Until Ready    ${Id Edit Contract Kind Button}
     Click Button    ${Id Edit Contract Kind Button}
     Wait Until Ready    ${Id Add Contract Kind}
@@ -348,8 +350,8 @@ Delete Template
 Disable Fields
     Wait Until Ready    ${Id Field}
     Click Element    ${Id Field}
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Button    ${Id Edit Field Button}
     Wait Until Ready    ${Add Field}
     Input Text    ${Add Field}    ${Name}
@@ -357,8 +359,10 @@ Disable Fields
     Click Element    ${Finish Button}
 
 Disable Contract Kind
-    Wait Until Ready    ${Contract Kind Edited Name Path}
-    Click Element    ${Contract Kind Edited Name Path}
+    Wait Until Ready
+    ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
+    Click Element
+    ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
     Click Button    ${Id Edit Contract Kind Button}
     Wait Until Ready    ${Id Add Contract Kind}
     Input Text    ${Id Add Contract Kind}    ${Contract Kind Name}
@@ -379,7 +383,8 @@ Add Contract Type
     Click Element    ${Finish Button}
 
 Enable Contract Type
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Contract Type Button}
     Click Button    ${Id Edit Contract Type Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -388,13 +393,15 @@ Enable Contract Type
 
 Enable Contract Type Or Add Contract Type
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Contract Type    ELSE    Add Contract Type
 
 Edit Contract Type
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Contract Type Button}
     Click Button    ${Id Edit Contract Type Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -405,8 +412,8 @@ Edit Contract Type
 Disable Contract Type
     Wait Until Ready    ${Id Contract Type}
     Click Element    ${Id Contract Type}
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Contract Type Button}
     Click Button    ${Id Edit Contract Type Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -421,13 +428,15 @@ Go To SAP Contract Kind
 
 Enable Sap Or Add Sap
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Sap    ELSE    Add Sap
 
 Enable Sap
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit SAP Button}
     Click Button    ${Id Edit SAP Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -443,8 +452,8 @@ Add Sap
     Click Element    ${Finish Button}
 
 Edit Sap
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit SAP Button}
     Click Button    ${Id Edit SAP Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -454,8 +463,8 @@ Edit Sap
 
 Disable Sap
     Go To SAP Contract Kind
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit SAP Button}
     Click Button    ${Id Edit SAP Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -470,13 +479,15 @@ Go To Accounting area
 
 Enable Accounting area Or Add Accounting area
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Accounting area    ELSE    Add Accounting area
 
 Enable Accounting area
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Accounting Area Button}
     Click Button    ${Id Edit Accounting Area Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -492,8 +503,8 @@ Add Accounting area
     Click Element    ${Finish Button}
 
 Edit Accounting area
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Accounting Area Button}
     Click Button    ${Id Edit Accounting Area Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -503,8 +514,8 @@ Edit Accounting area
 
 Disable Accounting area
     Go To Accounting area
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Accounting Area Button}
     Click Button    ${Id Edit Accounting Area Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -519,13 +530,15 @@ Go To Profit Center
 
 Enable Profit Center Or Add Profit Center
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Profit Center    ELSE    Add Profit Center
 
 Enable Profit Center
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Profit Center Button}
     Click Button    ${Id Edit Profit Center Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -542,8 +555,8 @@ Add Profit Center
     Click Element    ${Finish Button}
 
 Edit Profit Centrum
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Profit Center Button}
     Click Button    ${Id Edit Profit Center Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -552,10 +565,10 @@ Edit Profit Centrum
     Input Text    ${Id Add Responsible}    ${Edited Responsible}
     Click Element    ${Finish Button}
 
-Disable Profic Centrum
+Disable Profit Centrum
     Go To Profit Center
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Profit Center Button}
     Click Button    ${Id Edit Profit Center Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -571,13 +584,15 @@ Go To Contract Status
 
 Enable Contract Status Or Add Contract Status
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Contract Status    ELSE    Add Contract Status
 
 Enable Contract Status
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Contract Status Button}
     Click Button    ${Id Edit Contract Status Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -592,8 +607,8 @@ Add Contract Status
     Click Element    ${Finish Button}
 
 Edit Contract Status
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Contract Status Button}
     Click Button    ${Id Edit Contract Status Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -602,8 +617,8 @@ Edit Contract Status
 
 Disable Contract Status
     Go To Contract Status
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Contract Status Button}
     Click Button    ${Id Edit Contract Status Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -617,13 +632,15 @@ Go To Partner Role
 
 Enable Parner Role Or Add Partner Role
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Partner Role    ELSE    Add Partner Role
 
 Enable Partner Role
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Partner Roles Button}
     Click Button    ${Id Edit Partner Roles Button}
     Wait Until Ready    ${Partner Role Checkbox}
@@ -639,8 +656,8 @@ Add Partner Role
     Click Element    ${Finish Button}
 
 Edit Partner Role
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Partner Roles Button}
     Click Button    ${Id Edit Partner Roles Button}
     Wait Until Ready    ${Id Add Partner Roles}
@@ -650,8 +667,8 @@ Edit Partner Role
 
 Disable Partner Role
     Go To Partner Role
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Partner Roles Button}
     Click Button    ${Id Edit Partner Roles Button}
     Wait Until Ready    ${Id Add Partner Roles}
@@ -666,7 +683,9 @@ Go To Confidentiality level
 
 Enable Confidentiality level Or Add Confidentiality level
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}
         Enable Confidentiality level
@@ -675,8 +694,8 @@ Enable Confidentiality level Or Add Confidentiality level
     END
 
 Enable Confidentiality level
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Confidentiality level Button}
     Click Button    ${Id Edit Confidentiality level Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -691,8 +710,8 @@ Add Confidentiality level
     Click Element    ${Finish Button}
 
 Edit Confidentiality level
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Confidentiality level Button}
     Click Button    ${Id Edit Confidentiality level Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -701,8 +720,8 @@ Edit Confidentiality level
 
 Disable Confidentiality level
     Go To Confidentiality level
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_conf_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Confidentiality level Button}
     Click Button    ${Id Edit Confidentiality level Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -716,7 +735,9 @@ Go To Internal Partner
 
 Enable Internal Partner Or Add Internal Partner
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}
         Enable Internal Partner
@@ -725,8 +746,8 @@ Enable Internal Partner Or Add Internal Partner
     END
 
 Enable Internal Partner
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Internal Partner Button}
     Click Button    ${Id Edit Internal Partner Button}
     Wait Until Ready    ${Internal Partner Checkbox}
@@ -739,12 +760,10 @@ Add Internal Partner
     Wait Until Ready    ${Id Add Internal Partner}
     Input Text    ${Id Add Internal Partner}    ${Name}
     Click Element    ${Finish Button}
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
 
 Edit Internal Partner
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Internal Partner Button}
     Click Button    ${Id Edit Internal Partner Button}
     Wait Until Ready    ${Id Add Internal Partner}
@@ -753,8 +772,8 @@ Edit Internal Partner
 
 Disable Internal Partner
     Go To Internal Partner
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_int_partners_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Internal Partner Button}
     Click Button    ${Id Edit Internal Partner Button}
     Wait Until Ready    ${Id Add Internal Partner}
@@ -764,7 +783,9 @@ Disable Internal Partner
 
 Enable Organization Unit Or Add Organization Unit
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Contract Kind Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}
         Enable Organization Unit
@@ -773,8 +794,8 @@ Enable Organization Unit Or Add Organization Unit
     END
 
 Enable Organization Unit
-    Wait Until Ready    ${Contract Kind Name Path}
-    Click Element    ${Contract Kind Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Name}"]
+    Click Element    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Name}"]
     Wait Until Ready    ${Id Edit Organization Button}
     Click Button    ${Id Edit Organization Button}
     Wait Until Ready    ${Organization Unit Checkbox}
@@ -790,8 +811,8 @@ Add Organization Unit
 
 Edit Organization Unit
     Wait Until Ready    ${Id Edit Organization Button}
-    Wait Until Ready    ${Contract Kind Name Path}
-    Click Element    ${Contract Kind Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Name}"]
+    Click Element    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Name}"]
     Wait Until Ready    ${Id Edit Organization Button}
     Click Button    ${Id Edit Organization Button}
     Wait Until Ready    ${Id Add Organization Unit}
@@ -799,8 +820,8 @@ Edit Organization Unit
     Click Element    ${Finish Button}
 
 Disable Organization Unit
-    Wait Until Ready    ${Contract Kind Edited Name Path}
-    Click Element    ${Contract Kind Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Edited Name}"]
+    Click Element    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract kind Edited Name}"]
     Wait Until Ready    ${Id Edit Organization Button}
     Click Button    ${Id Edit Organization Button}
     Wait Until Ready    ${Id Add Organization Unit}
@@ -814,13 +835,15 @@ Go To Business Case
 
 Enable Business Case Or Add Business Case
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Business Case    ELSE    Add Business Case
 
 Enable Business Case
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Business Case Button}
     Click Button    ${Id Edit Business Case Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -835,8 +858,8 @@ Add Business Case
     Click Element    ${Finish Button}
 
 Edit Business Case
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Business Case Button}
     Click Button    ${Id Edit Business Case Button}
     Wait Until Ready    ${Id Add Contract Type Description}
@@ -845,8 +868,8 @@ Edit Business Case
 
 Disable Business Case
     Go To Business Case
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Business Case Button}
     Click Button    ${Id Edit Business Case Button}
     Wait Until Ready    ${Id Add Contract Type Description}
@@ -860,7 +883,9 @@ Go To Contract Language
 
 Enable Contract Language Or Add Contract Language
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}
         Enable Contract Language
@@ -869,8 +894,8 @@ Enable Contract Language Or Add Contract Language
     END
 
 Enable Contract Language
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Contract Language Button}
     Click Button    ${Id Edit Contract Language Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -886,8 +911,8 @@ Add Contract Language
 
 Edit Contract Language
     Wait Until Ready    ${Id Edit Contract Language Button}
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Contract Language Button}
     Click Button    ${Id Edit Contract Language Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -896,8 +921,8 @@ Edit Contract Language
 
 Disable Contract Language
     Go To Contract Language
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_language_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Contract Language Button}
     Click Button    ${Id Edit Contract Language Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -911,13 +936,15 @@ Go To VAT ID
 
 Enable VAT ID Or Add VAD ID
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable VAT ID    ELSE    Add VAT ID
 
 Enable VAT ID
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit VAT ID Button}
     Click Button    ${Id Edit VAT ID Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -932,8 +959,8 @@ Add VAT ID
     Click Element    ${Finish Button}
 
 Edit VAT ID
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit VAT ID Button}
     Click Button    ${Id Edit VAT ID Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -942,8 +969,8 @@ Edit VAT ID
 
 Disable VAT ID
     Go To VAT ID
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit VAT ID Button}
     Click Button    ${Id Edit VAT ID Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -957,13 +984,15 @@ Go To Bank Account
 
 Enable Bank Account Or Add Bank Account
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Bank Account    ELSE    Add Bank Account
 
 Enable Bank Account
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Bank Account Button}
     Click Button    ${Id Edit Bank Account Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -978,8 +1007,8 @@ Add Bank Account
     Click Element    ${Finish Button}
 
 Edit Bank Account
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Bank Account Button}
     Click Button    ${Id Edit Bank Account Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -988,8 +1017,8 @@ Edit Bank Account
 
 Disable Bank Account
     Go To Bank Account
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Bank Account Button}
     Click Button    ${Id Edit Bank Account Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -1003,13 +1032,15 @@ Go To Applicable Law
 
 Enable Applicable Law Or Add Applicable Law
     ${row_exists}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${Field Name Path}    timeout=${Timeout}
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout}
 
     IF    ${row_exists}    Enable Applicable Law    ELSE    Add Applicable Law
 
 Enable Applicable Law
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Applicable Law Button}
     Click Button    ${Id Edit Applicable Law Button}
     Wait Until Ready    ${Contract Type Checkbox}
@@ -1024,8 +1055,8 @@ Add Applicable Law
     Click Element    ${Finish Button}
 
 Edit Applicable Law
-    Wait Until Ready    ${Field Name Path}
-    Click Element    ${Field Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Name}"]
     Wait Until Ready    ${Id Edit Applicable Law Button}
     Click Button    ${Id Edit Applicable Law Button}
     Wait Until Ready    ${Id Add Contract Type}
@@ -1034,8 +1065,8 @@ Edit Applicable Law
 
 Disable Applicable Law
     Go To Applicable Law
-    Wait Until Ready    ${Edited Name Path}
-    Click Element    ${Edited Name Path}
+    Wait Until Ready    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Applicable Law Button}
     Click Button    ${Id Edit Applicable Law Button}
     Wait Until Ready    ${Id Add Contract Type}
