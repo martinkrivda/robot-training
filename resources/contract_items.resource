@@ -63,6 +63,11 @@ ${Field Name2}                                  //tr[td[normalize-space(.)='Typ 
 ${Field Name3}                                  xpath=//tr[td[normalize-space(.)="Incoterms"] and td[normalize-space(.)="Položka"]]
 ${Field Name4}                                  //tr[td[normalize-space(.)='Závod']]
 ${Field Name5}                                  //tr[td[normalize-space(.)='Sklad']]
+${Field Name6}                                  //tr[td[normalize-space(.)='Šarže']]
+${Field Name7}                                  //tr[td[normalize-space(.)='Obor']]
+${Field Name8}                                  //tr[td[normalize-space(.)='Expediční středisko']]
+${Field Name9}                                  //tr[td[normalize-space(.)='Balení']]
+${Field Name10}                                 //tr[td[normalize-space(.)='Druh prostředku']]
 ${Visibility1}                                  //label[@for="s_visible"]
 ${Visibility2}                                  //label[@for="s_invisible"]
 ${Id Fields Edit Button}                        ts_edit_custom_fields_btn
@@ -89,6 +94,26 @@ ${Id Store}                                     settings_item_store
 ${Id Edit Store Button}                         ts_edit_item_store_btn
 ${Id Add Store Button}                          ts_add_item_store_btn
 ${Id Add Store}                                 c_store
+${Id Batch}                                     settings_item_batch
+${Id Edit Batch Button}                         ts_edit_item_batch_btn
+${Id Add Batch Button}                          ts_add_item_batch_btn
+${Id Add Batch}                                 c_batch
+${Id Division}                                  settings_item_division
+${Id Edit Division Button}                      ts_edit_item_division_btn
+${Id Add Division Button}                       ts_add_item_division_btn
+${Id Add Division}                              c_division
+${Id Expedition Center}                         settings_item_expcenter
+${Id Edit Expedition Center Button}             ts_edit_item_expcenter_btn
+${Id Add Expedition Center Button}              ts_add_item_expcenter_btn
+${Id Add Expedition Center}                     c_expcenter
+${Id Packing}                                   settings_item_packing
+${Id Edit Packing Button}                       ts_edit_item_packing_btn
+${Id Add Packing Button}                        ts_add_item_packing_btn
+${Id Add Packing}                               c_packing
+${Id Resource kind}                             settings_item_restype
+${Id Edit Resource kind Button}                 ts_edit_item_restype_btn
+${Id Add Resource kind Button}                  ts_add_item_restype_btn
+${Id Add Resource kind}                         c_restype
 
 
 *** Keywords ***
@@ -114,6 +139,21 @@ Click On Administration
 Contract Items Setup
     Open Browser And Logged In
     Go To Fields
+    Set Item Type Visible
+    Set Account Assignment Type Visible
+    Set Incoterms Visible
+    Set Plant Visible
+    Set Store Visible
+    Set Batch Visible
+    Set Divison Visible
+    Set Expedition Center Visible
+    Set Packing Back Visible
+    Set Resource kind Visible
+    Click Element    ${Id Proposal lists}
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+
+Set Item Type Visible
     Wait Until Ready    ${Field Name}
     Click Element    ${Field Name}
     Click Button    ${Id Fields Edit Button}
@@ -121,6 +161,8 @@ Contract Items Setup
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Fields Edit Button}
+
+Set Account Assignment Type Visible
     Wait Until Ready    ${Field Name2}
     Click Element    ${Field Name2}
     Click Button    ${Id Fields Edit Button}
@@ -128,6 +170,8 @@ Contract Items Setup
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Fields Edit Button}
+
+Set Incoterms Visible
     Wait Until Ready    ${Field Name3}
     Click Element    ${Field Name3}
     Click Button    ${Id Fields Edit Button}
@@ -135,6 +179,8 @@ Contract Items Setup
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Fields Edit Button}
+
+Set Plant Visible
     Wait Until Ready    ${Field Name4}
     Click Element    ${Field Name4}
     Click Button    ${Id Fields Edit Button}
@@ -142,6 +188,8 @@ Contract Items Setup
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Fields Edit Button}
+
+Set Store Visible
     Wait Until Ready    ${Field Name5}
     Click Element    ${Field Name5}
     Click Button    ${Id Fields Edit Button}
@@ -149,9 +197,56 @@ Contract Items Setup
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Fields Edit Button}
-    Click Element    ${Id Proposal lists}
-    Wait Until Ready    ${Id Contract Items}
-    Click Element    ${Id Contract Items}
+
+Set Batch Visible
+    Wait Until Ready    ${Field Name6}
+    Click Element    ${Field Name6}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
+
+Set Divison Visible
+    Wait Until Ready    ${Field Name7}
+    Click Element    ${Field Name7}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
+
+Set Expedition Center Visible
+    Wait Until Ready    ${Field Name8}
+    Click Element    ${Field Name8}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
+
+Set Packing Back Visible
+    Wait Until Ready    ${Field Name9}
+    Click Element    ${Field Name9}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
+
+Set Resource kind Visible
+    Wait Until Ready    ${Field Name10}
+    Click Element    ${Field Name10}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Fields Edit Button}
 
 Set Item Type Back To Invisible
     Wait Until Ready    ${Field Name}
@@ -194,6 +289,47 @@ Set Store Back To Invisible
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
 
+Set Batch Back To Invisible
+    Wait Until Ready    ${Id Fields Edit Button}
+    Wait Until Ready    ${Field Name6}
+    Click Element    ${Field Name6}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Divison Back To Invisible
+    Wait Until Ready    ${Field Name7}
+    Click Element    ${Field Name7}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Expedition Center Back To Invisible
+    Wait Until Ready    ${Field Name8}
+    Click Element    ${Field Name8}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Packing Back To Invisible
+    Wait Until Ready    ${Field Name9}
+    Click Element    ${Field Name9}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+Set Resource kind Back To Invisible
+    Wait Until Ready    ${Field Name10}
+    Click Element    ${Field Name10}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
 Create Contract
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
@@ -228,9 +364,15 @@ Check Created Items
     Select From List By Label    ${Id Add Incoterms}    ${Name3}
     Select From List By Label    ${Id Add Plant}    ${Name3}
     Select From List By Label    ${Id Add Store}    ${Name3}
+    Select From List By Label    ${Id Add Batch}    ${Name3}
+    Select From List By Label    ${Id Add Division}    ${Name3}
+    Select From List By Label    ${Id Add Expedition Center}    ${Name3}
+    Select From List By Label    ${Id Add Packing}    ${Name3}
+    Select From List By Label    ${Id Add Resource kind}    ${Name3}
     Click Element    ${Finish Button}
 
 Delete Contract
+    Wait Until Element Is Not Visible    ${Id Add Invoicing date}
     Wait Until Ready    ${Id Add Item Button}
     Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}
@@ -636,6 +778,348 @@ Disable Store
     Click Element    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Store Button}
     Click Button    ${Id Edit Store Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Batch
+    Wait Until Ready    ${Id Batch}
+    Click Element    ${Id Batch}
+    Wait Until Ready    ${Id Add Batch Button}
+
+Enable Batch
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Batch Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Batch
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Batch
+        ...    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Batch
+        ...    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Batch
+
+Add Batch
+    Wait Until Ready    ${Id Add Batch Button}
+    Click Button    ${Id Add Batch Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Batch
+    Wait Until Ready    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Batch Button}
+    Click Button    ${Id Edit Batch Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Batch
+    Go To Batch
+    Wait Until Ready    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Batch Button}
+    Click Button    ${Id Edit Batch Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Division
+    Wait Until Ready    ${Id Division}
+    Click Element    ${Id Division}
+    Wait Until Ready    ${Id Add Division Button}
+
+Enable Division
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Division Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Division
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Division
+        ...    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Division
+        ...    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Division
+
+Add Division
+    Wait Until Ready    ${Id Add Division Button}
+    Click Button    ${Id Add Division Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Division
+    Wait Until Ready    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Division Button}
+    Click Button    ${Id Edit Division Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Division
+    Go To Division
+    Wait Until Ready    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Division Button}
+    Click Button    ${Id Edit Division Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Expedition Center
+    Wait Until Ready    ${Id Expedition Center}
+    Click Element    ${Id Expedition Center}
+    Wait Until Ready    ${Id Add Expedition Center Button}
+
+Enable Expedition Center
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Expedition Center Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Expedition Center
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Expedition Center
+        ...    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Expedition Center
+        ...    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}
+        Add Expedition Center
+    END
+
+Add Expedition Center
+    Wait Until Ready    ${Id Add Expedition Center Button}
+    Click Button    ${Id Add Expedition Center Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Expedition Center
+    Wait Until Ready    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Expedition Center Button}
+    Click Button    ${Id Edit Expedition Center Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Expedition Center
+    Go To Expedition Center
+    Wait Until Ready    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Expedition Center Button}
+    Click Button    ${Id Edit Expedition Center Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Packing
+    Wait Until Ready    ${Id Packing}
+    Click Element    ${Id Packing}
+    Wait Until Ready    ${Id Add Packing Button}
+
+Enable Packing
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Packing Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Packing
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Packing
+        ...    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Packing
+        ...    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Packing
+
+Add Packing
+    Wait Until Ready    ${Id Add Packing Button}
+    Click Button    ${Id Add Packing Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Packing
+    Wait Until Ready    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Packing Button}
+    Click Button    ${Id Edit Packing Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Packing
+    Go To Packing
+    Wait Until Ready    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Packing Button}
+    Click Button    ${Id Edit Packing Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Select Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Resource kind
+    Wait Until Ready    ${Id Resource kind}
+    Click Element    ${Id Resource kind}
+    Wait Until Ready    ${Id Add Resource kind Button}
+
+Enable Resource kind
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Resource kind Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Unselect Checkbox    ${Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Resource kind
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Resource kind
+        ...    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Resource kind
+        ...    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Resource kind
+
+Add Resource kind
+    Wait Until Ready    ${Id Add Resource kind Button}
+    Click Button    ${Id Add Resource kind Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Name2}
+    Input Text    ${Id Add Field2}    ${Name}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Name}"]
+
+Edit Resource kind
+    Wait Until Ready    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Name}"]
+    Click Element    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Name}"]
+    Wait Until Ready    ${Id Edit Resource kind Button}
+    Click Button    ${Id Edit Resource kind Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${Edited Name2}
+    Input Text    ${Id Add Field2}    ${Edited Name}
+    Click Element    ${Finish Button}
+
+Disable Resource kind
+    Go To Resource kind
+    Wait Until Ready    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Click Element    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    Wait Until Ready    ${Id Edit Resource kind Button}
+    Click Button    ${Id Edit Resource kind Button}
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${Name2}
     Input Text    ${Id Add Field2}    ${Name}
