@@ -73,6 +73,48 @@ Add Edit Resource Kind
     Enable Or Add Resource kind
     Edit Resource kind
 
+Add Edit VAT Sign
+    [Documentation]    A test case for VAT sign.
+    Go To VAT Sign
+    Enable Or Add VAT Sign
+    Edit VAT Sign
+
+Add Edit Pricing Type
+    [Documentation]    A test case for pricing type.
+    Go To Pricing Type
+    Enable Or Add Pricing Type
+    Edit Pricing Type
+
+Add Edit Currency
+    [Documentation]    A test case for currency.
+    Go To Currency
+    Enable Or Add Currency
+    Edit Currency
+
+Add Edit Unit
+    [Documentation]    A test case for unit.
+    Go To Unit
+    Enable Or Add Unit
+    Edit Unit
+
+Add Edit Order
+    [Documentation]    A test case for order.
+    Prepare Order
+    Add Order
+    Edit Order
+
+Add Edit Location
+    [Documentation]    A test case for location.
+    Go To Location
+    Enable Or Add Location
+    Edit Location
+
+Add Edit Maturity
+    [Documentation]    A test case for maturity.
+    Go To Maturity
+    Enable Or Add Maturity
+    Edit Maturity
+
 Check Created Contract Items
     [Documentation]    A test case for creating contract.
     Check Created Items
@@ -103,32 +145,27 @@ Disable Expedition Center And Packing
     Disable Expedition Center
     Disable Packing
 
-Disable Resource Kind And
-    [Documentation]    A test case for disabling resource kind, .
+Disable Resource Kind And VAT Sign
+    [Documentation]    A test case for disabling resource kind, VAT sign.
     Disable Resource kind
+    Disable VAT Sign
 
-Set Item Type And Account Assignment Type Visibility Back to Normal
+Disable Pricing Type And Currency
+    [Documentation]    A test case for disabling pricing type, currency.
+    Disable Pricing Type
+    Disable Currency
+
+Disable Unit And Delete Order
+    [Documentation]    A test case for disabling unit and deleting    order.
+    Disable Unit
+    Delete Order
+
+Disable Location And Maturity
+    [Documentation]    A test case for disabling location, .
+    Disable Location
+    Disable Maturity
+
+Set Fields Visibility Back to Normal
     [Documentation]    A test case for fileds visibility.
     Click On Administration
-    Set Item Type Back To Invisible
-    Set Account Assignment Type Back To Invisible
-
-Set Incoterms And Plant Visibility Back to Normal
-    [Documentation]    A test case for fileds visibility.
-    Set Incoterms Back To Invisible
-    Set Plant Back To Invisible
-
-Set Store And Batch Back to Normal
-    [Documentation]    A test case for fileds visibility.
-    Set Store Back To Invisible
-    Set Batch Back To Invisible
-
-Set Division And Expedition Center Back to Normal
-    [Documentation]    A test case for fileds visibility.
-    Set Divison Back To Invisible
-    Set Expedition Center Back To Invisible
-
-Set Packing And Resource Kind Back to Normal
-    [Documentation]    A test case for fileds visibility.
-    Set Packing Back To Invisible
-    Set Resource kind Back To Invisible
+    Set Fields Back To Invisible
