@@ -24,7 +24,7 @@ ${Edited Name}                                  dvtestEdited
 ${Id Commodity/service}                         settings_contract_items
 ${Id Edit Commodity/service Button}             ts_edit_contract_items_btn
 ${Id Add Commodity/service Button}              ts_add_contract_items_btn
-${Id Add Invoicing date}                        c_commodity
+${Id Add Commodity/service}                     c_commodity
 ${Id Number Sequence}                           c_number
 ${Id Contract Status}                           c_status
 ${Field}                                        Obchod, podnikání, obchodní právo § 261 - 775
@@ -467,7 +467,7 @@ Check Created Items
     Click Element    ${Finish Button}
 
 Select Created Items
-    Select From List By Label    ${Id Add Invoicing date}    ${Edited Name}
+    Select From List By Label    ${Id Add Commodity/service}    ${Edited Name}
     Select From List By Label    ${Id Add Item type}    ${Name3}
     Select From List By Label    ${Id Add Account Assignment Type}    ${Edited Name3}
     Select From List By Label    ${Id Add Incoterms}    ${Name3}
@@ -487,7 +487,7 @@ Select Created Items
     Select From List By Label    ${Id Add Maturity}    ${Edited Name}
 
 Delete Contract
-    Wait Until Element Is Not Visible    ${Id Add Invoicing date}
+    Wait Until Element Is Not Visible    ${Id Add Commodity/service}
     Wait Until Ready    ${Id Add Item Button}
     Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}
