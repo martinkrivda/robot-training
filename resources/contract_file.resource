@@ -94,6 +94,15 @@ ${Id Final Version Button}                  tc_merge_document_btn
 ${Create Final Version Button}              xpath=//div[@class="ui-dialog-buttonset"]//button[contains(@class, "ui-button") and normalize-space(.)="Vytvoření finálního znění"]
 ${Completed Contract File Path}             xpath=//tr[td/span[text()="Kompletní"] and td[normalize-space(.)="TESTCONRACTDV"]]
 ${Parked files}                             p_all
+${Forum}                                    xpath=//a[@href="#tc_contract_forum" and contains(@class, "sub_tabs")]
+${Id Add Forum Members}                     forum_members
+${Id Add Forum Members Button}              add_forum_member_btn
+${Id Edit Forum Button}                     tc_edit_milestone_btn
+${Id Delete Forum Button}                   tc_del_milestone_btn
+${Add Forum Member}                         xpath=//select[@id='id_pole_nebo_xpath']//option[normalize-space(.)="Vodárek , Tomáš (tomas.vodarek)"]
+${Id Delete Forum Member}                   xpath=//span[normalize-space(.)="Vodárek , Tomáš (tomas.vodarek)"]/following-sibling::label/following-sibling::input[@id="optin_2"]/following-sibling::button
+${Add Forum}                                forum_entry_form
+${Id Add Forum Button}                      add_forum_entry_btn
 
 
 *** Keywords ***
@@ -415,3 +424,16 @@ Check Completed Contract File
     Click Element    ${Parked files}
     Wait Until Ready    ${Completed Contract File Path}
     Click Element    ${Completed Contract File Path}
+
+Go To Forum
+    Wait Until Ready    ${Forum}
+    Click Element    ${Forum}
+
+Add Forum Member
+    Wait Until Ready    ${Id Add Forum Members}
+    Select From List By Label    ${Id Add Forum Members}    Vodárek , Tomáš (tomas.vodarek)
+    Click Button    ${Id Add Forum Members Button}
+    Wait Until Ready    ${Id Add Forum Members}
+    Click Element    ${Id Delete Forum Member}
+    Input Text    ${Add Forum}    ${Name}
+    Click Button    ${Id Add Forum Button}

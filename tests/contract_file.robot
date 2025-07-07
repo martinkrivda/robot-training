@@ -46,6 +46,11 @@ Add Edit Delete Contract Partners
     Add Contract Partners
     Delete Contract Partners
 
+Add Delete Forum Member
+    [Documentation]    A test case for forum.
+    Go To Forum
+    Add Forum Member
+
 Add Edit Delete Milestones
     [Documentation]    A test case for milestones.
     Go To Milestones
