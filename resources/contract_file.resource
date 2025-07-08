@@ -398,6 +398,7 @@ Add Final Version
     Double Click Element    ${File xPath}
     Wait Until Ready    ${Create Final Version Button}
     Click Element    ${Create Final Version Button}
+    Wait Until Element Is Not Visible    ${Please Wait}    10s
 
 Try To Add Second Final Version
     Wait Until Ready    ${Id Final Version Button}
