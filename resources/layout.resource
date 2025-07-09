@@ -4,6 +4,7 @@ Documentation       This is a resource file for layout.
 
 Library             OperatingSystem
 Library             SeleniumLibrary
+Library             Collections
 Variables           ../credentials.py
 Resource            login.resource
 
@@ -28,11 +29,12 @@ ${Layout Button}                    xpath=//button[contains(@class, "dt-button")
 ${Select None Button}               xpath=//input[@type="button" and @value="Zrušit vše"]
 ${Select All Button}                xpath=//input[@type="button" and @value="Vybrat vše"]
 ${Contract Subject Name}            TESTCONRACTDV
+${Contract Subject Name2}           CONRACTDVTEST
 ${Status Button}                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Stav"]
 ${Status}                           xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Stav"]
 ${Partner}                          xpath=//th[normalize-space(.)="Č.sml.partnera"]
 ${Partner Button}                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Č.sml.partnera"]
-${Contract Subject}                 xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Předmět smlouvy"]
+${Contract Subject}                 xpath=//th[normalize-space(.)="Předmět smlouvy"]
 ${Contract Subject Button}          xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Předmět smlouvy"]
 ${Kind}                             xpath=//th[normalize-space(.)="Druh"]
 ${Kind Button}                      xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Druh"]
@@ -67,6 +69,7 @@ ${Add Termination Method1}          C
 ${Add Termination Method2}          B
 ${Add Termination Method3}          A
 ${Please Wait}                      please_wait
+${Search Contract Subject}          s_text_subject
 
 
 *** Keywords ***
@@ -90,6 +93,7 @@ Delete Contract If Exists
 Delete Contracts
     [Arguments]    ${schema_name}
     Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+    Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    ${Delete Contract Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
@@ -108,10 +112,10 @@ Create Contract
     Select From List By Label    ${Id Field}    ${Field}
     Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
     Select From List By Label    ${Id Language}    ${Language}
-    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
 
 Create Contract1
     Create Contract
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
     Input Text    ${Id Add Partner}    ${Add Partner1}
     Select From List By Label    ${Id Contract kind}    ${Contract kind1}
     Click Element    ${Other Data Path}
@@ -120,7 +124,9 @@ Create Contract1
     Click Button    ${Create Contract File Button}
 
 Create Contract2
+    Wait Until Element Is Not Visible    ${Please Wait}
     Create Contract
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
     Input Text    ${Id Add Partner}    ${Add Partner2}
     Select From List By Label    ${Id Contract kind}    ${Contract kind2}
     Click Element    ${Other Data Path}
@@ -129,22 +135,49 @@ Create Contract2
     Click Button    ${Create Contract File Button}
 
 Create Contract3
+    Wait Until Element Is Not Visible    ${Please Wait}
     Create Contract
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
     Input Text    ${Id Add Partner}    ${Add Partner3}
     Select From List By Label    ${Id Contract kind}    ${Contract kind3}
     Click Element    ${Other Data Path}
     Wait Until Ready    ${Id Add Termination Method}
     Input Text    ${Id Add Termination Method}    ${Add Termination Method3}
     Click Button    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Create Contract4
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Create Contract
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name2}
+    Input Text    ${Id Add Partner}    ${Add Partner3}
+    Select From List By Label    ${Id Contract kind}    ${Contract kind2}
+    Click Element    ${Other Data Path}
+    Wait Until Ready    ${Id Add Termination Method}
+    Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
+    Click Button    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Delete Test Contracts
+    Delete Contract If Exists    ${Contract Subject Name}
+    Delete Contract If Exists    ${Contract Subject Name2}
 
 Layout Setup
     Open Browser And Logged In
-    Delete Contract If Exists    ${Contract Subject Name}
+    Wait Until Ready    ${Layout Button}
+    Click Element    ${Layout Button}
+    Wait Until Ready    ${Select All Button}
+    Click Element    ${Select All Button}
+    Click Element    ${Close Button}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Test Contracts
     Create Contract1
     Create Contract2
     Create Contract3
+    Create Contract4
 
 Layout Select None
+    Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
     Wait Until Ready    ${Layout Button}
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select None Button}
@@ -226,14 +259,105 @@ Select Termination Method
     Scroll Element Into View    ${Termination Method}
     Element Should Be Visible    ${Termination Method}
 
-Select Partner, Kind And Termination Method
+Select Contract Subject, Partner, Kind And Termination Method
     Wait Until Ready    ${Layout Button}
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select None Button}
     Click Element    ${Select None Button}
     Wait Until Element Is Not Visible    ${Please Wait}
-    Wait Until Ready    ${Partner Button}
+    Wait Until Ready    ${Contract Subject Button}
+    Click Element    ${Contract Subject Button}
     Click Element    ${Partner Button}
     Click Element    ${Kind Button}
     Click Element    ${Termination Method Button}
     Click Element    ${Close Button}
+
+Get Numeric Values From Table
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[1]
+    ${numbers}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        ${num}=    Convert To Integer    ${text}
+        Append To List    ${numbers}    ${num}
+    END
+    RETURN    ${numbers}
+
+Verify Column Sorting - Descending Then Ascending
+    Wait Until Ready    ${Partner}
+    Click Element    ${Partner}
+    Sleep    1s
+    ${descending}=    Get Numeric Values From Table
+    ${expected_desc}=    Copy List    ${descending}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${descending}    ${expected_desc}
+
+    Wait Until Ready    ${Partner}
+    Click Element    ${Partner}
+    Sleep    1s
+    ${ascending}=    Get Numeric Values From Table
+    ${expected_asc}=    Copy List    ${ascending}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${ascending}    ${expected_asc}
+
+Get Column Texts From Table
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${values}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${values}    ${text}
+    END
+    RETURN    ${values}
+
+Test Alphabetical Sorting Of Kind Column
+    Wait Until Ready    ${Kind}
+    Click Element    ${Kind}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    ${texts_desc}=    Get Column Texts From Table    3
+    ${sorted_desc}=    Copy List    ${texts_desc}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Lists Should Be Equal    ${texts_desc}    ${sorted_desc}
+
+    Wait Until Ready    ${Kind}
+    Click Element    ${Kind}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    ${texts_asc}=    Get Column Texts From Table    3
+    ${sorted_asc}=    Copy List    ${texts_asc}
+    Sort List    ${sorted_asc}
+    Lists Should Be Equal    ${texts_asc}    ${sorted_asc}
+
+Test Alphabetical Sorting Of Termination Method Column
+    Wait Until Ready    ${Termination Method}
+    Click Element    ${Termination Method}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    ${texts_desc}=    Get Column Texts From Table    4
+    ${sorted_desc}=    Copy List    ${texts_desc}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Lists Should Be Equal    ${texts_desc}    ${sorted_desc}
+
+    Wait Until Ready    ${Termination Method}
+    Click Element    ${Termination Method}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    ${texts_asc}=    Get Column Texts From Table    4
+    ${sorted_asc}=    Copy List    ${texts_asc}
+    Sort List    ${sorted_asc}
+    Lists Should Be Equal    ${texts_asc}    ${sorted_asc}
+
+Search Contract Subject
+    Wait Until Ready    ${Search Contract Subject}
+    Input Text    ${Search Contract Subject}    ${Contract Subject Name}
+    Click Element    ${Contract Subject}
+    Wait Until Ready    ${Search Contract Subject}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Element Should Not Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name2}"]
+
+Remove Search
+    Wait Until Ready    ${Search Contract Subject}
+    Clear Element Text    ${Search Contract Subject}
+    Click Element    ${Contract Subject}
+    Wait Until Ready    ${Search Contract Subject}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Element Should Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name2}"]
