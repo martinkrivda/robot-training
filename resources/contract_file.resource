@@ -64,8 +64,8 @@ ${Unit Price}                               1,69
 ${Id Add Commodity/service}                 c_commodity
 ${Delete Contract Personal}                 xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_delete_file"]
 ${Input File}                               xpath=//input[@type="file" and @name="qqfile"]
-${File Path}                                ${EXECDIR}/template_test.docx
-${File xPath}                               xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.docx"]
+${File Path}                                ${EXECDIR}/template_test.pdf
+${File xPath}                               xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.pdf"]
 ${Contract Relations}                       xpath=//a[@href="#tc_contract_relations" and contains(@class, "sub_tabs")]
 ${Id Add Contract Relations Button}         tc_add_relation_btn
 ${Id Edit Contract Relations Button}        tc_edit_relation_btn
@@ -103,6 +103,26 @@ ${Add Forum Member}                         xpath=//select[@id='id_pole_nebo_xpa
 ${Id Delete Forum Member}                   xpath=//span[normalize-space(.)="Vodárek , Tomáš (tomas.vodarek)"]/following-sibling::label/following-sibling::input[@id="optin_2"]/following-sibling::button
 ${Add Forum}                                forum_entry_form
 ${Id Add Forum Button}                      add_forum_entry_btn
+${Start Signoff Process Button}             xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_start_signoff"]
+${Id Add Signoff Schema}                    s_schema
+${Add Signoff Schema}                       TEST DV
+${Add Signoff Comment}                      signoff_comment
+${Id Contracts To Process}                  sign_off
+${Id Contracts Signed Off}                  s_signed_off_contracts
+${Id Contract SignOff Button}               xpath=//a[@href="#signoff_confirm"]
+${Id SignOff Button}                        decision_button
+${Id SignOff Release Button}                xpath=//div[@id="contract_top_menu"]//a[@href="#signoff_release"]
+${Id Add Document2}                         Originál
+${Id Wait}                                  comparing_7797
+${Release Button}                           xpath=//button[normalize-space(.)="Uvolnění k vyhledávání"]
+${Id Released Contracts}                    released
+${Partner}                                  xpath=//th[normalize-space(.)="Č.sml.partnera"]
+${Authorized Users}                         xpath=//a[normalize-space(text())="Autorizovaní uživatelé"]
+${Id Add Authorized Users Button}           tc_add_user_btn
+${Id Delete Authorized Users Button}        tc_del_user_btn
+${Id Authorized Users Button}               id=user_ms
+${Id Add Authorized Users}                  xpath=//label[span[contains(normalize-space(.), "Vodárková, Jindra")]]/input
+${Authorized User}                          xpath=//tr[td[normalize-space(.)="Vodárková, Jindra"]]
 
 
 *** Keywords ***
@@ -127,8 +147,8 @@ Delete Contracts
     Click Button    ${Delete Button}
 
 Delete Contract
-    Wait Until Ready    ${Delete Contract Personal}
-    Click Element    ${Delete Contract Personal}
+    Wait Until Ready    ${Delete Contract}
+    Click Element    ${Delete Contract}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
@@ -438,3 +458,85 @@ Add Forum Member
     Click Element    ${Id Delete Forum Member}
     Input Text    ${Add Forum}    ${Name}
     Click Button    ${Id Add Forum Button}
+
+Start SignOff Process
+    Wait Until Ready    ${Start Signoff Process Button}
+    Click Element    ${Start Signoff Process Button}
+    Wait Until Ready    ${Id Add Signoff Schema}
+    Select From List By Label    ${Id Add Signoff Schema}    ${Add Signoff Schema}
+    Input Text    ${Add Signoff Comment}    ${Name}
+    Click Element    ${Finish Button}
+
+Contract SignOff
+    Wait Until Ready    ${Id Contracts To Process}
+    Click Element    ${Id Contracts To Process}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Id Contracts Signed Off}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id="s_pending_decisions_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    xpath=//table[@id="s_pending_decisions_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Ready    ${Id Contract SignOff Button}
+    Click Element    ${Id Contract SignOff Button}
+    Wait Until Ready    ${Add Signoff Comment}
+    Input Text    ${Add Signoff Comment}    ${Name}
+    Click Element    ${Id SignOff Button}
+
+Contract Release
+    Wait Until Ready    ${Id Contracts Signed Off}
+    Click Element    ${Id Contracts Signed Off}
+    Wait Until Element Is Enabled
+    ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Scroll Element Into View
+    ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Double Click Element
+    ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Ready    ${Id Add Document Button}
+    Click Button    ${Id Add Document Button}
+    Wait Until Ready    ${Id Add Document}
+    Select From List By Label    ${Id Add Document}    ${Id Add Document2}
+    Choose File    ${Input File}    ${File Path}
+    Wait Until Ready    ${Finish Button}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Document}
+    Wait Until Ready    ${Id SignOff Release Button}
+    Click Element    ${Id SignOff Release Button}
+    Wait Until Ready    ${Release Button}
+    Click Element    ${Release Button}
+
+Go To Released Contracts
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
+    Wait Until Ready    ${Id Released Contracts}
+    Click Element    ${Id Released Contracts}
+    Wait Until Ready    ${Id Released Contracts}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Partner}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Scroll Element Into View
+    ...    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Double Click Element
+    ...    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+
+Go To Authorized Users
+    Wait Until Ready    ${Authorized Users}
+    Click Element    ${Authorized Users}
+
+Add Authorized Users
+    Wait Until Ready    ${Id Add Authorized Users Button}
+    Click Button    ${Id Add Authorized Users Button}
+    Wait Until Ready    ${Id Authorized Users Button}
+    Click Element    ${Id Authorized Users Button}
+    Wait Until Ready    ${Id Add Authorized Users}
+    Click Element    ${Id Add Authorized Users}
+    Click Element    ${Finish Button}
+
+Delete Authorized Users
+    Wait Until Ready    ${Authorized User}
+    Click Element    ${Authorized User}
+    Click Button    ${Id Delete Authorized Users Button}
+    Wait Until Ready    ${Id Add Authorized Users Button}
+    Element Should Not Be Visible    ${Authorized User}

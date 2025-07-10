@@ -64,6 +64,19 @@ Complete Contract File
     Add Contract Item, Final Version And Contract Partner
     Check Completed Contract File
 
+Start SignOff Process And Release Contract
+    [Documentation]    A test case for signoff process.
+    Start SignOff Process
+    Contract SignOff
+    Contract Release
+    Go To Released Contracts
+
+Add Delete Authorized Users
+    [Documentation]    A test case for authorized users.
+    Go To Authorized Users
+    Add Authorized Users
+    Delete Authorized Users
+
 Delete Contract
     [Documentation]    A test case for deleting contract.
     Delete Contract
