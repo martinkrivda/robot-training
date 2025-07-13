@@ -110,8 +110,62 @@ ${Lend To}                              xpath=//th[normalize-space(.)="Půjčeno
 ${Lend To Button}                       xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Půjčeno komu"]
 ${Maturity 1}                           xpath=//th[normalize-space(.)="Splatnost 1"]
 ${Maturity 1 Button}                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Splatnost 1"]
+${Maturity 2}                           xpath=//th[normalize-space(.)="Splatnost 2"]
+${Maturity 2 Button}                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Splatnost 2"]
+${Note}                                 xpath=//th[normalize-space(.)="Poznámka"]
+${Note Button}                          xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Poznámka"]
+${Notice Period}                        xpath=//th[normalize-space(.)="Výpovědní lhůta"]
+${Notice Period Button}                 xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Výpovědní lhůta"]
+${Notice Period Unit}                   xpath=//th[normalize-space(.)="Období výpovědní lhůty"]
+${Notice Period Unit Button}            xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Období výpovědní lhůty"]
+${Notice Required}                      xpath=//th[normalize-space(.)="Nutná výpověď"]
+${Notice Required Button}               xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Nutná výpověď"]
+${Order nr.}                            xpath=//th[normalize-space(.)="Č.obj."]
+${Order nr. Button}                     xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Č.obj."]
+${Org.Unit}                             xpath=//th[normalize-space(.)="Org. jedn."]
+${Org.Unit Button}                      xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Org. jedn."]
+${Origin}                               xpath=//th[normalize-space(.)="Původ"]
+${Origin Button}                        xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Původ"]
+${Own account}                          xpath=//th[normalize-space(.)="Vlastní účet"]
+${Own account Button}                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Vlastní účet"]
+${Postponement Condition}               xpath=//th[normalize-space(.)="Odkládací podmínka"]
+${Postponement Condition Button}        xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Odkládací podmínka"]
+${Partner VAT ID}                       xpath=//th[normalize-space(.)="DIČ Partnera"]
+${Partner VAT ID Button}                xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="DIČ Partnera"]
+${Role}                                 xpath=//th[normalize-space(.)="Role"]
+${Role Button}                          xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Role"]
+${Service Contract}                     xpath=//th[normalize-space(.)="Servisní smlouva"]
+${Service Contract Button}              xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Servisní smlouva"]
+${Status 2}                             xpath=//th[normalize-space(.)="Stav"]
+${Status 2 Button}                      xpath=//button[contains(@class,"buttons-columnVisibility") and @data-cv-idx="93"]
+${Original Storage}                     xpath=//th[normalize-space(.)="Úložiště originálu"]
+${Original Storage Button}              xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Úložiště originálu"]
+${Subsidy}                              xpath=//th[normalize-space(.)="Dotace"]
+${Subsidy Button}                       xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Dotace"]
+${Supp.payment}                         xpath=//th[normalize-space(.)="Platba dod."]
+${Supp.payment Button}                  xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Platba dod."]
+${Tender}                               xpath=//th[normalize-space(.)="Výběrové řízení"]
+${Tender Button}                        xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Výběrové řízení"]
 ${Termination Method}                   xpath=//th[normalize-space(.)="Metoda ukončení"]
 ${Termination Method Button}            xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Metoda ukončení"]
+${To Pay}                               xpath=//th[normalize-space(.)="K platbě"]
+${To Pay Button}                        xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="K platbě"]
+${To Pay Currency}                      xpath=//th[normalize-space(.)="K platbě měna"]
+${To Pay Currency Button}               xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="K platbě měna"]
+${To Pay Interval}                      xpath=//th[normalize-space(.)="K platbě int."]
+${To Pay Interval Button}               xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="K platbě int."]
+${Valid}                                xpath=//th[normalize-space(.)="Platná"]
+${Valid Button}                         xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Platná"]
+${Valid Since}                          xpath=//th[normalize-space(.)="Platnost od"]
+${Valid Since Button}                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Platnost od"]
+${Valid Until}                          xpath=//th[normalize-space(.)="Platnost do"]
+${Valid Until Button}                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Platnost do"]
+${VAT ID}                               xpath=//th[normalize-space(.)="DIČ"]
+${VAT ID Button}                        xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="DIČ"]
+${Amount Per Year}                      xpath=//th[normalize-space(.)="Částka za rok"]
+${Amount Per Year Button}               xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Částka za rok"]
+${Amount Per Year Currency}             xpath=//th[normalize-space(.)="Částka za rok měna"]
+${Amount Per Year Currency Button}      xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Částka za rok měna"]
 ${Delete Contract Button}               xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_delete_file"]
 ${Id Number Sequence}                   c_number
 ${Id Contract Status}                   c_status
@@ -482,4 +536,32 @@ Select Fields
     Click Element    ${Lend Date Button}
     Click Element    ${Lend To Button}
     Click Element    ${Maturity 1 Button}
+    Click Element    ${Maturity 2 Button}
+    Click Element    ${Note Button}
+    Click Element    ${Notice Period Button}
+    Click Element    ${Notice Period Unit Button}
+    Click Element    ${Notice Required Button}
+    Click Element    ${Order nr. Button}
+    Click Element    ${Org.Unit Button}
+    Click Element    ${Origin Button}
+    Click Element    ${Own account Button}
+    Click Element    ${Postponement Condition Button}
+    Click Element    ${Partner VAT ID Button}
+    Click Element    ${Role Button}
+    Click Element    ${Service Contract Button}
+    Click Element    ${Status 2 Button}
+    Click Element    ${Original Storage Button}
+    Click Element    ${Subsidy Button}
+    Click Element    ${Supp.payment Button}
+    Click Element    ${Tender Button}
+    Click Element    ${Termination Method Button}
+    Click Element    ${To Pay Button}
+    Click Element    ${To Pay Currency Button}
+    Click Element    ${To Pay Interval Button}
+    Click Element    ${Valid Button}
+    Click Element    ${Valid Since Button}
+    Click Element    ${Valid Until Button}
+    Click Element    ${VAT ID Button}
+    Click Element    ${Amount Per Year Button}
+    Click Element    ${Amount Per Year Currency Button}
     Sleep    3
