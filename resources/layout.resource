@@ -352,12 +352,15 @@ ${Id Add Field1}                                    s_field1
 ${Id Add Field2}                                    s_field2
 ${Id Add Field3}                                    s_field3
 ${Id Header Aux Data}                               settings_pl_head_aux
-${Add Original Storage 1}                           Achív dvtest1
+${Add Original Storage 1}                           Archív dvtest1
 ${Add Original Storage 2}                           dtest
 ${Add Original Storage 3}                           testdv1
 ${Id Payment Interval}                              settings_interval
 ${Id Edit Payment Interval Button}                  ts_edit_interval_btn
 ${Id Add Payment Interval Button}                   ts_add_interval_btn
+${Id Invoicing date}                                settings_inv_date
+${Id Edit Invoicing date Button}                    ts_edit_inv_date_btn
+${Id Add Invoicing date Button}                     ts_add_inv_date_btn
 
 
 *** Keywords ***
@@ -859,7 +862,14 @@ Create Contract Test
     Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
     Select From List By Label    ${Id Add Documentation required}    ${Yes}
     Input Text    ${Id Add Documentation required Date}    ${Add Date 1}
-
+    Select From List By Label    ${Id Add Invoicing date}    ${Number 1}
+    Select From List By Label    ${Id Add Payment interval}    ${Add Number 1}
+    Input Text    ${Id Add Lent To}    ${Add Contact person 1}
+    Input Text    ${Id Add Lent To Date}    ${Add Date 1}
+    Input Text    ${Id Add Maturity 2}    ${Number 1}
+    Select From List By Label    ${Id Add Original Storage}    ${Add Original Storage 1}
+    Input Text    ${Id Add Order Number}    ${Number 1}
+    Select From List By Label    ${Id Add Notice Required}    ${Yes}
     # Click Element    ${Create Contract File Button}
 
 Test
@@ -1097,6 +1107,52 @@ Disable Payment Interval
     Click Element    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Payment Interval Button}
     Click Button    ${Id Edit Payment Interval Button}
+    Wait Until Ready    ${Id Add Field1}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Invoicing date
+    Wait Until Ready    ${Id Invoicing date}
+    Click Element    ${Id Invoicing date}
+    Wait Until Ready    ${Id Add Invoicing date Button}
+
+Enable Invoicing date
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Invoicing date Button}
+    Wait Until Ready    ${Id Add Field1}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Invoicing date Or Add Invoicing date
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Invoicing date    ${number}
+    ELSE
+        Add Invoicing date    ${number}
+    END
+
+Add Invoicing date
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Invoicing date Button}
+    Click Button    ${Id Add Invoicing date Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
+    Click Element    ${Finish Button}
+
+Disable Invoicing date
+    [Arguments]    ${number}
+    Go To Invoicing date
+    Wait Until Ready    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Invoicing date Button}
+    Click Button    ${Id Edit Invoicing date Button}
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}

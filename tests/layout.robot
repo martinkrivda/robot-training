@@ -9,18 +9,8 @@ Resource            ${EXECDIR}/resources/layout.resource
 Test
     [Setup]    Open Browser And Logged In
     Sleep    4
-    Go To Settings
-    Go To Aux Data
-    Go To Payment Interval
-    Enable Payment Interval Or Add Payment Interval    ${Add Number 1}
-    Enable Payment Interval Or Add Payment Interval    ${Add Number 2}
-    Enable Payment Interval Or Add Payment Interval    ${Add Number 3}
-    Disable Payment Interval    ${Add Number 1}
-    Disable Payment Interval    ${Add Number 2}
-    Disable Payment Interval    ${Add Number 3}
-
-    # Create Contract Test
-    # Sleep    4
+    Create Contract Test
+    Sleep    4
 
 # Select None And Select All
 #    [Documentation]    A test case for selecting none and all.
