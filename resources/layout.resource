@@ -232,6 +232,9 @@ ${Search Contract Subject}                          s_text_subject
 ${Own Bank Field}                                   xpath=//tr[td[normalize-space(.)='Vlastní bankovní spojení']]
 ${Own VAT ID Field}                                 xpath=//tr[td[normalize-space(.)='Vlastní DIČ']]
 ${GDPR Field}                                       xpath=//tr[td[normalize-space(.)='GDPR']]
+${Framework Contract Field}                         xpath=//tr[td[normalize-space(.)='Rámcová smlouva']]
+${Item Type Field}                                  xpath=//tr[td[normalize-space(.)='Typ položky']]
+${VAT Sign Field}                                   xpath=//tr[td[normalize-space(.)='Znak DPH']]
 ${Id Administration and Configuration}              admin_config
 ${Id Fields}                                        settings_custom_fields
 ${Id Fields Edit Button}                            ts_edit_custom_fields_btn
@@ -361,6 +364,48 @@ ${Id Add Payment Interval Button}                   ts_add_interval_btn
 ${Id Invoicing date}                                settings_inv_date
 ${Id Edit Invoicing date Button}                    ts_edit_inv_date_btn
 ${Id Add Invoicing date Button}                     ts_add_inv_date_btn
+${Id Maturity}                                      settings_maturity
+${Id Edit Maturity Button}                          ts_edit_maturity_btn
+${Id Add Maturity Button}                           ts_add_maturity_btn
+${Id Add Maturity}                                  c_maturity
+${Id Create Maturity}                               s_maturity
+${Id Create Maturity Description}                   s_description
+${Maturity Number 1}                                0525
+${Maturity Number 2}                                1212
+${Maturity Number 3}                                3102
+${Contract Items}                                   xpath=//a[@href="#tc_contract_items" and contains(@class, "sub_tabs")]
+${Id Add Document Button}                           tc_add_document_btn
+${Id Add Item Button}                               tc_add_item_btn
+${Id Add Commodity/service}                         c_commodity
+${Add Commodity/service 1}                          AGROFIT kombi 250ml
+${Add Commodity/service 2}                          Cena za jednotku
+${Add Commodity/service 3}                          Dodání HW
+${Id Add Unit}                                      c_unit
+${Add Unit 1}                                       hodina
+${Add Unit 2}                                       km
+${Add Unit 3}                                       m3
+${Id Add Order}                                     c_order
+${Add Order 1}                                      01002 Inko BPE
+${Add Order 2}                                      c_order
+${Add Order 3}                                      c_order
+${Id Add Currency}                                  c_currency
+${Id Add Location}                                  c_location_id
+${Add Location 1}                                   Kolín
+${Add Location 2}                                   Pardubice
+${Add Location 3}                                   Praha 2
+${Id Unit Price}                                    c_unit_price
+${Id Add Quantity}                                  c_quant
+${Id Add Delivery Date}                             c_delivery
+${Id Add Delivery To}                               c_delivery_to
+${Id Add Discount}                                  c_discount
+${Id Add VAT rate}                                  c_vat_rate
+${Id Item type}                                     settings_item_type
+${Id Edit Item type Button}                         ts_edit_item_type_btn
+${Id Add Item type Button}                          ts_add_item_type_btn
+${Id Add Item type}                                 c_item_type
+${Add Item type 1}                                  dvt
+${Add Item type 2}                                  tdv
+${Add Item type 3}                                  dovt
 
 
 *** Keywords ***
@@ -788,6 +833,27 @@ Enable Fields
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
 
+    Wait Until Ready    ${Framework Contract Field}
+    Click Element    ${Framework Contract Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+
+    Wait Until Ready    ${Item Type Field}
+    Click Element    ${Item Type Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+
+    Wait Until Ready    ${VAT Sign Field}
+    Click Element    ${VAT Sign Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+
 Disable Fields
     Go To Fields
     Wait Until Ready    ${Own Bank Field}
@@ -806,6 +872,27 @@ Disable Fields
 
     Wait Until Ready    ${GDPR Field}
     Click Element    ${GDPR Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+    Wait Until Ready    ${Framework Contract Field}
+    Click Element    ${Framework Contract Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+    Wait Until Ready    ${Item Type Field}
+    Click Element    ${Item Type Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+
+    Wait Until Ready    ${VAT Sign Field}
+    Click Element    ${VAT Sign Field}
     Click Button    ${Id Fields Edit Button}
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
@@ -870,7 +957,43 @@ Create Contract Test
     Select From List By Label    ${Id Add Original Storage}    ${Add Original Storage 1}
     Input Text    ${Id Add Order Number}    ${Number 1}
     Select From List By Label    ${Id Add Notice Required}    ${Yes}
-    # Click Element    ${Create Contract File Button}
+    Input Text    ${Id Add Deposit Text}    ${Name}
+    Input Text    ${Id Add Postponement Condition}    ${Name}
+    Select From List By Label    ${Id Add Documentation Enclosed}    ${Yes}
+    Select From List By Label    ${Id Add Irregular Payment}    ${Yes}
+    Input Text    ${Id Add To Pay}    ${Number 1}
+    Select From List By Label    ${Id Add To Pay Currency}    ${Add Total Contract Price Period 1}
+    Input Text    ${Add Maturity 1}    ${Add Number 1}
+    Input Text    ${Id Add Discount%}    ${Number 1}
+    Input Text    ${Id Add Note}    ${Name}
+    Click Element    ${Create Contract File Button}
+
+Create Contract Item
+    Wait Until Element Is Not Visible    ${Add Maturity 1}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
+    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
+    Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
+    Wait Until Ready    ${Id Add Document Button}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Add Commodity/service}
+    Select From List By Label    ${Id Add Commodity/service}    ${Add Commodity/service 1}
+    Input Text    ${Id Add Quantity}    ${Number 1}
+    Select From List By Label    ${Id Add Unit}    ${Add Unit 1}
+    Input Text    ${Id Unit Price}    ${Maturity Number 1}
+    Select From List By Label    ${Id Add Order}    ${Add Order 1}
+    Select From List By Label    ${Id Add Currency}    ${Add Total Contract Price Period 1}
+    Select From List By Label    ${Id Add Location}    ${Add Location 1}
+    Input Text    ${Id Add Delivery Date}    ${Add Date 1}
+    Input Text    ${Id Add Delivery To}    ${Add Valid Date 1}
+    Input Text    ${Id Add Discount}    ${Number 1}
+    Select From List By Label    ${Id Add Maturity}    ${Maturity Number 1}
+    Input Text    ${Id Add VAT rate}    ${Number 1}
+    Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
+    Sleep    4
+    Click Element    ${Finish Button}
 
 Test
     Go To Settings
@@ -1153,6 +1276,101 @@ Disable Invoicing date
     Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Invoicing date Button}
     Click Button    ${Id Edit Invoicing date Button}
+    Wait Until Ready    ${Id Add Field1}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Maturity
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Wait Until Ready    ${Id Maturity}
+    Click Element    ${Id Maturity}
+    Wait Until Ready    ${Id Add Maturity Button}
+
+Enable Maturity
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Maturity Button}
+    Wait Until Ready    ${Id Create Maturity Description}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Maturity Or Add Maturity
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Maturity    ${number}
+    ELSE
+        Add Maturity    ${number}
+    END
+
+Add Maturity
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Maturity Button}
+    Click Button    ${Id Add Maturity Button}
+    Wait Until Ready    ${Id Create Maturity}
+    Input Text    ${Id Create Maturity}    ${number}
+    Input Text    ${Id Create Maturity Description}    ${number}
+    Click Element    ${Finish Button}
+
+Disable Maturity
+    [Arguments]    ${number}
+    # Go To Maturity
+    Wait Until Ready    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Maturity Button}
+    Click Button    ${Id Edit Maturity Button}
+    Wait Until Ready    ${Id Create Maturity Description}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Go To Item type
+    Wait Until Ready    ${Id Item type}
+    Click Element    ${Id Item type}
+    Wait Until Ready    ${Id Add Item type Button}
+
+Enable Item type
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Item type Button}
+    Wait Until Ready    ${Id Add Field1}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Item type Or Add Item type
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Item type    ${number}
+    ELSE
+        Add Item type    ${number}
+    END
+
+Add Item type
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Item type Button}
+    Click Button    ${Id Add Item type Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
+    Click Element    ${Finish Button}
+
+Disable Item type
+    [Arguments]    ${number}
+    # Go To Item type
+    Wait Until Ready    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Item type Button}
+    Click Button    ${Id Edit Item type Button}
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}

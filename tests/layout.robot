@@ -9,8 +9,18 @@ Resource            ${EXECDIR}/resources/layout.resource
 Test
     [Setup]    Open Browser And Logged In
     Sleep    4
-    Create Contract Test
-    Sleep    4
+    Go To Settings
+    Go To Maturity
+    Go To Item type
+    Enable Item type Or Add Item type    ${Add Item type 1}
+    Enable Item type Or Add Item type    ${Add Item type 2}
+    Enable Item type Or Add Item type    ${Add Item type 3}
+    Disable Item type    ${Add Item type 1}
+    Disable Item type    ${Add Item type 2}
+    Disable Item type    ${Add Item type 3}
+
+    # Create Contract Test
+    # Create Contract Item
 
 # Select None And Select All
 #    [Documentation]    A test case for selecting none and all.
