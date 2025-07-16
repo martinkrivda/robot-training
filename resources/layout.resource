@@ -24,12 +24,16 @@ ${Personal Space}                                   //a[@class="main_tabs" and @
 ${Settings}                                         //a[@class="main_tabs" and @href="#tab_settings"]
 ${Id Contract Items}                                settings_pl_items
 ${Name}                                             dvtest1
+${Name 2}                                           testd1
+${Name 3}                                           vtest1
 ${Edited Name}                                      dvtestEdited
 ${Layout Button}                                    xpath=//button[contains(@class, "dt-button") and normalize-space(.)="Layout"]
 ${Select None Button}                               xpath=//input[@type="button" and @value="Zrušit vše"]
 ${Select All Button}                                xpath=//input[@type="button" and @value="Vybrat vše"]
 ${Contract Subject Name}                            TESTCONRACTDV
-${Contract Subject Name2}                           CONRACTDVTEST
+${Contract Subject Name 2}                          TESTDVCONRACT
+${Contract Subject Name 3}                          TESTVDCONTRACT
+${Contract Subject Name 4}                          CONRACTDVTET
 ${Status Button}                                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Stav"]
 ${Status}                                           xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Stav"]
 ${Updated Button}                                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Aktualizováno"]
@@ -203,15 +207,22 @@ ${Framework Contract Button}                        xpath=//button[contains(@cla
 ${Delete Contract Button}                           xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_delete_file"]
 ${Id Number Sequence}                               c_number
 ${Add Field}                                        Občanské právo
+${Add Field 2}                                      Obchod, podnikání, obchodní právo § 261 - 775
 ${Add Confidentiality}                              Přísně tajné
+${Add Confidentiality 2}                            Důvěrné
+${Add Confidentiality 3}                            Tajné
 ${Contract kind1}                                   Kupní smlouva - § 588 - 610
-${Contract kind2}                                   Nájemní smlouva - § 663 - 723
+${Contract kind2}                                   Licenční smlouva k předmětům průmyslového vlastnictví - § 508
 ${Contract kind3}                                   Pojistná smlouva - § 788 - 828
 ${Add Language}                                     Čeština
+${Add Language 2}                                   Angličtina
+${Add Language 3}                                   Slovenština
 ${Id Field}                                         c_legalfield
 ${Id Confidentiality}                               c_confid
 ${Id Contract kind}                                 c_kind
 ${Number Sequence}                                  ISSTEST
+${Number Sequence 2}                                TEST
+${Number Sequence 3}                                ISS test
 ${Id Language}                                      c_lang
 ${Value}                                            Ve zpracování
 ${Id Contract Subject}                              c_subject
@@ -321,6 +332,8 @@ ${Add Business case 3}                              Nákup HW
 ${Add Partner role 1}                               Dodavatel (dodavatel)
 ${Add Partner role 2}                               Odběratel (dodavatel)
 ${Add Contract partner 1}                           Agrofert,
+${Add Contract partner 2}                           ISS
+${Add Contract partner 3}                           Primagra
 ${Add Contact person 1}                             Dominik
 ${Add Contact person 2}                             Tomáš
 ${Add Contact person 3}                             Michal
@@ -386,8 +399,8 @@ ${Add Unit 2}                                       km
 ${Add Unit 3}                                       m3
 ${Id Add Order}                                     c_order
 ${Add Order 1}                                      01002 Inko BPE
-${Add Order 2}                                      c_order
-${Add Order 3}                                      c_order
+${Add Order 2}                                      01201 Davo BPE
+${Add Order 3}                                      02006 Ethanol Energy ELF
 ${Id Add Currency}                                  c_currency
 ${Id Add Location}                                  c_location_id
 ${Add Location 1}                                   Kolín
@@ -406,6 +419,13 @@ ${Id Add Item type}                                 c_item_type
 ${Add Item type 1}                                  dvt
 ${Add Item type 2}                                  tdv
 ${Add Item type 3}                                  dovt
+${Id VAT Sign}                                      settings_item_vatsign
+${Id Edit VAT Sign Button}                          ts_edit_item_vatsign_btn
+${Id Add VAT Sign Button}                           ts_add_item_vatsign_btn
+${Id Add VAT Sign}                                  c_vatsign
+${Id Proposals}                                     proposals
+${Id Add GDPR}                                      c_gdpr
+${Id Add Framework Contract}                        c_fwc
 
 
 *** Keywords ***
@@ -430,6 +450,10 @@ Go To Fields
     Go To Settings
     Click On Administration
     Click On Fields
+
+Go To Personal Space
+    Wait Until Ready    ${Personal Space}
+    Click Element    ${Personal Space}
 
 Delete Contract If Exists
     [Arguments]    ${schema_name}
@@ -502,7 +526,7 @@ Create Contract3
 Create Contract4
     Wait Until Element Is Not Visible    ${Please Wait}
     Create Contract
-    Input Text    ${Id Contract Subject}    ${Contract Subject Name2}
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name4}
     Input Text    ${Id Add Partner}    ${Add Partner3}
     Select From List By Label    ${Id Contract kind}    ${Contract kind2}
     Click Element    ${Other Data Path}
@@ -513,10 +537,21 @@ Create Contract4
 
 Delete Test Contracts
     Delete Contract If Exists    ${Contract Subject Name}
-    Delete Contract If Exists    ${Contract Subject Name2}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Contract If Exists    ${Contract Subject Name 2}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Contract If Exists    ${Contract Subject Name 3}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Contract If Exists    ${Contract Subject Name 4}
 
 Layout Setup
     Open Browser And Logged In
+    Enable Fields
+    Enable Or Add Data
+    Go To Personal Space
     Wait Until Ready    ${Layout Button}
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select All Button}
@@ -524,10 +559,11 @@ Layout Setup
     Click Element    ${Close Button}
     Wait Until Element Is Not Visible    ${Please Wait}
     Delete Test Contracts
-    Create Contract1
-    Create Contract2
-    Create Contract3
-    Create Contract4
+    Create Contract Test 1
+    Create Contract Item 1
+    Create Contract Test 2
+    Create Contract Item 2
+    Create Contract Test 3
 
 Layout Select None
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
@@ -705,7 +741,7 @@ Search Contract Subject
     Click Element    ${Contract Subject}
     Wait Until Ready    ${Search Contract Subject}
     Wait Until Element Is Not Visible    ${Please Wait}
-    Element Should Not Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name2}"]
+    Element Should Not Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name4}"]
 
 Remove Search
     Wait Until Ready    ${Search Contract Subject}
@@ -713,7 +749,7 @@ Remove Search
     Click Element    ${Contract Subject}
     Wait Until Ready    ${Search Contract Subject}
     Wait Until Element Is Not Visible    ${Please Wait}
-    Element Should Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name2}"]
+    Element Should Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name4}"]
 
 Select Fields
     Wait Until Ready    ${Layout Button}
@@ -805,10 +841,9 @@ Select Fields
     Click Element    ${VAT Rate Button}
     Click Element    ${Item Type Button}
     Click Element    ${VAT Sign Button}
-    Click Element    ${Margin Button}
     Click Element    ${GDPR Button}
     Click Element    ${Framework Contract Button}
-    Sleep    3
+    Click Element    ${Close Button}
 
 Enable Fields
     Go To Fields
@@ -898,7 +933,7 @@ Disable Fields
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
 
-Create Contract Test
+Create Contract Test 1
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
@@ -966,9 +1001,11 @@ Create Contract Test
     Input Text    ${Add Maturity 1}    ${Add Number 1}
     Input Text    ${Id Add Discount%}    ${Number 1}
     Input Text    ${Id Add Note}    ${Name}
+    Select From List By Label    ${Id Add GDPR}    ${Yes}
+    Select From List By Label    ${Id Add Framework Contract}    ${Yes}
     Click Element    ${Create Contract File Button}
 
-Create Contract Item
+Create Contract Item 1
     Wait Until Element Is Not Visible    ${Add Maturity 1}
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
@@ -980,6 +1017,7 @@ Create Contract Item
     Click Button    ${Id Add Item Button}
     Wait Until Ready    ${Id Add Commodity/service}
     Select From List By Label    ${Id Add Commodity/service}    ${Add Commodity/service 1}
+    Select From List By Label    ${Id Add Item type}    ${Add Item type 1}
     Input Text    ${Id Add Quantity}    ${Number 1}
     Select From List By Label    ${Id Add Unit}    ${Add Unit 1}
     Input Text    ${Id Unit Price}    ${Maturity Number 1}
@@ -991,9 +1029,214 @@ Create Contract Item
     Input Text    ${Id Add Discount}    ${Number 1}
     Select From List By Label    ${Id Add Maturity}    ${Maturity Number 1}
     Input Text    ${Id Add VAT rate}    ${Number 1}
+    Select From List By Label    ${Id Add VAT Sign}    ${Add Item type 1}
     Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
-    Sleep    4
     Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Add Item Button}
+    Go To Personal Space
+
+Create Contract Test 2
+    Wait Until Ready    ${Create Contract}
+    Click Element    ${Create Contract}
+    Wait Until Ready    ${Id Number Sequence}
+    Select From List By Label    ${Id Number Sequence}    ${Number Sequence 2}
+    Input Text    ${Id Add Partner}    ${Add Number 2}
+    Select From List By Label    ${Id Add VAT ID}    ${Add Number 2}
+    Select From List By Label    ${Id Field}    ${Add Field 2}
+    Select From List By Label    ${Id Add Contract Type}    ${Add Contact Type 2}
+    Input Text    ${Id Add Signature Date}    ${Add Date 2}
+    Input Text    ${Id Add Valid Since}    ${Add Date 2}
+    Select From List By Label    ${Id Add Notice Period}    ${Add Notice Period 2}
+    Input Text    ${Id Add Notice Period 2}    ${Number 2}
+    Input Text    ${Id Add Total Contract Price Period}    ${Number 2}
+    Select From List By Label    ${Id Add Total Contract Price Period Currency}    ${Add Total Contract Price Period 2}
+    Select From List By Label    ${Id Add Publishing Required}    ${Yes}
+    Select From List By Label    ${Id Add Applicable Law}    ${Add Number 2}
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name 2}
+    Select From List By Label    ${Id Confidentiality}    ${Add Confidentiality 2}
+    Select From List By Label    ${Id Add Bank Account}    ${Add Number 2}
+    Select From List By Label    ${Id Contract kind}    ${Contract kind2}
+    Select From List By Label    ${Id Add Contract Status}    ${Add Contract Status 2}
+    Input Text    ${Id Add Partner Signature Date}    ${Add Valid Date 2}
+    Input Text    ${Id Add Valid Until}    ${Add Valid Date 2}
+    Input Text    ${Id Add Effective Date}    ${Add Valid Date 2}
+    Select From List By Label    ${Id Language}    ${Add Language 2}
+    Select From List By Label    ${Id Add Published}    ${Yes}
+    Input Text    ${Id Add Publishing Date}    ${Add Valid Date 2}
+    Click Element    ${Id Contract Subject}
+    Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 2}
+    Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
+    Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
+    Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 2}
+    Select From List By Label    ${Id Add Business case}    ${Add Business case 2}
+    Input Text    ${Id Add Contact information}    ${Number 2}
+    Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
+    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Input Text    ${Id Add Contact person}    ${Add Contact person 2}
+    Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
+    Select From List By Label    ${Id Add Partner role}    ${Add Partner role 2}
+    Click Element    ${Other Data Path}
+    Wait Until Ready    ${Id Add Amount Per Year}
+    Input Text    ${Id Add Amount Per Year}    ${Number 2}
+    Select From List By Label    ${Id Add Amount Per Year Currency}    ${Add Total Contract Price Period 2}
+    Input Text    ${Id Add Deposit}    ${Number 2}
+    Select From List By Label    ${Id Add Deposit Currency}    ${Add Total Contract Price Period 2}
+    Input Text    ${Id Add Interest}    ${Number 2}
+    Input Text    ${Id Add Termination Method}    ${Add Termination Method2}
+    Select From List By Label    ${Id Add Documentation required}    ${Yes}
+    Input Text    ${Id Add Documentation required Date}    ${Add Date 2}
+    Select From List By Label    ${Id Add Invoicing date}    ${Number 2}
+    Select From List By Label    ${Id Add Payment interval}    ${Add Number 2}
+    Input Text    ${Id Add Lent To}    ${Add Contact person 2}
+    Input Text    ${Id Add Lent To Date}    ${Add Date 2}
+    Input Text    ${Id Add Maturity 2}    ${Number 2}
+    Select From List By Label    ${Id Add Original Storage}    ${Add Original Storage 2}
+    Input Text    ${Id Add Order Number}    ${Number 2}
+    Select From List By Label    ${Id Add Notice Required}    ${Yes}
+    Input Text    ${Id Add Deposit Text}    ${Name 2}
+    Input Text    ${Id Add Postponement Condition}    ${Name 2}
+    Select From List By Label    ${Id Add Documentation Enclosed}    ${Yes}
+    Select From List By Label    ${Id Add Irregular Payment}    ${Yes}
+    Input Text    ${Id Add To Pay}    ${Number 2}
+    Select From List By Label    ${Id Add To Pay Currency}    ${Add Total Contract Price Period 2}
+    Input Text    ${Add Maturity 1}    ${Add Number 2}
+    Input Text    ${Id Add Discount%}    ${Number 2}
+    Input Text    ${Id Add Note}    ${Name 2}
+    Select From List By Label    ${Id Add GDPR}    ${Yes}
+    Select From List By Label    ${Id Add Framework Contract}    ${Yes}
+    Click Element    ${Create Contract File Button}
+
+Create Contract Item 2
+    Wait Until Element Is Not Visible    ${Add Maturity 1}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 2}"]
+    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 2}"]
+    Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 2}"]
+    Wait Until Ready    ${Id Add Document Button}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Add Commodity/service}
+    Select From List By Label    ${Id Add Commodity/service}    ${Add Commodity/service 2}
+    Select From List By Label    ${Id Add Item type}    ${Add Item type 2}
+    Input Text    ${Id Add Quantity}    ${Number 2}
+    Select From List By Label    ${Id Add Unit}    ${Add Unit 2}
+    Input Text    ${Id Unit Price}    ${Maturity Number 2}
+    Select From List By Label    ${Id Add Order}    ${Add Order 2}
+    Select From List By Label    ${Id Add Currency}    ${Add Total Contract Price Period 2}
+    Select From List By Label    ${Id Add Location}    ${Add Location 2}
+    Input Text    ${Id Add Delivery Date}    ${Add Date 2}
+    Input Text    ${Id Add Delivery To}    ${Add Valid Date 2}
+    Input Text    ${Id Add Discount}    ${Number 2}
+    Select From List By Label    ${Id Add Maturity}    ${Maturity Number 2}
+    Input Text    ${Id Add VAT rate}    ${Number 2}
+    Select From List By Label    ${Id Add VAT Sign}    ${Add Item type 2}
+    Select From List By Label    ${Id Add Business case}    ${Add Business case 2}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Add Item Button}
+    Go To Personal Space
+
+Create Contract Test 3
+    Wait Until Ready    ${Create Contract}
+    Click Element    ${Create Contract}
+    Wait Until Ready    ${Id Number Sequence}
+    Select From List By Label    ${Id Number Sequence}    ${Number Sequence 3}
+    Input Text    ${Id Add Partner}    ${Add Number 3}
+    Select From List By Label    ${Id Add VAT ID}    ${Add Number 3}
+    Select From List By Label    ${Id Field}    ${Add Field}
+    Select From List By Label    ${Id Add Contract Type}    ${Add Contact Type 3}
+    Input Text    ${Id Add Signature Date}    ${Add Date 3}
+    Input Text    ${Id Add Valid Since}    ${Add Date 3}
+    Select From List By Label    ${Id Add Notice Period}    ${Add Notice Period 3}
+    Input Text    ${Id Add Notice Period 2}    ${Number 3}
+    Input Text    ${Id Add Total Contract Price Period}    ${Number 3}
+    Select From List By Label    ${Id Add Total Contract Price Period Currency}    ${Add Total Contract Price Period 3}
+    Select From List By Label    ${Id Add Publishing Required}    ${No}
+    Select From List By Label    ${Id Add Applicable Law}    ${Add Number 3}
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name 3}
+    Select From List By Label    ${Id Confidentiality}    ${Add Confidentiality 3}
+    Select From List By Label    ${Id Add Bank Account}    ${Add Number 3}
+    Select From List By Label    ${Id Contract kind}    ${Contract kind3}
+    Select From List By Label    ${Id Add Contract Status}    ${Add Contract Status 3}
+    Input Text    ${Id Add Partner Signature Date}    ${Add Valid Date 3}
+    Input Text    ${Id Add Valid Until}    ${Add Valid Date 3}
+    Input Text    ${Id Add Effective Date}    ${Add Valid Date 3}
+    Select From List By Label    ${Id Language}    ${Add Language 3}
+    Select From List By Label    ${Id Add Published}    ${No}
+    Click Element    ${Id Contract Subject}
+    Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 3}
+    Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
+    Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
+    Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 3}
+    Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
+    Input Text    ${Id Add Contact information}    ${Number 3}
+    Input Text    ${Id Add Contract partner}    ${Add Contract partner 3}
+    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Input Text    ${Id Add Contact person}    ${Add Contact person 3}
+    Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
+    Select From List By Label    ${Id Add Partner role}    ${Add Partner role 1}
+    Click Element    ${Other Data Path}
+    Wait Until Ready    ${Id Add Amount Per Year}
+    Input Text    ${Id Add Amount Per Year}    ${Number 3}
+    Select From List By Label    ${Id Add Amount Per Year Currency}    ${Add Total Contract Price Period 3}
+    Input Text    ${Id Add Deposit}    ${Number 3}
+    Select From List By Label    ${Id Add Deposit Currency}    ${Add Total Contract Price Period 3}
+    Input Text    ${Id Add Interest}    ${Number 3}
+    Input Text    ${Id Add Termination Method}    ${Add Termination Method3}
+    Select From List By Label    ${Id Add Documentation required}    ${No}
+    Input Text    ${Id Add Documentation required Date}    ${Add Date 3}
+    Select From List By Label    ${Id Add Invoicing date}    ${Number 3}
+    Select From List By Label    ${Id Add Payment interval}    ${Add Number 3}
+    Input Text    ${Id Add Lent To}    ${Add Contact person 3}
+    Input Text    ${Id Add Lent To Date}    ${Add Date 3}
+    Input Text    ${Id Add Maturity 2}    ${Number 3}
+    Select From List By Label    ${Id Add Original Storage}    ${Add Original Storage 3}
+    Input Text    ${Id Add Order Number}    ${Number 3}
+    Select From List By Label    ${Id Add Notice Required}    ${No}
+    Input Text    ${Id Add Deposit Text}    ${Name 3}
+    Input Text    ${Id Add Postponement Condition}    ${Name 3}
+    Select From List By Label    ${Id Add Documentation Enclosed}    ${No}
+    Select From List By Label    ${Id Add Irregular Payment}    ${No}
+    Input Text    ${Id Add To Pay}    ${Number 2}
+    Select From List By Label    ${Id Add To Pay Currency}    ${Add Total Contract Price Period 3}
+    Input Text    ${Add Maturity 1}    ${Add Number 3}
+    Input Text    ${Id Add Discount%}    ${Number 3}
+    Input Text    ${Id Add Note}    ${Name 3}
+    Select From List By Label    ${Id Add GDPR}    ${No}
+    Select From List By Label    ${Id Add Framework Contract}    ${No}
+    Click Element    ${Create Contract File Button}
+
+Create Contract Item 3
+    Wait Until Element Is Not Visible    ${Add Maturity 1}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
+    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
+    Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
+    Wait Until Ready    ${Id Add Document Button}
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Add Commodity/service}
+    Select From List By Label    ${Id Add Commodity/service}    ${Add Commodity/service 3}
+    Select From List By Label    ${Id Add Item type}    ${Add Item type 3}
+    Input Text    ${Id Add Quantity}    ${Number 3}
+    Select From List By Label    ${Id Add Unit}    ${Add Unit 3}
+    Input Text    ${Id Unit Price}    ${Maturity Number 3}
+    Select From List By Label    ${Id Add Order}    ${Add Order 3}
+    Select From List By Label    ${Id Add Currency}    ${Add Total Contract Price Period 3}
+    Select From List By Label    ${Id Add Location}    ${Add Location 3}
+    Input Text    ${Id Add Delivery Date}    ${Add Date 3}
+    Input Text    ${Id Add Delivery To}    ${Add Valid Date 3}
+    Input Text    ${Id Add Discount}    ${Number 3}
+    Select From List By Label    ${Id Add Maturity}    ${Maturity Number 3}
+    Input Text    ${Id Add VAT rate}    ${Number 3}
+    Select From List By Label    ${Id Add VAT Sign}    ${Add Item type 3}
+    Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Add Item Button}
+    Go To Personal Space
 
 Test
     Go To Settings
@@ -1281,8 +1524,6 @@ Disable Invoicing date
     Click Element    ${Finish Button}
 
 Go To Maturity
-    Wait Until Ready    ${Id Contract Items}
-    Click Element    ${Id Contract Items}
     Wait Until Ready    ${Id Maturity}
     Click Element    ${Id Maturity}
     Wait Until Ready    ${Id Add Maturity Button}
@@ -1374,3 +1615,176 @@ Disable Item type
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+
+Go To VAT Sign
+    Wait Until Ready    ${Id VAT Sign}
+    Click Element    ${Id VAT Sign}
+    Wait Until Ready    ${Id Add VAT Sign Button}
+
+Enable VAT Sign
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit VAT Sign Button}
+    Wait Until Ready    ${Id Add Field1}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Enable VAT Sign Or Add VAT Sign
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable VAT Sign    ${number}
+    ELSE
+        Add VAT Sign    ${number}
+    END
+
+Add VAT Sign
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add VAT Sign Button}
+    Click Button    ${Id Add VAT Sign Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
+    Click Element    ${Finish Button}
+
+Disable VAT Sign
+    [Arguments]    ${number}
+    # Go To VAT Sign
+    Wait Until Ready    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit VAT Sign Button}
+    Click Button    ${Id Edit VAT Sign Button}
+    Wait Until Ready    ${Id Add Field1}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Or Add Data
+    Wait Until Ready    ${Id Proposals}
+    Click Element    ${Id Proposals}
+    Go To VAT ID
+    Enable Or Add VAT ID    ${Add Number 1}
+    Enable Or Add VAT ID    ${Add Number 2}
+    Enable Or Add VAT ID    ${Add Number 3}
+    Go To Bank Account
+    Enable Bank Account Or Add Bank Account    ${Add Number 1}
+    Enable Bank Account Or Add Bank Account    ${Add Number 2}
+    Enable Bank Account Or Add Bank Account    ${Add Number 3}
+    Go To Applicable Law
+    Enable Applicable Law Or Add Applicable Law    ${Add Number 1}
+    Enable Applicable Law Or Add Applicable Law    ${Add Number 2}
+    Enable Applicable Law Or Add Applicable Law    ${Add Number 3}
+    Wait Until Ready    ${Id Header Aux Data}
+    Click Element    ${Id Header Aux Data}
+    Go To Original Storage
+    Enable Original Storage Or Add Original Storage    ${Add Original Storage 1}
+    Enable Original Storage Or Add Original Storage    ${Add Original Storage 2}
+    Enable Original Storage Or Add Original Storage    ${Add Original Storage 3}
+    Go To Payment Interval
+    Enable Payment Interval Or Add Payment Interval    ${Add Number 1}
+    Enable Payment Interval Or Add Payment Interval    ${Add Number 2}
+    Enable Payment Interval Or Add Payment Interval    ${Add Number 3}
+    Go To Invoicing date
+    Enable Invoicing date Or Add Invoicing date    ${Number 1}
+    Enable Invoicing date Or Add Invoicing date    ${Number 2}
+    Enable Invoicing date Or Add Invoicing date    ${Number 3}
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Go To Item type
+    Enable Item type Or Add Item type    ${Add Item type 1}
+    Enable Item type Or Add Item type    ${Add Item type 2}
+    Enable Item type Or Add Item type    ${Add Item type 3}
+    Go To VAT Sign
+    Enable VAT Sign Or Add VAT Sign    ${Add Item type 1}
+    Enable VAT Sign Or Add VAT Sign    ${Add Item type 2}
+    Enable VAT Sign Or Add VAT Sign    ${Add Item type 3}
+    Go To Maturity
+    Enable Maturity Or Add Maturity    ${Maturity Number 1}
+    Enable Maturity Or Add Maturity    ${Maturity Number 2}
+    Enable Maturity Or Add Maturity    ${Maturity Number 3}
+
+Disable Data
+    Wait Until Ready    ${Id Proposals}
+    Click Element    ${Id Proposals}
+    Go To VAT ID
+    Disable VAT ID    ${Add Number 1}
+    Disable VAT ID    ${Add Number 2}
+    Disable VAT ID    ${Add Number 3}
+    Go To Bank Account
+    Disable Bank Account    ${Add Number 1}
+    Disable Bank Account    ${Add Number 2}
+    Disable Bank Account    ${Add Number 3}
+    Go To Applicable Law
+    Disable Applicable Law    ${Add Number 1}
+    Disable Applicable Law    ${Add Number 2}
+    Disable Applicable Law    ${Add Number 3}
+    Wait Until Ready    ${Id Header Aux Data}
+    Click Element    ${Id Header Aux Data}
+    Go To Original Storage
+    Disable Original Storage    ${Add Original Storage 1}
+    Disable Original Storage    ${Add Original Storage 2}
+    Disable Original Storage    ${Add Original Storage 3}
+    Go To Payment Interval
+    Disable Payment Interval    ${Add Number 1}
+    Disable Payment Interval    ${Add Number 2}
+    Disable Payment Interval    ${Add Number 3}
+    Go To Invoicing date
+    Disable Invoicing date    ${Number 1}
+    Disable Invoicing date    ${Number 2}
+    Disable Invoicing date    ${Number 3}
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Go To Item type
+    Disable Item type    ${Add Item type 1}
+    Disable Item type    ${Add Item type 2}
+    Disable Item type    ${Add Item type 3}
+    Go To VAT Sign
+    Disable VAT Sign    ${Add Item type 1}
+    Disable VAT Sign    ${Add Item type 2}
+    Disable VAT Sign    ${Add Item type 3}
+    Go To Maturity
+    Disable Maturity    ${Maturity Number 1}
+    Disable Maturity    ${Maturity Number 2}
+    Disable Maturity    ${Maturity Number 3}
+
+Test Alphabetical Sorting Of Status Column
+    Wait Until Ready    ${Status 2}
+    Click Element    ${Status 2}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+    ${texts_desc}=    Get Column Texts From Table    1
+    ${sorted_desc}=    Copy List    ${texts_desc}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Lists Should Be Equal    ${texts_desc}    ${sorted_desc}
+
+    Wait Until Ready    ${Status 2}
+    Click Element    ${Status 2}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+    ${texts_asc}=    Get Column Texts From Table    1
+    ${sorted_asc}=    Copy List    ${texts_asc}
+    Sort List    ${sorted_asc}
+    Lists Should Be Equal    ${texts_asc}    ${sorted_asc}
+
+Test Alphabetical Sorting Of Partner Column
+    Wait Until Ready    ${Partner}
+    Click Element    ${Partner}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+    ${texts_desc}=    Get Column Texts From Table    4
+    ${sorted_desc}=    Copy List    ${texts_desc}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Lists Should Be Equal    ${texts_desc}    ${sorted_desc}
+
+    Click Element    ${Partner}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+    ${texts_asc}=    Get Column Texts From Table    4
+    ${sorted_asc}=    Copy List    ${texts_asc}
+    Sort List    ${sorted_asc}
+    Lists Should Be Equal    ${texts_asc}    ${sorted_asc}

@@ -6,47 +6,31 @@ Resource            ${EXECDIR}/resources/layout.resource
 
 
 *** Test Cases ***
-Test
-    [Setup]    Open Browser And Logged In
-    Sleep    4
-    Go To Settings
-    Go To Maturity
-    Go To Item type
-    Enable Item type Or Add Item type    ${Add Item type 1}
-    Enable Item type Or Add Item type    ${Add Item type 2}
-    Enable Item type Or Add Item type    ${Add Item type 3}
-    Disable Item type    ${Add Item type 1}
-    Disable Item type    ${Add Item type 2}
-    Disable Item type    ${Add Item type 3}
+Select None And Select All
+    [Documentation]    A test case for selecting none and all.
+    [Setup]    Layout Setup
+    Layout Select None
+    Layout Select All
 
-    # Create Contract Test
-    # Create Contract Item
+Select Status
+    [Documentation]    A test case for selecting.
+    Unselect Partner
+    Select Partner
+    Unselect Kind
+    Select Kind
+    Unselect Termination Method
+    Select Termination Method
 
-# Select None And Select All
-#    [Documentation]    A test case for selecting none and all.
-#    [Setup]    Layout Setup
-#    Layout Select None
-#    Layout Select All
+Verify Sorting And Searching
+    [Documentation]    A test case for sorting.
+    Select Fields
+    Test Alphabetical Sorting Of Status Column
+    Create Contract Item 3
+    Test Alphabetical Sorting Of Partner Column
 
-# Select Status
-#    [Documentation]    A test case for selecting.
-#    Unselect Partner
-#    Select Partner
-#    Unselect Kind
-#    Select Kind
-#    Unselect Termination Method
-#    Select Termination Method
-
-# Verify Sorting And Searching
-#    [Documentation]    A test case for sorting.
-#    Select Contract Subject, Partner, Kind And Termination Method
-#    Search Contract Subject
-#    Verify Column Sorting - Descending Then Ascending
-#    Test Alphabetical Sorting Of Kind Column
-#    Test Alphabetical Sorting Of Termination Method Column
-#    Remove Search
-
-# Set Layout Back To Normal And Delete Test Contracts
-#    [Documentation]    A test case for deleting test contracts.
-#    Layout Select All
-#    Delete Test Contracts
+Set Data Back To Normal And Delete Test Contracts
+    [Documentation]    A test case for deleting test contracts.
+    Layout Select All
+    Delete Test Contracts
+    Disable Fields
+    Disable Data
