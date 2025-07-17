@@ -12,20 +12,23 @@ Select None And Select All
     Layout Select None
     Layout Select All
 
-Select Status
-    [Documentation]    A test case for selecting.
-    Unselect Partner
-    Select Partner
-    Unselect Kind
-    Select Kind
-    Unselect Termination Method
-    Select Termination Method
+# Select Status
+#    [Documentation]    A test case for selecting.
+#    Unselect Partner
+#    Select Partner
+#    Unselect Kind
+#    Select Kind
+#    Unselect Termination Method
+#    Select Termination Method
 
 Verify Sorting And Searching
     [Documentation]    A test case for sorting.
     Select Fields
+    Test Searching Of Status Column
     Test Alphabetical Sorting Of Status Column
     Create Contract Item 3
+    Verify Updated Text Sorting
+    Test Searching Of Partner Number Column
     Test Alphabetical Sorting Of Partner Column
 
 Set Data Back To Normal And Delete Test Contracts

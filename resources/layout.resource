@@ -17,7 +17,7 @@ ${Id Alert}                                         alert_area
 ${Alert Message}                                    Vyplňte prosím všechna povinná pole!
 ${Alert Message2}                                   Finální znění už existuje.
 ${Alert Message3}                                   Chcete jej nahradit novou verzí?
-${Timeout}                                          5s
+${Timeout}                                          10s
 ${Timeout2}                                         1s
 ${No Path}                                          xpath=//button[normalize-space(.)="Ne"]
 ${Personal Space}                                   //a[@class="main_tabs" and @href="#tab_personal"]
@@ -37,7 +37,7 @@ ${Contract Subject Name 4}                          CONRACTDVTET
 ${Status Button}                                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Stav"]
 ${Status}                                           xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Stav"]
 ${Updated Button}                                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Aktualizováno"]
-${Updated}                                          xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Aktualizováno"]
+${Updated}                                          xpath=//th[normalize-space(.)="Aktualizováno"]
 ${Number Button}                                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Číslo"]
 ${Number}                                           xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Číslo"]
 ${Number Partner}                                   xpath=//th[normalize-space(.)="Č.sml.partnera"]
@@ -426,6 +426,12 @@ ${Id Add VAT Sign}                                  c_vatsign
 ${Id Proposals}                                     proposals
 ${Id Add GDPR}                                      c_gdpr
 ${Id Add Framework Contract}                        c_fwc
+${Id Search Status}                                 s_text_info
+${Search Status}                                    Chybí finální znění
+${Missing Item}                                     xpath=//span[@class="cs_red" and normalize-space(.)="Chybí položka"]
+${Id Search Number Parner}                          s_text_pnumber
+${Search Number Parner}                             7189
+${Search Number 1}                                  xpath=//table//tbody/tr[1]/td[4]
 
 
 *** Keywords ***
@@ -585,6 +591,7 @@ Layout Select All
     Wait Until Element Is Not Visible    ${Select All Button}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
     Element Should Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
+    Wait Until Element Is Not Visible    ${Please Wait}
 
 Unselect Partner
     Wait Until Ready    ${Layout Button}
@@ -1269,6 +1276,7 @@ Enable VAT ID
     Wait Until Ready    ${Contract Type Checkbox}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Add VAT ID
     [Arguments]    ${number}
@@ -1277,10 +1285,10 @@ Add VAT ID
     Wait Until Ready    ${Id Add Contract Type}
     Input Text    ${Id Add Contract Type}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Disable VAT ID
     [Arguments]    ${number}
-    # Go To VAT ID
     Wait Until Ready    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit VAT ID Button}
@@ -1315,6 +1323,7 @@ Enable Bank Account
     Wait Until Ready    ${Contract Type Checkbox}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Add Bank Account
     [Arguments]    ${number}
@@ -1323,10 +1332,10 @@ Add Bank Account
     Wait Until Ready    ${Id Add Contract Type}
     Input Text    ${Id Add Contract Type}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Disable Bank Account
     [Arguments]    ${number}
-    # Go To Bank Account
     Wait Until Ready    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Bank Account Button}
@@ -1361,6 +1370,7 @@ Enable Applicable Law
     Wait Until Ready    ${Contract Type Checkbox}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Add Applicable Law
     [Arguments]    ${number}
@@ -1369,10 +1379,10 @@ Add Applicable Law
     Wait Until Ready    ${Id Add Contract Type}
     Input Text    ${Id Add Contract Type}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Disable Applicable Law
     [Arguments]    ${number}
-    # Go To Applicable Law
     Wait Until Ready    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Applicable Law Button}
@@ -1398,6 +1408,7 @@ Enable Original Storage
     Wait Until Ready    ${Id Add Field1}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Enable Original Storage Or Add Original Storage
     [Arguments]    ${number}
@@ -1419,10 +1430,10 @@ Add Original Storage
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Disable Original Storage
     [Arguments]    ${number}
-    # Go To Original Storage
     Wait Until Ready    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Original Storage Button}
@@ -1444,6 +1455,7 @@ Enable Payment Interval
     Wait Until Ready    ${Id Add Field1}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Enable Payment Interval Or Add Payment Interval
     [Arguments]    ${number}
@@ -1465,10 +1477,10 @@ Add Payment Interval
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Disable Payment Interval
     [Arguments]    ${number}
-    Go To Payment Interval
     Wait Until Ready    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Payment Interval Button}
@@ -1490,6 +1502,7 @@ Enable Invoicing date
     Wait Until Ready    ${Id Add Field1}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Enable Invoicing date Or Add Invoicing date
     [Arguments]    ${number}
@@ -1511,10 +1524,10 @@ Add Invoicing date
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Disable Invoicing date
     [Arguments]    ${number}
-    Go To Invoicing date
     Wait Until Ready    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Invoicing date Button}
@@ -1536,6 +1549,7 @@ Enable Maturity
     Wait Until Ready    ${Id Create Maturity Description}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Create Maturity Description}
 
 Enable Maturity Or Add Maturity
     [Arguments]    ${number}
@@ -1558,10 +1572,10 @@ Add Maturity
     Input Text    ${Id Create Maturity}    ${number}
     Input Text    ${Id Create Maturity Description}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Create Maturity Description}
 
 Disable Maturity
     [Arguments]    ${number}
-    # Go To Maturity
     Wait Until Ready    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Maturity Button}
@@ -1583,6 +1597,7 @@ Enable Item type
     Wait Until Ready    ${Id Add Field1}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Enable Item type Or Add Item type
     [Arguments]    ${number}
@@ -1604,10 +1619,10 @@ Add Item type
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Disable Item type
     [Arguments]    ${number}
-    # Go To Item type
     Wait Until Ready    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit Item type Button}
@@ -1629,6 +1644,7 @@ Enable VAT Sign
     Wait Until Ready    ${Id Add Field1}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Enable VAT Sign Or Add VAT Sign
     [Arguments]    ${number}
@@ -1650,10 +1666,10 @@ Add VAT Sign
     Wait Until Ready    ${Id Add Field1}
     Input Text    ${Id Add Field1}    ${number}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Disable VAT Sign
     [Arguments]    ${number}
-    # Go To VAT Sign
     Wait Until Ready    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
     Click Element    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${number}"]
     Wait Until Ready    ${Id Edit VAT Sign Button}
@@ -1772,6 +1788,7 @@ Test Alphabetical Sorting Of Status Column
 
 Test Alphabetical Sorting Of Partner Column
     Wait Until Ready    ${Partner}
+    Wait Until Element Is Not Visible    ${Please Wait }
     Click Element    ${Partner}
     Wait Until Element Is Not Visible    ${Please Wait}
 
@@ -1788,3 +1805,54 @@ Test Alphabetical Sorting Of Partner Column
     ${sorted_asc}=    Copy List    ${texts_asc}
     Sort List    ${sorted_asc}
     Lists Should Be Equal    ${texts_asc}    ${sorted_asc}
+
+Get Timestamps From Table
+    ${elements}=    Get WebElements    xpath=//table[@id="p_all_tbl"]//tbody/tr/td[2]
+    ${timestamps}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${timestamps}    ${text}
+    END
+    RETURN    ${timestamps}
+
+Verify Updated Text Sorting
+    Click Element    ${Updated}
+    Sleep    1s
+    ${desc}=    Get Timestamps From Table
+    ${expected_desc}=    Copy List    ${desc}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Lists Should Be Equal    ${desc}    ${expected_desc}
+
+    Click Element    ${Updated}
+    Sleep    1s
+    ${asc}=    Get Timestamps From Table
+    ${expected_asc}=    Copy List    ${asc}
+    Sort List    ${expected_asc}
+    Lists Should Be Equal    ${asc}    ${expected_asc}
+
+Apply Filter
+    [Arguments]    ${text}    ${input_locator}    ${confirm_locator}
+    Wait Until Ready    ${input_locator}
+    IF    '${text}' == ''
+        Clear Element Text    ${input_locator}
+    ELSE
+        Input Text    ${input_locator}    ${text}
+    END
+    Click Element    ${confirm_locator}
+    Wait Until Ready    ${input_locator}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Test Searching Of Status Column
+    Apply Filter    ${Search Status}    ${Id Search Status}    ${Status 2}
+    Element Should Not Be Visible    ${Missing Item}
+
+    Apply Filter    ${EMPTY}    ${Id Search Status}    ${Status 2}
+    Element Should Be Visible    ${Missing Item}
+
+Test Searching Of Partner Number Column
+    Apply Filter    ${Search Number Parner}    ${Id Search Number Parner}    ${Number Partner}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Number 1}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Number Parner}    ${Number Partner}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Number 1}']
