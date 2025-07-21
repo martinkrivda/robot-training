@@ -5,6 +5,7 @@ Documentation       This is a resource file for layout.
 Library             OperatingSystem
 Library             SeleniumLibrary
 Library             Collections
+Library             String
 Variables           ../credentials.py
 Resource            login.resource
 
@@ -30,16 +31,16 @@ ${Edited Name}                                      dvtestEdited
 ${Layout Button}                                    xpath=//button[contains(@class, "dt-button") and normalize-space(.)="Layout"]
 ${Select None Button}                               xpath=//input[@type="button" and @value="Zrušit vše"]
 ${Select All Button}                                xpath=//input[@type="button" and @value="Vybrat vše"]
-${Contract Subject Name}                            TESTCONRACTDV
-${Contract Subject Name 2}                          TESTDVCONRACT
-${Contract Subject Name 3}                          TESTVDCONTRACT
+${Contract Subject Name}                            dvTESTCONRACTDV
+${Contract Subject Name 2}                          dvTESTDVCONRACT
+${Contract Subject Name 3}                          dvTESTVDCONTRACT
 ${Contract Subject Name 4}                          CONRACTDVTET
 ${Status Button}                                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Stav"]
 ${Status}                                           xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Stav"]
 ${Updated Button}                                   xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Aktualizováno"]
 ${Updated}                                          xpath=//th[normalize-space(.)="Aktualizováno"]
 ${Number Button}                                    xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Číslo"]
-${Number}                                           xpath=//th[contains(@class, "sorting_asc") and normalize-space(.)="Číslo"]
+${Number}                                           xpath=//th[normalize-space(.)="Číslo"]
 ${Number Partner}                                   xpath=//th[normalize-space(.)="Č.sml.partnera"]
 ${Number Partner Button}                            xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Č.sml.partnera"]
 ${Partner}                                          xpath=//th[normalize-space(.)="Partner"]
@@ -326,6 +327,8 @@ ${Add Organisational unit 2}                        Oddělení řízení PJM
 ${Add Organisational unit 3}                        Provoz a support
 ${Primary Responsible Person}                       Vodárek, Dominik
 ${Secondary Responsible Person}                     Švadlena, Michal
+${Add Primary Responsible Person}                   Dominik Vodárek
+${Add Secondary Responsible Person}                 Michal Švadlena
 ${Add Business case 1}                              Nákup služeb
 ${Add Business case 2}                              Prodej licencí
 ${Add Business case 3}                              Nákup HW
@@ -431,7 +434,28 @@ ${Search Status}                                    Chybí finální znění
 ${Missing Item}                                     xpath=//span[@class="cs_red" and normalize-space(.)="Chybí položka"]
 ${Id Search Number Parner}                          s_text_pnumber
 ${Search Number Parner}                             7189
-${Search Number 1}                                  xpath=//table//tbody/tr[1]/td[4]
+${Id Saved Layouts}                                 dt_saved_layouts
+${Id Layout Name}                                   dt_layout_name
+${Id Save Layout Button}                            save_layout_btn
+${Id Load Layout Button}                            load_layout_btn
+${Id Search Number}                                 s_text_number
+${Id Search Partner}                                s_text_partner
+${Search Partner}                                   Primagra, a.s.
+${Search Partner ID}                                1525
+${Id Search Partner ID}                             s_text_partner_id
+${Partner ID 1}                                     1648
+${Id Search Contract Subject}                       s_text_subject
+${Id Search Field}                                  s_text_field
+${Id Search Type}                                   s_text_type
+${Id Search Primary Resp.}                          s_text_primary_resp
+${Id Search Secondary Resp.}                        s_text_sec_resp
+${Id Search Bank Account}                           s_text_account
+${Search Bank Account}                              1259974001/2700
+${Add Bank Account}                                 1013034060/5500
+${Id Search Accountant}                             s_text_accountant
+${Id Search Appl. Law}                              s_text_appl_law
+${Id Search Bonus}                                  s_decimal_bonus
+${Add Bonus}                                        4,00
 
 
 *** Keywords ***
@@ -489,6 +513,7 @@ Delete Contract
 
 Create Contract
     Wait Until Ready    ${Create Contract}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
     Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
@@ -496,45 +521,12 @@ Create Contract
     Select From List By Label    ${Id Confidentiality}    ${Add Confidentiality}
     Select From List By Label    ${Id Language}    ${Add Language}
 
-Create Contract1
-    Create Contract
-    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
-    Input Text    ${Id Add Partner}    ${Add Partner1}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind1}
-    Click Element    ${Other Data Path}
-    Wait Until Ready    ${Id Add Termination Method}
-    Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
-    Click Button    ${Create Contract File Button}
-
-Create Contract2
-    Wait Until Element Is Not Visible    ${Please Wait}
-    Create Contract
-    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
-    Input Text    ${Id Add Partner}    ${Add Partner2}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind2}
-    Click Element    ${Other Data Path}
-    Wait Until Ready    ${Id Add Termination Method}
-    Input Text    ${Id Add Termination Method}    ${Add Termination Method2}
-    Click Button    ${Create Contract File Button}
-
-Create Contract3
-    Wait Until Element Is Not Visible    ${Please Wait}
-    Create Contract
-    Input Text    ${Id Contract Subject}    ${Contract Subject Name}
-    Input Text    ${Id Add Partner}    ${Add Partner3}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind3}
-    Click Element    ${Other Data Path}
-    Wait Until Ready    ${Id Add Termination Method}
-    Input Text    ${Id Add Termination Method}    ${Add Termination Method3}
-    Click Button    ${Create Contract File Button}
-    Wait Until Element Is Not Visible    ${Please Wait}
-
-Create Contract4
+Create Contract Test 4
     Wait Until Element Is Not Visible    ${Please Wait}
     Create Contract
     Input Text    ${Id Contract Subject}    ${Contract Subject Name4}
-    Input Text    ${Id Add Partner}    ${Add Partner3}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind2}
+    Input Text    ${Id Add Partner}    ${Add Partner1}
+    Select From List By Label    ${Id Contract kind}    ${Contract kind1}
     Click Element    ${Other Data Path}
     Wait Until Ready    ${Id Add Termination Method}
     Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
@@ -542,6 +534,7 @@ Create Contract4
     Wait Until Element Is Not Visible    ${Please Wait}
 
 Delete Test Contracts
+    Wait Until Ready    ${Settings}
     Delete Contract If Exists    ${Contract Subject Name}
     Wait Until Ready    ${Settings}
     Wait Until Element Is Not Visible    ${Please Wait}
@@ -552,26 +545,31 @@ Delete Test Contracts
     Wait Until Ready    ${Settings}
     Wait Until Element Is Not Visible    ${Please Wait}
     Delete Contract If Exists    ${Contract Subject Name 4}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
 
 Layout Setup
     Open Browser And Logged In
-    Enable Fields
-    Enable Or Add Data
-    Go To Personal Space
-    Wait Until Ready    ${Layout Button}
-    Click Element    ${Layout Button}
-    Wait Until Ready    ${Select All Button}
-    Click Element    ${Select All Button}
-    Click Element    ${Close Button}
-    Wait Until Element Is Not Visible    ${Please Wait}
-    Delete Test Contracts
-    Create Contract Test 1
-    Create Contract Item 1
-    Create Contract Test 2
-    Create Contract Item 2
-    Create Contract Test 3
+    # Enable Fields
+    # Enable Or Add Data
+    # Go To Personal Space
+    # Wait Until Ready    ${Layout Button}
+    # Click Element    ${Layout Button}
+    # Wait Until Ready    ${Select All Button}
+    # Click Element    ${Select All Button}
+    # Click Element    ${Close Button}
+    # Wait Until Ready    ${Layout Button}
+    # Wait Until Element Is Not Visible    ${Please Wait}
+    # Delete Test Contracts
+    # Create Contract Test 1
+    # Create Contract Item 1
+    # Create Contract Test 2
+    # Create Contract Item 2
+    # Create Contract Test 3
+    # Create Contract Test 4
 
 Layout Select None
+    Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
     Wait Until Ready    ${Layout Button}
     Click Element    ${Layout Button}
@@ -583,6 +581,7 @@ Layout Select None
     Element Should Not Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
 
 Layout Select All
+    Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    ${Layout Button}
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select All Button}
@@ -669,7 +668,7 @@ Select Contract Subject, Partner, Kind And Termination Method
     Click Element    ${Close Button}
 
 Get Numeric Values From Table
-    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[1]
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[3]
     ${numbers}=    Create List
     FOR    ${el}    IN    @{elements}
         ${text}=    Get Text    ${el}
@@ -678,7 +677,7 @@ Get Numeric Values From Table
     END
     RETURN    ${numbers}
 
-Verify Column Sorting - Descending Then Ascending
+Verify Partner Number Column Sorting
     Wait Until Ready    ${Number Partner}
     Click Element    ${Number Partner}
     Sleep    1s
@@ -759,12 +758,6 @@ Remove Search
     Element Should Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name4}"]
 
 Select Fields
-    Wait Until Ready    ${Layout Button}
-    Click Element    ${Layout Button}
-    Wait Until Ready    ${Select None Button}
-    Click Element    ${Select None Button}
-    Wait Until Ready    ${Status Button}
-    Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    ${Status Button}
     Click Element    ${Status Button}
     Click Element    ${Updated Button}
@@ -773,10 +766,8 @@ Select Fields
     Click Element    ${Partner Button}
     Click Element    ${Partner ID Button}
     Click Element    ${Contract Subject Button}
-    Click Element    ${Cmt Button}
     Click Element    ${Field Button}
     Click Element    ${Type Button}
-    Click Element    ${Creator Button}
     Click Element    ${Prim. Resp. Button}
     Click Element    ${Sec. Resp. Button}
     Click Element    ${Bank Account Button}
@@ -850,6 +841,36 @@ Select Fields
     Click Element    ${VAT Sign Button}
     Click Element    ${GDPR Button}
     Click Element    ${Framework Contract Button}
+    Input Text    ${Id Layout Name}    ${Name}
+    Click Element    ${Id Save Layout Button}
+
+Open Or Select Saved Layout
+    Click Element    ${Id Saved Layouts}
+    Sleep    1
+    Wait Until Element Is Visible    xpath=//div[contains(@class, 'dataTables_scroll')]
+
+    ${is_present}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//option[normalize-space(.)="dvtest1"]
+
+    IF    ${is_present}
+        Click Element    xpath=//option[normalize-space(.)="dvtest1"]
+        Click Element    ${Id Load Layout Button}
+    ELSE
+        Select Fields
+    END
+
+Select Fields Test
+    Wait Until Ready    ${Layout Button}
+    Click Element    ${Layout Button}
+    Wait Until Ready    ${Select None Button}
+    Click Element    ${Select None Button}
+    Wait Until Ready    ${Status Button}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Id Saved Layouts}
+    Open Or Select Saved Layout
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Close Button}
     Click Element    ${Close Button}
 
 Enable Fields
@@ -1296,6 +1317,7 @@ Disable VAT ID
     Wait Until Ready    ${Contract Type Checkbox}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Go To Bank Account
     Wait Until Ready    ${Id Bank Account}
@@ -1343,6 +1365,7 @@ Disable Bank Account
     Wait Until Ready    ${Contract Type Checkbox}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Go To Applicable Law
     Wait Until Ready    ${Id Applicable Law}
@@ -1390,6 +1413,7 @@ Disable Applicable Law
     Wait Until Ready    ${Contract Type Checkbox}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
 
 Go To Aux Data
     Wait Until Ready    ${Id Header Aux Data}
@@ -1441,6 +1465,7 @@ Disable Original Storage
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Go To Payment Interval
     Wait Until Ready    ${Id Payment Interval}
@@ -1488,6 +1513,7 @@ Disable Payment Interval
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Go To Invoicing date
     Wait Until Ready    ${Id Invoicing date}
@@ -1535,6 +1561,7 @@ Disable Invoicing date
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Go To Maturity
     Wait Until Ready    ${Id Maturity}
@@ -1583,6 +1610,7 @@ Disable Maturity
     Wait Until Ready    ${Id Create Maturity Description}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Create Maturity Description}
 
 Go To Item type
     Wait Until Ready    ${Id Item type}
@@ -1630,6 +1658,7 @@ Disable Item type
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Go To VAT Sign
     Wait Until Ready    ${Id VAT Sign}
@@ -1677,6 +1706,7 @@ Disable VAT Sign
     Wait Until Ready    ${Id Add Field1}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Enable Or Add Data
     Wait Until Ready    ${Id Proposals}
@@ -1815,7 +1845,7 @@ Get Timestamps From Table
     END
     RETURN    ${timestamps}
 
-Verify Updated Text Sorting
+Test Updated Text Sorting
     Click Element    ${Updated}
     Sleep    1s
     ${desc}=    Get Timestamps From Table
@@ -1856,3 +1886,408 @@ Test Searching Of Partner Number Column
 
     Apply Filter    ${EMPTY}    ${Id Search Number Parner}    ${Number Partner}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Number 1}']
+
+Test Searching Of Number Column
+    Wait Until Ready    ${Id Search Number}
+    ${updated_value}=    Get Text    xpath=//table[@id='p_all_tbl']//tbody/tr[1]/td[3]
+    ${updated_value2}=    Get Text    xpath=//table[@id='p_all_tbl']//tbody/tr[2]/td[3]
+    Input Text    ${Id Search Number}    ${updated_value}
+    Click Element    ${Number}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tbody/tr/td[normalize-space(text())="${updated_value}"]
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tbody/tr/td[normalize-space(text())="${updated_value2}"]
+
+    Input Text    ${Id Search Number}    ${EMPTY}
+    Click Element    ${Number}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tbody/tr/td[normalize-space(text())="${updated_value2}"]
+
+Get IDs From Table Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${ids}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${ids}    ${text}
+    END
+    RETURN    ${ids}
+
+Extract Number From ID
+    [Arguments]    ${text}
+    ${num}=    Replace String Using Regexp    ${text}    [^0-9]    ${EMPTY}
+    ${num}=    Convert To Integer    ${num}
+    RETURN    ${num}
+
+Test Sorting Of Number Column
+    Wait Until Ready    ${Number}
+    Click Element    ${Number}
+    Sleep    1s
+    ${ids_desc}=    Get IDs From Table Column    3
+
+    ${numbers_desc}=    Create List
+    FOR    ${id}    IN    @{ids_desc}
+        ${num}=    Extract Number From ID    ${id}
+        Append To List    ${numbers_desc}    ${num}
+    END
+
+    ${expected_desc}=    Copy List    ${numbers_desc}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${numbers_desc}    ${expected_desc}
+
+    Click Element    ${Number}
+    Sleep    1s
+    ${ids_asc}=    Get IDs From Table Column    3
+
+    ${numbers_asc}=    Create List
+    FOR    ${id}    IN    @{ids_asc}
+        ${num}=    Extract Number From ID    ${id}
+        Append To List    ${numbers_asc}    ${num}
+    END
+
+    ${expected_asc}=    Copy List    ${numbers_asc}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${numbers_asc}    ${expected_asc}
+
+Extract Leading Number
+    [Arguments]    ${text}
+    ${text}=    Strip String    ${text}
+    ${split}=    Split String    ${text}    ${SPACE}
+    ${num}=    Convert To Integer    ${split[0]}
+    RETURN    ${num}
+
+Get Partner Numbers From Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${numbers}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        ${num}=    Extract Leading Number    ${text}
+        Append To List    ${numbers}    ${num}
+    END
+    RETURN    ${numbers}
+
+Test Sorting Of Partner Number Column
+    Wait Until Ready    ${Number Partner}
+    Click Element    ${Number Partner}
+    Sleep    1s
+    ${desc_nums}=    Get Partner Numbers From Column    4
+    ${expected_desc}=    Copy List    ${desc_nums}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_nums}    ${expected_desc}
+
+    Click Element    ${Number Partner}
+    Sleep    1s
+    ${asc_nums}=    Get Partner Numbers From Column    4
+    ${expected_asc}=    Copy List    ${asc_nums}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_nums}    ${expected_asc}
+
+Search Contracts
+    Wait Until Ready    ${Search Contract Subject}
+    Input Text    ${Search Contract Subject}    dvTEST
+    Click Element    ${Contract Subject}
+
+Test Searching Of Partner Column
+    Apply Filter    ${Add Contract partner 1}    ${Id Search Partner}    ${Partner}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Partner}    ${Partner}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner}']
+
+Get Partner IDs From Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${ids}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        ${id}=    Convert To Integer    ${text}
+        Append To List    ${ids}    ${id}
+    END
+    RETURN    ${ids}
+
+Test Sorting Of Partner ID Column
+    Wait Until Ready    ${Partner ID}
+    Click Element    ${Partner ID}
+    Sleep    1s
+    ${desc_ids}=    Get Partner IDs From Column    6
+    ${sorted_desc}=    Copy List    ${desc_ids}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_ids}    ${sorted_desc}
+
+    Click Element    ${Partner ID}
+    Sleep    1s
+    ${asc_ids}=    Get Partner IDs From Column    6
+    ${sorted_asc}=    Copy List    ${asc_ids}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_ids}    ${sorted_asc}
+
+Test Searching Of Partner ID Column
+    Apply Filter    ${Partner ID 1}    ${Id Search Partner ID}    ${Partner ID}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner ID}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Partner ID}    ${Partner ID}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner ID}']
+
+Test Searching Of Contract Type Column
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Contract Subject Name 4}']
+    Apply Filter    ${Contract Subject Name}    ${Id Search Contract Subject}    ${Contract Subject}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Contract Subject Name 4}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Contract Subject}    ${Contract Subject}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Contract Subject Name 4}']
+
+    Input Text    ${Search Contract Subject}    dvTEST
+    Click Element    ${Contract Subject}
+
+Get Column Text Values
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${values}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${values}    ${text}
+    END
+    RETURN    ${values}
+
+Test Contract Subject Sorting
+    Wait Until Ready    ${Contract Subject}
+    Click Element    ${Contract Subject}
+    Sleep    1s
+    ${desc_subjects}=    Get Column Text Values    7
+    ${sorted_desc}=    Copy List    ${desc_subjects}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_subjects}    ${sorted_desc}
+
+    Click Element    ${Contract Subject}
+    Sleep    1s
+    ${asc_subjects}=    Get Column Text Values    7
+    ${sorted_asc}=    Copy List    ${asc_subjects}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_subjects}    ${sorted_asc}
+
+Test Searching Of Field Column
+    Apply Filter    ${Add Field}    ${Id Search Field}    ${Field}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Field}    ${Field}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field 2}']
+
+Test Field Sorting
+    Wait Until Ready    ${Field}
+    Click Element    ${Field}
+    Sleep    1s
+    ${asc_values}=    Get Column Text Values    8
+    ${sorted_asc}=    Copy List    ${asc_values}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_values}    ${sorted_asc}
+
+    Click Element    ${Field}
+    Sleep    1s
+    ${desc_values}=    Get Column Text Values    8
+    ${sorted_desc}=    Copy List    ${desc_values}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_values}    ${sorted_desc}
+
+Test Searching Of Type Column
+    Apply Filter    ${Add Contact Type 1}    ${Id Search Type}    ${Type}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Type}    ${Type}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 2}']
+
+Test Type Sorting
+    Wait Until Ready    ${Type}
+    Click Element    ${Type}
+    Sleep    1s
+    ${desc_values}=    Get Column Text Values    9
+    ${sorted_desc}=    Copy List    ${desc_values}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_values}    ${sorted_desc}
+
+    Click Element    ${Type}
+    Sleep    1s
+    ${asc_values}=    Get Column Text Values    9
+    ${sorted_asc}=    Copy List    ${asc_values}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_values}    ${sorted_asc}
+
+Test Searching Of Prim. Resp. Column
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[10][normalize-space(.)='${Add Secondary responsible person}']
+    Apply Filter    ${Add Primary responsible person}    ${Id Search Primary Resp.}    ${Prim. Resp.}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[10][normalize-space(.)='${Add Secondary responsible person}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Primary Resp.}    ${Prim. Resp.}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[10][normalize-space(.)='${Add Secondary responsible person}']
+
+Test Searching Of Sec. Resp. Column
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[11][normalize-space(.)='${Add Primary responsible person}']
+    Apply Filter    ${Add Secondary responsible person}    ${Id Search Secondary Resp.}    ${Sec. Resp.}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[11][normalize-space(.)='${Add Primary Responsible Person}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Secondary Resp.}    ${Sec. Resp.}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[11][normalize-space(.)='${Add Primary responsible person}']
+
+Test Sorting Of Primary Responsible Column
+    Wait Until Ready    ${Prim. Resp.}
+    Click Element    ${Prim. Resp.}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    10
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Prim. Resp.}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    10
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Sorting Of Secondary Responsible Column
+    Wait Until Ready    ${Sec. Resp.}
+    Click Element    ${Sec. Resp.}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    11
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Sec. Resp.}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    11
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Bank Account Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//tr/td[12][normalize-space(.)='${Add Bank Account}']
+    Apply Filter    ${Search Bank Account}    ${Id Search Bank Account}    ${Bank Account}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[12][normalize-space(.)='${Add Bank Account}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Bank Account}    ${Bank Account}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[12][normalize-space(.)='${Add Bank Account}']
+
+Test Sorting Of Bank Account Column
+    Wait Until Ready    ${Bank Account}
+    Click Element    ${Bank Account}
+    Sleep    1s
+    ${desc_values}=    Get Column Text Values    12
+    ${expected_desc}=    Copy List    ${desc_values}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_values}    ${expected_desc}
+
+    Click Element    ${Bank Account}
+    Sleep    1s
+    ${asc_values}=    Get Column Text Values    12
+    ${expected_asc}=    Copy List    ${asc_values}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_values}    ${expected_asc}
+
+Test Searching Of Accountant Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[13][normalize-space(.)='${Add Secondary Responsible Person}']
+    Apply Filter    ${Add Primary Responsible Person}    ${Id Search Accountant}    ${Accountant}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[13][normalize-space(.)='${Add Secondary Responsible Person}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Accountant}    ${Accountant}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[13][normalize-space(.)='${Add Secondary Responsible Person}']
+
+Test Sorting Of Accountant Column
+    Wait Until Ready    ${Accountant}
+    Click Element    ${Accountant}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    13
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Accountant}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    13
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Appl. Law Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[16][normalize-space(.)='${Add Confidentiality 3}']
+    Apply Filter    ${Add Number 2}    ${Id Search Appl. Law}    ${Appl.law}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[14][normalize-space(.)='${Add Number 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Appl. Law}    ${Appl.law}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[14][normalize-space(.)='${Add Number 3}']
+
+Test Sorting Of Appl. Law Column
+    Wait Until Ready    ${Appl.law}
+    Click Element    ${Appl.law}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    14
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Appl.law}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    14
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Bonus Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Number 3}    ${Id Search Bonus}    ${Bonus}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[15][normalize-space(.)='${Add Bonus}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Bonus}    ${Bonus}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[15][normalize-space(.)='${Add Bonus}']
+
+Test Sorting Of Bonus Column
+    Wait Until Ready    ${Bonus}
+    Click Element    ${Bonus}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    15
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Bonus}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    15
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
