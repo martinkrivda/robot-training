@@ -10,8 +10,8 @@ Select None And Select All
     [Documentation]    A test case for selecting none and all.
     [Setup]    Layout Setup
     Sleep    1
-#    Layout Select None
-#    Layout Select All
+    # Layout Select None
+    # Layout Select All
 
 # Select Status
 #    [Documentation]    A test case for selecting.
@@ -49,12 +49,26 @@ Verify Sorting And Searching
     # Test Sorting Of Secondary Responsible Column
     # Test Searching Of Bank Account Column
     # Test Sorting Of Bank Account Column
-    Test Searching Of Accountant Column
-    Test Sorting Of Accountant Column
-    Test Searching Of Appl. Law Column
-    Test Sorting Of Appl. Law Column
-    Test Searching Of Bonus Column
-    Test Sorting Of Bonus Column
+    # Test Searching Of Accountant Column
+    # Test Sorting Of Accountant Column
+    # Test Searching Of Appl. Law Column
+    # Test Sorting Of Appl. Law Column
+    # Test Searching Of Bonus Column
+    # Test Sorting Of Bonus Column
+    # Test Searching Of Confidentiality Column
+    # Test Sorting Of Confidentiality Column
+    # Test Searching Of Contact Person Column
+    # Test Sorting Of Contact Person Column
+    # Test Searching Of Contract Price Column
+    # Test Sorting Of Contract Price Column
+    # Test Searching Of Contract Price Currency Column
+    # Test Sorting Of Contract Price Currency Column
+    Test Searching Of Deposit Column
+    Test Sorting Of Deposit Column
+    Test Searching Of Deposit Currency Column
+    Test Sorting Of Deposit Currency Column
+    Test Searching Of Deposit Text Column
+    Test Sorting Of Deposit Text Column
 
 # Set Data Back To Normal And Delete Test Contracts
 #    [Documentation]    A test case for deleting test contracts.

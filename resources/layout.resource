@@ -456,6 +456,15 @@ ${Id Search Accountant}                             s_text_accountant
 ${Id Search Appl. Law}                              s_text_appl_law
 ${Id Search Bonus}                                  s_decimal_bonus
 ${Add Bonus}                                        4,00
+${Id Search Confidentiality}                        s_text_conf
+${Id Search Contact Person}                         s_text_contact_person
+${Contract Price 2}                                 15 510,00
+${Contract Price 3}                                 1 575,00
+${Id Search Contract Price}                         s_decimal_contract_price
+${Id Search Contract Price Currency}                s_text_contract_price_currency
+${Id Search Deposit}                                s_decimal_deposit
+${Id Search Deposit Currency}                       s_text_deposit_currency
+${Id Search Deposit Text}                           s_text_deposit_text
 
 
 *** Keywords ***
@@ -778,7 +787,6 @@ Select Fields
     Click Element    ${Contact Person Button}
     Click Element    ${Contract Price Button}
     Click Element    ${Contract Price Currency Button}
-    Click Element    ${Creation Date Button}
     Click Element    ${Deposit Button}
     Click Element    ${Deposit Currency Button}
     Click Element    ${Deposit Text Button}
@@ -2288,6 +2296,217 @@ Test Sorting Of Bonus Column
     Click Element    ${Bonus}
     Sleep    1s
     ${asc_names}=    Get Column Text Values    15
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Confidentiality Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Add Confidentiality 3}    ${Id Search Confidentiality}    ${Confidentiality}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[16][normalize-space(.)='${Add Confidentiality 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Confidentiality}    ${Confidentiality}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[16][normalize-space(.)='${Add Confidentiality 2}']
+
+Test Sorting Of Confidentiality Column
+    Wait Until Ready    ${Confidentiality}
+    Click Element    ${Confidentiality}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    16
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Confidentiality}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    16
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Contact Person Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[19][normalize-space(.)='${Add Total Contract Price Period 3}']
+    Apply Filter    ${Add Contact person 2}    ${Id Search Contact Person}    ${Contact person}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[17][normalize-space(.)='${Add Contact person 1}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Contact Person}    ${Contact Person}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[17][normalize-space(.)='${Add Contact person 1}']
+
+Test Sorting Of Contact Person Column
+    Wait Until Ready    ${Contact Person}
+    Click Element    ${Contact Person}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    17
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Contact Person}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    17
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Contract Price Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Contract Price 2}    ${Id Search Contract Price}    ${Contract Price}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[18][normalize-space(.)='${Contract Price 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Contract Price}    ${Contract Price}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[18][normalize-space(.)='${Contract Price 3}']
+
+Get Contract Price Values From Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${prices}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        ${text}=    Replace String    ${text}    ${SPACE}    ${EMPTY}
+        ${text}=    Replace String    ${text}    ,    .
+        ${num}=    Convert To Number    ${text}
+        Append To List    ${prices}    ${num}
+    END
+    RETURN    ${prices}
+
+Test Sorting Of Contract Price Column
+    Wait Until Ready    ${Contract Price}
+    Click Element    ${Contract Price}
+    Sleep    1s
+    ${desc_prices}=    Get Contract Price Values From Column    18
+    ${sorted_desc}=    Copy List    ${desc_prices}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_prices}    ${sorted_desc}
+
+    Click Element    ${Contract Price}
+    Sleep    1s
+    ${asc_prices}=    Get Contract Price Values From Column    18
+    ${sorted_asc}=    Copy List    ${asc_prices}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_prices}    ${sorted_asc}
+
+Test Searching Of Contract Price Currency Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Total Contract Price Period 3}
+    ...    ${Id Search Contract Price Currency}
+    ...    ${Contract Price Currency}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[19][normalize-space(.)='${Add Total Contract Price Period 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Contract Price Currency}    ${Contract Price Currency}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[19][normalize-space(.)='${Add Total Contract Price Period 2}']
+
+Test Sorting Of Contract Price Currency Column
+    Wait Until Ready    ${Contract Price Currency}
+    Click Element    ${Contract Price Currency}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    19
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Contract Price Currency}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    19
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Deposit Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//tr/td[22][normalize-space(.)='${Name 3}']
+    Apply Filter    ${Number 1}    ${Id Search Deposit}    ${Deposit}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[20][normalize-space(.)='${Add Bonus}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Deposit}    ${Deposit}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[20][normalize-space(.)='${Add Bonus}']
+
+Test Sorting Of Deposit Column
+    Wait Until Ready    ${Deposit}
+    Click Element    ${Deposit}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    20
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Deposit}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    20
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Deposit Currency Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Total Contract Price Period 3}
+    ...    ${Id Search Deposit Currency}
+    ...    ${Deposit Currency}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[21][normalize-space(.)='${Add Total Contract Price Period 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Deposit Currency}    ${Deposit Currency}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[21][normalize-space(.)='${Add Total Contract Price Period 2}']
+
+Test Sorting Of Deposit Currency Column
+    Wait Until Ready    ${Deposit Currency}
+    Click Element    ${Deposit Currency}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    21
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Deposit Currency}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    21
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Deposit Text Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Name 3}    ${Id Search Deposit Text}    ${Deposit Text}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[22][normalize-space(.)='${Name 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Deposit Text}    ${Deposit Text}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[22][normalize-space(.)='${Name 2}']
+
+Test Sorting Of Deposit Text Column
+    Wait Until Ready    ${Deposit Text}
+    Click Element    ${Deposit Text}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    22
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Deposit Text}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    22
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
     Should Be Equal    ${asc_names}    ${expected_asc}
