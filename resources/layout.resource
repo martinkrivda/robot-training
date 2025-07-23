@@ -6,6 +6,7 @@ Library             OperatingSystem
 Library             SeleniumLibrary
 Library             Collections
 Library             String
+Library             DateTime
 Variables           ../credentials.py
 Resource            login.resource
 
@@ -465,6 +466,26 @@ ${Id Search Contract Price Currency}                s_text_contract_price_curren
 ${Id Search Deposit}                                s_decimal_deposit
 ${Id Search Deposit Currency}                       s_text_deposit_currency
 ${Id Search Deposit Text}                           s_text_deposit_text
+${Id Search Doc.enclosed}                           s_yesno_doc_enclosed
+${Search Date 1}                                    09.09.2025
+${Search Date 2}                                    06.08.2025
+${Id Search Doc.req.}                               s_yesno_doc_required
+${Id Search Doc.req.date From}                      s_datefrom_doc_required_date
+${Id Search Doc.req.date To}                        s_dateto_doc_required_date
+${Id Search Effective Date From}                    s_datefrom_effective_date
+${Id Search Effective Date To}                      s_dateto_effective_date
+${Id Search Eff.from sig Date}                      s_yesno_effective_from_signature
+${Edit Contract Button}                             xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_edit_data"]
+${Effective Date CheckBox}                          c_effective_from_sig
+${Update Contract File}                             xpath=//button[normalize-space(.)="Aktualizovat smluvní složku"]
+${Id Search Interest}                               s_decimal_interest
+${Id Search Internal Contact}                       s_text_internal_contact
+${Id Search Int.part.}                              s_text_intpart
+${Id Search Invoicing Date}                         s_text_invoicing_date
+${Search Invoicing Date}                            4 -
+${Id Search Irregular Payment}                      s_yesno_irregular_payment
+${Id Search Kind}                                   s_text_kind
+${Id Search Language}                               s_text_lang
 
 
 *** Keywords ***
@@ -1881,6 +1902,20 @@ Apply Filter
     Wait Until Ready    ${input_locator}
     Wait Until Element Is Not Visible    ${Please Wait}
 
+Apply Date Filter
+    [Arguments]    ${text}    ${text2}    ${input_locator}    ${input_locator2}    ${confirm_locator}
+    Wait Until Ready    ${input_locator}
+    IF    '${text}' == ''
+        Clear Element Text    ${input_locator}
+        Clear Element Text    ${input_locator2}
+    ELSE
+        Input Text    ${input_locator}    ${text}
+        Input Text    ${input_locator2}    ${text2}
+    END
+    Click Element    ${confirm_locator}
+    Wait Until Ready    ${input_locator}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
 Test Searching Of Status Column
     Apply Filter    ${Search Status}    ${Id Search Status}    ${Status 2}
     Element Should Not Be Visible    ${Missing Item}
@@ -2510,3 +2545,374 @@ Test Sorting Of Deposit Text Column
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
     Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Doc.enclosed Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//tr/td[26][normalize-space(.)='${Search Date 1}']
+    Apply Filter    ${Yes}    ${Id Search Doc.enclosed}    ${Doc.enclosed}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[23][normalize-space(.)='${No}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Doc.enclosed}    ${Doc.enclosed}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[23][normalize-space(.)='${No}']
+
+Test Sorting Of Doc.enclosed Column
+    Wait Until Ready    ${Doc.enclosed}
+    Click Element    ${Doc.enclosed}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    23
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Doc.enclosed}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    23
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Test Searching Of Doc.req. Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Yes}    ${Id Search Doc.req.}    ${Doc.req.}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[24][normalize-space(.)='${No}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Doc.req.}    ${Doc.req.}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[24][normalize-space(.)='${No}']
+
+Test Sorting Of Doc.req. Column
+    Wait Until Ready    ${Doc.req.}
+    Click Element    ${Doc.req.}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    24
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Doc.req.}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    24
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Test Searching Of Doc.req.date Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Date Filter
+    ...    ${Add Date 1}
+    ...    ${Add Date 2}
+    ...    ${Id Search Doc.req.date From}
+    ...    ${Id Search Doc.req.date To}
+    ...    ${Doc.req.date}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[25][normalize-space(.)='${Search Date 2}']
+
+    Apply Date Filter
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    ${Id Search Doc.req.date From}
+    ...    ${Id Search Doc.req.date To}
+    ...    ${Doc.req.date}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[25][normalize-space(.)='${Search Date 2}']
+
+Test Sorting Of Doc.req.date Column
+    Wait Until Ready    ${Doc.req.date}
+    Click Element    ${Doc.req.date}
+    Sleep    1s
+    ${asc_texts}=    Get Date Column Values From Column    25
+    ${asc_dates}=    Convert To Dates    @{asc_texts}
+    ${sorted_asc}=    Copy List    ${asc_dates}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_dates}    ${sorted_asc}
+
+    Click Element    ${Doc.req.date}
+    Sleep    1s
+    ${desc_texts}=    Get Date Column Values From Column    25
+    ${desc_dates}=    Convert To Dates    @{desc_texts}
+    ${sorted_desc}=    Copy List    ${desc_dates}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_dates}    ${sorted_desc}
+
+Get Date Column Values From Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id="p_all_tbl"]//tbody/tr/td[${column_index}]
+    ${values}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${values}    ${text}
+    END
+    RETURN    ${values}
+
+Convert To Dates
+    [Arguments]    @{date_texts}
+    ${dates}=    Create List
+    FOR    ${text}    IN    @{date_texts}
+        ${date}=    Convert Date    ${text}    date_format=%d.%m.%Y
+        Append To List    ${dates}    ${date}
+    END
+    RETURN    ${dates}
+
+Test Searching Of Effective Date Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Date Filter
+    ...    ${Add Valid Date 1}
+    ...    ${Add Valid Date 2}
+    ...    ${Id Search Effective Date From}
+    ...    ${Id Search Effective Date To}
+    ...    ${Effective Date}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[26][normalize-space(.)='${Search Date 1}']
+
+    Apply Date Filter
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    ${Id Search Effective Date From}
+    ...    ${Id Search Effective Date To}
+    ...    ${Effective Date}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[26][normalize-space(.)='${Search Date 1}']
+
+Test Sorting Of Effective Date Column
+    Wait Until Ready    ${Effective Date}
+    Click Element    ${Effective Date}
+    Sleep    1s
+    ${asc_texts}=    Get Date Column Values From Column    26
+    ${asc_dates}=    Convert To Dates    @{asc_texts}
+    ${sorted_asc}=    Copy List    ${asc_dates}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_dates}    ${sorted_asc}
+
+    Click Element    ${Effective Date}
+    Sleep    1s
+    ${desc_texts}=    Get Date Column Values From Column    26
+    ${desc_dates}=    Convert To Dates    @{desc_texts}
+    ${sorted_desc}=    Copy List    ${desc_dates}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_dates}    ${sorted_desc}
+
+Test Searching Of Eff.from sig Date Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 3}']
+    Apply Filter    ${Yes}    ${Id Search Eff.from sig Date}    ${Eff.from sig Date}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[27][normalize-space(.)='${No}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Eff.from sig Date}    ${Eff.from sig Date}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[27][normalize-space(.)='${No}']
+
+Test Sorting Of Eff.from sig Date Column
+    Wait Until Ready    ${Eff.from sig Date}
+    Click Element    ${Eff.from sig Date}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    27
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Eff.from sig Date}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    27
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Edit Effective Date
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 3}']
+    Click Element    ${Edit Contract Button}
+    Wait Until Ready    ${Effective Date CheckBox}
+    Select Checkbox    ${Effective Date CheckBox}
+    Click Element    ${Update Contract File}
+    Wait Until Element Is Not Visible    ${Effective Date CheckBox}
+
+Test Searching Of Interest Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 3}']
+    Apply Filter    ${Number 1}    ${Id Search Interest}    ${Interest}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[28][normalize-space(.)='${Add Bonus}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Interest}    ${Interest}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[28][normalize-space(.)='${Add Bonus}']
+
+Test Sorting Of Interest Column
+    Wait Until Ready    ${Interest}
+    Click Element    ${Interest}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    28
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Interest}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    28
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Internal Contact Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Number 1}    ${Id Search Internal Contact}    ${Internal Contact}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[29][normalize-space(.)='${Number 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Internal Contact}    ${Internal Contact}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[29][normalize-space(.)='${Number 2}']
+
+Test Sorting Of Internal Contact Column
+    Wait Until Ready    ${Internal Contact}
+    Click Element    ${Internal Contact}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    29
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Internal Contact}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    29
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Int.part. Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Add Internal Contract Partner 3}    ${Id Search Int.part.}    ${Int.part.}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Int.part.}    ${Int.part.}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 2}']
+
+Test Sorting Of Int.part. Column
+    Wait Until Ready    ${Int.part.}
+    Click Element    ${Int.part.}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    30
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Reverse List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Int.part.}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    30
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Test Searching Of Invoicing Date Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[34][normalize-space(.)='${Add Language}']
+    Apply Filter    ${Number 1}    ${Id Search Invoicing Date}    ${Invoicing Date}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[31][normalize-space(.)='${Search Invoicing Date}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Invoicing Date}    ${Invoicing Date}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[31][normalize-space(.)='${Search Invoicing Date}']
+
+Test Sorting Of Invoicing Date Column
+    Wait Until Ready    ${Invoicing Date}
+    Click Element    ${Invoicing Date}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    31
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Invoicing Date}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    31
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Irregular Payment Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Yes}    ${Id Search Irregular Payment}    ${Irregular Payment}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[32][normalize-space(.)='${No}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Irregular Payment}    ${Irregular Payment}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[32][normalize-space(.)='${No}']
+
+Test Sorting Of Irregular Payment Column
+    Wait Until Ready    ${Irregular Payment}
+    Click Element    ${Irregular Payment}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    32
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Irregular Payment}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    32
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Test Searching Of Kind Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Contract kind3}    ${Id Search Kind}    ${Kind}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[33][normalize-space(.)='${Contract kind2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Kind}    ${Kind}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[33][normalize-space(.)='${Contract kind2}']
+
+Test Sorting Of Kind Column
+    Wait Until Ready    ${Kind}
+    Click Element    ${Kind}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    33
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Reverse List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Kind}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    33
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Test Searching Of Language Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Add Language 2}    ${Id Search Language}    ${Language}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[34][normalize-space(.)='${Add Language 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Language}    ${Language}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[34][normalize-space(.)='${Add Language 3}']
+
+Test Sorting Of Language Column
+    Wait Until Ready    ${Language}
+    Click Element    ${Language}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    34
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Reverse List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Language}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    34
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}

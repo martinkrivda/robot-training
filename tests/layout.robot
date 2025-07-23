@@ -63,12 +63,37 @@ Verify Sorting And Searching
     # Test Sorting Of Contract Price Column
     # Test Searching Of Contract Price Currency Column
     # Test Sorting Of Contract Price Currency Column
-    Test Searching Of Deposit Column
-    Test Sorting Of Deposit Column
-    Test Searching Of Deposit Currency Column
-    Test Sorting Of Deposit Currency Column
-    Test Searching Of Deposit Text Column
-    Test Sorting Of Deposit Text Column
+    # Test Searching Of Deposit Column
+    # Test Sorting Of Deposit Column
+    # Test Searching Of Deposit Currency Column
+    # Test Sorting Of Deposit Currency Column
+    # Test Searching Of Deposit Text Column
+    # Test Sorting Of Deposit Text Column
+    # Test Searching Of Doc.enclosed Column
+    # Test Sorting Of Doc.enclosed Column
+    # Test Searching Of Doc.req. Column
+    # Test Sorting Of Doc.req. Column
+    # Test Searching Of Doc.req.date Column
+    # Test Sorting Of Doc.req.date Column
+    # Test Searching Of Effective Date Column
+    # Test Sorting Of Effective Date Column
+    # Edit Effective Date
+    # Test Searching Of Eff.from sig Date Column
+    # Test Sorting Of Eff.from sig Date Column
+    # Test Searching Of Interest Column
+    # Test Sorting Of Interest Column
+    # Test Searching Of Internal Contact Column
+    # Test Sorting Of Internal Contact Column
+    # Test Searching Of Int.part. Column
+    # Test Sorting Of Int.part. Column
+    Test Searching Of Invoicing Date Column
+    Test Sorting Of Invoicing Date Column
+    Test Searching Of Irregular Payment Column
+    Test Sorting Of Irregular Payment Column
+    Test Searching Of Kind Column
+    Test Sorting Of Kind Column
+    Test Searching Of Language Column
+    Test Sorting Of Language Column
 
 # Set Data Back To Normal And Delete Test Contracts
 #    [Documentation]    A test case for deleting test contracts.
