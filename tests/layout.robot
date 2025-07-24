@@ -10,8 +10,8 @@ Select None And Select All
     [Documentation]    A test case for selecting none and all.
     [Setup]    Layout Setup
     Sleep    1
-    # Layout Select None
-    # Layout Select All
+#    Layout Select None
+#    Layout Select All
 
 # Select Status
 #    [Documentation]    A test case for selecting.
@@ -86,14 +86,42 @@ Verify Sorting And Searching
     # Test Sorting Of Internal Contact Column
     # Test Searching Of Int.part. Column
     # Test Sorting Of Int.part. Column
-    Test Searching Of Invoicing Date Column
-    Test Sorting Of Invoicing Date Column
-    Test Searching Of Irregular Payment Column
-    Test Sorting Of Irregular Payment Column
-    Test Searching Of Kind Column
-    Test Sorting Of Kind Column
-    Test Searching Of Language Column
-    Test Sorting Of Language Column
+    # Test Searching Of Invoicing Date Column
+    # Test Sorting Of Invoicing Date Column
+    # Test Searching Of Irregular Payment Column
+    # Test Sorting Of Irregular Payment Column
+    # Test Searching Of Kind Column
+    # Test Sorting Of Kind Column
+    # Test Searching Of Language Column
+    # Test Sorting Of Language Column
+    # Test Searching Of Lend Date Column
+    # Test Sorting Of Lend Date Column
+    # Test Searching Of Lent To Column
+    # Test Sorting Of Lent To Column
+    # Test Searching Of Maturity 1 Column
+    # Test Sorting Of Maturity 1 Column
+    # Test Searching Of Maturity 2 Column
+    # Test Sorting Of Maturity 2 Column
+    # Test Searching Of Note Column
+    # Test Sorting Of Note Column
+    # Test Searching Of Notice Period Column
+    # Test Sorting Of Notice Period Column
+    # Test Searching Of Notice Period Unit Column
+    # Test Sorting Of Notice Period Unit Column
+    # Test Searching Of Notice Required Column
+    # Test Sorting Of Notice Required Column
+    # Test Searching Of Order nr. Column
+    # Test Sorting Of Order nr. Column
+    # Test Searching Of Org.Unit Column
+    # Test Sorting Of Org.Unit Column
+    Test Searching Of Own Account Column
+    Test Sorting Of Own Account Column
+    Test Searching Of Postponement Condition Column
+    Test Sorting Of Postponement Condition Column
+    Test Searching Of Partner VAT ID Column
+    Test Sorting Of Partner VAT ID Column
+    Test Searching Of Role Column
+    Test Sorting Of Role Column
 
 # Set Data Back To Normal And Delete Test Contracts
 #    [Documentation]    A test case for deleting test contracts.
