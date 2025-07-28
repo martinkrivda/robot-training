@@ -140,6 +140,50 @@ Verify Sorting And Searching
     Test Sorting Of To Pay Column
     Test Searching Of To Pay Currency Column
     Test Sorting Of To Pay Currency Column
+    Test Searching Of To Pay Interval Column
+    Test Sorting Of To Pay Interval Column
+    Test Searching Of Valid Since Column
+    Test Sorting Of Valid Since Column
+    Test Searching Of Valid Until Column
+    Test Sorting Of Valid Until Column
+    Test Searching Of VAT ID Column
+    Test Sorting Of VAT ID Column
+    Test Searching Of Amount Per Year Column
+    Test Sorting Of Amount Per Year Column
+    Test Searching Of Amount Per Year Currency Column
+    Test Sorting Of Amount Per Year Currency Column
+    Test Searching Of Item Column
+    Test Sorting Of Item Column
+    Test Searching Of Quantity Column
+    Test Sorting Of Quantity Column
+    Test Searching Of Unit Column
+    Test Sorting Of Unit Column
+    Test Searching Of Unit Price Column
+    Test Sorting Of Unit Price Column
+    Test Searching Of Price Column
+    Test Sorting Of Price Column
+    Test Searching Of Currency Column
+    Test Sorting Of Currency Column
+    Test Searching Of Location Column
+    Test Sorting Of Location Column
+    Test Searching Of Delivery Date Column
+    Test Sorting Of Delivery Date Column
+    Test Searching Of Delivery To Column
+    Test Sorting Of Delivery To Column
+    Test Searching Of Discount Column
+    Test Sorting Of Discount Column
+    Test Searching Of Maturity Column
+    Test Sorting Of Maturity Column
+    Test Searching Of VAT Rate Column
+    Test Sorting Of VAT Rate Column
+    Test Searching Of Item Type Column
+    Test Sorting Of Item Type Column
+    Test Searching Of VAT Sign Column
+    Test Sorting Of VAT Sign Column
+    Test Searching Of GDPR Column
+    Test Sorting Of GDPR Column
+    Test Searching Of Framework Contract Column
+    Test Sorting Of Framework Contract Column
 
 # Set Data Back To Normal And Delete Test Contracts
 #    [Documentation]    A test case for deleting test contracts.

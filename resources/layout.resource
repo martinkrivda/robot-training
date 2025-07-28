@@ -462,6 +462,10 @@ ${Id Search Accountant}                             s_text_accountant
 ${Id Search Appl. Law}                              s_text_appl_law
 ${Id Search Bonus}                                  s_decimal_bonus
 ${Add Bonus}                                        4,00
+${Add Bonus 2}                                      4.00
+${Add Bonus 3}                                      3,00
+${Add Bonus 4}                                      3.00
+${Add Bonus 5}                                      5,00
 ${Id Search Confidentiality}                        s_text_conf
 ${Id Search Contact Person}                         s_text_contact_person
 ${Contract Price 2}                                 15 510,00
@@ -474,6 +478,8 @@ ${Id Search Deposit Text}                           s_text_deposit_text
 ${Id Search Doc.enclosed}                           s_yesno_doc_enclosed
 ${Search Date 1}                                    09.09.2025
 ${Search Date 2}                                    06.08.2025
+${Search Date 3}                                    29.08.2025
+${Search Date 4}                                    27.07.2025
 ${Id Search Doc.req.}                               s_yesno_doc_required
 ${Id Search Doc.req.date From}                      s_datefrom_doc_required_date
 ${Id Search Doc.req.date To}                        s_dateto_doc_required_date
@@ -488,6 +494,7 @@ ${Id Search Internal Contact}                       s_text_internal_contact
 ${Id Search Int.part.}                              s_text_intpart
 ${Id Search Invoicing Date}                         s_text_invoicing_date
 ${Search Invoicing Date}                            4 -
+${Search Invoicing Date 2}                          3 -
 ${Id Search Irregular Payment}                      s_yesno_irregular_payment
 ${Id Search Kind}                                   s_text_kind
 ${Id Search Language}                               s_text_lang
@@ -500,6 +507,7 @@ ${Id Search Note}                                   s_text_note
 ${Id Search Notice Period}                          s_text_notice_period
 ${Id Search Notice Period Unit}                     s_text_not_per_unt
 ${Search Notice Period}                             měsíc
+${Search Notice Period 2}                           den
 ${Id Search Notice Required}                        s_yesno_notice_required
 ${Id Search Order nr.}                              s_text_order_nr
 ${Id Search Org.Unit}                               s_text_org_unit
@@ -526,6 +534,34 @@ ${Id Search Tender}                                 s_yesno_tender
 ${Id Search Termination Method}                     s_text_termination_method
 ${Id Search To Pay}                                 s_decimal_topay
 ${Id Search To Pay Currency}                        s_text_topay_currency
+${Id Search To Pay Interval}                        s_text_topay_interval
+${Id Search Valid Since From}                       s_datefrom_valid_since
+${Id Search Valid Since To}                         s_dateto_valid_since
+${Id Search Valid Until From}                       s_datefrom_valid_until
+${Id Search Valid Until To}                         s_dateto_valid_until
+${Id Search VAT ID}                                 s_text_vat_id
+${Id Search Amount Per Year}                        s_decimal_year_amount
+${Id Search Amount Per Year Currency}               s_text_year_amount_currency
+${Id Search Item}                                   s_text_item
+${Id Search Quantity}                               s_text_quantity
+${Id Search Unit}                                   s_text_unit
+${Search Unit Price}                                3 102,00
+${Search Unit Price 2}                              1 212,00
+${Id Search Unit Price}                             s_decimal_unit_price
+${Id Search Price}                                  s_decimal_price
+${Id Search Currency}                               s_text_currency
+${Id Search Location}                               s_text_location
+${Id Search Delivery Date From}                     s_datefrom_delivery
+${Id Search Delivery Date To}                       s_dateto_delivery
+${Id Search Delivery To From}                       s_datefrom_delivery_to
+${Id Search Delivery To}                            s_dateto_delivery_to
+${Id Search Discount}                               s_text_discount
+${Id Search Maturity}                               s_text_maturity
+${Id Search VAT Rate}                               s_decimal_vat_rate
+${Id Search Item Type}                              s_text_item_type
+${Id Search VAT Sign}                               s_text_vatsign
+${Id Search GDPR}                                   s_yesno_gdpr
+${Id Search Framework Contract}                     s_yesno_framework_contract
 
 
 *** Keywords ***
@@ -574,6 +610,7 @@ Delete Contracts
     Click Element    ${Delete Contract Button}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
+    Wait Until Element Is Not Visible    ${Delete Button}
 
 Delete Contract
     Wait Until Ready    ${Delete Contract Button}
@@ -601,6 +638,7 @@ Create Contract Test 4
     Wait Until Ready    ${Id Add Termination Method}
     Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
     Click Button    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Id Add Termination Method}
     Wait Until Element Is Not Visible    ${Please Wait}
 
 Delete Test Contracts
@@ -645,6 +683,7 @@ Layout Select None
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select None Button}
     Click Element    ${Select None Button}
+    Wait Until Ready    ${Close Button}
     Click Element    ${Close Button}
     Wait Until Element Is Not Visible    ${Select None Button}
     Wait Until Ready    ${Layout Button}
@@ -656,6 +695,7 @@ Layout Select All
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select All Button}
     Click Element    ${Select All Button}
+    Wait Until Ready    ${Close Button}
     Click Element    ${Close Button}
     Wait Until Element Is Not Visible    ${Select All Button}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
@@ -887,7 +927,6 @@ Select Fields
     Click Element    ${To Pay Button}
     Click Element    ${To Pay Currency Button}
     Click Element    ${To Pay Interval Button}
-    Click Element    ${Valid Button}
     Click Element    ${Valid Since Button}
     Click Element    ${Valid Until Button}
     Click Element    ${VAT ID Button}
@@ -1161,6 +1200,7 @@ Create Contract Test 1
     Select From List By Label    ${Id Add GDPR}    ${Yes}
     Select From List By Label    ${Id Add Framework Contract}    ${Yes}
     Click Element    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Id Add Framework Contract}
 
 Create Contract Item 1
     Wait Until Element Is Not Visible    ${Add Maturity 1}
@@ -1263,6 +1303,7 @@ Create Contract Test 2
     Select From List By Label    ${Id Add GDPR}    ${Yes}
     Select From List By Label    ${Id Add Framework Contract}    ${Yes}
     Click Element    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Id Add Framework Contract}
 
 Create Contract Item 2
     Wait Until Element Is Not Visible    ${Add Maturity 1}
@@ -1364,6 +1405,7 @@ Create Contract Test 3
     Select From List By Label    ${Id Add GDPR}    ${No}
     Select From List By Label    ${Id Add Framework Contract}    ${No}
     Click Element    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Id Add Framework Contract}
 
 Create Contract Item 3
     Wait Until Element Is Not Visible    ${Add Maturity 1}
@@ -2026,6 +2068,7 @@ Test Searching Of Status Column
 Test Searching Of Partner Number Column
     Apply Filter    ${Search Number Parner}    ${Id Search Number Parner}    ${Number Partner}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Number 1}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Number 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Number Parner}    ${Number Partner}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Number 1}']
@@ -2413,6 +2456,8 @@ Test Searching Of Bonus Column
     Apply Filter    ${Number 3}    ${Id Search Bonus}    ${Bonus}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[15][normalize-space(.)='${Add Bonus}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[15][normalize-space(.)='${Add Bonus 5}']
 
     Apply Filter    ${EMPTY}    ${Id Search Bonus}    ${Bonus}
     Element Should Be Visible
@@ -2440,6 +2485,8 @@ Test Searching Of Confidentiality Column
     Apply Filter    ${Add Confidentiality 3}    ${Id Search Confidentiality}    ${Confidentiality}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[16][normalize-space(.)='${Add Confidentiality 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[16][normalize-space(.)='${Add Confidentiality 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Confidentiality}    ${Confidentiality}
     Element Should Be Visible
@@ -2469,6 +2516,8 @@ Test Searching Of Contact Person Column
     Apply Filter    ${Add Contact person 2}    ${Id Search Contact Person}    ${Contact person}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[17][normalize-space(.)='${Add Contact person 1}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[17][normalize-space(.)='${Add Contact person 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Contact Person}    ${Contact Person}
     Element Should Be Visible
@@ -2496,12 +2545,14 @@ Test Searching Of Contract Price Column
     Apply Filter    ${Contract Price 2}    ${Id Search Contract Price}    ${Contract Price}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[18][normalize-space(.)='${Contract Price 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[18][normalize-space(.)='${Contract Price 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Contract Price}    ${Contract Price}
     Element Should Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[18][normalize-space(.)='${Contract Price 3}']
 
-Get Contract Price Values From Column
+Get Price Values From Column
     [Arguments]    ${column_index}
     ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
     ${prices}=    Create List
@@ -2518,7 +2569,7 @@ Test Sorting Of Contract Price Column
     Wait Until Ready    ${Contract Price}
     Click Element    ${Contract Price}
     Sleep    1s
-    ${desc_prices}=    Get Contract Price Values From Column    18
+    ${desc_prices}=    Get Price Values From Column    18
     ${sorted_desc}=    Copy List    ${desc_prices}
     Sort List    ${sorted_desc}
     Reverse List    ${sorted_desc}
@@ -2526,7 +2577,7 @@ Test Sorting Of Contract Price Column
 
     Click Element    ${Contract Price}
     Sleep    1s
-    ${asc_prices}=    Get Contract Price Values From Column    18
+    ${asc_prices}=    Get Price Values From Column    18
     ${sorted_asc}=    Copy List    ${asc_prices}
     Sort List    ${sorted_asc}
     Should Be Equal    ${asc_prices}    ${sorted_asc}
@@ -2539,6 +2590,8 @@ Test Searching Of Contract Price Currency Column
     ...    ${Contract Price Currency}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[19][normalize-space(.)='${Add Total Contract Price Period 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[19][normalize-space(.)='${Add Total Contract Price Period 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Contract Price Currency}    ${Contract Price Currency}
     Element Should Be Visible
@@ -2567,6 +2620,8 @@ Test Searching Of Deposit Column
     Apply Filter    ${Number 1}    ${Id Search Deposit}    ${Deposit}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[20][normalize-space(.)='${Add Bonus}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[20][normalize-space(.)='${Add Bonus 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Deposit}    ${Deposit}
     Element Should Be Visible
@@ -2597,6 +2652,8 @@ Test Searching Of Deposit Currency Column
     ...    ${Deposit Currency}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[21][normalize-space(.)='${Add Total Contract Price Period 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[21][normalize-space(.)='${Add Total Contract Price Period 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Deposit Currency}    ${Deposit Currency}
     Element Should Be Visible
@@ -2624,6 +2681,8 @@ Test Searching Of Deposit Text Column
     Apply Filter    ${Name 3}    ${Id Search Deposit Text}    ${Deposit Text}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[22][normalize-space(.)='${Name 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[22][normalize-space(.)='${Name 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Deposit Text}    ${Deposit Text}
     Element Should Be Visible
@@ -2651,6 +2710,7 @@ Test Searching Of Doc.enclosed Column
     Scroll Element Into View    xpath=//table[@id='p_all_tbl']//tr/td[26][normalize-space(.)='${Search Date 1}']
     Apply Filter    ${Yes}    ${Id Search Doc.enclosed}    ${Doc.enclosed}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[23][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[23][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Doc.enclosed}    ${Doc.enclosed}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[23][normalize-space(.)='${No}']
@@ -2676,6 +2736,7 @@ Test Searching Of Doc.req. Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Apply Filter    ${Yes}    ${Id Search Doc.req.}    ${Doc.req.}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[24][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[24][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Doc.req.}    ${Doc.req.}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[24][normalize-space(.)='${No}']
@@ -2706,6 +2767,7 @@ Test Searching Of Doc.req.date Column
     ...    ${Id Search Doc.req.date To}
     ...    ${Doc.req.date}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[25][normalize-space(.)='${Search Date 2}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[25][normalize-space(.)='${Search Date 4}']
 
     Apply Date Filter
     ...    ${EMPTY}
@@ -2762,6 +2824,7 @@ Test Searching Of Effective Date Column
     ...    ${Id Search Effective Date To}
     ...    ${Effective Date}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[26][normalize-space(.)='${Search Date 1}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[26][normalize-space(.)='${Search Date 3}']
 
     Apply Date Filter
     ...    ${EMPTY}
@@ -2796,6 +2859,7 @@ Test Searching Of Eff.from sig Date Column
     ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 3}']
     Apply Filter    ${Yes}    ${Id Search Eff.from sig Date}    ${Eff.from sig Date}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[27][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[27][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Eff.from sig Date}    ${Eff.from sig Date}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[27][normalize-space(.)='${No}']
@@ -2833,6 +2897,8 @@ Test Searching Of Interest Column
     Apply Filter    ${Number 1}    ${Id Search Interest}    ${Interest}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[28][normalize-space(.)='${Add Bonus}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[28][normalize-space(.)='${Add Bonus 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Interest}    ${Interest}
     Element Should Be Visible
@@ -2860,6 +2926,8 @@ Test Searching Of Internal Contact Column
     Apply Filter    ${Number 1}    ${Id Search Internal Contact}    ${Internal Contact}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[29][normalize-space(.)='${Number 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[29][normalize-space(.)='${Number 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Internal Contact}    ${Internal Contact}
     Element Should Be Visible
@@ -2887,6 +2955,8 @@ Test Searching Of Int.part. Column
     Apply Filter    ${Add Internal Contract Partner 3}    ${Id Search Int.part.}    ${Int.part.}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[30][normalize-space(.)='${Add Internal Contract Partner 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Int.part.}    ${Int.part.}
     Element Should Be Visible
@@ -2916,6 +2986,8 @@ Test Searching Of Invoicing Date Column
     Apply Filter    ${Number 1}    ${Id Search Invoicing Date}    ${Invoicing Date}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[31][normalize-space(.)='${Search Invoicing Date}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[31][normalize-space(.)='${Search Invoicing Date 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Invoicing Date}    ${Invoicing Date}
     Element Should Be Visible
@@ -2942,6 +3014,7 @@ Test Searching Of Irregular Payment Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Apply Filter    ${Yes}    ${Id Search Irregular Payment}    ${Irregular Payment}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[32][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[32][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Irregular Payment}    ${Irregular Payment}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[32][normalize-space(.)='${No}']
@@ -2968,6 +3041,8 @@ Test Searching Of Kind Column
     Apply Filter    ${Contract kind3}    ${Id Search Kind}    ${Kind}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[33][normalize-space(.)='${Contract kind2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[33][normalize-space(.)='${Contract kind3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Kind}    ${Kind}
     Element Should Be Visible
@@ -2995,6 +3070,8 @@ Test Searching Of Language Column
     Apply Filter    ${Add Language 2}    ${Id Search Language}    ${Language}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[34][normalize-space(.)='${Add Language 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[34][normalize-space(.)='${Add Language 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Language}    ${Language}
     Element Should Be Visible
@@ -3028,6 +3105,7 @@ Test Searching Of Lend Date Column
     ...    ${Id Search Lend Date Date To}
     ...    ${Lend Date}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[35][normalize-space(.)='${Search Date 2}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[35][normalize-space(.)='${Search Date 4}']
 
     Apply Date Filter
     ...    ${EMPTY}
@@ -3061,6 +3139,8 @@ Test Searching Of Lent To Column
     Apply Filter    ${Add Contact person 2}    ${Id Search Lent To}    ${Lent To}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[36][normalize-space(.)='${Add Contact person 1}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[36][normalize-space(.)='${Add Contact person 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Lent To}    ${Lent To}
     Element Should Be Visible
@@ -3088,6 +3168,8 @@ Test Searching Of Maturity 1 Column
     Apply Filter    ${Add Number 2}    ${Id Search Maturity 1}    ${Maturity 1}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[37][normalize-space(.)='${Add Number 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[37][normalize-space(.)='${Add Number 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Maturity 1}    ${Maturity 1}
     Element Should Be Visible
@@ -3115,6 +3197,8 @@ Test Searching Of Maturity 2 Column
     Apply Filter    ${Number 1}    ${Id Search Maturity 2}    ${Maturity 2}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[38][normalize-space(.)='${Number 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[38][normalize-space(.)='${Number 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Maturity 2}    ${Maturity 2}
     Element Should Be Visible
@@ -3142,6 +3226,8 @@ Test Searching Of Note Column
     Apply Filter    ${Name 3}    ${Id Search Note}    ${Note}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[39][normalize-space(.)='${Name 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[39][normalize-space(.)='${Name 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Note}    ${Note}
     Element Should Be Visible
@@ -3171,6 +3257,8 @@ Test Searching Of Notice Period Column
     Apply Filter    ${Number 1}    ${Id Search Notice Period}    ${Notice Period}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[40][normalize-space(.)='${Number 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[40][normalize-space(.)='${Number 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Notice Period}    ${Notice Period}
     Element Should Be Visible
@@ -3198,6 +3286,8 @@ Test Searching Of Notice Period Unit Column
     Apply Filter    ${Add Notice Period 1}    ${Id Search Notice Period Unit}    ${Notice Period Unit}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[41][normalize-space(.)='${Search Notice Period}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[41][normalize-space(.)='${Search Notice Period 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Notice Period Unit}    ${Notice Period Unit}
     Element Should Be Visible
@@ -3224,6 +3314,7 @@ Test Searching Of Notice Required Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Apply Filter    ${Yes}    ${Id Search Notice Required}    ${Notice Required}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[42][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[42][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Notice Required}    ${Notice Required}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[42][normalize-space(.)='${No}']
@@ -3250,6 +3341,8 @@ Test Searching Of Order nr. Column
     Apply Filter    ${Number 1}    ${Id Search Order nr.}    ${Order nr.}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[43][normalize-space(.)='${Number 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[43][normalize-space(.)='${Number 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Order nr.}    ${Order nr.}
     Element Should Be Visible
@@ -3277,6 +3370,8 @@ Test Searching Of Org.Unit Column
     Apply Filter    ${Add Organisational unit 2}    ${Id Search Org.Unit}    ${Org.Unit}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[44][normalize-space(.)='${Add Organisational unit 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[44][normalize-space(.)='${Add Organisational unit 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Org.Unit}    ${Org.Unit}
     Element Should Be Visible
@@ -3306,6 +3401,8 @@ Test Searching Of Own Account Column
     Apply Filter    ${Add Number 2}    ${Id Search Own account}    ${Own account}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[45][normalize-space(.)='${Add Number 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[45][normalize-space(.)='${Add Number 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Own account}    ${Own account}
     Element Should Be Visible
@@ -3333,6 +3430,8 @@ Test Searching Of Postponement Condition Column
     Apply Filter    ${Name 3}    ${Id Search Postponement Condition}    ${Postponement Condition}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[46][normalize-space(.)='${Name 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[46][normalize-space(.)='${Name 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Postponement Condition}    ${Postponement Condition}
     Element Should Be Visible
@@ -3360,6 +3459,8 @@ Test Searching Of Partner VAT ID Column
     Apply Filter    ${Add Partner VAT ID 1}    ${Id Search Partner VAT ID}    ${Partner VAT ID}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[47][normalize-space(.)='${Add Partner VAT ID 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[47][normalize-space(.)='${Add Partner VAT ID 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Partner VAT ID}    ${Partner VAT ID}
     Element Should Be Visible
@@ -3387,6 +3488,8 @@ Test Searching Of Role Column
     Apply Filter    ${Search Role Partner}    ${Id Search Role}    ${Role}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[48][normalize-space(.)='${Search Role Partner 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[48][normalize-space(.)='${Search Role Partner}']
 
     Apply Filter    ${EMPTY}    ${Id Search Role}    ${Role}
     Element Should Be Visible
@@ -3415,6 +3518,7 @@ Test Searching Of Service Contract Column
     ...    xpath=//table[@id='p_all_tbl']//tr/td[51][normalize-space(.)='${Add Original Storage 1}']
     Apply Filter    ${Yes}    ${Id Search Service Contract}    ${Service Contract}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[49][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[49][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Service Contract}    ${Service Contract}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[49][normalize-space(.)='${No}']
@@ -3441,6 +3545,8 @@ Test Searching Of Text Status Column
     Apply Filter    ${Add Contract Status 2}    ${Id Search Status 2}    ${Status}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[50][normalize-space(.)='${Add Contract Status 1}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[50][normalize-space(.)='${Add Contract Status 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Status 2}    ${Status}
     Element Should Be Visible
@@ -3473,6 +3579,8 @@ Test Searching Of Original Storage Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[51][normalize-space(.)='${Add Original Storage 1}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[51][normalize-space(.)='${Add Original Storage 2}']
 
     Wait Until Ready    ${Id Select Original Storage}
     Click Element    ${Id Select Original Storage}
@@ -3506,6 +3614,7 @@ Test Searching Of Subsidy Column
     ...    xpath=//table[@id='p_all_tbl']//tr/td[56][normalize-space(.)='${Add Bonus}']
     Apply Filter    ${Yes}    ${Id Search Subsidy}    ${Subsidy}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[52][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[52][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Subsidy}    ${Subsidy}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[52][normalize-space(.)='${No}']
@@ -3531,6 +3640,7 @@ Test Searching Of Supp.payment Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Apply Filter    ${Yes}    ${Id Search Supp.payment}    ${Supp.payment}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[53][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[53][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Supp.payment}    ${Supp.payment}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[53][normalize-space(.)='${No}']
@@ -3556,6 +3666,7 @@ Test Searching Of Tender Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Apply Filter    ${Yes}    ${Id Search Tender}    ${Tender}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[54][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[54][normalize-space(.)='${Yes}']
 
     Apply Filter    ${EMPTY}    ${Id Search Tender}    ${Tender}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[54][normalize-space(.)='${No}']
@@ -3582,6 +3693,8 @@ Test Searching Of Termination Method Column
     Apply Filter    ${Add Termination Method3}    ${Id Search Termination Method}    ${Termination Method}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[55][normalize-space(.)='${Add Termination Method2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[55][normalize-space(.)='${Add Termination Method3}']
 
     Apply Filter    ${EMPTY}    ${Id Search Termination Method}    ${Termination Method}
     Element Should Be Visible
@@ -3609,6 +3722,8 @@ Test Searching Of To Pay Column
     Apply Filter    ${Number 1}    ${Id Search To Pay}    ${To Pay}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[56][normalize-space(.)='${Add Bonus}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[56][normalize-space(.)='${Add Bonus 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search To Pay}    ${To Pay}
     Element Should Be Visible
@@ -3634,23 +3749,25 @@ Test Sorting Of To Pay Column
 Test Searching Of To Pay Currency Column
     Wait Until Element Is Not Visible    ${Please Wait}
     Scroll Element Into View
-    ...    xpath=//table[@id='p_all_tbl']//tr/td[60][normalize-space(.)='${Search Date 2}']
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[60][normalize-space(.)='${Search Date 1}']
     Apply Filter
     ...    ${Add Total Contract Price Period 3}
     ...    ${Id Search To Pay Currency}
     ...    ${To Pay Currency}
     Element Should Not Be Visible
-    ...    xpath=//table[@id='p_all_tbl']//tr/td[21][normalize-space(.)='${Add Total Contract Price Period 2}']
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[57][normalize-space(.)='${Add Total Contract Price Period 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[57][normalize-space(.)='${Add Total Contract Price Period 3}']
 
     Apply Filter    ${EMPTY}    ${Id Search To Pay Currency}    ${To Pay Currency}
     Element Should Be Visible
-    ...    xpath=//table[@id='p_all_tbl']//tr/td[21][normalize-space(.)='${Add Total Contract Price Period 2}']
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[57][normalize-space(.)='${Add Total Contract Price Period 2}']
 
 Test Sorting Of To Pay Currency Column
     Wait Until Ready    ${To Pay Currency}
     Click Element    ${To Pay Currency}
     Sleep    1s
-    ${desc_names}=    Get Column Text Values    21
+    ${desc_names}=    Get Column Text Values    57
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
     Reverse List    ${expected_desc}
@@ -3658,7 +3775,698 @@ Test Sorting Of To Pay Currency Column
 
     Click Element    ${To Pay Currency}
     Sleep    1s
-    ${asc_names}=    Get Column Text Values    21
+    ${asc_names}=    Get Column Text Values    57
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
     Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of To Pay Interval Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Add Number 2}    ${Id Search To Pay Interval}    ${To Pay Interval}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[58][normalize-space(.)='${Add Number 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[58][normalize-space(.)='${Add Number 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search To Pay Interval}    ${To Pay Interval}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[58][normalize-space(.)='${Add Number 3}']
+
+Test Sorting Of To Pay Interval Column
+    Wait Until Ready    ${To Pay Interval}
+    Click Element    ${To Pay Interval}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    58
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${To Pay Interval}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    58
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Valid Since Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Date Filter
+    ...    ${Add Date 1}
+    ...    ${Add Date 2}
+    ...    ${Id Search Valid Since From}
+    ...    ${Id Search Valid Since To}
+    ...    ${Valid Since}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[59][normalize-space(.)='${Search Date 2}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[59][normalize-space(.)='${Search Date 4}']
+
+    Apply Date Filter
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    ${Id Search Valid Since From}
+    ...    ${Id Search Valid Since To}
+    ...    ${Valid Since}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[59][normalize-space(.)='${Search Date 2}']
+
+Test Sorting Of Valid Since Column
+    Wait Until Ready    ${Valid Since}
+    Click Element    ${Valid Since}
+    Sleep    1s
+    ${asc_texts}=    Get Date Column Values From Column    59
+    ${asc_dates}=    Convert To Dates    @{asc_texts}
+    ${sorted_asc}=    Copy List    ${asc_dates}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_dates}    ${sorted_asc}
+
+    Click Element    ${Valid Since}
+    Sleep    1s
+    ${desc_texts}=    Get Date Column Values From Column    59
+    ${desc_dates}=    Convert To Dates    @{desc_texts}
+    ${sorted_desc}=    Copy List    ${desc_dates}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_dates}    ${sorted_desc}
+
+Test Searching Of Valid Until Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Date Filter
+    ...    ${Add Valid Date 1}
+    ...    ${Add Valid Date 2}
+    ...    ${Id Search Valid Until From}
+    ...    ${Id Search Valid Until To}
+    ...    ${Valid Until}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[60][normalize-space(.)='${Search Date 1}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[60][normalize-space(.)='${Search Date 3}']
+
+    Apply Date Filter
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    ${Id Search Valid Until From}
+    ...    ${Id Search Valid Until To}
+    ...    ${Valid Until}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[60][normalize-space(.)='${Search Date 1}']
+
+Test Sorting Of Valid Until Column
+    Wait Until Ready    ${Valid Until}
+    Click Element    ${Valid Until}
+    Sleep    1s
+    ${asc_texts}=    Get Date Column Values From Column    60
+    ${asc_dates}=    Convert To Dates    @{asc_texts}
+    ${sorted_asc}=    Copy List    ${asc_dates}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_dates}    ${sorted_asc}
+
+    Click Element    ${Valid Until}
+    Sleep    1s
+    ${desc_texts}=    Get Date Column Values From Column    60
+    ${desc_dates}=    Convert To Dates    @{desc_texts}
+    ${sorted_desc}=    Copy List    ${desc_dates}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_dates}    ${sorted_desc}
+
+Test Searching Of VAT ID Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[64][normalize-space(.)='${Add Commodity/service 2}']
+    Apply Filter    ${Add Number 2}    ${Id Search VAT ID}    ${VAT ID}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[61][normalize-space(.)='${Add Number 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[61][normalize-space(.)='${Add Number 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search VAT ID}    ${VAT ID}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[61][normalize-space(.)='${Add Number 3}']
+
+Test Sorting Of VAT ID Column
+    Wait Until Ready    ${VAT ID}
+    Click Element    ${VAT ID}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    61
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${VAT ID}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    61
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Amount Per Year Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Number 1}    ${Id Search Amount Per Year}    ${Amount Per Year}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[62][normalize-space(.)='${Add Bonus}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[62][normalize-space(.)='${Add Bonus 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Amount Per Year}    ${Amount Per Year}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[62][normalize-space(.)='${Add Bonus}']
+
+Test Sorting Of Amount Per Year Column
+    Wait Until Ready    ${Amount Per Year}
+    Click Element    ${Amount Per Year}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    62
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Amount Per Year}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    62
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Amount Per Year Currency Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Total Contract Price Period 3}
+    ...    ${Id Search Amount Per Year Currency}
+    ...    ${Amount Per Year Currency}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[63][normalize-space(.)='${Add Total Contract Price Period 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[63][normalize-space(.)='${Add Total Contract Price Period 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Amount Per Year Currency}    ${Amount Per Year Currency}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[63][normalize-space(.)='${Add Total Contract Price Period 2}']
+
+Test Sorting Of Amount Per Year Currency Column
+    Wait Until Ready    ${Amount Per Year Currency}
+    Click Element    ${Amount Per Year Currency}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    63
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Amount Per Year Currency}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    63
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Item Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Commodity/service 2}
+    ...    ${Id Search Item}
+    ...    ${Item}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[64][normalize-space(.)='${Add Commodity/service 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[64][normalize-space(.)='${Add Commodity/service 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Item}    ${Item}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[64][normalize-space(.)='${Add Commodity/service 3}']
+
+Test Sorting Of Item Column
+    Wait Until Ready    ${Item}
+    Click Element    ${Item}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    64
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Item}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    64
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Quantity Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[68][normalize-space(.)='${Contract Price 2}']
+    Apply Filter    ${Number 1}    ${Id Search Quantity}    ${Quantity}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[65][normalize-space(.)='${Number 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[65][normalize-space(.)='${Number 1}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Quantity}    ${Quantity}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[65][normalize-space(.)='${Number 2}']
+
+Test Sorting Of Quantity Column
+    Wait Until Ready    ${Quantity}
+    Click Element    ${Quantity}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    65
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Quantity}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    65
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Unit Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Unit 1}
+    ...    ${Id Search Unit}
+    ...    ${Unit}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[66][normalize-space(.)='${Add Unit 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[66][normalize-space(.)='${Add Unit 1}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Unit}    ${Unit}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[66][normalize-space(.)='${Add Unit 2}']
+
+Test Sorting Of Unit Column
+    Wait Until Ready    ${Unit}
+    Click Element    ${Unit}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    66
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Unit}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    66
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Unit Price Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Maturity Number 2}    ${Id Search Unit Price}    ${Unit Price}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[67][normalize-space(.)='${Search Unit Price}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[67][normalize-space(.)='${Search Unit Price 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Unit Price}    ${Unit Price}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[67][normalize-space(.)='${Search Unit Price}']
+
+Test Sorting Of Unit Price Column
+    Wait Until Ready    ${Unit Price}
+    Click Element    ${Unit Price}
+    Sleep    1s
+    ${desc_prices}=    Get Price Values From Column    67
+    ${sorted_desc}=    Copy List    ${desc_prices}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_prices}    ${sorted_desc}
+
+    Click Element    ${Unit Price}
+    Sleep    1s
+    ${asc_prices}=    Get Price Values From Column    67
+    ${sorted_asc}=    Copy List    ${asc_prices}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_prices}    ${sorted_asc}
+
+Test Searching Of Price Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Contract Price 3}    ${Id Search Price}    ${Price}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[68][normalize-space(.)='${Contract Price 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[68][normalize-space(.)='${Contract Price 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Price}    ${Price}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[68][normalize-space(.)='${Contract Price 2}']
+
+Test Sorting Of Price Column
+    Wait Until Ready    ${Price}
+    Click Element    ${Price}
+    Sleep    1s
+    ${desc_prices}=    Get Price Values From Column    68
+    ${sorted_desc}=    Copy List    ${desc_prices}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_prices}    ${sorted_desc}
+
+    Click Element    ${Price}
+    Sleep    1s
+    ${asc_prices}=    Get Price Values From Column    68
+    ${sorted_asc}=    Copy List    ${asc_prices}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_prices}    ${sorted_asc}
+
+Test Searching Of Currency Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[73][normalize-space(.)='${Add Bonus 2}']
+    Apply Filter
+    ...    ${Add Total Contract Price Period 3}    ${Id Search Currency}    ${Currency}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[69][normalize-space(.)='${Add Total Contract Price Period 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[69][normalize-space(.)='${Add Total Contract Price Period 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Currency}    ${Currency}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[69][normalize-space(.)='${Add Total Contract Price Period 2}']
+
+Test Sorting Of Currency Column
+    Wait Until Ready    ${Currency}
+    Click Element    ${Currency}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    69
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Currency}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    69
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Location Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Location 1}    ${Id Search Location}    ${Location}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[70][normalize-space(.)='${Add Location 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[70][normalize-space(.)='${Add Location 1}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Location}    ${Location}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[70][normalize-space(.)='${Add Location 3}']
+
+Test Sorting Of Location Column
+    Wait Until Ready    ${Location}
+    Click Element    ${Location}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    70
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Location}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    70
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Delivery Date Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Date Filter
+    ...    ${Add Date 1}
+    ...    ${Add Date 2}
+    ...    ${Id Search Delivery Date From}
+    ...    ${Id Search Delivery Date To}
+    ...    ${Delivery Date}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[71][normalize-space(.)='${Search Date 2}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[71][normalize-space(.)='${Search Date 4}']
+
+    Apply Date Filter
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    ${Id Search Delivery Date From}
+    ...    ${Id Search Delivery Date To}
+    ...    ${Delivery Date}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[71][normalize-space(.)='${Search Date 2}']
+
+Test Sorting Of Delivery Date Column
+    Wait Until Ready    ${Delivery Date}
+    Click Element    ${Delivery Date}
+    Sleep    1s
+    ${asc_texts}=    Get Date Column Values From Column    71
+    ${asc_dates}=    Convert To Dates    @{asc_texts}
+    ${sorted_asc}=    Copy List    ${asc_dates}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_dates}    ${sorted_asc}
+
+    Click Element    ${Delivery Date}
+    Sleep    1s
+    ${desc_texts}=    Get Date Column Values From Column    71
+    ${desc_dates}=    Convert To Dates    @{desc_texts}
+    ${sorted_desc}=    Copy List    ${desc_dates}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_dates}    ${sorted_desc}
+
+Test Searching Of Delivery To Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Date Filter
+    ...    ${Add Valid Date 1}
+    ...    ${Add Valid Date 2}
+    ...    ${Id Search Delivery To From}
+    ...    ${Id Search Delivery To}
+    ...    ${Delivery To}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[72][normalize-space(.)='${Search Date 1}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[72][normalize-space(.)='${Search Date 3}']
+
+    Apply Date Filter
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    ${Id Search Delivery To From}
+    ...    ${Id Search Delivery To}
+    ...    ${Delivery To}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[72][normalize-space(.)='${Search Date 1}']
+
+Test Sorting Of Delivery To Column
+    Wait Until Ready    ${Delivery To}
+    Click Element    ${Delivery To}
+    Sleep    1s
+    ${asc_texts}=    Get Date Column Values From Column    72
+    ${asc_dates}=    Convert To Dates    @{asc_texts}
+    ${sorted_asc}=    Copy List    ${asc_dates}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_dates}    ${sorted_asc}
+
+    Click Element    ${Delivery To}
+    Sleep    1s
+    ${desc_texts}=    Get Date Column Values From Column    72
+    ${desc_dates}=    Convert To Dates    @{desc_texts}
+    ${sorted_desc}=    Copy List    ${desc_dates}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_dates}    ${sorted_desc}
+
+Test Searching Of Discount Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Number 1}    ${Id Search Discount}    ${Discount}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[73][normalize-space(.)='${Add Bonus 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[73][normalize-space(.)='${Add Bonus 4}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Discount}    ${Discount}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[73][normalize-space(.)='${Add Bonus 2}']
+
+Test Sorting Of Discount Column
+    Wait Until Ready    ${Discount}
+    Click Element    ${Discount}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    73
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Discount}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    73
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Maturity Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[76][normalize-space(.)='${Add Item type 1}']
+    Apply Filter    ${Maturity Number 2}    ${Id Search Maturity}    ${Maturity}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[74][normalize-space(.)='${Maturity Number 1}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[74][normalize-space(.)='${Maturity Number 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Maturity}    ${Maturity}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[74][normalize-space(.)='${Maturity Number 1}']
+
+Test Sorting Of Maturity Column
+    Wait Until Ready    ${Maturity}
+    Click Element    ${Maturity}
+    Sleep    1s
+    ${desc_prices}=    Get Price Values From Column    74
+    ${sorted_desc}=    Copy List    ${desc_prices}
+    Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
+    Should Be Equal    ${desc_prices}    ${sorted_desc}
+
+    Click Element    ${Maturity}
+    Sleep    1s
+    ${asc_prices}=    Get Price Values From Column    74
+    ${sorted_asc}=    Copy List    ${asc_prices}
+    Sort List    ${sorted_asc}
+    Should Be Equal    ${asc_prices}    ${sorted_asc}
+
+Test Searching Of VAT Rate Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Number 1}    ${Id Search VAT Rate}    ${VAT Rate}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[75][normalize-space(.)='${Add Bonus}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[75][normalize-space(.)='${Add Bonus 3}']
+
+    Apply Filter    ${EMPTY}    ${Id Search VAT Rate}    ${VAT Rate}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[75][normalize-space(.)='${Add Bonus}']
+
+Test Sorting Of VAT Rate Column
+    Wait Until Ready    ${VAT Rate}
+    Click Element    ${VAT Rate}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    75
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${VAT Rate}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    75
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of Item Type Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter
+    ...    ${Add Item type 1}    ${Id Search Item Type}    ${Item Type}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[76][normalize-space(.)='${Add Item type 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[76][normalize-space(.)='${Add Item type 1}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Item Type}    ${Item Type}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[76][normalize-space(.)='${Add Item type 2}']
+
+Test Sorting Of Item Type Column
+    Wait Until Ready    ${Item Type}
+    Click Element    ${Item Type}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    76
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${Item Type}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    76
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of VAT Sign Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[79][normalize-space(.)='${No}']
+    Apply Filter
+    ...    ${Add Item type 2}    ${Id Search VAT Sign}    ${VAT Sign}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[77][normalize-space(.)='${Add Item type 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[77][normalize-space(.)='${Add Item type 2}']
+
+    Apply Filter    ${EMPTY}    ${Id Search VAT Sign}    ${VAT Sign}
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[77][normalize-space(.)='${Add Item type 3}']
+
+Test Sorting Of VAT Sign Column
+    Wait Until Ready    ${VAT Sign}
+    Click Element    ${VAT Sign}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    77
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+    Click Element    ${VAT Sign}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    77
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+Test Searching Of GDPR Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Yes}    ${Id Search GDPR}    ${GDPR}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[78][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[78][normalize-space(.)='${Yes}']
+
+    Apply Filter    ${EMPTY}    ${Id Search GDPR}    ${GDPR}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[78][normalize-space(.)='${No}']
+
+Test Sorting Of GDPR Column
+    Wait Until Ready    ${GDPR}
+    Click Element    ${GDPR}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    78
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${GDPR}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    78
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
+
+Test Searching Of Framework Contract Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Apply Filter    ${Yes}    ${Id Search Framework Contract}    ${Framework Contract}
+    Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[79][normalize-space(.)='${No}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[79][normalize-space(.)='${Yes}']
+
+    Apply Filter    ${EMPTY}    ${Id Search Framework Contract}    ${Framework Contract}
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//tr/td[79][normalize-space(.)='${No}']
+
+Test Sorting Of Framework Contract Column
+    Wait Until Ready    ${Framework Contract}
+    Click Element    ${Framework Contract}
+    Sleep    1s
+    ${asc_names}=    Get Column Text Values    79
+    ${expected_asc}=    Copy List    ${asc_names}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${asc_names}    ${expected_asc}
+
+    Click Element    ${Framework Contract}
+    Sleep    1s
+    ${desc_names}=    Get Column Text Values    79
+    ${expected_desc}=    Copy List    ${desc_names}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${desc_names}    ${expected_desc}
