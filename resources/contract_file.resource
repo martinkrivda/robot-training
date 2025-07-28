@@ -48,7 +48,9 @@ ${Create Contract}                          //button[.//span[@class="title" and 
 ${Please Wait}                              please_wait
 ${Contract Documents}                       xpath=//a[@href="#tc_contract_documents" and contains(@class, "sub_tabs")]
 ${Id Add Document Button}                   tc_add_document_btn
+${Id Add Document Dialog}                   add_document_to_contract_dialog
 ${Id Edit Document Button}                  tc_edit_document_btn
+${Id Edit Document Dialog}                  edit_contract_document_dialog
 ${Id Delete Document Button}                tc_del_document_btn
 ${Id Add Document}                          doc_type
 ${Additional Documents}                     xpath=//a[@href="#tc_contract_otherdocs" and contains(@class, "sub_tabs")]
@@ -234,6 +236,7 @@ Add Contract Document
 
 Edit Contract Document
     Wait Until Ready    ${Id Edit Document Button}
+    Wait Until Element Is Not Visible    ${Id Add Document Dialog}
     Click Element    ${Id Edit Document Button}
     Wait Until Ready    ${Finish Button}
     Wait Until Ready    ${Id Add Document}
@@ -275,6 +278,7 @@ Add Additional Document
 
 Edit Additional Document
     Wait Until Ready    ${Id Edit Additional Document Button}
+    Wait Until Element Is Not Visible    ${Id Edit Document Dialog}
     Click Element    ${Id Edit Additional Document Button}
     Wait Until Ready    ${Finish Button}
     Wait Until Ready    ${Id Add Document}
