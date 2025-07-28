@@ -55,6 +55,7 @@ ${Delete Contract}                          //a[@class="ui-corner-all" and @href
 ${Contract Name Detail}                     //a[@id="tab_contract_contract"]
 ${Id Slave Field Delete Button}             ts_del_dep_slave_btn
 ${Id Master Field Delete Button}            ts_del_dep_master_btn
+${Please Wait}                              please_wait
 
 
 *** Keywords ***
@@ -88,12 +89,13 @@ Add Master Field
     Click Button    ${Id Master Field Add Button}
     Wait Until Ready    ${Id Select Master Field}
     Select From List By Label    ${Id Select Master Field}    ${Master Field2}
+    Wait Until Ready    ${Value Name}
     Select From List By Label    ${Value Name}    ${Value2}
     Click Element    ${Finish Button}
 
 Edit Master Field
-    Wait Until Ready    //tr[td[text()="${Value2}"]]
-    Click Element    //tr[td[text()="${Value2}"]]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
     Click Button    ${Id Master Field Edit Button}
     Wait Until Ready    ${Id Select Master Field}
     Select From List By Label    ${Id Select Master Field}    ${Master Field}
@@ -102,15 +104,15 @@ Edit Master Field
     Click Element    ${Finish Button}
 
 Delete Master Field
-    Wait Until Ready    //tr[td[text()="${Value}"]]
-    Click Element    //tr[td[text()="${Value}"]]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
     Click Button    ${Id Master Field Delete Button}
     Wait Until Ready    ${Delete Button}
     Click Element    ${Delete Button}
 
 Add Slave Field
-    Wait Until Ready    //tr[td[text()="${Value2}"]]
-    Click Element    //tr[td[text()="${Value2}"]]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
     Click Button    ${Id Slave Field Add Button}
     Wait Until Ready    ${Id Select Slave Field}
     Select From List By Label    ${Id Select Slave Field}    ${Slave Field2}
@@ -178,6 +180,8 @@ Create Contract With All Required
 
 Delete Contract
     Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Ready    ${Contract Name Detail}
     Element Should Contain    ${Contract Name Detail}    ${Contract Subject}

@@ -25,6 +25,8 @@ Not Possible To Create a Contract Without a Required Field
     Try To Create Contract Without Required Applicable Law
     Create Contract With All Required
 
-Delete Contract and Added Dependencies
+Delete Added Contract
     Delete Contract
+
+Delete Added Dependencies
     Delete Dependencies
