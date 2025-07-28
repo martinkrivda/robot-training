@@ -19,7 +19,7 @@ ${Id New Password}                  new_pw
 ${Id Retype New Password}           new_pw2
 ${New Password}                     TestNewPW26
 ${Id PW Change Button}              pw_change_button
-${Id Alert Area}                    //*[@id="alert_area"]/span
+${Id Alert Area}                    //*[@id="alert_area"]
 ${PW Succesful Change Msg}          Heslo úspěšně změněno!
 ${PW Empty Fields Msg}              Vyplňte prosím všechna povinná pole!
 ${Old PW Wrong Msg}                 Původní heslo je nesprávné!
