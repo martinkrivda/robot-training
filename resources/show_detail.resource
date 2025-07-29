@@ -14,6 +14,9 @@ ${Personal Space}               //a[@href="#tab_personal"]
 ${Id Personal Settings}         personal_settings
 ${Id Show Detail}               show_detail
 ${Id Show Detail Checkbox}      show_detail_chk
+${Id My Contracts}              my_contracts
+${All Table}                    p_all_tbl
+${Contract Data Container}      contract_data_container
 
 
 *** Keywords ***
@@ -39,12 +42,6 @@ Go To Show Detail Settings
     Click On Personal Settings
     Click On Show Datail Settings
 
-# Click on Show Detail Checkbox
-#    Wait Until Ready    ${Id Show Detail Checkbox}
-#    Checkbox Should Be Selected    ${Id Show Detail Checkbox}
-#    Unselect Checkbox    ${Id Show Detail Checkbox}
-#    Checkbox Should Not Be Selected    ${Id Show Detail Checkbox}
-
 Turn Off Show Detail Checkbox
     ${is_checked}=    Run Keyword And Return Status    Checkbox Should Be Selected    ${Id Show Detail Checkbox}
     IF    ${is_checked}    Unselect Checkbox    ${Id Show Detail Checkbox}
@@ -52,3 +49,13 @@ Turn Off Show Detail Checkbox
 Turn On Show Detail Checkbox
     ${is_checked}=    Run Keyword And Return Status    Checkbox Should Not Be Selected    ${Id Show Detail Checkbox}
     IF    ${is_checked}    Select Checkbox    ${Id Show Detail Checkbox}
+
+Go To My Contracts
+    Wait Until Ready    ${Id My Contracts}
+    Click Element    ${Id My Contracts}
+
+Click On Contract
+    Wait Until Ready    ${All Table}
+    Click Element    ${Id Personal Settings}
+
+# Contract Detail Should Be Visible
