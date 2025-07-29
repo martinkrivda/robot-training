@@ -185,9 +185,9 @@ Verify Sorting And Searching
     Test Searching Of Framework Contract Column
     Test Sorting Of Framework Contract Column
 
-# Set Data Back To Normal And Delete Test Contracts
-#    [Documentation]    A test case for deleting test contracts.
-#    Layout Select All
-#    Delete Test Contracts
-#    Disable Fields
-#    Disable Data
+Set Data Back To Normal And Delete Test Contracts
+    [Documentation]    A test case for deleting test contracts.
+    Layout Select All
+    Delete Test Contracts
+    Disable Fields
+    Disable Data

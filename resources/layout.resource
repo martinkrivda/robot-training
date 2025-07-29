@@ -447,6 +447,7 @@ ${Id Load Layout Button}                            load_layout_btn
 ${Id Search Number}                                 s_text_number
 ${Id Search Partner}                                s_text_partner
 ${Search Partner}                                   Primagra, a.s.
+${Search Partner 2}                                 AGROFERT, a.s.
 ${Search Partner ID}                                1525
 ${Id Search Partner ID}                             s_text_partner_id
 ${Partner ID 1}                                     1648
@@ -989,6 +990,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Own VAT ID Field}
     Click Element    ${Own VAT ID Field}
@@ -996,6 +998,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${GDPR Field}
     Click Element    ${GDPR Field}
@@ -1003,6 +1006,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Framework Contract Field}
     Click Element    ${Framework Contract Field}
@@ -1010,6 +1014,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Item Type Field}
     Click Element    ${Item Type Field}
@@ -1017,6 +1022,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${VAT Sign Field}
     Click Element    ${VAT Sign Field}
@@ -1024,6 +1030,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Sevice Contract Field}
     Click Element    ${Sevice Contract Field}
@@ -1031,6 +1038,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Subsidy Field}
     Click Element    ${Subsidy Field}
@@ -1038,6 +1046,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Supp.payment Field}
     Click Element    ${Supp.payment Field}
@@ -1045,6 +1054,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
     Wait Until Ready    ${Tender Field}
     Click Element    ${Tender Field}
@@ -1052,6 +1062,7 @@ Enable Fields
     Wait Until Ready    ${Visibility1}
     Click Element    ${Visibility1}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
 
 Disable Fields
     Go To Fields
@@ -1061,6 +1072,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Own VAT ID Field}
     Click Element    ${Own VAT ID Field}
@@ -1068,6 +1080,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${GDPR Field}
     Click Element    ${GDPR Field}
@@ -1075,6 +1088,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Framework Contract Field}
     Click Element    ${Framework Contract Field}
@@ -1082,6 +1096,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Item Type Field}
     Click Element    ${Item Type Field}
@@ -1089,6 +1104,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${VAT Sign Field}
     Click Element    ${VAT Sign Field}
@@ -1096,6 +1112,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Sevice Contract Field}
     Click Element    ${Sevice Contract Field}
@@ -1103,6 +1120,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Subsidy Field}
     Click Element    ${Subsidy Field}
@@ -1110,6 +1128,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Supp.payment Field}
     Click Element    ${Supp.payment Field}
@@ -1117,6 +1136,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
     Wait Until Ready    ${Tender Field}
     Click Element    ${Tender Field}
@@ -1124,6 +1144,7 @@ Disable Fields
     Wait Until Ready    ${Visibility2}
     Click Element    ${Visibility2}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
 
 Create Contract Test 1
     Wait Until Ready    ${Create Contract}
@@ -2181,6 +2202,7 @@ Search Contracts
 Test Searching Of Partner Column
     Apply Filter    ${Add Contract partner 1}    ${Id Search Partner}    ${Partner}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Partner}    ${Partner}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner}']
@@ -2216,6 +2238,7 @@ Test Sorting Of Partner ID Column
 Test Searching Of Partner ID Column
     Apply Filter    ${Partner ID 1}    ${Id Search Partner ID}    ${Partner ID}
     Element Should Not Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner ID}']
+    Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Partner ID 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Partner ID}    ${Partner ID}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Search Partner ID}']
@@ -2225,6 +2248,8 @@ Test Searching Of Contract Type Column
     Apply Filter    ${Contract Subject Name}    ${Id Search Contract Subject}    ${Contract Subject}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Contract Subject Name 4}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Contract Subject Name}']
 
     Apply Filter    ${EMPTY}    ${Id Search Contract Subject}    ${Contract Subject}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Contract Subject Name 4}']
@@ -2263,6 +2288,8 @@ Test Searching Of Field Column
     Apply Filter    ${Add Field}    ${Id Search Field}    ${Field}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field}']
 
     Apply Filter    ${EMPTY}    ${Id Search Field}    ${Field}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field 2}']
@@ -2288,6 +2315,8 @@ Test Searching Of Type Column
     Apply Filter    ${Add Contact Type 1}    ${Id Search Type}    ${Type}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 1}']
 
     Apply Filter    ${EMPTY}    ${Id Search Type}    ${Type}
     Element Should Be Visible    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 2}']
@@ -2315,6 +2344,8 @@ Test Searching Of Prim. Resp. Column
     Apply Filter    ${Add Primary responsible person}    ${Id Search Primary Resp.}    ${Prim. Resp.}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[10][normalize-space(.)='${Add Secondary responsible person}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[10][normalize-space(.)='${Add Primary Responsible Person}']
 
     Apply Filter    ${EMPTY}    ${Id Search Primary Resp.}    ${Prim. Resp.}
     Element Should Be Visible
@@ -2326,6 +2357,8 @@ Test Searching Of Sec. Resp. Column
     Apply Filter    ${Add Secondary responsible person}    ${Id Search Secondary Resp.}    ${Sec. Resp.}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[11][normalize-space(.)='${Add Primary Responsible Person}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[11][normalize-space(.)='${Add Secondary responsible person}']
 
     Apply Filter    ${EMPTY}    ${Id Search Secondary Resp.}    ${Sec. Resp.}
     Element Should Be Visible
@@ -2371,6 +2404,8 @@ Test Searching Of Bank Account Column
     Apply Filter    ${Search Bank Account}    ${Id Search Bank Account}    ${Bank Account}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[12][normalize-space(.)='${Add Bank Account}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[12][normalize-space(.)='${Search Bank Account}']
 
     Apply Filter    ${EMPTY}    ${Id Search Bank Account}    ${Bank Account}
     Element Should Be Visible
@@ -2400,6 +2435,8 @@ Test Searching Of Accountant Column
     Apply Filter    ${Add Primary Responsible Person}    ${Id Search Accountant}    ${Accountant}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[13][normalize-space(.)='${Add Secondary Responsible Person}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[13][normalize-space(.)='${Add Primary Responsible Person}']
 
     Apply Filter    ${EMPTY}    ${Id Search Accountant}    ${Accountant}
     Element Should Be Visible
@@ -2429,6 +2466,8 @@ Test Searching Of Appl. Law Column
     Apply Filter    ${Add Number 2}    ${Id Search Appl. Law}    ${Appl.law}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//tr/td[14][normalize-space(.)='${Add Number 3}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='p_all_tbl']//tr/td[14][normalize-space(.)='${Add Number 2}']
 
     Apply Filter    ${EMPTY}    ${Id Search Appl. Law}    ${Appl.law}
     Element Should Be Visible
@@ -3571,6 +3610,7 @@ Test Sorting Of Text Status Column
 
 Test Searching Of Original Storage Column
     Wait Until Element Is Not Visible    ${Please Wait}
+    Sleep    1
     Wait Until Ready    ${Id Select Original Storage}
     Click Element    ${Id Select Original Storage}
     Wait Until Ready    ${Select Original Storage}
