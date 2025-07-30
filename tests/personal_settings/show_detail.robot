@@ -13,7 +13,8 @@ Turn Off Show Detail
 
 Check Personal Space Without Detail
     Go To My Contracts
-    Click On Contract
+    Click On First Contract
+    Contract Detail Should Not Be Visible
 
 Turn On Show Detail
     Go to Show Detail Settings
@@ -21,4 +22,5 @@ Turn On Show Detail
 
 Check Personal Space With Detail
     Go To My Contracts
-    Click On Contract
+    Click On First Contract
+    Contract Detail Should Be Visible

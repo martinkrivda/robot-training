@@ -17,6 +17,9 @@ ${Id Show Detail Checkbox}      show_detail_chk
 ${Id My Contracts}              my_contracts
 ${All Table}                    p_all_tbl
 ${Contract Data Container}      contract_data_container
+${First Row}                    xpath=//table[@id='${All Table}']/tbody/tr[1]
+${First Row Highligh NoD}       odd highlight
+${First Row Highligh ShowD}     odd detail dt-hasChild
 
 
 *** Keywords ***
@@ -47,15 +50,25 @@ Turn Off Show Detail Checkbox
     IF    ${is_checked}    Unselect Checkbox    ${Id Show Detail Checkbox}
 
 Turn On Show Detail Checkbox
-    ${is_checked}=    Run Keyword And Return Status    Checkbox Should Not Be Selected    ${Id Show Detail Checkbox}
-    IF    ${is_checked}    Select Checkbox    ${Id Show Detail Checkbox}
+    ${is_not_checked}=    Run Keyword And Return Status
+    ...    Checkbox Should Not Be Selected
+    ...    ${Id Show Detail Checkbox}
+    IF    ${is_not_checked}    Select Checkbox    ${Id Show Detail Checkbox}
 
 Go To My Contracts
     Wait Until Ready    ${Id My Contracts}
     Click Element    ${Id My Contracts}
 
-Click On Contract
+Click On First Contract
     Wait Until Ready    ${All Table}
-    Click Element    ${Id Personal Settings}
+    Click Element    ${First Row}
 
-# Contract Detail Should Be Visible
+Contract Detail Should Be Visible
+    Wait Until Ready    ${Contract Data Container}
+    Element Attribute Value Should Be    ${First Row}    class    ${First Row Highligh ShowD}
+    Element Should Be Visible    ${Contract Data Container}
+
+Contract Detail Should Not Be Visible
+    Sleep    1
+    Element Attribute Value Should Be    ${First Row}    class    ${First Row Highligh NoD}
+    Element Should Not Be Visible    ${Contract Data Container}
