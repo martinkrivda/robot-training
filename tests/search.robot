@@ -11,3 +11,7 @@ Select None And Select All
     [Setup]    Search Setup
     Create Contract Test 1
     Create Contract Item 1
+    Create Contract Test 2
+    Create Contract Item 2
+    Create Contract Test 3
+    Create Contract Item 3
