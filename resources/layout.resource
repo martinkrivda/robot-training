@@ -53,7 +53,7 @@ ${Contract Subject Button}                          xpath=//button[contains(@cla
 ${Cmt}                                              xpath=//th[normalize-space(.)="Přip.už."]
 ${Cmt Button}                                       xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Přip.už."]
 ${Field}                                            xpath=//th[normalize-space(.)="Oblast"]
-${Field Button}                                     xpath=(//button[normalize-space(.)="Oblast" and not(ancestor::div[contains(@style,"display: none")])])[1]
+${Field Button}                                     xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Oblast"]
 ${Type}                                             xpath=//th[normalize-space(.)="Typ"]
 ${Type Button}                                      xpath=//button[contains(@class, "buttons-columnVisibility") and normalize-space(.)="Typ"]
 ${Creator}                                          xpath=//th[normalize-space(.)="Pořizovatel"]
@@ -570,6 +570,7 @@ Wait Until Ready
     [Arguments]    ${locator}
     Wait Until Element Is Visible    ${locator}    timeout=${Timeout}
     Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}
+    Wait Until Element Is Not Visible    ${Please Wait}
 
 Go To Settings
     Wait Until Ready    ${Settings}
