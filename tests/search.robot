@@ -9,9 +9,4 @@ Resource            ${EXECDIR}/resources/search.resource
 Select None And Select All
     [Documentation]    A test case for selecting none and all.
     [Setup]    Search Setup
-    Create Contract Test 1
-    Create Contract Item 1
-    Create Contract Test 2
-    Create Contract Item 2
-    Create Contract Test 3
-    Create Contract Item 3
+    Sleep    1

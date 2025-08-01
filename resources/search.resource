@@ -223,11 +223,59 @@ ${Id Add Maturity}                                  c_maturity
 ${Maturity Number 1}                                0525
 ${Maturity Number 2}                                1212
 ${Maturity Number 3}                                3102
+${Visibility1}                                      //label[@for="s_visible"]
+${Visibility2}                                      //label[@for="s_invisible"]
+${Own Bank Field}                                   xpath=//tr[td[normalize-space(.)='Vlastní bankovní spojení']]
+${Own VAT ID Field}                                 xpath=//tr[td[normalize-space(.)='Vlastní DIČ']]
+${GDPR Field}                                       xpath=//tr[td[normalize-space(.)='GDPR']]
+${Framework Contract Field}                         xpath=//tr[td[normalize-space(.)='Rámcová smlouva']]
+${Item Type Field}                                  xpath=//tr[td[normalize-space(.)='Typ položky']]
+${VAT Sign Field}                                   xpath=//tr[td[normalize-space(.)='Znak DPH']]
+${Sevice Contract Field}                            xpath=//tr[td[normalize-space(.)='Servisní smlouva']]
+${Subsidy Field}                                    xpath=//tr[td[normalize-space(.)='Dotace']]
+${Supp.payment Field}                               xpath=//tr[td[normalize-space(.)='Platba dodavateli']]
+${Tender Field}                                     xpath=//tr[td[normalize-space(.)='Výběrové řízení']]
+${Tender Number Field}                              xpath=//tr[td[normalize-space(.)='Číslo výb.řízení']]
+${Id Administration and Configuration}              admin_config
+${Id Fields}                                        settings_custom_fields
+${Id Fields Edit Button}                            ts_edit_custom_fields_btn
+${Delete Contract Button}                           xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_delete_file"]
+${Id Contract Items}                                settings_pl_items
+${Contract Type Checkbox}                           xpath=//input[@type='checkbox' and @id='s_disabled']
+${Id Payment Interval}                              settings_interval
+${Id Edit Payment Interval Button}                  ts_edit_interval_btn
+${Id Add Payment Interval Button}                   ts_add_interval_btn
+${Id Invoicing date}                                settings_inv_date
+${Id Edit Invoicing date Button}                    ts_edit_inv_date_btn
+${Id Add Invoicing date Button}                     ts_add_inv_date_btn
+${Id Maturity}                                      settings_maturity
+${Id Edit Maturity Button}                          ts_edit_maturity_btn
+${Id Add Maturity Button}                           ts_add_maturity_btn
+${Id Create Maturity}                               s_maturity
+${Id Create Maturity Description}                   s_description
+${Layout Button}                                    xpath=//button[contains(@class, "dt-button") and normalize-space(.)="Layout"]
+${Select None Button}                               xpath=//input[@type="button" and @value="Zrušit vše"]
+${Select All Button}                                xpath=//input[@type="button" and @value="Vybrat vše"]
+${Id Add Tender Number}                             c_tender_number
+${Id Add Tender Date}                               c_tender_date
+${Search}                                           //a[@class="main_tabs" and @href="#tab_search"]
+${Id Add Document}                                  doc_type
+${Input File}                                       xpath=//input[@type="file" and @name="qqfile"]
+${File Path}                                        ${EXECDIR}/template_test.pdf
+${Contract Documents}                               xpath=//a[@href="#tc_contract_documents" and contains(@class, "sub_tabs")]
+${Id Final Version Button}                          tc_merge_document_btn
+${Create Final Version Button}                      xpath=//div[@class="ui-dialog-buttonset"]//button[contains(@class, "ui-button") and normalize-space(.)="Vytvoření finálního znění"]
+${File xPath}                                       xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.pdf"]
 
 
 *** Keywords ***
 Search Setup
     Open Browser And Logged In
+    Enable Fields
+    Enable Or Add Data
+    Layout Select All
+    Delete Test Contracts
+    Create Test Contracts
 
 Wait Until Ready
     [Arguments]    ${locator}
@@ -237,6 +285,88 @@ Wait Until Ready
 Go To Personal Space
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
+
+Go To Settings
+    Wait Until Ready    ${Settings}
+    Click Element    ${Settings}
+
+Click On Administration
+    Wait Until Ready    ${Id Administration and Configuration}
+    Click Element    ${Id Administration and Configuration}
+
+Click On Fields
+    Wait Until Ready    ${Id Fields}
+    Click Element    ${Id Fields}
+
+Go To Fields
+    Go To Settings
+    Click On Administration
+    Click On Fields
+
+Go To Search
+    Wait Until Ready    ${Search}
+    Click Element    ${Search}
+
+Layout Select All
+    Go To Personal Space
+    Wait Until Ready    ${Layout Button}
+    Click Element    ${Layout Button}
+    Wait Until Ready    ${Select All Button}
+    Click Element    ${Select All Button}
+    Click Element    ${Close Button}
+    Wait Until Ready    ${Layout Button}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Delete Contract If Exists
+    [Arguments]    ${schema_name}
+    ${elements}=    Get WebElements    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+    ${count}=    Get Length    ${elements}
+
+    WHILE    ${count} > 0
+        Delete Contracts    ${schema_name}
+        Sleep    0.5s
+        ${elements}=    Get WebElements    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+        ${count}=    Get Length    ${elements}
+    END
+
+Delete Test Contracts
+    Wait Until Ready    ${Settings}
+    Delete Contract If Exists    ${Contract Subject Name}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Contract If Exists    ${Contract Subject Name 2}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Contract If Exists    ${Contract Subject Name 3}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Delete Contract If Exists    ${Contract Subject Name 4}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Delete Contracts
+    [Arguments]    ${schema_name}
+    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Delete Contract Button}
+    Wait Until Ready    ${Delete Button}
+    Click Button    ${Delete Button}
+    Wait Until Element Is Not Visible    ${Delete Button}
+
+Delete Contract
+    Wait Until Ready    ${Delete Contract Button}
+    Click Element    ${Delete Contract Button}
+    Wait Until Ready    ${Delete Button}
+    Click Button    ${Delete Button}
+
+Create Test Contracts
+    Create Contract Test 1
+    Create Contract Item 1
+    Add Final Version
+    Create Contract Test 2
+    Create Contract Item 2
+    Create Contract Test 3
+    Create Contract Test 4
 
 Create Contract Test 1
     Wait Until Ready    ${Create Contract}
@@ -268,7 +398,9 @@ Create Contract Test 1
     Select From List By Label    ${Id Language}    ${Add Language}
     Select From List By Label    ${Id Add Published}    ${Yes}
     Input Text    ${Id Add Publishing Date}    ${Add Valid Date 1}
+    Input Text    ${Id Add Tender Number}    ${Number 1}
     Select From List By Label    ${Id Add Tender}    ${Yes}
+    Input Text    ${Id Add Tender Date}    ${Add Valid Date 1}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 1}
     Select From List By Label    ${Id Add Primary responsible person}    ${Primary Responsible Person}
@@ -343,9 +475,9 @@ Create Contract Item 1
     Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Add Item Button}
-    Go To Personal Space
 
 Create Contract Test 2
+    Go To Personal Space
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
@@ -375,7 +507,9 @@ Create Contract Test 2
     Select From List By Label    ${Id Language}    ${Add Language 2}
     Select From List By Label    ${Id Add Published}    ${Yes}
     Input Text    ${Id Add Publishing Date}    ${Add Valid Date 2}
+    Input Text    ${Id Add Tender Number}    ${Number 2}
     Select From List By Label    ${Id Add Tender}    ${Yes}
+    Input Text    ${Id Add Tender Date}    ${Add Valid Date 2}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 2}
     Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
@@ -482,7 +616,9 @@ Create Contract Test 3
     Select From List By Label    ${Id Language}    ${Add Language 3}
     Select From List By Label    ${Id Add Published}    ${No}
     # Input Text    ${Id Add Publishing Date}    ${Add Valid Date 3}
+    Input Text    ${Id Add Tender Number}    ${Number 3}
     Select From List By Label    ${Id Add Tender}    ${Yes}
+    Input Text    ${Id Add Tender Date}    ${Add Valid Date 3}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 3}
     Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
@@ -558,3 +694,407 @@ Create Contract Item 3
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Add Item Button}
     Go To Personal Space
+
+Create Contract Test 4
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Create Contract}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Create Contract}
+    Wait Until Ready    ${Id Number Sequence}
+    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
+    Select From List By Label    ${Id Field}    ${Add Field}
+    Select From List By Label    ${Id Confidentiality}    ${Add Confidentiality}
+    Select From List By Label    ${Id Language}    ${Add Language 4}
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name4}
+    Input Text    ${Id Add Partner}    ${Add Partner1}
+    Select From List By Label    ${Id Contract kind}    ${Contract kind1}
+    Click Element    ${Other Data Path}
+    Wait Until Ready    ${Id Add Termination Method}
+    Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
+    Click Button    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Id Add Termination Method}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Enable Fields
+    Go To Fields
+    Wait Until Ready    ${Own VAT ID Field}
+    Click Element    ${Own VAT ID Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
+
+    Wait Until Ready    ${Supp.payment Field}
+    Click Element    ${Supp.payment Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
+
+    Wait Until Ready    ${Tender Field}
+    Click Element    ${Tender Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
+
+    Wait Until Ready    ${Tender Number Field}
+    Click Element    ${Tender Number Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility1}
+
+Disable Fields
+    Go To Fields
+    Wait Until Ready    ${Own VAT ID Field}
+    Click Element    ${Own VAT ID Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
+
+    Wait Until Ready    ${Supp.payment Field}
+    Click Element    ${Supp.payment Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
+
+    Wait Until Ready    ${Tender Field}
+    Click Element    ${Tender Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
+
+    Wait Until Ready    ${Tender Number Field}
+    Click Element    ${Tender Number Field}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Visibility2}
+    Click Element    ${Visibility2}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Visibility2}
+
+Enable Or Add Data
+    Wait Until Ready    ${Id Proposals}
+    Click Element    ${Id Proposals}
+    Go To VAT ID
+    Enable Or Add VAT ID    ${Add Number 1}
+    Enable Or Add VAT ID    ${Add Number 2}
+    Enable Or Add VAT ID    ${Add Number 3}
+    Wait Until Ready    ${Id Header Aux Data}
+    Click Element    ${Id Header Aux Data}
+    Go To Original Storage
+    Enable Original Storage Or Add Original Storage    ${Add Original Storage 1}
+    Enable Original Storage Or Add Original Storage    ${Add Original Storage 2}
+    Enable Original Storage Or Add Original Storage    ${Add Original Storage 3}
+    Go To Payment Interval
+    Enable Payment Interval Or Add Payment Interval    ${Add Number 1}
+    Enable Payment Interval Or Add Payment Interval    ${Add Number 2}
+    Enable Payment Interval Or Add Payment Interval    ${Add Number 3}
+    Go To Invoicing date
+    Enable Invoicing date Or Add Invoicing date    ${Number 1}
+    Enable Invoicing date Or Add Invoicing date    ${Number 2}
+    Enable Invoicing date Or Add Invoicing date    ${Number 3}
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Go To Maturity
+    Enable Maturity Or Add Maturity    ${Maturity Number 1}
+    Enable Maturity Or Add Maturity    ${Maturity Number 2}
+    Enable Maturity Or Add Maturity    ${Maturity Number 3}
+
+Disable Data
+    Wait Until Ready    ${Id Proposals}
+    Click Element    ${Id Proposals}
+    Go To VAT ID
+    Disable VAT ID    ${Add Number 1}
+    Disable VAT ID    ${Add Number 2}
+    Disable VAT ID    ${Add Number 3}
+    Wait Until Ready    ${Id Header Aux Data}
+    Click Element    ${Id Header Aux Data}
+    Go To Original Storage
+    Disable Original Storage    ${Add Original Storage 1}
+    Disable Original Storage    ${Add Original Storage 2}
+    Disable Original Storage    ${Add Original Storage 3}
+    Go To Payment Interval
+    Disable Payment Interval    ${Add Number 1}
+    Disable Payment Interval    ${Add Number 2}
+    Disable Payment Interval    ${Add Number 3}
+    Go To Invoicing date
+    Disable Invoicing date    ${Number 1}
+    Disable Invoicing date    ${Number 2}
+    Disable Invoicing date    ${Number 3}
+    Wait Until Ready    ${Id Contract Items}
+    Click Element    ${Id Contract Items}
+    Go To Maturity
+    Disable Maturity    ${Maturity Number 1}
+    Disable Maturity    ${Maturity Number 2}
+    Disable Maturity    ${Maturity Number 3}
+
+Go To VAT ID
+    Wait Until Ready    ${Id VAT ID}
+    Click Element    ${Id VAT ID}
+
+Enable Or Add VAT ID
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable VAT ID    ${number}
+    ELSE
+        Add VAT ID    ${number}
+    END
+
+Enable VAT ID
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit VAT ID Button}
+    Click Button    ${Id Edit VAT ID Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
+
+Add VAT ID
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add VAT ID Button}
+    Click Button    ${Id Add VAT ID Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${number}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
+
+Disable VAT ID
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit VAT ID Button}
+    Click Button    ${Id Edit VAT ID Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Contract Type}
+
+Go To Original Storage
+    Wait Until Ready    ${Id Original Storage}
+    Click Element    ${Id Original Storage}
+    Wait Until Ready    ${Id Add Original Storage Button}
+
+Enable Original Storage
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Original Storage Button}
+    Wait Until Ready    ${Id Add Field1}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Enable Original Storage Or Add Original Storage
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Original Storage    ${number}
+    ELSE
+        Add Original Storage    ${number}
+    END
+
+Add Original Storage
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Original Storage Button}
+    Click Button    ${Id Add Original Storage Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Disable Original Storage
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Original Storage Button}
+    Click Button    ${Id Edit Original Storage Button}
+    Wait Until Ready    ${Id Add Field1}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Go To Payment Interval
+    Wait Until Ready    ${Id Payment Interval}
+    Click Element    ${Id Payment Interval}
+    Wait Until Ready    ${Id Add Payment Interval Button}
+
+Enable Payment Interval
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Payment Interval Button}
+    Wait Until Ready    ${Id Add Field1}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Enable Payment Interval Or Add Payment Interval
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Payment Interval    ${number}
+    ELSE
+        Add Payment Interval    ${number}
+    END
+
+Add Payment Interval
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Payment Interval Button}
+    Click Button    ${Id Add Payment Interval Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Disable Payment Interval
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Payment Interval Button}
+    Click Button    ${Id Edit Payment Interval Button}
+    Wait Until Ready    ${Id Add Field1}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Go To Invoicing date
+    Wait Until Ready    ${Id Invoicing date}
+    Click Element    ${Id Invoicing date}
+    Wait Until Ready    ${Id Add Invoicing date Button}
+
+Enable Invoicing date
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Invoicing date Button}
+    Wait Until Ready    ${Id Add Field1}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Enable Invoicing date Or Add Invoicing date
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Invoicing date    ${number}
+    ELSE
+        Add Invoicing date    ${number}
+    END
+
+Add Invoicing date
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Invoicing date Button}
+    Click Button    ${Id Add Invoicing date Button}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Disable Invoicing date
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Invoicing date Button}
+    Click Button    ${Id Edit Invoicing date Button}
+    Wait Until Ready    ${Id Add Field1}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
+
+Go To Maturity
+    Wait Until Ready    ${Id Maturity}
+    Click Element    ${Id Maturity}
+    Wait Until Ready    ${Id Add Maturity Button}
+
+Enable Maturity
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Click Button    ${Id Edit Maturity Button}
+    Wait Until Ready    ${Id Create Maturity Description}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Create Maturity Description}
+
+Enable Maturity Or Add Maturity
+    [Arguments]    ${number}
+    ${row_exists}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    ...    timeout=${Timeout}
+
+    IF    ${row_exists}
+        Enable Maturity    ${number}
+    ELSE
+        Add Maturity    ${number}
+    END
+
+Add Maturity
+    [Arguments]    ${number}
+    Wait Until Ready    ${Id Add Maturity Button}
+    Click Button    ${Id Add Maturity Button}
+    Wait Until Ready    ${Id Create Maturity}
+    Input Text    ${Id Create Maturity}    ${number}
+    Input Text    ${Id Create Maturity Description}    ${number}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Create Maturity Description}
+
+Disable Maturity
+    [Arguments]    ${number}
+    Wait Until Ready    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Click Element    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${number}"]
+    Wait Until Ready    ${Id Edit Maturity Button}
+    Click Button    ${Id Edit Maturity Button}
+    Wait Until Ready    ${Id Create Maturity Description}
+    Select Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Create Maturity Description}
+
+Add Final Version
+    Wait Until Ready    ${Contract Documents}
+    Click Element    ${Contract Documents}
+    Wait Until Ready    ${Id Add Document Button}
+    Click Element    ${Id Add Document Button}
+    Wait Until Ready    ${Id Add Document}
+    Select From List By Index    ${Id Add Document}    1
+    Choose File    ${Input File}    ${File Path}
+    Wait Until Ready    ${Finish Button}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Document}
+    Wait Until Ready    ${Id Final Version Button}
+    Click Button    ${Id Final Version Button}
+    Wait Until Ready    ${File xPath}
+    Double Click Element    ${File xPath}
+    Wait Until Ready    ${Create Final Version Button}
+    Click Element    ${Create Final Version Button}
+    Wait Until Element Is Not Visible    ${Please Wait}    30s
