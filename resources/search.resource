@@ -180,10 +180,12 @@ ${Name}                                             dvtest1
 ${Name 2}                                           testd1
 ${Name 3}                                           vtest1
 ${Edited Name}                                      dvtestEdited
-${Contract Subject Name}                            dvTESTCONRACTDV
-${Contract Subject Name 2}                          dvTESTDVCONRACT
+${Contract Subject Name}                            dvTESTCONTRACTDV
+${Contract Subject Name 2}                          dvTESTDVCONTRACT
 ${Contract Subject Name 3}                          dvTESTVDCONTRACT
-${Contract Subject Name 4}                          CONRACTDVTET
+${Contract Subject Name 4}                          CONTRACTVTEST
+${Search Contract Subject 1}                        vTEST
+${Search Contract Subject 2}                        dvTEST
 ${Id Add Service Contract}                          c_service_contract
 ${Id Add VAT Sign}                                  c_vatsign
 ${Id Proposals}                                     proposals
@@ -259,6 +261,8 @@ ${Select All Button}                                xpath=//input[@type="button"
 ${Id Add Tender Number}                             c_tender_number
 ${Id Add Tender Date}                               c_tender_date
 ${Search}                                           //a[@class="main_tabs" and @href="#tab_search"]
+${Search Button}                                    xpath=//button[normalize-space(.)="Hledání"]
+${Search Button 2}                                  xpath=//div[contains(@class,"ui-dialog")]//button[normalize-space(.)="Hledání"]
 ${Id Add Document}                                  doc_type
 ${Input File}                                       xpath=//input[@type="file" and @name="qqfile"]
 ${File Path}                                        ${EXECDIR}/template_test.pdf
@@ -266,6 +270,12 @@ ${Contract Documents}                               xpath=//a[@href="#tc_contrac
 ${Id Final Version Button}                          tc_merge_document_btn
 ${Create Final Version Button}                      xpath=//div[@class="ui-dialog-buttonset"]//button[contains(@class, "ui-button") and normalize-space(.)="Vytvoření finálního znění"]
 ${File xPath}                                       xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.pdf"]
+${Contract Number}                                  xpath=//th[normalize-space(.)="Číslo smlouvy"]
+${Search Partner Contract Number}                   c_partner_number
+${Reset Button}                                     xpath=//div[contains(@class,"ui-dialog")]//button[normalize-space(.)="Reset"]
+${Search Role Partner}                              Dodavatel
+${Search Role Partner 2}                            Odběratel
+${Id Search Role Partner}                           c_part_s_role
 
 
 *** Keywords ***
@@ -522,6 +532,7 @@ Create Contract Test 2
     Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 2}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
+    Sleep    20
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 2}
     Click Element    ${Other Data Path}
     Wait Until Ready    ${Id Add Amount Per Year}
@@ -1098,3 +1109,125 @@ Add Final Version
     Wait Until Ready    ${Create Final Version Button}
     Click Element    ${Create Final Version Button}
     Wait Until Element Is Not Visible    ${Please Wait}    30s
+
+Get IDs From Table Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${ids}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${ids}    ${text}
+    END
+    RETURN    ${ids}
+
+Extract Number From ID
+    [Arguments]    ${text}
+    ${num}=    Replace String Using Regexp    ${text}    [^0-9]    ${EMPTY}
+    ${num}=    Convert To Integer    ${num}
+    RETURN    ${num}
+
+Test Sorting Of Number Column
+    Wait Until Ready    ${Contract Number}
+    Click Element    ${Contract Number}
+    Sleep    1s
+    ${ids_desc}=    Get IDs From Table Column    3
+
+    ${numbers_desc}=    Create List
+    FOR    ${id}    IN    @{ids_desc}
+        ${num}=    Extract Number From ID    ${id}
+        Append To List    ${numbers_desc}    ${num}
+    END
+
+    ${expected_desc}=    Copy List    ${numbers_desc}
+    Sort List    ${expected_desc}
+    Reverse List    ${expected_desc}
+    Should Be Equal    ${numbers_desc}    ${expected_desc}
+
+    Click Element    ${Contract Number}
+    Sleep    1s
+    ${ids_asc}=    Get IDs From Table Column    3
+
+    ${numbers_asc}=    Create List
+    FOR    ${id}    IN    @{ids_asc}
+        ${num}=    Extract Number From ID    ${id}
+        Append To List    ${numbers_asc}    ${num}
+    END
+
+    ${expected_asc}=    Copy List    ${numbers_asc}
+    Sort List    ${expected_asc}
+    Should Be Equal    ${numbers_asc}    ${expected_asc}
+
+Test Searching Of Contract Subject
+    Wait Until Ready    ${Search Button}
+    Click Element    ${Search Button}
+    Wait Until Ready    ${Reset Button}
+    Click Element    ${Reset Button}
+    Wait Until Ready    ${Id Contract Subject}
+    Input Text    ${Id Contract Subject}    ${Search Contract Subject 1}
+    Click Element    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Id Contract Subject}
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[3][normalize-space(.)='${Contract Subject Name 4}']
+
+    Wait Until Ready    ${Search Button}
+    Click Element    ${Search Button}
+    Wait Until Ready    ${Id Contract Subject}
+    Input Text    ${Id Contract Subject}    ${Search Contract Subject 2}
+    Click Element    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Id Contract Subject}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[3][normalize-space(.)='${Contract Subject Name 4}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[3][normalize-space(.)='${Contract Subject Name 3}']
+
+Test Searching Of Partner Contract Number
+    Wait Until Ready    ${Search Button}
+    Click Element    ${Search Button}
+    Wait Until Ready    ${Reset Button}
+    Click Element    ${Reset Button}
+    Wait Until Ready    ${Search Partner Contract Number}
+    Input Text    ${Search Partner Contract Number}    ${Add Number 1}
+    Input Text    ${Id Contract Subject}    ${Search Contract Subject 2}
+    Click Element    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Search Partner Contract Number}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[6][normalize-space(.)='${Add Number 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[6][normalize-space(.)='${Add Number 1}']
+
+    Wait Until Ready    ${Search Button}
+    Click Element    ${Search Button}
+    Wait Until Ready    ${Search Partner Contract Number}
+    Input Text    ${Search Partner Contract Number}    ${Add Number 2}
+    Click Element    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Search Partner Contract Number}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[6][normalize-space(.)='${Add Number 1}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[6][normalize-space(.)='${Add Number 2}']
+
+Test Searching Of Field
+    Wait Until Ready    ${Search Button}
+    Click Element    ${Search Button}
+    Wait Until Ready    ${Reset Button}
+    Click Element    ${Reset Button}
+    Wait Until Ready    ${Id Field}
+    Select From List By Label    ${Id Field}    ${Add Field}
+    Input Text    ${Id Contract Subject}    ${Search Contract Subject 2}
+    Click Element    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Id Field}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[10][normalize-space(.)='${Add Field 2}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[10][normalize-space(.)='${Add Field}']
+
+    Wait Until Ready    ${Search Button}
+    Click Element    ${Search Button}
+    Wait Until Ready    ${Id Field}
+    Select From List By Label    ${Id Field}    ${Add Field 2}
+    Click Element    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Id Field}
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[10][normalize-space(.)='${Add Field}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[10][normalize-space(.)='${Add Field 2}']
