@@ -276,6 +276,14 @@ ${Reset Button}                                     xpath=//div[contains(@class,
 ${Search Role Partner}                              Dodavatel
 ${Search Role Partner 2}                            Odběratel
 ${Id Search Role Partner}                           c_part_s_role
+${Filter}                                           xpath=//input[@type="search" and @aria-controls="search_results"]
+${Search Partner}                                   Primagra, a.s.
+${Search Partner 2}                                 AGROFERT, a.s.
+${Filter Reset}                                     filter_reset
+${Contract Subject}                                 xpath=//div[contains(@class,"dataTables_scroll")]//tr/th[3][normalize-space(.)="Předmět"]
+${Partner}                                          xpath=//div[contains(@class,"dataTables_scrollHead ui-state-default")]//tr/th[4][normalize-space(.)="Partner"]
+# ${Partner}    xpath=//th[normalize-space(.)="Partner"]
+${Contact Person}                                   xpath=//th[normalize-space(.)="Kontaktní osoba"]
 
 
 *** Keywords ***
@@ -1112,7 +1120,7 @@ Add Final Version
 
 Get IDs From Table Column
     [Arguments]    ${column_index}
-    ${elements}=    Get WebElements    xpath=//table[@id='p_all_tbl']//tbody/tr/td[${column_index}]
+    ${elements}=    Get WebElements    xpath=//table[@id='search_results']//tbody/tr/td[${column_index}]
     ${ids}=    Create List
     FOR    ${el}    IN    @{elements}
         ${text}=    Get Text    ${el}
@@ -1130,7 +1138,7 @@ Test Sorting Of Number Column
     Wait Until Ready    ${Contract Number}
     Click Element    ${Contract Number}
     Sleep    1s
-    ${ids_desc}=    Get IDs From Table Column    3
+    ${ids_desc}=    Get IDs From Table Column    2
 
     ${numbers_desc}=    Create List
     FOR    ${id}    IN    @{ids_desc}
@@ -1145,7 +1153,7 @@ Test Sorting Of Number Column
 
     Click Element    ${Contract Number}
     Sleep    1s
-    ${ids_asc}=    Get IDs From Table Column    3
+    ${ids_asc}=    Get IDs From Table Column    2
 
     ${numbers_asc}=    Create List
     FOR    ${id}    IN    @{ids_asc}
@@ -1231,3 +1239,65 @@ Test Searching Of Field
     ...    xpath=//table[@id='search_results']//tr/td[10][normalize-space(.)='${Add Field}']
     Element Should Be Visible
     ...    xpath=//table[@id='search_results']//tr/td[10][normalize-space(.)='${Add Field 2}']
+
+Test Filter
+    Wait Until Ready    ${Filter}
+    Input Text    ${Filter}    ${Add Contract partner 3}
+    Sleep    2
+    Wait Until Ready    xpath=//table[@id='search_results']//tr/td[4][normalize-space(.)='${Search Partner}']
+    Element Should Be Visible    xpath=//table[@id='search_results']//tr/td[4][normalize-space(.)='${Search Partner}']
+    Element Should Not Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[4][normalize-space(.)='${Search Partner 2}']
+
+    Click Element    ${Filter Reset}
+    Wait Until Ready    ${Filter}
+    Input Text    ${Filter}    ${EMPTY}
+    Sleep    2
+    Wait Until Ready    xpath=//table[@id='search_results']//tr/td[4][normalize-space(.)='${Search Partner}']
+    Element Should Be Visible    xpath=//table[@id='search_results']//tr/td[4][normalize-space(.)='${Search Partner}']
+    Element Should Be Visible
+    ...    xpath=//table[@id='search_results']//tr/td[4][normalize-space(.)='${Search Partner 2}']
+
+Test Contract Subject Sorting
+    Wait Until Ready    ${Contract Subject}
+    Click Element    ${Contract Subject}
+    Sleep    1s
+    ${desc_subjects}=    Get Column Text Values    3
+    ${sorted_desc}=    Copy List    ${desc_subjects}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_subjects}    ${sorted_desc}
+
+    Click Element    ${Contract Subject}
+    Sleep    1s
+    ${asc_subjects}=    Get Column Text Values    3
+    ${sorted_asc}=    Copy List    ${asc_subjects}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_subjects}    ${sorted_asc}
+
+Get Column Text Values
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='search_results']//tbody/tr/td[${column_index}]
+    ${values}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        Append To List    ${values}    ${text}
+    END
+    RETURN    ${values}
+
+Test Partner Sorting
+    Wait Until Ready    ${Partner}
+    Click Element    ${Partner}
+    Sleep    1s
+    ${desc_subjects}=    Get Column Text Values    4
+    ${sorted_desc}=    Copy List    ${desc_subjects}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_subjects}    ${sorted_desc}
+
+    Click Element    ${Partner}
+    Sleep    1s
+    ${asc_subjects}=    Get Column Text Values    4
+    ${sorted_asc}=    Copy List    ${asc_subjects}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_subjects}    ${sorted_asc}
