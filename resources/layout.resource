@@ -19,7 +19,7 @@ ${Id Alert}                                         alert_area
 ${Alert Message}                                    Vyplňte prosím všechna povinná pole!
 ${Alert Message2}                                   Finální znění už existuje.
 ${Alert Message3}                                   Chcete jej nahradit novou verzí?
-${Timeout}                                          10s
+${Timeout}                                          30s
 ${Timeout2}                                         1s
 ${No Path}                                          xpath=//button[normalize-space(.)="Ne"]
 ${Personal Space}                                   //a[@class="main_tabs" and @href="#tab_personal"]
@@ -692,7 +692,7 @@ Layout Select None
     Element Should Not Be Visible    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
 
 Layout Select All
-    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Element Is Not Visible    ${Please Wait}    20s
     Wait Until Ready    ${Layout Button}
     Click Element    ${Layout Button}
     Wait Until Ready    ${Select All Button}
@@ -2040,6 +2040,7 @@ Get Timestamps From Table
 
 Test Updated Text Sorting
     Click Element    ${Updated}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Sleep    1s
     ${desc}=    Get Timestamps From Table
     ${expected_desc}=    Copy List    ${desc}
@@ -2271,6 +2272,7 @@ Get Column Text Values
 Test Contract Subject Sorting
     Wait Until Ready    ${Contract Subject}
     Click Element    ${Contract Subject}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Sleep    1s
     ${desc_subjects}=    Get Column Text Values    7
     ${sorted_desc}=    Copy List    ${desc_subjects}
