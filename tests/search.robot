@@ -9,7 +9,6 @@ Resource            ${EXECDIR}/resources/search.resource
 Test Filter And Searching
     [Documentation]    A test case for filter, searching.
     [Setup]    Search Setup
-    Sleep    1
     Go To Search
     Test Searching Of Partner Contract Number
     Test Searching Of Field
@@ -18,8 +17,11 @@ Test Filter And Searching
 
 Test Sorting
     [Documentation]    A test case for sorting.
-    Test Sorting Of Number Column
-    Test Contract Subject Sorting
-    Test Partner Sorting
-    Sleep    5
-    # Click Element    xpath=//div[contains(@class,"dataTables_scroll")]//tr/th[3][normalize-space(.)="Předmět"]
+    Test Sorting Of Columns
+
+Set Data Back To Normal And Delete Test Contracts
+    [Documentation]    A test case for deleting test contracts.
+    Layout Select All
+    Delete Test Contracts
+    Disable Fields
+    Disable Data

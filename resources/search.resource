@@ -281,9 +281,17 @@ ${Search Partner}                                   Primagra, a.s.
 ${Search Partner 2}                                 AGROFERT, a.s.
 ${Filter Reset}                                     filter_reset
 ${Contract Subject}                                 xpath=//div[contains(@class,"dataTables_scroll")]//tr/th[3][normalize-space(.)="Předmět"]
-${Partner}                                          xpath=//div[contains(@class,"dataTables_scrollHead ui-state-default")]//tr/th[4][normalize-space(.)="Partner"]
-# ${Partner}    xpath=//th[normalize-space(.)="Partner"]
+${Partner}                                          xpath=//div[@id="search_results_wrapper"]//div[contains(@class,"dataTables_scrollHeadInner")]//tr/th[4]
 ${Contact Person}                                   xpath=//th[normalize-space(.)="Kontaktní osoba"]
+${SAP Id}                                           xpath=//div[@id="search_results_wrapper"]//div[contains(@class,"dataTables_scrollHeadInner")]//tr/th[5]
+${Field}                                            xpath=//div[@id="search_results_wrapper"]//div[contains(@class,"dataTables_scrollHeadInner")]//tr/th[10]
+${Search Date 2}                                    06.08.2025
+${Contract Price 3}                                 1 575,00
+${Search Notice Period}                             3 dny
+${Search Business Case ID}                          9
+${Search Amount Per Year}                           3,00 CZK
+${Search To Pay}                                    5,00 USD 7 189 dvtest
+${Search VAT Rate}                                  3,00
 
 
 *** Keywords ***
@@ -540,7 +548,6 @@ Create Contract Test 2
     Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 2}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
-    Sleep    20
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 2}
     Click Element    ${Other Data Path}
     Wait Until Ready    ${Id Add Amount Per Year}
@@ -673,7 +680,7 @@ Create Contract Test 3
     Input Text    ${Id Add Postponement Condition}    ${Name 3}
     Select From List By Label    ${Id Add Documentation Enclosed}    ${No}
     Select From List By Label    ${Id Add Irregular Payment}    ${No}
-    Input Text    ${Id Add To Pay}    ${Number 2}
+    Input Text    ${Id Add To Pay}    ${Number 3}
     Select From List By Label    ${Id Add To Pay Currency}    ${Add Total Contract Price Period 3}
     # Input Text    ${Add Maturity 1}    ${Add Number 3}
     # Input Text    ${Id Add Discount%}    ${Number 3}
@@ -685,7 +692,7 @@ Create Contract Test 3
     Wait Until Element Is Not Visible    ${Id Add Note}
 
 Create Contract Item 3
-    Wait Until Element Is Not Visible    ${Add Maturity 1}
+    Go To Personal Space
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
     Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
@@ -712,7 +719,6 @@ Create Contract Item 3
     Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Add Item Button}
-    Go To Personal Space
 
 Create Contract Test 4
     Wait Until Element Is Not Visible    ${Please Wait}
@@ -1148,7 +1154,6 @@ Test Sorting Of Number Column
 
     ${expected_desc}=    Copy List    ${numbers_desc}
     Sort List    ${expected_desc}
-    Reverse List    ${expected_desc}
     Should Be Equal    ${numbers_desc}    ${expected_desc}
 
     Click Element    ${Contract Number}
@@ -1163,6 +1168,7 @@ Test Sorting Of Number Column
 
     ${expected_asc}=    Copy List    ${numbers_asc}
     Sort List    ${expected_asc}
+    Reverse List    ${expected_asc}
     Should Be Equal    ${numbers_asc}    ${expected_asc}
 
 Test Searching Of Contract Subject
@@ -1174,6 +1180,7 @@ Test Searching Of Contract Subject
     Input Text    ${Id Contract Subject}    ${Search Contract Subject 1}
     Click Element    ${Search Button 2}
     Wait Until Element Is Not Visible    ${Id Contract Subject}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Element Should Be Visible
     ...    xpath=//table[@id='search_results']//tr/td[3][normalize-space(.)='${Contract Subject Name 4}']
 
@@ -1285,19 +1292,210 @@ Get Column Text Values
     END
     RETURN    ${values}
 
-Test Partner Sorting
-    Wait Until Ready    ${Partner}
-    Click Element    ${Partner}
+Test Field Sorting
+    Wait Until Ready    ${Field}
+    Click Element    ${Field}
     Sleep    1s
-    ${desc_subjects}=    Get Column Text Values    4
+    ${desc_subjects}=    Get Column Text Values    10
     ${sorted_desc}=    Copy List    ${desc_subjects}
     Sort List    ${sorted_desc}
+    Reverse List    ${sorted_desc}
     Should Be Equal    ${desc_subjects}    ${sorted_desc}
 
-    Click Element    ${Partner}
+    Click Element    ${Field}
     Sleep    1s
-    ${asc_subjects}=    Get Column Text Values    4
+    ${asc_subjects}=    Get Column Text Values    10
     ${sorted_asc}=    Copy List    ${asc_subjects}
     Sort List    ${sorted_asc}
-    Reverse List    ${sorted_asc}
     Should Be Equal    ${asc_subjects}    ${sorted_asc}
+
+Test SAP Id Sorting
+    Wait Until Ready    ${SAP Id}
+    Click Element    ${SAP Id}
+    Sleep    1s
+    ${desc_prices}=    Get Price Values From Column    5
+    ${sorted_desc}=    Copy List    ${desc_prices}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_prices}    ${sorted_desc}
+
+    Click Element    ${SAP Id}
+    Sleep    1s
+    ${asc_prices}=    Get Price Values From Column    5
+    ${sorted_asc}=    Copy List    ${asc_prices}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_prices}    ${sorted_asc}
+
+Get Price Values From Column
+    [Arguments]    ${column_index}
+    ${elements}=    Get WebElements    xpath=//table[@id='search_results']//tbody/tr/td[${column_index}]
+    ${prices}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        ${text}=    Replace String    ${text}    ${SPACE}    ${EMPTY}
+        ${text}=    Replace String    ${text}    ,    .
+        ${num}=    Convert To Number    ${text}
+        Append To List    ${prices}    ${num}
+    END
+    RETURN    ${prices}
+
+Sort Column By Index
+    [Arguments]    ${column_index}    ${as_number}=False    ${as_date}=False    ${as_boolean}=False
+    ${header_xpath}=    Set Variable
+    ...    //div[@id="search_results_wrapper"]//div[contains(@class,"dataTables_scrollHeadInner")]//tr/th[${column_index}]
+
+    ${header_text}=    Get Text    xpath=${header_xpath}
+    Log To Console    Clicking on header: ${header_text}
+    Log    Řadím podle sloupce: ${header_text}
+    Wait Until Element Is Visible    xpath=${header_xpath}
+    Click Element    xpath=${header_xpath}
+    Sleep    1s
+
+    ${desc_values}=    Get Column Values    ${column_index}    ${as_number}    ${as_date}    ${as_boolean}
+    ${sorted_desc}=    Copy List    ${desc_values}
+    Sort List    ${sorted_desc}
+    Should Be Equal    ${desc_values}    ${sorted_desc}
+
+    Click Element    xpath=${header_xpath}
+    Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+    ${asc_values}=    Get Column Values    ${column_index}    ${as_number}    ${as_date}    ${as_boolean}
+    ${sorted_asc}=    Copy List    ${asc_values}
+    Sort List    ${sorted_asc}
+    Reverse List    ${sorted_asc}
+    Should Be Equal    ${asc_values}    ${sorted_asc}
+
+Get Column Values
+    [Arguments]    ${column_index}    ${as_number}=False    ${as_date}=False    ${as_boolean}=False
+    ${elements}=    Get WebElements    xpath=//table[@id='search_results']//tbody/tr/td[${column_index}]
+    ${values}=    Create List
+    FOR    ${el}    IN    @{elements}
+        ${text}=    Get Text    ${el}
+        IF    '${as_number}' == 'True'
+            ${text}=    Replace String    ${text}    ${SPACE}    ${EMPTY}
+            ${text}=    Replace String    ${text}    ,    .
+            ${text}=    Convert To Number    ${text}
+        ELSE IF    '${as_date}' == 'True'
+            ${text}=    Convert To Dates    ${text}
+            ${text}=    Get From List    ${text}    0
+        ELSE IF    '${as_boolean}' == 'True'
+            ${text}=    Convert To Boolean Value    ${text}
+        END
+        Append To List    ${values}    ${text}
+    END
+    RETURN    ${values}
+
+Convert To Dates
+    [Arguments]    @{date_texts}
+    ${dates}=    Create List
+    FOR    ${text}    IN    @{date_texts}
+        ${date}=    Convert Date    ${text}    date_format=%d.%m.%Y
+        Append To List    ${dates}    ${date}
+    END
+    RETURN    ${dates}
+
+Convert To Boolean Value
+    [Arguments]    ${text}
+    ${text}=    Strip String    ${text}
+    IF    '${text}'=='Ano'    RETURN    1
+    RETURN    0
+
+Test Sorting Of Columns
+    Wait Until Ready
+    ...    xpath=//div[@id="search_results_wrapper"]//div[contains(@class,"dataTables_scrollHeadInner")]//tr/th[4]
+    Click Element
+    ...    xpath=//div[@id="search_results_wrapper"]//div[contains(@class,"dataTables_scrollHeadInner")]//tr/th[4]
+    Test Sorting Of Number Column
+    Sort Column By Index    3
+    Sort Column By Index    4
+    Sort Column By Index    5    as_number=True
+    Sort Column By Index    6
+    # Sort Column By Index    7
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[11][normalize-space(.)='${Contract kind1}']
+    Sort Column By Index    8
+    Sort Column By Index    9
+    Test Field Sorting
+    Sort Column By Index    11
+    Scroll Element Into View    xpath=//table[@id='search_results']//tr/td[15][normalize-space(.)='${Search Date 2}']
+    Sort Column By Index    12
+    Sort Column By Index    13
+    Sort Column By Index    14
+    Sort Column By Index    15    as_date=True
+    Scroll Element Into View    xpath=//table[@id='search_results']//tr/td[19][normalize-space(.)='${Search Date 2}']
+    Sort Column By Index    16    as_date=True
+    Sort Column By Index    17    as_date=True
+    # Sort Column By Index    18
+    Sort Column By Index    19    as_date=True
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[23][normalize-space(.)='${Search Notice Period}']
+    Sort Column By Index    20    as_date=True
+    Sort Column By Index    21    as_date=True
+    # Sort Column By Index    22
+    Sort Column By Index    23
+    Scroll Element Into View    xpath=//table[@id='search_results']//tr/td[27][normalize-space(.)='${Name}']
+    Sort Column By Index    24    as_number=True
+    Sort Column By Index    25
+    Sort Column By Index    26
+    Sort Column By Index    27
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[31][normalize-space(.)='${Search Business Case ID}']
+    Sort Column By Index    28
+    Sort Column By Index    29
+    Sort Column By Index    30
+    Sort Column By Index    31    as_number=True
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[35][normalize-space(.)='${Search Amount Per Year}']
+    # Sort Column By Index    32
+    Sort Column By Index    33
+    Sort Column By Index    34
+    Sort Column By Index    35
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[40][normalize-space(.)='${Add Termination Method1}']
+    Sort Column By Index    36    as_boolean=True
+    Sort Column By Index    37
+    Sort Column By Index    38    as_number=True
+    # Sort Column By Index    39
+    Sort Column By Index    40
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[45][normalize-space(.)='${Search To Pay}']
+    Sort Column By Index    41
+    Sort Column By Index    42    as_boolean=True
+    Sort Column By Index    43    as_boolean=True
+    Sort Column By Index    44
+    Sort Column By Index    45
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[50][normalize-space(.)='${Number 2}']
+    Sort Column By Index    46    as_boolean=True
+    Sort Column By Index    47
+    Sort Column By Index    48    as_boolean=True
+    Sort Column By Index    49    as_boolean=True
+    Sort Column By Index    50    as_number=True
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[53][normalize-space(.)='${Number 3}']
+    # Sort Column By Index    51    as_boolean=True
+    Sort Column By Index    52    as_date=True
+    Sort Column By Index    53    as_number=True
+    Create Contract Item 3
+    Go To Search
+    Wait Until Ready    xpath=//table[@id='search_results']//tr/td[53][normalize-space(.)='${Number 3}']
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[58][normalize-space(.)='${Add Total Contract Price Period 2}']
+    Sort Column By Index    54
+    Sort Column By Index    55    as_number=True
+    Sort Column By Index    56
+    Sort Column By Index    57    as_number=True
+    Sort Column By Index    58
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[61][normalize-space(.)='${Add Location 1}']
+    Sort Column By Index    59    as_number=True
+    Sort Column By Index    60
+    Sort Column By Index    61
+    Scroll Element Into View
+    ...    xpath=//table[@id='search_results']//tr/td[66][normalize-space(.)='${Search VAT Rate}']
+    Sort Column By Index    62    as_date=True
+    Sort Column By Index    63    as_date=True
+    Sort Column By Index    64    as_number=True
+    Sort Column By Index    65    as_number=True
+    Sort Column By Index    66    as_number=True
