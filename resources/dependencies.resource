@@ -28,14 +28,15 @@ ${Value}                                    Ve zpracování
 ${Value2}                                   Občanské právo
 ${Id Slave Field Add Button}                ts_add_dep_slave_btn
 ${Id Select Slave Field}                    s_slave_field
-${Slave Field}                              Rozhodné právo
+${Slave Field}                              Primárně odp. osoba
 ${Slave Field2}                             Typ smlouvy
 ${Optional}                                 //label[@for="s_optional"]
 ${Required}                                 //label[@for="s_required"]
 ${Id Master Field Edit Button}              ts_edit_dep_master_btn
 ${Id Slave Field Edit Button}               ts_edit_dep_slave_btn
-${Id Applicable Law}                        c_appl_law
-${Applicable Law}                           České
+# ${Id Applicable Law}    c_appl_law
+${Id Primary Person}                        c_primary
+# ${Applicable Law}    České
 ${Id Number Sequence}                       c_number
 ${Create Contract}                          //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
 ${Id Contract Status}                       c_status
@@ -46,6 +47,17 @@ ${Language}                                 Čeština
 ${Id Field}                                 c_legalfield
 ${Id Confidentiality}                       c_confid
 ${Id Contract kind}                         c_kind
+${Id Type}                                  c_type
+${Id Partner}                               c_partner
+${Partner Test}                             test
+${Partner List}                             xpath://ul[contains(@class, 'ui-autocomplete')]/li[1]
+${Checkbox Valid Until}                     c_valid_indefinite
+${Acc Area Button}                          c_acc_area_btn
+${Get SAP Data Dialog}                      get_sap_data_dialog
+${Acc Area Field}                           s_bukrs
+${SAP Search Button}                        sap_search_btn
+${Acc Area Name}                            SAP A.G.
+${SAP Search OK Button}                     //button[normalize-space(.)='OK']
 ${Number Sequence}                          ISSTEST
 ${Id Language}                              c_lang
 ${Create Contract File Button}              //button[normalize-space(.)='Vytvoření smluvní složky']
@@ -90,7 +102,7 @@ Add Master Field
     Wait Until Ready    ${Id Select Master Field}
     Select From List By Label    ${Id Select Master Field}    ${Master Field2}
     Wait Until Ready    ${Value Name}
-    Select From List By Label    ${Value Name}    ${Value2}
+    Select From List By Index    ${Value Name}    1
     Click Element    ${Finish Button}
 
 Edit Master Field
@@ -139,22 +151,22 @@ Delete Slave Field
     Wait Until Ready    ${Delete Button}
     Click Element    ${Delete Button}
 
-Check If Applicable Law Is Optional
+Check If Primary Person Is Optional
     Wait Until Ready    ${Id Master Field Add Button}
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
-    ${class}=    Get Element Attribute    ${Id Applicable Law}    class
-    Should Not Contain    ${class}    required
+    ${class}=    Get Element Attribute    ${Id Primary Person}    class
+    Should Not Match    ${class}    required
 
-Check If Applicable Law Is Required
+Check If Primary Person Is Required
     Select From List By Label    ${Id Contract Status}    ${Value}
-    ${class}=    Get Element Attribute    ${Id Applicable Law}    class
-    Should Contain    ${class}    required
+    ${class}=    Get Element Attribute    ${Id Primary Person}    class
+    Should Match    ${class}    required
 
-Try To Create Contract Without Required Applicable Law
+Try To Create Contract Without Required Primary Person
     Fill In Required Fields
     Click Button    ${Create Contract File Button}
     Element Should Be Visible    ${Id Alert}
@@ -163,19 +175,31 @@ Try To Create Contract Without Required Applicable Law
 
 Fill In Required Fields
     Wait Until Ready    ${Id Number Sequence}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Field}    ${Field}
-    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind}
-    Select From List By Label    ${Id Language}    ${Language}
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Index    ${Id Language}    1
+    Select From List By Index    ${Id Type}    1
     Select From List By Label    ${Id Contract Status}    ${Value}
+    Click Element    ${Checkbox Valid Until}
+    Click Element    ${Acc Area Button}
+    Wait Until Ready    ${Get SAP Data Dialog}
+    Input Text    ${Acc Area Field}    1
+    Click Element    ${SAP Search Button}
+    Wait Until Ready    xpath=//table[@id="sap_search_results_tbl"]//td[normalize-space(.)="${Acc Area Name}"]
+    Click Element    xpath=//table[@id="sap_search_results_tbl"]//td[normalize-space(.)="${Acc Area Name}"]
+    Click Button    ${SAP Search OK Button}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
+    Input Text    ${Id Partner}    ${Partner Test}
+    Wait Until Ready    ${Partner List}
+    Click Element    ${Partner List}
 
 Create Contract With All Required
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Fill In Required Fields
-    Select From List By Label    ${Id Applicable Law}    ${Applicable Law}
+    Select From List By Label    ${Id Primary Person}    Admin, Adam
     Click Button    ${Create Contract File Button}
 
 Delete Contract

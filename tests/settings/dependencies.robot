@@ -17,12 +17,12 @@ Edit Dependencies Master and Slave Field
     Edit Master Field
     Edit Slave Field
 
-Check If Applicable Law Is Optional/Required
-    Check If Applicable Law Is Optional
-    Check If Applicable Law Is Required
+Check If Primary Person Is Optional/Required
+    Check If Primary Person Is Optional
+    Check If Primary Person Is Required
 
 Not Possible To Create a Contract Without a Required Field
-    Try To Create Contract Without Required Applicable Law
+    Try To Create Contract Without Required Primary Person
     Create Contract With All Required
 
 Delete Added Contract
