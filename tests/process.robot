@@ -11,3 +11,12 @@ Test Filter And Searching
     [Setup]    Process Setup
     Check Name Of User
     Create Contract
+    Edit Contract
+    Check Edited Contract
+    Create Contract Item
+    Edit Contract Item
+    Check Edited Contract Item
+    Add Documents
+    Add Final Version
+    Start SignOff Process
+    Contract SignOff
