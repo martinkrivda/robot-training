@@ -8,10 +8,10 @@ Variables           ../credentials.py
 
 
 *** Variables ***
-${Login Url}                https://apps.iss-europe.eu/csmtest/login.php
+# ${Login Url}    https://apps.iss-europe.eu/csmtest/login.php
 ${Browser}                  Chrome
 ${Invalid User}             mstestXX
-${Invalid Password}         MsTestXX
+${Invalid Password}         heslo123
 ${Title Login}              CSM
 ${Title Welcome Page}       CSM ISS Europe
 ${Invalid Login Message}    Nemáte oprávnění k použití této aplikace!
@@ -22,13 +22,13 @@ ${Id Password}              password
 
 *** Keywords ***
 Open Browser To Login Page
-    Open Browser    ${Login Url}    ${Browser}
+    Open Browser    ${DATABASE_LOGINURL}    ${Browser}
     Maximize Browser Window
     Title Should Be    ${Title Login}
     Set Selenium Speed    0.05s
 
 Go To Login Page
-    Go To    ${Login Url}
+    Go To    ${DATABASE_LOGINURL}
     Title Should Be    ${Title Login}
 
 Type In Valid Username
@@ -53,7 +53,7 @@ Welcome Page Should Be Open
     Element Text Should Be    //*[@id="user"]/em    ${USER}
 
 Login Should Have Failed
-    Location Should Be    ${Login Url}
+    Location Should Be    ${DATABASE_LOGINURL}
     Title Should Be    ${Title Login}
     Sleep    0.1
     Element Text Should Be    //*[@id="messages"]/center    ${Invalid Login Message}
