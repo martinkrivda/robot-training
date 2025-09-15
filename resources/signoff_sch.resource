@@ -17,7 +17,7 @@ ${SignOff Schema Level1}                    1
 ${SignOff Schema Level2}                    2
 ${Add User1}                                Švadlena, Michal
 ${User1}                                    Michal Švadlena
-${Add User2}                                Vodárek, Dominik
+${Add User2}                                Admin, Adam
 ${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
 ${Id Administration and Configuration}      admin_config
 ${Id SignOff Schemas}                       settings_schemas

@@ -15,8 +15,8 @@ ${Commenting Schema Edit Field}                                 Občanské práv
 ${Commenting Schema Edit Document type}                         ISRS Originál
 ${Add User1}                                                    Švadlena, Michal (isseutester02)
 ${User1}                                                        Michal Švadlena (isseutester02)
-${Add User2}                                                    Vodárek, Dominik (dominik.vodarek@stajrendejov.cz)
-${User2}                                                        Dominik Vodárek (dominik.vodarek@stajrendejov.cz)
+${Add User2}                                                    Admin, Adam (admin)
+${User2}                                                        Adam Admin (admin)
 ${Finish Button}                                                //button[normalize-space(text())="Dokončit"]
 ${Id Administration and Configuration}                          admin_config
 ${Id Settings}                                                  settings_comm_schemas
@@ -26,8 +26,8 @@ ${Id Commenting Schema Edit Button}                             ts_edit_comm_sch
 ${Id Commenting Schema Edit Field}                              add_comm_mand_field_select
 ${Id Commenting Schema Edit Document Type}                      add_comm_mand_doc_type_select
 ${Id Commenting Schema Edit Applicable Law}                     add_comm_mand_appl_law_select_ms
-${Id Commenting Schema Edit Applicable Law Select0}             xpath=//input[@id="ui-multiselect-1-add_comm_mand_appl_law_select-option-0"]
-${Id Commenting Schema Edit Applicable Law Select1}             xpath=//input[@id="ui-multiselect-1-add_comm_mand_appl_law_select-option-1"]
+${Id Commenting Schema Edit Applicable Law Select0}             xpath=//input[contains(@id, 'add_comm_mand_appl_law_select-option-0')]
+${Id Commenting Schema Edit Applicable Law Select1}             xpath=//input[contains(@id, 'add_comm_mand_appl_law_select-option-1')]
 ${Id Commenting Schema Edit Applicable Law Add Button}          u_add_comm_mand
 ${Id Commenting Schema Edit Applicable Law Delete Button}       u_delete_comm_mand
 ${Id Commenting Schema Delete Button}                           ts_del_comm_schema_btn

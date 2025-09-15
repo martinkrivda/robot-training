@@ -24,8 +24,6 @@ ${Id Select Master Field}                   s_master_field
 ${Master Field}                             Stav smlouvy
 ${Master Field2}                            Oblast
 ${Value Name}                               name=s_from
-${Value}                                    Ve zpracování
-${Value2}                                   Občanské právo
 ${Id Slave Field Add Button}                ts_add_dep_slave_btn
 ${Id Select Slave Field}                    s_slave_field
 ${Slave Field}                              Primárně odp. osoba
@@ -34,9 +32,7 @@ ${Optional}                                 //label[@for="s_optional"]
 ${Required}                                 //label[@for="s_required"]
 ${Id Master Field Edit Button}              ts_edit_dep_master_btn
 ${Id Slave Field Edit Button}               ts_edit_dep_slave_btn
-# ${Id Applicable Law}    c_appl_law
 ${Id Primary Person}                        c_primary
-# ${Applicable Law}    České
 ${Id Number Sequence}                       c_number
 ${Create Contract}                          //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
 ${Id Contract Status}                       c_status
@@ -68,6 +64,8 @@ ${Contract Name Detail}                     //a[@id="tab_contract_contract"]
 ${Id Slave Field Delete Button}             ts_del_dep_slave_btn
 ${Id Master Field Delete Button}            ts_del_dep_master_btn
 ${Please Wait}                              please_wait
+${Selected Value}                           ${EMPTY}
+${Selected Value 2}                         ${EMPTY}
 
 
 *** Keywords ***
@@ -102,29 +100,33 @@ Add Master Field
     Wait Until Ready    ${Id Select Master Field}
     Select From List By Label    ${Id Select Master Field}    ${Master Field2}
     Wait Until Ready    ${Value Name}
-    Select From List By Index    ${Value Name}    1
+    Select From List By Index    ${Value Name}    0
+    ${Selected Label}=    Get Selected List Label    ${Value Name}
+    Set Suite Variable    ${Selected Value}    ${Selected Label}
     Click Element    ${Finish Button}
 
 Edit Master Field
-    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
-    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value}"]
     Click Button    ${Id Master Field Edit Button}
     Wait Until Ready    ${Id Select Master Field}
     Select From List By Label    ${Id Select Master Field}    ${Master Field}
     Wait Until Ready    ${Value Name}
-    Select From List By Label    ${Value Name}    ${Value}
+    Select From List By Index    ${Value Name}    1
+    ${Selected Label 2}=    Get Selected List Label    ${Value Name}
+    Set Suite Variable    ${Selected Value 2}    ${Selected Label 2}
     Click Element    ${Finish Button}
 
 Delete Master Field
-    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
-    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value 2}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value 2}"]
     Click Button    ${Id Master Field Delete Button}
     Wait Until Ready    ${Delete Button}
     Click Element    ${Delete Button}
 
 Add Slave Field
-    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
-    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value2}"]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value}"]
     Click Button    ${Id Slave Field Add Button}
     Wait Until Ready    ${Id Select Slave Field}
     Select From List By Label    ${Id Select Slave Field}    ${Slave Field2}
@@ -132,8 +134,8 @@ Add Slave Field
     Click Element    ${Finish Button}
 
 Edit Slave Field
-    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
-    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value 2}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value 2}"]
     Wait Until Ready    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field2}"]
     Click Element    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field2}"]
     Click Button    ${Id Slave Field Edit Button}
@@ -143,8 +145,8 @@ Edit Slave Field
     Click Element    ${Finish Button}
 
 Delete Slave Field
-    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
-    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Value}"]
+    Wait Until Ready    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value 2}"]
+    Click Element    //*[@id="ts_dep_masters_tbl"]//td[text()="${Selected Value 2}"]
     Wait Until Ready    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field}"]
     Click Element    //*[@id="ts_dep_slaves_tbl"]//td[text()="${Slave Field}"]
     Click Button    ${Id Slave Field Delete Button}
@@ -162,7 +164,7 @@ Check If Primary Person Is Optional
     Should Not Match    ${class}    required
 
 Check If Primary Person Is Required
-    Select From List By Label    ${Id Contract Status}    ${Value}
+    Select From List By Label    ${Id Contract Status}    ${Selected Value 2}
     ${class}=    Get Element Attribute    ${Id Primary Person}    class
     Should Match    ${class}    required
 
@@ -181,8 +183,26 @@ Fill In Required Fields
     Select From List By Index    ${Id Contract kind}    1
     Select From List By Index    ${Id Language}    1
     Select From List By Index    ${Id Type}    1
-    Select From List By Label    ${Id Contract Status}    ${Value}
+    Select From List By Label    ${Id Contract Status}    ${Selected Value 2}
     Click Element    ${Checkbox Valid Until}
+    Fill In Acc Area If Present
+    Input Text    ${Id Contract Subject}    ${Contract Subject}
+    Input Text    ${Id Partner}    ${Partner Test}
+    Wait Until Ready    ${Partner List}
+    Click Element    ${Partner List}
+
+Fill In Acc Area If Present
+    ${is_button_present}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible
+    ...    ${Acc Area Button}
+    ...    timeout=2s
+    IF    ${is_button_present}
+        Fill In Acc Area
+    ELSE
+        Log    Tlačítko ${Acc Area Button} není přítomné, pokračuji bez akce
+    END
+
+Fill In Acc Area
     Click Element    ${Acc Area Button}
     Wait Until Ready    ${Get SAP Data Dialog}
     Input Text    ${Acc Area Field}    1
@@ -190,10 +210,6 @@ Fill In Required Fields
     Wait Until Ready    xpath=//table[@id="sap_search_results_tbl"]//td[normalize-space(.)="${Acc Area Name}"]
     Click Element    xpath=//table[@id="sap_search_results_tbl"]//td[normalize-space(.)="${Acc Area Name}"]
     Click Button    ${SAP Search OK Button}
-    Input Text    ${Id Contract Subject}    ${Contract Subject}
-    Input Text    ${Id Partner}    ${Partner Test}
-    Wait Until Ready    ${Partner List}
-    Click Element    ${Partner List}
 
 Create Contract With All Required
     Wait Until Ready    ${Create Contract}
@@ -205,6 +221,7 @@ Create Contract With All Required
 Delete Contract
     Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Element Is Not Visible    ${Please Wait}
+    Sleep    1
     Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Ready    ${Contract Name Detail}
