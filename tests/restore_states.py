@@ -1,36 +1,67 @@
+import logging
+import sys
+import json
 from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
-import json
 import time
 
-def wait_for_element(driver, locator, timeout=5):
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('restore_states.log'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger(__name__)
+
+def attach_to_existing_session(executor_url, session_id):
     try:
+        from selenium.webdriver.chrome.options import Options
+        options = Options()
+        driver = RemoteWebDriver(command_executor=executor_url, options=options)
+        driver.session_id = session_id
+        logger.info(f"Attached to existing WebDriver session with ID: {session_id}")
+        return driver
+    except Exception as e:
+        logger.error(f"Failed to attach to session: {e}")
+        raise
+
+def wait_for_element(driver, locator, timeout=20):
+    try:
+        logger.info(f"Waiting for element: {locator}")
         return WebDriverWait(driver, timeout).until(
             EC.visibility_of_element_located(locator)
         )
     except TimeoutException:
-        print(f"Element {locator} not found within {timeout} seconds")
+        logger.error(f"Element {locator} not found within {timeout} seconds")
         return None
 
-def wait_for_element_gone(driver, locator, timeout=5):
+def wait_for_element_gone(driver, locator, timeout=20):
     try:
+        logger.info(f"Waiting for element to disappear: {locator}")
         WebDriverWait(driver, timeout).until(
             EC.invisibility_of_element_located(locator)
         )
-        print(f"Element {locator} is no longer visible")
+        logger.info(f"Element {locator} is no longer visible")
         return True
     except TimeoutException:
-        print(f"Element {locator} still visible after {timeout} seconds")
+        logger.error(f"Element {locator} still visible after {timeout} seconds")
         return False
 
 def get_radio_state(driver, input_id):
     try:
         input_element = driver.find_element(By.XPATH, f"//input[@id='{input_id}']")
-        return input_id if input_element.get_attribute("checked") == "checked" else None
-    except:
+        state = input_id if input_element.get_attribute("checked") == "checked" else None
+        logger.info(f"Checked state for {input_id}: {state}")
+        return state
+    except Exception as e:
+        logger.error(f"Failed to get state for {input_id}: {e}")
         return None
 
 def click_radio_button(driver, label_for):
@@ -41,20 +72,19 @@ def click_radio_button(driver, label_for):
             WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, f"//label[@for='{label_for}' and contains(@class, 'ui-state-active')]"))
             )
-            print(f"Clicked radio button: {label_for}")
+            logger.info(f"Clicked radio button: {label_for}")
     except Exception as e:
-        print(f"Failed to click radio button {label_for}: {e}")
+        logger.error(f"Failed to click radio button {label_for}: {e}")
 
 def click_finish_button(driver):
     try:
         finish_button = wait_for_element(driver, (By.XPATH, "//div[@class='ui-dialog-buttonset']//button[contains(text(), 'Dokončit')]"))
         if finish_button:
             finish_button.click()
-            print("Clicked 'Dokončit' button")
-            # Wait for dialog to close
+            logger.info("Clicked 'Dokončit' button")
             wait_for_element_gone(driver, (By.XPATH, "//div[@role='dialog']"))
     except Exception as e:
-        print(f"Failed to click 'Dokončit' button: {e}")
+        logger.error(f"Failed to click 'Dokončit' button: {e}")
 
 def restore_states(driver, row_index, row_states):
     radio_groups = {
@@ -65,7 +95,6 @@ def restore_states(driver, row_index, row_states):
         "edit_radio": ["s_editable", "s_readonly"]
     }
 
-    # Check current states and restore if different
     for group in radio_groups:
         current_state = None
         for input_id in radio_groups[group]:
@@ -75,75 +104,95 @@ def restore_states(driver, row_index, row_states):
                 break
         initial_state = row_states.get(group)
         if current_state != initial_state:
-            print(f"Row {row_index + 1} - Restoring {group} to {initial_state}")
+            logger.info(f"Row {row_index + 1} - Restoring {group} to {initial_state}")
             click_radio_button(driver, initial_state)
         else:
-            print(f"Row {row_index + 1} - No change needed for {group}")
+            logger.info(f"Row {row_index + 1} - No change needed for {group}")
 
-    # Save restored states
     click_finish_button(driver)
 
 def main():
-    # Load initial states from JSON file
+    logger.info("Starting restore_states.py")
+    try:
+        with open("session_info.json", "r") as f:
+            session_data = json.load(f)
+            executor_url = session_data.get('executor_url')
+            session_id = session_data.get('session_id')
+        if not executor_url or not session_id:
+            logger.error("Invalid session_info.json: Missing executor_url or session_id")
+            return
+        logger.info(f"Loaded session info: executor_url={executor_url}, session_id={session_id}")
+    except FileNotFoundError:
+        logger.error("session_info.json not found")
+        return
+    except KeyError as e:
+        logger.error(f"Invalid session_info.json format: {e}")
+        return
+
+    try:
+        driver = attach_to_existing_session(executor_url, session_id)
+    except Exception as e:
+        logger.error(f"Failed to attach to existing session: {e}")
+        return
+
     try:
         with open("initial_states.json", "r") as f:
             all_initial_states = json.load(f)
-        print("Loaded initial states from initial_states.json")
-    except FileNotFoundError:
-        print("initial_states.json not found")
-        return
+        logger.info("Loaded initial states from initial_states.json")
 
-    # Initialize WebDriver
-    driver = webdriver.Chrome()
-    driver.get("https://example.com")  # Replace with actual URL
-
-    try:
-        # Wait for table to load
         table = wait_for_element(driver, (By.ID, "ts_custom_fields_tbl"))
         if not table:
-            print("Table not found")
+            logger.error("Table not found")
             return
 
-        # Get all rows
         rows = driver.find_elements(By.XPATH, "//table[@id='ts_custom_fields_tbl']/tbody/tr")
-        print(f"Found {len(rows)} rows")
+        logger.info(f"Found {len(rows)} rows")
 
         for index in range(len(rows)):
-            # Re-fetch rows to avoid stale element reference
-            rows = driver.find_elements(By.XPATH, "//table[@id='ts_custom_fields_tbl']/tbody/tr")
-            row = rows[index]
-            print(f"Processing row {index + 1}")
-
-            row_key = f"row_{index + 1}"
-            if row_key not in all_initial_states:
-                print(f"No initial states found for {row_key}")
+            row_locator = f"//table[@id='ts_custom_fields_tbl']/tbody/tr[{index + 1}]"
+            row = wait_for_element(driver, (By.XPATH, row_locator))
+            if row:
+                row.click()
+                logger.info(f"Clicked on row {index + 1} to select it")
+                time.sleep(1)  # Short delay to allow row highlighting
+                try:
+                    WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.XPATH, f"{row_locator}[contains(@class, 'highlight')]"))
+                    )
+                    logger.info(f"Row {index + 1} highlighted")
+                except TimeoutException:
+                    logger.warning(f"Row {index + 1} not highlighted, proceeding anyway")
+            else:
+                logger.error(f"Row {index + 1} not found")
                 continue
 
-            row_states = all_initial_states[row_key]
-
-            # Click edit button
             edit_button = wait_for_element(driver, (By.ID, "ts_edit_custom_fields_btn"))
             if edit_button:
                 try:
                     edit_button.click()
-                    print(f"Clicked edit button for row {index + 1}")
+                    logger.info(f"Clicked edit button for row {index + 1}")
 
-                    # Wait for fieldset to appear
                     fieldset = wait_for_element(driver, (By.XPATH, "//fieldset[contains(@class, 'ui-widget-content')]"))
                     if fieldset:
-                        print(f"Fieldset opened for row {index + 1}")
-                        restore_states(driver, index, row_states)
+                        logger.info(f"Fieldset opened for row {index + 1}")
+                        row_states = all_initial_states.get(f"row_{index + 1}")
+                        if row_states:
+                            restore_states(driver, index, row_states)
+                        else:
+                            logger.error(f"No initial states found for row_{index + 1}")
                     else:
-                        print(f"Fieldset not found for row {index + 1}")
+                        logger.error(f"Fieldset not found for row {index + 1}")
                 except StaleElementReferenceException:
-                    print(f"Stale element error for row {index + 1}, retrying")
+                    logger.error(f"Stale element error for row {index + 1}, retrying")
                     time.sleep(1)
                     continue
             else:
-                print(f"Edit button not found for row {index + 1}")
+                logger.error(f"Edit button not found for row {index + 1}")
 
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
     finally:
-        driver.quit()
+        logger.info("Finished, keeping WebDriver open for Robot")
 
 if __name__ == "__main__":
     main()

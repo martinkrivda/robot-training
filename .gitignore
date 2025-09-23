@@ -8,3 +8,7 @@ output.xml
 selenium-screenshot-*.png
 __pycache__
 *.log
+stderr.txt
+stdout.txt
+session_info.json
+initial_states.json
