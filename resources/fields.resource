@@ -6,6 +6,7 @@ Library             OperatingSystem
 Library             SeleniumLibrary
 Variables           ../credentials.py
 Resource            login.resource
+Resource            fields_setup.resource
 
 
 *** Variables ***
@@ -86,15 +87,15 @@ Click On Fields
     Wait Until Ready    ${Id Fields}
     Click Element    ${Id Fields}
 
-Go To Fields
-    Go To Settings
-    Click On Administration
-    Click On Fields
+# Go To Fields
+#    Go To Settings
+#    Click On Administration
+#    Click On Fields
 
-Wait Until Ready
-    [Arguments]    ${locator}
-    Wait Until Element Is Visible    ${locator}    timeout=${Timeout}
-    Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}
+# Wait Until Ready
+#    [Arguments]    ${locator}
+#    Wait Until Element Is Visible    ${locator}    timeout=${Timeout}
+#    Wait Until Element Is Enabled    ${locator}    timeout=${Timeout}
 
 Check If Tender Number Is Not Visible
     Wait Until Ready    ${Personal Space}

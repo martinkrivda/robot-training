@@ -3,6 +3,8 @@ Documentation       A test suite for fields.
 ...                 Keywords are imported from fields.resource
 
 Resource            ${EXECDIR}/resources/fields.resource
+# Suite Setup    Save Original Fields State
+# Suite Teardown    Restore Original Fields State
 
 
 *** Test Cases ***
