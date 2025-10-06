@@ -79,6 +79,26 @@ Save Original Fields State
     Log    stderr: ${stderr}
     Close Browser
 
+Set Test Fields State
+    Open Browser And Logged In
+    Go To Fields
+    Save Session Info
+    Run Process
+    ...    python
+    ...    ${EXECDIR}/tests/set_states.py
+    ...    stdout=stdout.txt
+    ...    stderr=stderr.txt
+    ...    env:PYTHONIOENCODING=utf-8
+    ${stdout}=    Get File    stdout.txt    encoding=utf-8
+    ${stderr}=    Get File    stderr.txt    encoding=utf-8
+    Log    stdout: ${stdout}
+    Log    stderr: ${stderr}
+    Close Browser
+
+Save and Set Fields
+    Save Original Fields State
+    Set Test Fields State
+
 Restore Original Fields State
     Open Browser And Logged In
     Go To Fields

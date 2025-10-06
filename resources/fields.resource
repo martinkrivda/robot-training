@@ -34,7 +34,7 @@ ${Tender Number}                            1234
 ${Create Contract}                          //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
 ${Id Number Sequence}                       c_number
 ${Close Button}                             xpath=//button[@title="Close"]
-${Personal Space}                           //a[@class="main_tabs" and @href="#tab_personal"]
+${Personal Space}                           //a[contains(@class, 'main_tabs') and @href="#tab_personal"]
 ${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
 ${Id Field}                                 c_legalfield
 ${Id Confidentiality}                       c_confid
