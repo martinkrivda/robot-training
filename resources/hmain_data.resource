@@ -330,7 +330,7 @@ Check Created Template
     Wait Until Ready    ${Id Create Document From Template Button}
     Click Element    ${Close Button}
 
-Delete Contract
+Delete Contractt
     Wait Until Ready    ${Id Add Document Button}
     Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}

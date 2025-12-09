@@ -62,6 +62,7 @@ ${Id Add Item Button}                       tc_add_item_btn
 ${Id Edit Item Button}                      tc_edit_item_btn
 ${Id Delete Item Button}                    tc_del_item_btn
 ${Id Unit Price}                            c_unit_price
+${Id Price}                                 c_price
 ${Unit Price}                               1,69
 ${Id Add Commodity/service}                 c_commodity
 ${Delete Contract Personal}                 xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_delete_file"]
@@ -125,6 +126,14 @@ ${Id Delete Authorized Users Button}        tc_del_user_btn
 ${Id Authorized Users Button}               id=user_ms
 ${Id Add Authorized Users}                  xpath=//label[span[contains(normalize-space(.), "Vodárková, Jindra")]]/input
 ${Authorized User}                          xpath=//tr[td[normalize-space(.)="Vodárková, Jindra"]]
+${Id VAT ID}                                c_vatid
+${Id Contract Type}                         c_type
+${Id Appl Law}                              c_appl_law
+${Id Profit Center}                         c_profit_center
+${Id Acc Area}                              c_acc_area
+${Id Delivery To}                           c_delivery_to
+${Id Unit}                                  c_unit
+${Id As Autor}                              id=r_creator
 
 
 *** Keywords ***
@@ -148,7 +157,7 @@ Delete Contracts
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
-Delete Contract
+Delete Contract1
     Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}
     Wait Until Ready    ${Delete Button}
@@ -160,17 +169,29 @@ Contract File Setup
     Delete Contract If Exists    ${Contract Subject}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
-    Wait Until Ready    ${Id Number Sequence}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Field}    ${Field}
-    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind}
-    Select From List By Label    ${Id Language}    ${Language}
-    Select From List By Label    ${Id Contract Status}    ${Value}
-    Select From List By Label    ${Id Primary Responsible Person}    ${Primary Responsible Person}
-    Select From List By Label    ${Id Secondary Responsible Person}    ${Secondary Responsible Person}
+    Wait Until Ready    ${Id Language}
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Contract Type}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Index    ${Id Language}    1
+    Select From List By Index    ${Id Contract Status}    1
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Add Contract Partners}    ${Name2}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
     Input Text    ${Id Valid Until}    ${Edited Date}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
     Click Button    ${Create Contract File Button}
 
 Go To Contract File
@@ -202,7 +223,10 @@ Add Contract Item
     Wait Until Ready    ${Id Unit Price}
     Input Text    ${Id Unit Price}    ${Unit Price}
     Input Text    ${Id Quantity}    ${Number}
+    Input Text    ${Id Price}    ${Number}
     Select From List By Index    ${Id Add Commodity/service}    1
+    Input Text    ${Id Delivery To}    ${Date}
+    Select From List By Index    ${Id Unit}    1
     Click Element    ${Finish Button}
 
 Edit Contract Item
@@ -214,7 +238,7 @@ Edit Contract Item
     Click Element    ${Finish Button}
     Wait Until Element Is Not Visible    ${Id Add Commodity/service}
 
-Delete Contract Item
+Delete Contract Items
     Wait Until Ready    xpath=//table[@id="tc_contract_items_tbl"]//td[normalize-space(.)="${Unit Price}"]
     Click Element    xpath=//table[@id="tc_contract_items_tbl"]//td[normalize-space(.)="${Unit Price}"]
     Click Button    ${Id Delete Item Button}
@@ -233,6 +257,7 @@ Add Contract Document
     Choose File    ${Input File}    ${File Path}
     Wait Until Ready    ${Finish Button}
     Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Add Document Button}
 
 Edit Contract Document
     Wait Until Ready    ${Id Edit Document Button}
@@ -244,6 +269,7 @@ Edit Contract Document
     Click Element    ${Finish Button}
 
 Delete Contract Document
+    Sleep    5
     Wait Until Ready    ${Id Delete Document Button}
     Click Button    ${Id Delete Document Button}
     Wait Until Ready    ${Delete Button}
@@ -277,8 +303,9 @@ Add Additional Document
     Wait Until Ready    ${Id Add Additional Document Button}
 
 Edit Additional Document
-    Wait Until Ready    ${Id Edit Additional Document Button}
+    Sleep    5
     Wait Until Element Is Not Visible    ${Id Edit Document Dialog}
+    Wait Until Ready    ${Id Edit Additional Document Button}
     Click Element    ${Id Edit Additional Document Button}
     Wait Until Ready    ${Finish Button}
     Wait Until Ready    ${Id Add Document}
@@ -308,6 +335,7 @@ Go To Contract Relations
     Click Element    ${Contract Relations}
 
 Add Contract Relations
+    Sleep    5
     Wait Until Ready    ${Id Add Contract Relations Button}
     Click Button    ${Id Add Contract Relations Button}
     Wait Until Ready    ${Id Contract Relations From}
@@ -319,6 +347,7 @@ Add Contract Relations
     Wait Until Element Is Visible    ${Contract}    timeout=5s
     Click Element    ${Contract}
     Double Click Element    ${Contract}
+    Wait Until Ready    ${Id Contract Relations From}
     Wait Until Ready    ${Finish Button}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Add Contract Relations Button}
@@ -351,14 +380,17 @@ Try To Create Contract Relations Without Required Field
 Go To Contract Partners
     Wait Until Ready    ${Contract Partners}
     Click Element    ${Contract Partners}
+    Wait Until Ready    ${Id Add Contract Partners Button}
 
 Add Contract Partners
+    Sleep    2
     Wait Until Ready    ${Id Add Contract Partners Button}
     Click Button    ${Id Add Contract Partners Button}
     Wait Until Ready    ${Id Add Contract Partners}
     Input Text    ${Id Add Contract Partners}    ${Name2}
     Wait Until Element Is Visible    xpath=(//ul[contains(@class, "ui-autocomplete")])[1]//li[1]
     Click Element    xpath=(//ul[contains(@class, "ui-autocomplete")])[1]//li[1]
+    Sleep    3
     Wait Until Ready    ${Finish Button}
     Click Element    ${Finish Button}
     Wait Until Ready    ${Id Add Contract Partners Button}
@@ -370,6 +402,7 @@ Delete Contract Partners
     Click Button    ${Delete Button}
 
 Try To Create Contract Partners Without Required Field
+    Sleep    5
     Wait Until Ready    ${Id Add Contract Partners Button}
     Click Button    ${Id Add Contract Partners Button}
     Wait Until Ready    ${Finish Button}
@@ -443,6 +476,7 @@ Add Contract Item, Final Version And Contract Partner
     Add Contract Partners
 
 Check Completed Contract File
+    Sleep    5
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
     Wait Until Ready    ${Parked files}
@@ -516,14 +550,18 @@ Go To Released Contracts
     Click Element    ${Id Released Contracts}
     Wait Until Ready    ${Id Released Contracts}
     Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Id As Autor}
+    Click Element    ${Id As Autor}
+    Wait Until Ready    ${Id As Autor}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    ${Partner}
     Wait Until Element Is Not Visible    ${Please Wait}
-    Wait Until Ready    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Ready    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject}"]
     Scroll Element Into View
-    ...    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
-    Click Element    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    ...    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject}"]
     Double Click Element
-    ...    xpath=//table[@id="r_primary_resp_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    ...    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject}"]
 
 Go To Authorized Users
     Wait Until Ready    ${Authorized Users}

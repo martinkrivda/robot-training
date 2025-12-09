@@ -104,7 +104,7 @@ Check Created Main Data
     [Documentation]    A test case for creating contract, contract template.
     Check Created Contract Data
     Check Created Template
-    Delete Contract
+    Delete Contractt
 
 Delete Template And Disable Field
     [Documentation]    A test case for deleting template, disabling field.

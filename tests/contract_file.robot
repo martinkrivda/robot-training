@@ -3,7 +3,11 @@ Documentation       A test suite for contract file.
 ...                 Keywords are imported from contract_file.resource
 
 Resource            ${EXECDIR}/resources/contract_file.resource
+Resource            ${EXECDIR}/resources/fields.resource
+Resource            ${EXECDIR}/resources/hmain_data.resource
 
+Suite Setup         Save and Set Fields
+Suite Teardown      Restore Original Fields State
 
 *** Test Cases ***
 Add Edit Delete Contract Items
@@ -13,7 +17,7 @@ Add Edit Delete Contract Items
     Try To Create Contract Item Without Required Field
     Add Contract Item
     Edit Contract Item
-    Delete Contract Item
+    Delete Contract Items
 
 Add Edit Delete Contract Document
     [Documentation]    A test case for contract document.
@@ -79,4 +83,4 @@ Add Delete Authorized Users
 
 Delete Contract
     [Documentation]    A test case for deleting contract.
-    Delete Contract
+    Delete Contract1

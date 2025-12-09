@@ -84,6 +84,7 @@ ${Input File}                               xpath=//input[@type="file" and @name
 ${Contract Documents}                       xpath=//a[@href="#tc_contract_documents" and contains(@class, "sub_tabs")]
 ${File Path}                                ${EXECDIR}/template_test.pdf
 ${File Path 2}                              ${EXECDIR}/template_test.docx
+${File Path 3}                              ${EXECDIR}/template_test2.pdf
 ${Id Final Version Button}                  tc_merge_document_btn
 ${Create Final Version Button}              xpath=//div[@class="ui-dialog-buttonset"]//button[contains(@class, "ui-button") and normalize-space(.)="Vytvoření finálního znění"]
 ${File xPath}                               xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.pdf"]
@@ -91,6 +92,7 @@ ${File xPath 2}                             xpath=//ul[@id="docs_left"]//li[norm
 ${DOWNLOAD_DIR}                             C:/Users/domin/Downloads
 ${Add Document}                             Smlouva
 ${Add Document 2}                           Kalkulace
+${Add Document 3}                           Originál
 ${Create Document Template Button}          doc_create_from_template
 ${Id Document Template}                     doc_templ
 ${Document Template}                        Test mapován údajů do vzoru - vše.docx
@@ -105,6 +107,9 @@ ${Contract To Process}                      sign_off
 ${Contract Signoff}                         xpath=//ul[contains(@class,"cm_pending_decisions_tbl") and contains(@class,"contextMenu") and not(contains(@class,"permanent"))]//a[@href="#signoff_confirm"]
 ${Signoff Button}                           decision_button
 ${Contract Signed Off}                      s_signed_off_contracts
+${Protocols}                                xpath=//a[@href="#tc_contract_protocols"]
+${Id Cover Sheet}                           tc_cover_sheet_btn
+${Id Final Version Checkbox}                finalversion_chk
 
 
 *** Keywords ***
@@ -326,7 +331,29 @@ Contract SignOff
     Wait Until Ready    ${Signoff Button}
     Click Button    ${Signoff Button}
 
-Check
+Check Signed Off Contract And Create Cover Sheet
     Wait Until Ready    ${Contract Signed Off}
     Click Element    ${Contract Signed Off}
     Wait Until Ready    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Double Click Element
+    ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Ready    ${Protocols}
+    Click Element    ${Protocols}
+    Wait Until Ready    ${Id Cover Sheet}
+    Click Button    ${Id Cover Sheet}
+    Wait Until Ready    ${Id Final Version Checkbox}
+    Select Checkbox    ${Id Final Version Checkbox}
+    Click Element    ${Create Button}
+    Wait Until Element Is Not Visible    ${Please Wait}    30s
+
+Original
+    Wait Until Ready    ${Contract Documents}
+    Click Element    ${Contract Documents}
+    Wait Until Ready    ${Id Add Document Button}
+    Click Element    ${Id Add Document Button}
+    Wait Until Ready    ${Id Add Document}
+    Select From List By Label    ${Id Add Document}    ${Add Document 3}
+    Choose File    ${Input File}    ${File Path 3}
+    Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Add Document}

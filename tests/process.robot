@@ -20,3 +20,6 @@ Test Filter And Searching
     Add Final Version
     Start SignOff Process
     Contract SignOff
+    Check Signed Off Contract And Create Cover Sheet
+    Original
+    Sleep    10s
