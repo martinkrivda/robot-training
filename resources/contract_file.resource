@@ -108,7 +108,6 @@ ${Add Forum}                                forum_entry_form
 ${Id Add Forum Button}                      add_forum_entry_btn
 ${Start Signoff Process Button}             xpath=//div[@id="tbl_menu"]//ul[contains(@class,"cm_personal_tbl")]//a[@href="#contract_start_signoff"]
 ${Id Add Signoff Schema}                    s_schema
-${Add Signoff Schema}                       TEST DV
 ${Add Signoff Comment}                      signoff_comment
 ${Id Contracts To Process}                  sign_off
 ${Id Contracts Signed Off}                  s_signed_off_contracts
@@ -157,7 +156,7 @@ Delete Contracts
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
-Delete Contract1
+Delete Contract
     Wait Until Ready    ${Delete Contract}
     Click Element    ${Delete Contract}
     Wait Until Ready    ${Delete Button}
@@ -501,7 +500,7 @@ Start SignOff Process
     Wait Until Ready    ${Start Signoff Process Button}
     Click Element    ${Start Signoff Process Button}
     Wait Until Ready    ${Id Add Signoff Schema}
-    Select From List By Label    ${Id Add Signoff Schema}    ${Add Signoff Schema}
+    Select From List By Label    ${Id Add Signoff Schema}    ${SIGNOFF_SCHEMA}
     Input Text    ${Add Signoff Comment}    ${Name}
     Click Element    ${Finish Button}
 

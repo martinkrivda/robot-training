@@ -83,4 +83,4 @@ Add Delete Authorized Users
 
 Delete Contract
     [Documentation]    A test case for deleting contract.
-    Delete Contract1
+    contract_file.Delete Contract
