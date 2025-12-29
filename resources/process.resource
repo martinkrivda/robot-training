@@ -24,6 +24,8 @@ ${Timeout2}                                 1s
 ${No Path}                                  xpath=//button[normalize-space(.)="Ne"]
 ${Personal Space}                           //a[@class="main_tabs" and @href="#tab_personal"]
 ${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
+${Contract}                                 //a[@class="main_tabs" and @href="#tab_contract"]
+${Refresh}                                  css=#tab_personal_buttons button.refresh_btn
 ${Create Contract File Button}              //button[normalize-space(.)='Vytvoření smluvní složky']
 ${Delete Contract}                          xpath=//li[@class="cm_item ui-corner-all"]//a[contains(@href, "#contract_delete_file")]
 ${Create Contract}                          //button[.//span[@class="title" and contains(text(), "Vytvoření smlouvy")]]
@@ -260,6 +262,7 @@ Add Documents
     Click Button    ${Create Button}
     Wait Until Ready    ${Id Add Document}
     Wait Until File Downloaded    *.docx
+    Sleep    3
     ${latest_file}=    Get Latest Downloaded Docx    ${DOWNLOAD_DIR}
     Choose File    ${Input File}    ${DOWNLOAD_DIR}/${latest_file}
     Wait Until Ready    ${Finish Button}
@@ -317,10 +320,11 @@ Start SignOff Process
     Wait Until Ready    ${Start SignOff Process}
     Click Element    ${Start SignOff Process}
     Wait Until Ready    ${Id Add Signoff Schema}
-    Select From List By Label    ${Id Add Signoff Schema}    ${Add Signoff Schema}
+    Select From List By Label    ${Id Add Signoff Schema}    ${SIGNOFF_SCHEMA}
     Click Element    ${Finish Button}
 
 Contract SignOff
+    Wait Until Element Is Not Visible    ${Please Wait}
     Go To Personal Space
     Wait Until Ready    ${Contract To Process}
     Click Element    ${Contract To Process}
@@ -357,3 +361,34 @@ Original
     Choose File    ${Input File}    ${File Path 3}
     Click Element    ${Finish Button}
     Wait Until Element Is Not Visible    ${Id Add Document}
+
+
+Wait Until Comparing Finished
+    [Arguments]    ${max_attempts}=30
+
+    ${attempt}=    Set Variable    0
+
+    WHILE    True
+        ${attempt}=    Evaluate    ${attempt} + 1
+        Run Keyword If    ${attempt} > ${max_attempts}
+        ...    Fail    Porovnávání stále běží i po ${max_attempts} pokusech
+
+        Wait Until Ready    ${Personal Space}
+        Click Element      ${Personal Space}
+
+        Wait Until Ready    ${Refresh}
+        Click Element      ${Refresh}
+        Sleep    1s
+
+        Wait Until Ready    ${Contract}
+        Click Element      ${Contract}
+        Sleep    1s
+
+        ${is_visible}=    Run Keyword And Return Status
+        ...    Page Should Contain Element
+        ...    xpath=//span[starts-with(@id,'comparing_')]
+
+        Run Keyword If    not ${is_visible}    Exit For Loop
+
+        Log    Comparing stále běží – opakuji (${attempt}/${max_attempts})
+    END

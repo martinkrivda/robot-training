@@ -22,4 +22,5 @@ Test Filter And Searching
     Contract SignOff
     Check Signed Off Contract And Create Cover Sheet
     Original
-    Sleep    10s
+    Wait Until Comparing Finished
+
