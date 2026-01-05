@@ -3,6 +3,10 @@ Documentation       A test suite for contract items.
 ...                 Keywords are imported from contract_items.resource
 
 Resource            ${EXECDIR}/resources/contract_items.resource
+Resource            ${EXECDIR}/resources/fields.resource
+
+Suite Setup         Save and Set Fields
+Suite Teardown      Restore Original Fields State
 
 
 *** Test Cases ***
@@ -118,7 +122,7 @@ Add Edit Maturity
 Check Created Contract Items
     [Documentation]    A test case for creating contract.
     Check Created Items
-    Delete Contract
+    contract_items.Delete Contract
 
 Disable Commodity/service And Item Type
     [Documentation]    A test case for disabling commodity/service, item type.
@@ -167,5 +171,5 @@ Disable Location And Maturity
 
 Set Fields Visibility Back to Normal
     [Documentation]    A test case for fileds visibility.
-    Click On Administration
+    contract_items.Click On Administration
     Set Fields Back To Invisible

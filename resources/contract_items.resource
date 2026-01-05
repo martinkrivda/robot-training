@@ -132,7 +132,7 @@ ${Id Currency}                                  settings_currency
 ${Id Edit Currency Button}                      ts_edit_currency_btn
 ${Id Add Currency Button}                       ts_add_currency_btn
 ${Id Add Currency}                              c_currency
-${Id Unit}                                      settings_unit
+${Id Set Unit}                                  settings_unit
 ${Id Edit Unit Button}                          ts_edit_unit_btn
 ${Id Add Unit Button}                           ts_add_unit_btn
 ${Id Add Unit}                                  c_unit
@@ -153,7 +153,22 @@ ${Id Add Maturity Button}                       ts_add_maturity_btn
 ${Id Add Maturity}                              c_maturity
 ${Id Create Maturity}                           s_maturity
 ${Id Create Maturity Description}               s_description
-
+${Id VAT ID}                                    c_vatid
+${Id Contract Type}                             c_type
+${Id Appl Law}                                  c_appl_law
+${Id Profit Center}                             c_profit_center
+${Id Acc Area}                                  c_acc_area
+${Id Delivery To}                               c_delivery_to
+${Id Unit}                                      c_unit
+${Id Primary Responsible Person}                c_primary
+${Id Secondary Responsible Person}              c_secondary
+${Id Add Contract Partners}                     c_partner
+${Id Valid Until}                               c_valid_until
+${Edited Date}                                  12.07.2025
+${Name7}                                        vod
+${Id Quantity}                                  c_quant
+${Date}                                         03.07.2025
+${Id Price}                                 c_price
 
 *** Keywords ***
 Wait Until Ready
@@ -439,14 +454,29 @@ Create Contract
     Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
-    Wait Until Ready    ${Id Number Sequence}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Field}    ${Field}
-    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind}
-    Select From List By Label    ${Id Language}    ${Language}
-    Select From List By Label    ${Id Contract Status}    ${Value}
+    Wait Until Ready    ${Id Language}
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Contract Type}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Index    ${Id Language}    1
+    Select From List By Index    ${Id Contract Status}    1
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Add Contract Partners}    ${Name7}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Valid Until}    ${Edited Date}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
     Click Button    ${Create Contract File Button}
 
 Check Created Items
@@ -463,6 +493,11 @@ Check Created Items
     Click Button    ${Id Add Item Button}
     Wait Until Ready    ${Id Unit Price}
     Input Text    ${Id Unit Price}    ${Unit Price}
+    Input Text    ${Id Quantity}    ${Number}
+    Input Text    ${Id Price}    ${Number}
+    Select From List By Index    ${Id Add Commodity/service}    1
+    Input Text    ${Id Delivery To}    ${Date}
+    Select From List By Index    ${Id Unit}    1
     Select Created Items
     Click Element    ${Finish Button}
 
@@ -1456,8 +1491,8 @@ Disable Currency
     Click Element    ${Finish Button}
 
 Go To Unit
-    Wait Until Ready    ${Id Unit}
-    Click Element    ${Id Unit}
+    Wait Until Ready    ${Id Set Unit}
+    Click Element    ${Id Set Unit}
     Wait Until Ready    ${Id Add Unit Button}
 
 Enable Unit
