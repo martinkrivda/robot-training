@@ -21,12 +21,12 @@ ${Settings}                                 //a[@class="main_tabs" and @href="#t
 ${Id Dependencies}                          settings_custom_dependencies
 ${Id Master Field Add Button}               ts_add_dep_master_btn
 ${Id Select Master Field}                   s_master_field
-${Master Field}                             Stav smlouvy
+${Master Field}                             Jazyk smlouvy
 ${Master Field2}                            Oblast
 ${Value Name}                               name=s_from
 ${Id Slave Field Add Button}                ts_add_dep_slave_btn
 ${Id Select Slave Field}                    s_slave_field
-${Slave Field}                              Primárně odp. osoba
+${Slave Field}                              Organizační jednotka
 ${Slave Field2}                             Typ smlouvy
 ${Optional}                                 //label[@for="s_optional"]
 ${Required}                                 //label[@for="s_required"]
@@ -66,8 +66,21 @@ ${Id Master Field Delete Button}            ts_del_dep_master_btn
 ${Please Wait}                              please_wait
 ${Selected Value}                           ${EMPTY}
 ${Selected Value 2}                         ${EMPTY}
-
-
+${Id VAT ID}                                c_vatid
+${Id Contract Type}                         c_type
+${Id Appl Law}                              c_appl_law
+${Id Profit Center}                         c_profit_center
+${Id Acc Area}                              c_acc_area
+${Id Delivery To}                           c_delivery_to
+${Id Unit}                                  c_unit
+${Id Primary Responsible Person}            c_primary
+${Id Secondary Responsible Person}          c_secondary
+${Id Add Contract Partners}                 c_partner
+${Id Valid Until}                           c_valid_until
+${Name}                                     dvtest1
+${Name2}                                    vod
+${Edited Date}                              12.07.2025
+${Id Org Unit}                              c_orgunit
 *** Keywords ***
 Go To Settings
     Click Element    ${Settings}
@@ -153,22 +166,22 @@ Delete Slave Field
     Wait Until Ready    ${Delete Button}
     Click Element    ${Delete Button}
 
-Check If Primary Person Is Optional
+Check If Org Unit Is Optional
     Wait Until Ready    ${Id Master Field Add Button}
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
-    ${class}=    Get Element Attribute    ${Id Primary Person}    class
-    Should Not Match    ${class}    required
+    ${class}=    Get Element Attribute    id=c_orgunit    class
+    Should Not Contain    ${class}    required
 
-Check If Primary Person Is Required
-    Select From List By Label    ${Id Contract Status}    ${Selected Value 2}
-    ${class}=    Get Element Attribute    ${Id Primary Person}    class
-    Should Match    ${class}    required
+Check If Org Unit Is Required
+    Select From List By Label    ${Id Language}    ${Selected Value 2}
+    ${class}=    Get Element Attribute    id=c_orgunit    class
+    Should Contain    ${class}    required
 
-Try To Create Contract Without Required Primary Person
+Try To Create Contract Without Required Org Unit
     Fill In Required Fields
     Click Button    ${Create Contract File Button}
     Element Should Be Visible    ${Id Alert}
@@ -176,20 +189,45 @@ Try To Create Contract Without Required Primary Person
     Click Element    ${Close Button}
 
 Fill In Required Fields
-    Wait Until Ready    ${Id Number Sequence}
+    Wait Until Ready    ${Id Language}
     Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Contract Type}    1
     Select From List By Index    ${Id Field}    1
     Select From List By Index    ${Id Confidentiality}    1
     Select From List By Index    ${Id Contract kind}    1
-    Select From List By Index    ${Id Language}    1
-    Select From List By Index    ${Id Type}    1
-    Select From List By Label    ${Id Contract Status}    ${Selected Value 2}
-    Click Element    ${Checkbox Valid Until}
-    Fill In Acc Area If Present
+    Select From List By Label    ${Id Language}    ${Selected Value 2}
+    Select From List By Index    ${Id Contract Status}    1
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Add Contract Partners}    ${Name2}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Valid Until}    ${Edited Date}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
-    Input Text    ${Id Partner}    ${Partner Test}
-    Wait Until Ready    ${Partner List}
-    Click Element    ${Partner List}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
+
+    # Wait Until Ready    ${Id Number Sequence}
+    # Select From List By Index    ${Id Number Sequence}    1
+    # Select From List By Index    ${Id Field}    1
+    # Select From List By Index    ${Id Confidentiality}    1
+    # Select From List By Index    ${Id Contract kind}    1
+    # Select From List By Index    ${Id Language}    1
+    # Select From List By Index    ${Id Type}    1
+    # Select From List By Label    ${Id Contract Status}    ${Selected Value 2}
+    # Sleep    10
+    # Click Element    ${Checkbox Valid Until}
+    # Fill In Acc Area If Present
+    # Input Text    ${Id Contract Subject}    ${Contract Subject}
+    # Input Text    ${Id Partner}    ${Partner Test}
+    # Wait Until Ready    ${Partner List}
+    # Click Element    ${Partner List}
 
 Fill In Acc Area If Present
     ${is_button_present}=    Run Keyword And Return Status
@@ -215,7 +253,7 @@ Create Contract With All Required
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Fill In Required Fields
-    Select From List By Label    ${Id Primary Person}    Admin, Adam
+    Select From List By Index    ${Id Org Unit}    1
     Click Button    ${Create Contract File Button}
 
 Delete Contract
