@@ -211,36 +211,22 @@ Fill In Required Fields
     Input Text    ${Id Valid Until}    ${Edited Date}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
     Select From List By Index    ${Id VAT ID}    1
-    Select From List By Index    ${Id Acc Area}    1
+    Fill In Acc Area
 
-    # Wait Until Ready    ${Id Number Sequence}
-    # Select From List By Index    ${Id Number Sequence}    1
-    # Select From List By Index    ${Id Field}    1
-    # Select From List By Index    ${Id Confidentiality}    1
-    # Select From List By Index    ${Id Contract kind}    1
-    # Select From List By Index    ${Id Language}    1
-    # Select From List By Index    ${Id Type}    1
-    # Select From List By Label    ${Id Contract Status}    ${Selected Value 2}
-    # Sleep    10
-    # Click Element    ${Checkbox Valid Until}
-    # Fill In Acc Area If Present
-    # Input Text    ${Id Contract Subject}    ${Contract Subject}
-    # Input Text    ${Id Partner}    ${Partner Test}
-    # Wait Until Ready    ${Partner List}
-    # Click Element    ${Partner List}
-
-Fill In Acc Area If Present
+Fill In Acc Area
     ${is_button_present}=    Run Keyword And Return Status
     ...    Wait Until Element Is Visible
     ...    ${Acc Area Button}
     ...    timeout=2s
     IF    ${is_button_present}
-        Fill In Acc Area
+        Fill In Acc Area From SAP
+        Log    Vyhledání přes SAP
     ELSE
-        Log    Tlačítko ${Acc Area Button} není přítomné, pokračuji bez akce
+        Select From List By Index    ${Id Acc Area}    1
+        Log    Vyhledání v CSM
     END
 
-Fill In Acc Area
+Fill In Acc Area From SAP
     Click Element    ${Acc Area Button}
     Wait Until Ready    ${Get SAP Data Dialog}
     Input Text    ${Acc Area Field}    1
