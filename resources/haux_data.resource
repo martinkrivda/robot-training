@@ -121,7 +121,19 @@ ${Id Contract Relations To}             c_relation_to
 ${Search Button}                        xpath=//button[@type="button" and contains(@class, "ui-button") and normalize-space(.)="Hledání"]
 ${Contract}                             css=#search_contract_relation_tbl tbody tr.odd td.sorting_1
 ${Please Wait}                          please_wait
-
+${Id VAT ID}                            c_vatid
+${Id Contract Type}                     c_type
+${Id Appl Law}                          c_appl_law
+${Id Profit Center}                     c_profit_center
+${Id Acc Area}                          c_acc_area
+${Id Delivery To}                       c_delivery_to
+${Id Unit}                              c_unit
+${Id Valid Until}                       c_valid_until
+${Id Primary Responsible Person}        c_primary
+${Id Secondary Responsible Person}      c_secondary
+${Id Add Contract Partners}             c_partner
+${Edited Date}                          12.07.2025
+${Name5}                                vod
 
 *** Keywords ***
 Go To Settings
@@ -140,14 +152,29 @@ Haux Setup
     Click Element    ${Id Header Aux Data}
 
 Fill In Required Fields
-    Wait Until Ready    ${Id Number Sequence}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Field}    ${Field}
-    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind}
-    Select From List By Label    ${Id Language}    ${Language}
-    Select From List By Label    ${Id Contract Status}    ${Value}
+    Wait Until Ready    ${Id Language}
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Contract Type}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Index    ${Id Language}    1
+    Select From List By Index    ${Id Contract Status}    1
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Add Contract Partners}    ${Name5}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Valid Until}    ${Edited Date}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
 
 Check Created Contract Other Data
     Wait Until Ready    ${Personal Space}
@@ -972,6 +999,7 @@ Check Created Contract Document
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    ${Create Contract}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
     Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
     Wait Until Ready    ${Id Add Document Button}

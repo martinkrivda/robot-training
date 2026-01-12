@@ -3,7 +3,11 @@ Documentation       A test suite for header aux data.
 ...                 Keywords are imported from haux_data.resource
 
 Resource            ${EXECDIR}/resources/haux_data.resource
+Resource            ${EXECDIR}/resources/fields.resource
+Resource            ${EXECDIR}/resources/hmain_data.resource
 
+Suite Setup         Save and Set Fields
+Suite Teardown      Restore Original Fields State
 
 *** Test Cases ***
 Add Edit Original Storage
@@ -84,7 +88,7 @@ Check Created Aux Data
     Check Created Contract Other Data
     Check Created Contract Document
     Check Created Contract Relations
-    Delete Contract
+    haux_data.Delete Contract
 
 Disable Original Storage And Keywords
     [Documentation]    A test case for disabling original storage, keywords.
