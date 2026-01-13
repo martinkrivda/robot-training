@@ -3,12 +3,15 @@ Documentation       A test suite for header main data.
 ...                 Keywords are imported from hmain_data.resource
 
 Resource            ${EXECDIR}/resources/hmain_data.resource
+Resource            ${EXECDIR}/resources/fields.resource
 
+Suite Setup         Save and Set Fields
+Suite Teardown      Restore Original Fields State
 
 *** Test Cases ***
 Add Edit Templates
     [Documentation]    A test case for templates.
-    [Setup]    Field Setup
+    [Setup]    hmain_data.Field Setup
     Add Template
     Edit Template
 
@@ -104,7 +107,7 @@ Check Created Main Data
     [Documentation]    A test case for creating contract, contract template.
     Check Created Contract Data
     Check Created Template
-    Delete Contract
+    hmain_data.Delete Contract
 
 Delete Template And Disable Field
     [Documentation]    A test case for deleting template, disabling field.
@@ -149,6 +152,6 @@ Disable Bank Account And Applicable Law
 
 Set Fields Visibility Back to Normal
     [Documentation]    A test case for fileds visibility.
-    Click On Administration
+    hmain_data.Click On Administration
     Set SAP Visibility Back to Invisible
     Set Accounting area Visibility Back to Invisible

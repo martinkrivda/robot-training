@@ -151,6 +151,14 @@ ${Id Add Applicable Law Button}                 ts_add_appl_law_btn
 ${Id Edit Applicable Law Button}                ts_edit_appl_law_btn
 ${Id Select Applicable Law}                     c_appl_law
 ${File Path}                                    ${EXECDIR}/template_test.docx
+${Please Wait}                                  please_wait
+${Id Primary Responsible Person}                c_primary
+${Id Secondary Responsible Person}              c_secondary
+${Name2}                                        vod
+${Id Add Contract Partners}                     c_partner
+${Edited Date}                                  12.07.2025
+${Id Valid Until}                               c_valid_until
+${Id VAT}                                       c_vatid
 
 
 *** Keywords ***
@@ -289,7 +297,7 @@ Check Created Contract Data
     Wait Until Ready    ${Create Contract}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Field Contract}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
+    Select From List By Index    ${Id Number Sequence}    1
     Select From List By Label    ${Id Field Contract}    ${Edited Name}
     Input Text    ${Id Contract Subject}    ${Contract Subject}
     Select From List By Label    ${Id Contract kind}    ${Contract Kind Edited Name}
@@ -306,16 +314,27 @@ Check Created Contract Data
     Select From List By Label    ${Id Select Applicable Law}    ${Edited Name}
     # Select From List By Label    ${Id Select Bank Account}    ${Edited Name}
     # Select From List By Label    ${Id Select VAT ID}    ${Edited Name}
+    # Input Text    ${Id Select Profit Centrum}    ${Edited Name}
+    # Wait Until Page Contains Element
+    # ...    //ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
+    # ...    5s
+    # Click Element    xpath=//ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
+    Input Text    ${Id Valid Until}    ${Edited Date}
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Input Text    ${Id Add Contract Partners}    ${Name2}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id VAT}    1
     Input Text    ${Id Select Profit Centrum}    ${Edited Name}
-    Wait Until Page Contains Element
-    ...    //ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
-    ...    5s
-    Click Element    xpath=//ul[contains(@class,'ui-autocomplete')]//li[contains(., '${Edited Name}')]
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
     Click Button    ${Create Contract File Button}
 
 Check Created Template
     Wait Until Ready    ${Settings}
     Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
+    Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Ready    ${Contract Name Detail}
