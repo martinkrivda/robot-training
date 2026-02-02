@@ -3,6 +3,10 @@ Documentation       A test suite for layout.
 ...                 Keywords are imported from layout.resource
 
 Resource            ${EXECDIR}/resources/layout.resource
+Resource            ${EXECDIR}/resources/fields.resource
+
+Suite Setup         Save and Set Fields
+Suite Teardown      Restore Original Fields State
 
 
 *** Test Cases ***

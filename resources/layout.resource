@@ -563,7 +563,14 @@ ${Id Search Item Type}                              s_text_item_type
 ${Id Search VAT Sign}                               s_text_vatsign
 ${Id Search GDPR}                                   s_yesno_gdpr
 ${Id Search Framework Contract}                     s_yesno_framework_contract
-
+${Missing Items}                                    Chybí položka
+${Id Profit Center}                                 c_profit_center
+${Id Acc Area}                                      c_acc_area
+${Id Delivery To}                                   c_delivery_to
+${Id Unit}                                          c_unit
+${Id Quantity}                                      c_quant
+${Id Price}                                         c_price
+${Date}                                             03.07.2025
 
 *** Keywords ***
 Wait Until Ready
@@ -629,6 +636,13 @@ Create Contract
     Select From List By Label    ${Id Field}    ${Add Field}
     Select From List By Label    ${Id Confidentiality}    ${Add Confidentiality}
     Select From List By Label    ${Id Language}    ${Add Language 4}
+    Select From List By Label    ${Id Add Contract Type}    ${Add Contact Type 1}
+    Select From List By Index    ${Id Acc Area}    1
+    Select From List By Index    ${Id Add Applicable Law}    1
+    Select From List By Index    ${Id Add VAT ID}    1
+    Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
 
 Create Contract Test 4
     Wait Until Element Is Not Visible    ${Please Wait}
@@ -636,9 +650,14 @@ Create Contract Test 4
     Input Text    ${Id Contract Subject}    ${Contract Subject Name4}
     Input Text    ${Id Add Partner}    ${Add Partner1}
     Select From List By Label    ${Id Contract kind}    ${Contract kind1}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Input Text    ${Id Add Valid Until}    ${Date}
     Click Element    ${Other Data Path}
     Wait Until Ready    ${Id Add Termination Method}
     Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
+    Select From List By Index    ${Id Acc Area}    1
     Click Button    ${Create Contract File Button}
     Wait Until Element Is Not Visible    ${Id Add Termination Method}
     Wait Until Element Is Not Visible    ${Please Wait}
@@ -1176,18 +1195,22 @@ Create Contract Test 1
     Input Text    ${Id Add Effective Date}    ${Add Valid Date 1}
     Select From List By Label    ${Id Language}    ${Add Language}
     Select From List By Label    ${Id Add Published}    ${Yes}
-    Input Text    ${Id Add Publishing Date}    ${Add Valid Date 1}
     Select From List By Label    ${Id Add Tender}    ${Yes}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 1}
     Select From List By Label    ${Id Add Primary responsible person}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Secondary responsible person}    ${Secondary Responsible Person}
+    Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 1}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
     Input Text    ${Id Add Contact information}    ${Number 1}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 1}
-    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
-    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Input Text    ${Id Add Publishing Date}    ${Add Valid Date 1}
     Input Text    ${Id Add Contact person}    ${Add Contact person 1}
     Select From List By Label    ${Id Add Responsible accountant}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 1}
@@ -1238,6 +1261,7 @@ Create Contract Item 1
     Select From List By Label    ${Id Add Commodity/service}    ${Add Commodity/service 1}
     Select From List By Label    ${Id Add Item type}    ${Add Item type 1}
     Input Text    ${Id Add Quantity}    ${Number 1}
+    Input Text    ${Id Price}    ${Number 2}
     Select From List By Label    ${Id Add Unit}    ${Add Unit 1}
     Input Text    ${Id Unit Price}    ${Maturity Number 1}
     Select From List By Label    ${Id Add Order}    ${Add Order 1}
@@ -1286,12 +1310,16 @@ Create Contract Test 2
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 2}
     Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
+    Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 2}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 2}
     Input Text    ${Id Add Contact information}    ${Number 2}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
-    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
-    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 2}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 2}
@@ -1388,12 +1416,16 @@ Create Contract Test 3
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 3}
     Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
+    Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 3}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
     Input Text    ${Id Add Contact information}    ${Number 3}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 3}
-    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
-    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 3}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 1}
@@ -1909,6 +1941,7 @@ Enable Or Add Data
     Enable Or Add VAT ID    ${Add Number 2}
     Enable Or Add VAT ID    ${Add Number 3}
     Go To Bank Account
+    Sleep    1
     Enable Bank Account Or Add Bank Account    ${Add Number 1}
     Enable Bank Account Or Add Bank Account    ${Add Number 2}
     Enable Bank Account Or Add Bank Account    ${Add Number 3}
@@ -2082,6 +2115,8 @@ Apply Date Filter
     Wait Until Element Is Not Visible    ${Please Wait}
 
 Test Searching Of Status Column
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Missing Items}']
     Apply Filter    ${Search Status}    ${Id Search Status}    ${Status 2}
     Element Should Not Be Visible    ${Missing Item}
 
@@ -2288,6 +2323,7 @@ Test Contract Subject Sorting
     Should Be Equal    ${asc_subjects}    ${sorted_asc}
 
 Test Searching Of Field Column
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field}']
     Apply Filter    ${Add Field}    ${Id Search Field}    ${Field}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Field 2}']
@@ -2315,6 +2351,7 @@ Test Field Sorting
     Should Be Equal    ${desc_values}    ${sorted_desc}
 
 Test Searching Of Type Column
+    Scroll Element Into View    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 1}']
     Apply Filter    ${Add Contact Type 1}    ${Id Search Type}    ${Type}
     Element Should Not Be Visible
     ...    xpath=//table[@id='p_all_tbl']//td[normalize-space(.)='${Add Contact Type 2}']
@@ -2929,6 +2966,7 @@ Edit Effective Date
     Click Element    ${Edit Contract Button}
     Wait Until Ready    ${Effective Date CheckBox}
     Select Checkbox    ${Effective Date CheckBox}
+    Select From List By Index    ${Id Acc Area}    1
     Click Element    ${Update Contract File}
     Wait Until Element Is Not Visible    ${Effective Date CheckBox}
 
