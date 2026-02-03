@@ -69,9 +69,30 @@ ${Packing}                                  test
 ${Id Add Description}                       s_field2
 ${Description}                              autotest
 ${Select Packing}                           test autotest
-${Contract Item}                            //tr[td[normalize-space(text())="Doprava"] and td[contains(normalize-space(text()), "1 568")]]
+${Contract Item}                            xpath=//table[@id='tc_contract_items_tbl']//tr[td[normalize-space(.)='12'] and td[normalize-space(.)='1 568,00']]
 ${Id Delete Contract Item Button}           tc_del_item_btn
 ${Id Proposal Lists}                        proposals
+${Name2}                                    vod
+${Name}                                     dvtest1
+${Edited Date}                              12.07.2025
+${Id VAT ID}                                c_vatid
+${Id Contract Type}                         c_type
+${Id Appl Law}                              c_appl_law
+${Id Profit Center}                         c_profit_center
+${Id Acc Area}                              c_acc_area
+${Id Delivery To}                           c_delivery_to
+${Id Unit}                                  c_unit
+${Id Valid Until}                           c_valid_until
+${Id Primary Responsible Person}            c_primary
+${Id Secondary Responsible Person}          c_secondary
+${Id Contract Status}                       c_status
+${Id Add Contract Partners}                 c_partner
+${Id Add Commodity/service}                 c_commodity
+${Date}                                     03.07.2025
+${Number}                                   12
+${Id Quantity}                              c_quant
+${Id Price}                                 c_price
+${Please Wait}                              please_wait
 
 
 *** Keywords ***
@@ -158,6 +179,7 @@ Check If Tender Number Is Required
     Should Contain    ${class}    required
 
 Edit Field Back To Normal
+    Wait Until Element Is Not Visible    ${Please Wait}
     Go To Settings
     Wait Until Ready    ${Field Name}
     Click Element    ${Field Name}
@@ -172,12 +194,29 @@ Edit Field Back To Normal
     Click Element    ${Finish Button}
 
 Fill In Required Fields
-    Wait Until Ready    ${Id Number Sequence}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Field}    ${Field}
-    Select From List By Label    ${Id Confidentiality}    ${Confidentiality}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind}
-    Select From List By Label    ${Id Language}    ${Language}
+    Wait Until Ready    ${Id Language}
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Contract Type}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Index    ${Id Language}    1
+    Select From List By Index    ${Id Contract Status}    1
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Add Contract Partners}    ${Name2}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Profit Center}    ${Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Valid Until}    ${Edited Date}
+    Input Text    ${Id Contract Subject}    ${Contract Subject}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
 
 Try To Create Contract Without Required Tender Number
     Fill In Required Fields
@@ -268,8 +307,12 @@ Check If Packing Is Required
     Should Contain    ${class}    required
 
 Try To Create Contract Item Without Required Packing
-    Select From List By Label    ${Id Commodity/service}    ${Commodity/service}
     Input Text    ${Id Unit Price}    ${Unit Price}
+    Input Text    ${Id Quantity}    ${Number}
+    Input Text    ${Id Price}    ${Number}
+    Select From List By Index    ${Id Add Commodity/service}    1
+    Input Text    ${Id Delivery To}    ${Date}
+    Select From List By Index    ${Id Unit}    1
     Click Element    ${Finish Button}
     Element Should Be Visible    ${Id Alert}
     Element Text Should Be    ${Id Alert}    ${Alert Message}
@@ -325,10 +368,15 @@ Create Contract Item With All Required
     Wait Until Ready    ${Id Add Item Button}
     Click Button    ${Id Add Item Button}
     Wait Until Ready    ${Id Unit Price}
-    Select From List By Label    ${Id Commodity/service}    ${Commodity/service}
     Input Text    ${Id Unit Price}    ${Unit Price}
+    Input Text    ${Id Quantity}    ${Number}
+    Input Text    ${Id Price}    ${Number}
+    Select From List By Index    ${Id Add Commodity/service}    1
+    Input Text    ${Id Delivery To}    ${Date}
+    Select From List By Index    ${Id Unit}    1
     Select From List By Label    ${Id Packing}    ${Select Packing}
     Click Element    ${Finish Button}
+    Wait Until Element Is Not Visible    ${Id Unit Price}
 
 Delete Contract Item
     Wait Until Ready    ${Personal Space}
