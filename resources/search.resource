@@ -292,6 +292,19 @@ ${Search Business Case ID}                          9
 ${Search Amount Per Year}                           3,00 CZK
 ${Search To Pay}                                    5,00 USD 7 189 dvtest
 ${Search VAT Rate}                                  3,00
+${Id Acc Area}                                      c_acc_area
+${Id Profit Center}                                 c_profit_center
+${Id Contract Type}                                 c_type
+${Id Appl Law}                                      c_appl_law
+${Id Delivery To}                                   c_delivery_to
+${Id Unit}                                          c_unit
+${Edited Date}                                      12.07.2025
+${Id Valid Until}                                   c_valid_until
+${Id Add Contract Partners}                         c_partner
+${Id Primary Responsible Person}                    c_primary
+${Id Secondary Responsible Person}                  c_secondary
+${Id Contract Status}                               c_status
+${Name4}                                            test
 
 
 *** Keywords ***
@@ -410,7 +423,7 @@ Create Contract Test 1
     Input Text    ${Id Add Total Contract Price Period}    ${Number 1}
     # Select From List By Label    ${Id Add Total Contract Price Period Currency}    ${Add Total Contract Price Period 1}
     Select From List By Label    ${Id Add Publishing Required}    ${Yes}
-    # Select From List By Label    ${Id Add Applicable Law}    ${Add Number 1}
+    Select From List By Index    ${Id Add Applicable Law}    1
     # Select From List By Label    ${Id Add Subsidy}    ${Yes}
     Select From List By Label    ${Id Add Supp.payment}    ${Yes}
     Input Text    ${Id Contract Subject}    ${Contract Subject Name}
@@ -429,14 +442,18 @@ Create Contract Test 1
     Input Text    ${Id Add Tender Date}    ${Add Valid Date 1}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 1}
+    Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Primary responsible person}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Secondary responsible person}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 1}
+    Input Text    ${Id Profit Center}    ${Name4}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
     Input Text    ${Id Add Contact information}    ${Number 1}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 1}
-    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
-    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 1}
     Select From List By Label    ${Id Add Responsible accountant}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 1}
@@ -519,7 +536,7 @@ Create Contract Test 2
     Input Text    ${Id Add Total Contract Price Period}    ${Number 2}
     # Select From List By Label    ${Id Add Total Contract Price Period Currency}    ${Add Total Contract Price Period 2}
     Select From List By Label    ${Id Add Publishing Required}    ${Yes}
-    # Select From List By Label    ${Id Add Applicable Law}    ${Add Number 2}
+    Select From List By Index    ${Id Add Applicable Law}    1
     # Select From List By Label    ${Id Add Subsidy}    ${Yes}
     Select From List By Label    ${Id Add Supp.payment}    ${Yes}
     Input Text    ${Id Contract Subject}    ${Contract Subject Name 2}
@@ -538,14 +555,18 @@ Create Contract Test 2
     Input Text    ${Id Add Tender Date}    ${Add Valid Date 2}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 2}
+    Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 2}
+    Input Text    ${Id Profit Center}    ${Name4}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 2}
     Input Text    ${Id Add Contact information}    ${Number 2}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
-    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
-    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 2}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 2}
@@ -628,7 +649,7 @@ Create Contract Test 3
     Input Text    ${Id Add Total Contract Price Period}    ${Number 3}
     # Select From List By Label    ${Id Add Total Contract Price Period Currency}    ${Add Total Contract Price Period 3}
     Select From List By Label    ${Id Add Publishing Required}    ${No}
-    # Select From List By Label    ${Id Add Applicable Law}    ${Add Number 3}
+    Select From List By Index    ${Id Add Applicable Law}    1
     # Select From List By Label    ${Id Add Subsidy}    ${Yes}
     Select From List By Label    ${Id Add Supp.payment}    ${Yes}
     Input Text    ${Id Contract Subject}    ${Contract Subject Name 3}
@@ -647,14 +668,18 @@ Create Contract Test 3
     Input Text    ${Id Add Tender Date}    ${Add Valid Date 3}
     Click Element    ${Id Contract Subject}
     Select From List By Label    ${Id Add Internal Contract Partner}    ${Add Internal Contract Partner 3}
+    Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Primary responsible person}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 3}
+    Input Text    ${Id Profit Center}    ${Name4}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
     Input Text    ${Id Add Contact information}    ${Number 3}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 3}
-    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
-    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 3}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Partner role}    ${Add Partner role 1}
@@ -726,13 +751,31 @@ Create Contract Test 4
     Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    ${Create Contract}
     Wait Until Ready    ${Id Number Sequence}
-    Select From List By Label    ${Id Number Sequence}    ${Number Sequence}
-    Select From List By Label    ${Id Field}    ${Add Field}
-    Select From List By Label    ${Id Confidentiality}    ${Add Confidentiality}
-    Select From List By Label    ${Id Language}    ${Add Language 4}
-    Input Text    ${Id Contract Subject}    ${Contract Subject Name4}
     Input Text    ${Id Add Partner}    ${Add Partner1}
-    Select From List By Label    ${Id Contract kind}    ${Contract kind1}
+
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Contract Type}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Index    ${Id Language}    1
+    Select From List By Index    ${Id Contract Status}    1
+    Select From List By Index    ${Id Primary Responsible Person}    1
+    Select From List By Index    ${Id Secondary Responsible Person}    1
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Add Contract Partners}    ${Add Contract partner 1}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Profit Center}    ${Name4}
+    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Ready    ${Id Language}
+    Input Text    ${Id Valid Until}    ${Edited Date}
+    Input Text    ${Id Contract Subject}    ${Contract Subject Name 4}
+    Select From List By Index    ${Id Add VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
+
     Click Element    ${Other Data Path}
     Wait Until Ready    ${Id Add Termination Method}
     Input Text    ${Id Add Termination Method}    ${Add Termination Method1}
