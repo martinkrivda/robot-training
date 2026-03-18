@@ -1,0 +1,807 @@
+{
+    "row_1": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_2": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_3": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_4": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_5": {
+        "req_radio": "s_required",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_6": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_7": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_8": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_9": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_10": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_11": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_12": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_13": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_14": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_15": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_16": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_17": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_18": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_19": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_20": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_21": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_22": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_23": {
+        "req_radio": "s_required",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_24": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_25": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_26": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_27": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_28": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_29": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_30": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_31": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_32": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_33": {
+        "req_radio": "s_required",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_34": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_35": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_36": {
+        "req_radio": "s_required",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_37": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_38": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_39": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_40": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_41": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_42": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_43": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_44": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_45": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_46": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_47": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_48": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_49": {
+        "req_radio": "s_required",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_50": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_51": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_52": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_53": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_54": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_55": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_56": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_57": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_58": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_59": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_60": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_61": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_62": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_63": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_64": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_65": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_66": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_67": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_68": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_69": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_70": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_71": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_72": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_73": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_74": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_75": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_76": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_77": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_78": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_79": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_80": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_81": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_82": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_83": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_84": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_85": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_86": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_87": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_88": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sorequired",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_89": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_90": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_91": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_92": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_93": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_94": {
+        "req_radio": "s_required",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_95": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_96": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_97": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_98": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_99": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_100": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_101": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_102": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_103": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_104": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_105": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_106": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_107": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_108": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_109": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_110": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_111": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_112": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_113": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_114": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_invisible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    },
+    "row_115": {
+        "req_radio": "s_optional",
+        "soreq_radio": "s_sooptional",
+        "vis_radio": "s_visible",
+        "edit_radio": "s_readonly",
+        "source_radio": "s_source_csm"
+    }
+}
