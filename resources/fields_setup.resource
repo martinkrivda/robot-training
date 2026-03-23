@@ -53,7 +53,7 @@ Save Session Info
     ${selenium}=    Get Library Instance    SeleniumLibrary
     ${driver}=    Evaluate    $selenium.driver
     ${session_id}=    Evaluate    $driver.session_id
-    ${executor_url}=    Evaluate    $driver.command_executor._url
+    ${executor_url}=    Evaluate    str($driver.command_executor._client_config.remote_server_addr)
     IF    '${session_id}'=='${None}' or '${executor_url}'=='${None}'
         Fail    Failed to retrieve session info
     END
