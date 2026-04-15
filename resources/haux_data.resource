@@ -261,8 +261,6 @@ Edit Original Storage
     Click Element    ${Finish Button}
 
 Disable Original Storage
-    Go To Settings
-    Go To Original Storage
     Wait Until Ready    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_storage_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Original Storage Button}
@@ -324,7 +322,6 @@ Edit Keywords
     Click Element    ${Finish Button}
 
 Disable Keywords
-    Go To Keywords
     Wait Until Ready    xpath=//table[@id="ts_keywords_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_keywords_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Keywords Button}
@@ -388,7 +385,6 @@ Edit Document Type
     Click Element    ${Finish Button}
 
 Disable Document Type
-    Go To Document Type
     Wait Until Ready    xpath=//table[@id="ts_doc_types_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_doc_types_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Document Type Button}
@@ -456,7 +452,6 @@ Edit Contract Relations
     Click Element    ${Finish Button}
 
 Disable Contract Relations
-    Go To Contract Relations
     Wait Until Ready    xpath=//table[@id="ts_relations_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_relations_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Contract Relations Button}
@@ -521,7 +516,6 @@ Edit Payment Interval
     Click Element    ${Finish Button}
 
 Disable Payment Interval
-    Go To Payment Interval
     Wait Until Ready    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_interval_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Payment Interval Button}
@@ -586,7 +580,6 @@ Edit Business Area
     Click Element    ${Finish Button}
 
 Disable Business Area
-    Go To Business Area
     Wait Until Ready    xpath=//table[@id="ts_bus_area_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_bus_area_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Business Area Button}
@@ -652,7 +645,6 @@ Edit Purchase Org
     Click Element    ${Finish Button}
 
 Disable Purchase Org
-    Go To Purchase Org
     Wait Until Ready    xpath=//table[@id="ts_purch_org_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_purch_org_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Purchase Org Button}
@@ -718,7 +710,6 @@ Edit Purchase Group
     Click Element    ${Finish Button}
 
 Disable Purchase Group
-    Go To Purchase Group
     Wait Until Ready    xpath=//table[@id="ts_purch_group_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_purch_group_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Purchase Group Button}
@@ -784,7 +775,6 @@ Edit Sales Group
     Click Element    ${Finish Button}
 
 Disable Sales Group
-    Go To Sales Group
     Wait Until Ready    xpath=//table[@id="ts_sales_group_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_sales_group_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Sales Group Button}
@@ -850,7 +840,6 @@ Edit Sales Office
     Click Element    ${Finish Button}
 
 Disable Sales Office
-    Go To Sales Office
     Wait Until Ready    xpath=//table[@id="ts_sales_office_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_sales_office_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Sales Office Button}
@@ -918,7 +907,6 @@ Edit Shipping Condition
     Click Element    ${Finish Button}
 
 Disable Shipping Condition
-    Go To Shipping Condition
     Wait Until Ready    xpath=//table[@id="ts_ship_cond_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_ship_cond_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Shipping Condition Button}
@@ -984,7 +972,6 @@ Edit Invoicing date
     Click Element    ${Finish Button}
 
 Disable Invoicing date
-    Go To Invoicing date
     Wait Until Ready    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_inv_date_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Invoicing date Button}
@@ -1016,15 +1003,40 @@ Check Created Contract Relations
     Click Button    ${Add Contract Relations Button}
     Wait Until Ready    ${Id Contract Relations From}
     Select From List By Label    ${Id Contract Relations From}    ${Edited Name}
-    Select From List By Label    ${Id Contract Relations To}    ${Edited Name}
     Click Element    ${Search Contract Relations Button}
     Wait Until Ready    ${Search Button}
     Click Element    ${Search Button}
     Wait Until Element Is Visible    ${Contract}    timeout=5s
     Click Element    ${Contract}
     Double Click Element    ${Contract}
-    Wait Until Ready    ${Finish Button}
+    Wait Until Ready    ${Id Contract Relations To}
+    Select From List By Label    ${Id Contract Relations To}    ${Edited Name}
     Click Element    ${Finish Button}
     Wait Until Element Is Not Visible    ${Id Contract Relations From}
     Wait Until Ready    ${Add Contract Relations Button}
     Element Should Contain    xpath=//table[@id="tc_contract_relations_tbl"]//td    ${Edited Name}
+
+
+Retry Keyword With Popup Fix
+    [Arguments]    ${keyword_name}    @{args}
+
+    FOR    ${i}    IN RANGE    3
+        Log    🔁 Pokus ${i + 1}
+
+        Run Keyword And Ignore Error    Run Keyword    ${keyword_name}    @{args}
+
+        ${closed}=    Run Keyword And Return Status
+        ...    Wait Until Element Is Not Visible    ${Finish Button}    5s
+
+        IF    ${closed}
+            Log    ✅ Popup zmizel → hotovo
+            RETURN
+        END
+
+        Log    ⚠️ Popup nezmizel → zavírám ručně
+        Run Keyword And Ignore Error    Click Element    ${Close Button}
+    END
+
+    Fail    ❌ Nepodařilo se dokončit ani po retry
+
+

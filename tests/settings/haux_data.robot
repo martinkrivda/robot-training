@@ -14,74 +14,74 @@ Add Edit Original Storage
     [Documentation]    A test case for original storage.
     [Setup]    Haux Setup
     Go To Original Storage
-    Enable Or Add Original Storage
-    Edit Original Storage
+    Retry Keyword With Popup Fix    Enable Or Add Original Storage
+    Retry Keyword With Popup Fix    Edit Original Storage
 
 Add Edit Keywords
     [Documentation]    A test case for keywords.
     Go To Keywords
-    Enable Or Add Keywords
-    Edit Keywords
+    Retry Keyword With Popup Fix    Enable Or Add Keywords
+    Retry Keyword With Popup Fix    Edit Keywords
 
 Add Edit Document Type
     [Documentation]    A test case for document type.
     Go To Document Type
-    Enable Or Add Document Type
-    Edit Document Type
+    Retry Keyword With Popup Fix    Enable Or Add Document Type
+    Retry Keyword With Popup Fix    Edit Document Type
 
 Add Edit Contract Relations
     [Documentation]    A test case for contract relations.
     Go To Contract Relations
-    Enable Or Add Contract Relations
-    Edit Contract Relations
+    Retry Keyword With Popup Fix    Enable Or Add Contract Relations
+    Retry Keyword With Popup Fix    Edit Contract Relations
 
 Add Edit Payment Interval
     [Documentation]    A test case for payment interval.
     Go To Payment Interval
-    Enable Or Add Payment Interval
-    Edit Payment Interval
+    Retry Keyword With Popup Fix    Enable Or Add Payment Interval
+    Retry Keyword With Popup Fix    Edit Payment Interval
 
 Add Edit Business Area
     [Documentation]    A test case for payment interval.
     Go To Business Area
-    Enable Or Add Business Area
-    Edit Business Area
+    Retry Keyword With Popup Fix    Enable Or Add Business Area
+    Retry Keyword With Popup Fix    Edit Business Area
 
 Add Edit Purchase Org
     [Documentation]    A test case for purchase org.
     Go To Purchase Org
-    Enable Or Add Purchase Org
-    Edit Purchase Org
+    Retry Keyword With Popup Fix    Enable Or Add Purchase Org
+    Retry Keyword With Popup Fix    Edit Purchase Org
 
 Add Edit Purchase Group
     [Documentation]    A test case for purchase group.
     Go To Purchase Group
-    Enable Or Add Purchase Group
-    Edit Purchase Group
+    Retry Keyword With Popup Fix    Enable Or Add Purchase Group
+    Retry Keyword With Popup Fix    Edit Purchase Group
 
 Add Edit Sales Group
     [Documentation]    A test case for sales group.
     Go To Sales Group
-    Enable Or Add Sales Group
-    Edit Sales Group
+    Retry Keyword With Popup Fix    Enable Or Add Sales Group
+    Retry Keyword With Popup Fix    Edit Sales Group
 
 Add Edit Sales Office
     [Documentation]    A test case for sales office.
     Go To Sales Office
-    Enable Or Add Sales Office
-    Edit Sales Office
+    Retry Keyword With Popup Fix    Enable Or Add Sales Office
+    Retry Keyword With Popup Fix    Edit Sales Office
 
 Add Edit Shipping Condition
     [Documentation]    A test case for shipping condition.
     Go To Shipping Condition
-    Enable Or Add Shipping Condition
-    Edit Shipping Condition
+    Retry Keyword With Popup Fix    Enable Or Add Shipping Condition
+    Retry Keyword With Popup Fix    Edit Shipping Condition
 
 Add Edit Invoicing date
     [Documentation]    A test case for invoicing date.
     Go To Invoicing date
-    Enable Or Add Invoicing date
-    Edit Invoicing date
+    Retry Keyword With Popup Fix    Enable Or Add Invoicing date
+    Retry Keyword With Popup Fix    Edit Invoicing date
 
 Check Created Aux Data
     [Documentation]    A test case for creating contract.
@@ -89,33 +89,46 @@ Check Created Aux Data
     Check Created Contract Document
     Check Created Contract Relations
     haux_data.Delete Contract
+    haux_data.Go To Settings
 
 Disable Original Storage And Keywords
     [Documentation]    A test case for disabling original storage, keywords.
-    Disable Original Storage
-    Disable Keywords
+    Go To Original Storage
+    Retry Keyword With Popup Fix    Disable Original Storage
+    Go To Keywords
+    Retry Keyword With Popup Fix    Disable Keywords
 
 Disable Document Type And Contract Relations
     [Documentation]    A test case for disabling document type, contract relations.
-    Disable Document Type
-    Disable Contract Relations
+    Go To Document Type
+    Retry Keyword With Popup Fix    Disable Document Type
+    Go To Contract Relations
+    Retry Keyword With Popup Fix    Disable Contract Relations
 
 Disable Document Type And Business Area
     [Documentation]    A test case for disabling payment interval, business area.
-    Disable Payment Interval
-    Disable Business Area
+    Go To Payment Interval
+    Retry Keyword With Popup Fix    Disable Payment Interval
+    Go To Business Area
+    Retry Keyword With Popup Fix    Disable Business Area
 
 Disable Purchase Org And Purchase Group
     [Documentation]    A test case for disabling purchase org, purchase group.
-    Disable Purchase Org
-    Disable Purchase Group
+    Go To Purchase Org
+    Retry Keyword With Popup Fix    Disable Purchase Org
+    Go To Purchase Group
+    Retry Keyword With Popup Fix    Disable Purchase Group
 
 Disable Sales Group And Sales Office
     [Documentation]    A test case for disabling sales group, sales office.
-    Disable Sales Group
-    Disable Sales Office
+    Go To Sales Group
+    Retry Keyword With Popup Fix    Disable Sales Group
+    Go To Sales Office
+    Retry Keyword With Popup Fix    Disable Sales Office
 
 Disable Shipping Condition And
     [Documentation]    A test case for disabling shipping condition, invoicing date.
-    Disable Shipping Condition
-    Disable Invoicing date
+    Go To Shipping Condition
+    Retry Keyword With Popup Fix    Disable Shipping Condition
+    Go To Invoicing date
+    Retry Keyword With Popup Fix    Disable Invoicing date
