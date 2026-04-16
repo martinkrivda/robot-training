@@ -73,7 +73,7 @@ ${Field Name12}                                 //tr[td[normalize-space(.)='Typ 
 ${Visibility1}                                  //label[@for="s_visible"]
 ${Visibility2}                                  //label[@for="s_invisible"]
 ${Id Fields Edit Button}                        ts_edit_custom_fields_btn
-${Id Proposal lists}                            ui-id-14
+${Id Proposal lists}                            proposals
 ${Name2}                                        DV
 ${Edited Name2}                                 DVE
 ${Name3}                                        DVE dvtestEdited
@@ -194,6 +194,7 @@ Contract Items Setup
     Open Browser And Logged In
     Go To Fields
     Set Fields Visible
+    Wait Until Ready    ${Id Proposal lists}
     Click Element    ${Id Proposal lists}
     Wait Until Ready    ${Id Contract Items}
     Click Element    ${Id Contract Items}
@@ -584,8 +585,6 @@ Edit Commodity/service
     Click Element    ${Finish Button}
 
 Disable Commodity/service
-    Go To Settings
-    Go To Commodity/service
     Wait Until Ready    xpath=//table[@id="ts_contract_items_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_contract_items_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Commodity/service Button}
@@ -651,7 +650,6 @@ Edit Item type
     Click Element    ${Finish Button}
 
 Disable Item type
-    Go To Item type
     Wait Until Ready    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_type_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Item type Button}
@@ -722,7 +720,6 @@ Edit Account Assignment Type
     Click Element    ${Finish Button}
 
 Disable Account Assignment Type
-    Go To Account Assignment Type
     Wait Until Ready    xpath=//table[@id="ts_item_acc_ass_type_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_acc_ass_type_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Account Assignment Type Button}
@@ -791,7 +788,6 @@ Edit Incoterms
     Click Element    ${Finish Button}
 
 Disable Incoterms
-    Go To Incoterms
     Wait Until Ready    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_incoterms_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Incoterms Button}
@@ -860,7 +856,6 @@ Edit Plant
     Click Element    ${Finish Button}
 
 Disable Plant
-    Go To Plant
     Wait Until Ready    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_plant_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Plant Button}
@@ -929,7 +924,6 @@ Edit Store
     Click Element    ${Finish Button}
 
 Disable Store
-    Go To Store
     Wait Until Ready    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_store_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Store Button}
@@ -998,7 +992,6 @@ Edit Batch
     Click Element    ${Finish Button}
 
 Disable Batch
-    Go To Batch
     Wait Until Ready    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_batch_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Batch Button}
@@ -1067,7 +1060,6 @@ Edit Division
     Click Element    ${Finish Button}
 
 Disable Division
-    Go To Division
     Wait Until Ready    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_division_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Division Button}
@@ -1138,7 +1130,6 @@ Edit Expedition Center
     Click Element    ${Finish Button}
 
 Disable Expedition Center
-    Go To Expedition Center
     Wait Until Ready    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_expcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Expedition Center Button}
@@ -1207,7 +1198,6 @@ Edit Packing
     Click Element    ${Finish Button}
 
 Disable Packing
-    Go To Packing
     Wait Until Ready    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_packing_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Packing Button}
@@ -1276,7 +1266,6 @@ Edit Resource kind
     Click Element    ${Finish Button}
 
 Disable Resource kind
-    Go To Resource kind
     Wait Until Ready    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_restype_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Resource kind Button}
@@ -1345,7 +1334,6 @@ Edit VAT Sign
     Click Element    ${Finish Button}
 
 Disable VAT Sign
-    Go To VAT Sign
     Wait Until Ready    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_vatsign_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit VAT Sign Button}
@@ -1414,7 +1402,6 @@ Edit Pricing Type
     Click Element    ${Finish Button}
 
 Disable Pricing Type
-    Go To Pricing Type
     Wait Until Ready    xpath=//table[@id="ts_item_pricing_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_item_pricing_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Pricing Type Button}
@@ -1480,7 +1467,6 @@ Edit Currency
     Click Element    ${Finish Button}
 
 Disable Currency
-    Go To Currency
     Wait Until Ready    xpath=//table[@id="ts_currency_tbl"]//td[normalize-space(.)="${Edited Name2}"]
     Click Element    xpath=//table[@id="ts_currency_tbl"]//td[normalize-space(.)="${Edited Name2}"]
     Wait Until Ready    ${Id Edit Currency Button}
@@ -1545,7 +1531,6 @@ Edit Unit
     Click Element    ${Finish Button}
 
 Disable Unit
-    Go To Unit
     Wait Until Ready    xpath=//table[@id="ts_unit_tbl"]//td[normalize-space(.)="${Edited Name2}"]
     Click Element    xpath=//table[@id="ts_unit_tbl"]//td[normalize-space(.)="${Edited Name2}"]
     Wait Until Ready    ${Id Edit Unit Button}
@@ -1600,7 +1585,6 @@ Edit Order
     Click Element    ${Finish Button}
 
 Delete Order
-    Go To Order
     Wait Until Ready    xpath=//*[@id="ts_orders_tbl"]//td[contains(normalize-space(.), "${Edited Name}")]
     Click Element    xpath=//*[@id="ts_orders_tbl"]//td[contains(normalize-space(.), "${Edited Name}")]
     Click Button    ${Id Delete Order Button}
@@ -1662,7 +1646,6 @@ Edit Location
     Click Element    ${Finish Button}
 
 Disable Location
-    Go To Location
     Wait Until Ready    xpath=//table[@id="ts_location_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_location_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Location Button}
@@ -1728,7 +1711,6 @@ Edit Maturity
     Click Element    ${Finish Button}
 
 Disable Maturity
-    Go To Maturity
     Wait Until Ready    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Click Element    xpath=//table[@id="ts_maturity_tbl"]//td[normalize-space(.)="${Edited Name}"]
     Wait Until Ready    ${Id Edit Maturity Button}
@@ -1737,3 +1719,25 @@ Disable Maturity
     Input Text    ${Id Create Maturity Description}    ${Name}
     Select Checkbox    ${Checkbox}
     Click Element    ${Finish Button}
+
+Retry Keyword With Popup Fix
+    [Arguments]    ${keyword_name}    @{args}
+
+    FOR    ${i}    IN RANGE    3
+        Log    🔁 Pokus ${i + 1}
+
+        Run Keyword And Ignore Error    Run Keyword    ${keyword_name}    @{args}
+
+        ${closed}=    Run Keyword And Return Status
+        ...    Wait Until Element Is Not Visible    ${Finish Button}    5s
+
+        IF    ${closed}
+            Log    ✅ Popup zmizel → hotovo
+            RETURN
+        END
+
+        Log    ⚠️ Popup nezmizel → zavírám ručně
+        Run Keyword And Ignore Error    Click Element    ${Close Button}
+    END
+
+    Fail    ❌ Nepodařilo se dokončit ani po retry
