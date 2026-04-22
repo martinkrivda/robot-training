@@ -18,90 +18,90 @@ Add Edit Templates
 Add Edit Field
     [Documentation]    A test case for fields.
     Go To Header Main Data Fields
-    Enable Fields Or Add Field
-    Enable Contract Kind Or Add Contract Kind
-    Edit Field
-    Edit Contract Kind
+    Retry Keyword With Popup Fix    Enable Fields Or Add Field
+    Retry Keyword With Popup Fix    Enable Contract Kind Or Add Contract Kind
+    Retry Keyword With Popup Fix    Edit Field
+    Retry Keyword With Popup Fix    Edit Contract Kind
 
 Add Edit Contract Type
     [Documentation]    A test case for contract type.
     Go To Contract Type
-    Enable Contract Type Or Add Contract Type
-    Edit Contract Type
+    Retry Keyword With Popup Fix    Enable Contract Type Or Add Contract Type
+    Retry Keyword With Popup Fix    Edit Contract Type
 
 Add Edit SAP Contract Kind
     [Documentation]    A test case for SAP contract kind.
     Go To SAP Contract Kind
-    Enable Sap Or Add Sap
-    Edit Sap
+    Retry Keyword With Popup Fix    Enable Sap Or Add Sap
+    Retry Keyword With Popup Fix    Edit Sap
 
 Add Edit Accounting area
     [Documentation]    A test case for accounting area.
     Go To Accounting area
-    Enable Accounting area Or Add Accounting area
-    Edit Accounting area
+    Retry Keyword With Popup Fix    Enable Accounting area Or Add Accounting area
+    Retry Keyword With Popup Fix    Edit Accounting area
 
 Add Edit Profit Center
     [Documentation]    A test case for profit center.
     Go To Profit Center
-    Enable Profit Center Or Add Profit Center
-    Edit Profit Centrum
+    Retry Keyword With Popup Fix    Enable Profit Center Or Add Profit Center
+    Retry Keyword With Popup Fix    Edit Profit Centrum
 
 Add Edit Contract Status
     [Documentation]    A test case for contract status.
     Go To Contract Status
-    Enable Contract Status Or Add Contract Status
-    Edit Contract Status
+    Retry Keyword With Popup Fix    Enable Contract Status Or Add Contract Status
+    Retry Keyword With Popup Fix    Edit Contract Status
 
 Add Edit Partner Role
     [Documentation]    A test case for partner role.
     Go To Partner Role
-    Enable Parner Role Or Add Partner Role
-    Edit Partner Role
+    Retry Keyword With Popup Fix    Enable Parner Role Or Add Partner Role
+    Retry Keyword With Popup Fix    Edit Partner Role
 
 Add Edit Confidentiality level
     [Documentation]    A test case for confidentiality level.
     Go To Confidentiality level
-    Enable Confidentiality level Or Add Confidentiality level
-    Edit Confidentiality level
+    Retry Keyword With Popup Fix    Enable Confidentiality level Or Add Confidentiality level
+    Retry Keyword With Popup Fix    Edit Confidentiality level
 
 Add Edit Internal Partner
     [Documentation]    A test case for internal partner.
     Go To Internal Partner
-    Enable Internal Partner Or Add Internal Partner
-    Enable Organization Unit Or Add Organization Unit
-    Edit Internal Partner
-    Edit Organization Unit
+    Retry Keyword With Popup Fix    Enable Internal Partner Or Add Internal Partner
+    Retry Keyword With Popup Fix    Enable Organization Unit Or Add Organization Unit
+    Retry Keyword With Popup Fix    Edit Internal Partner
+    Retry Keyword With Popup Fix    Edit Organization Unit
 
 Add Edit Business Case
     [Documentation]    A test case for business case.
     Go To Business Case
-    Enable Business Case Or Add Business Case
-    Edit Business Case
+    Retry Keyword With Popup Fix    Enable Business Case Or Add Business Case
+    Retry Keyword With Popup Fix    Edit Business Case
 
 Add Edit Contract Language
     [Documentation]    A test case for contract language.
     Go To Contract Language
-    Enable Contract Language Or Add Contract Language
-    Edit Contract Language
+    Retry Keyword With Popup Fix    Enable Contract Language Or Add Contract Language
+    Retry Keyword With Popup Fix    Edit Contract Language
 
 Add Edit VAD ID
     [Documentation]    A test case for VAD ID.
     Go To VAT ID
-    Enable VAT ID Or Add VAD ID
-    Edit VAT ID
+    Retry Keyword With Popup Fix    Enable VAT ID Or Add VAD ID
+    Retry Keyword With Popup Fix    Edit VAT ID
 
 Add Edit Bank Account
     [Documentation]    A test case for bank account.
     Go To Bank Account
-    Enable Bank Account Or Add Bank Account
-    Edit Bank Account
+    Retry Keyword With Popup Fix    Enable Bank Account Or Add Bank Account
+    Retry Keyword With Popup Fix    Edit Bank Account
 
 Add Edit Applicable Law
     [Documentation]    A test case for applicable law.
     Go To Applicable Law
-    Enable Applicable Law Or Add Applicable Law
-    Edit Applicable Law
+    Retry Keyword With Popup Fix    Enable Applicable Law Or Add Applicable Law
+    Retry Keyword With Popup Fix    Edit Applicable Law
 
 Check Created Main Data
     [Documentation]    A test case for creating contract, contract template.
@@ -112,43 +112,43 @@ Check Created Main Data
 Delete Template And Disable Field
     [Documentation]    A test case for deleting template, disabling field.
     Delete Template
-    Disable Fields
-    Disable Contract Kind
+    Retry Keyword With Popup Fix    Disable Fields
+    Retry Keyword With Popup Fix    Disable Contract Kind
 
 Disable Contract Type And Sap
     [Documentation]    A test case for disabling contract type, SAP contract kind.
-    Disable Contract Type
-    Disable Sap
+    Retry Keyword With Popup Fix    Disable Contract Type
+    Retry Keyword With Popup Fix    Disable Sap
 
 Disable Accounting area And Profit Centrum
     [Documentation]    A test case for disabling Accounting area, profit centrum.
-    Disable Accounting area
-    Disable Profit Centrum
+    Retry Keyword With Popup Fix    Disable Accounting area
+    Retry Keyword With Popup Fix    Disable Profit Centrum
 
 Disable Contract Status And Partner Role
     [Documentation]    A test case for disabling contract status, partner role.
-    Disable Contract Status
-    Disable Partner Role
+    Retry Keyword With Popup Fix    Disable Contract Status
+    Retry Keyword With Popup Fix    Disable Partner Role
 
 Disable Confidentiality level And Internal Partner
     [Documentation]    A test case for disabling confidentiality level, internal partner.
-    Disable Confidentiality level
-    Disable Internal Partner
-    Disable Organization Unit
+    Retry Keyword With Popup Fix    Disable Confidentiality level
+    Retry Keyword With Popup Fix    Disable Internal Partner
+    Retry Keyword With Popup Fix    Disable Organization Unit
 
 Disable Business Case
     [Documentation]    A test case for disabling business case.
-    Disable Business Case
+    Retry Keyword With Popup Fix    Disable Business Case
 
 Disable Contract Language And VAD ID
     [Documentation]    A test case for disabling contract language, VAD ID.
-    Disable Contract Language
-    Disable VAT ID
+    Retry Keyword With Popup Fix    Disable Contract Language
+    Retry Keyword With Popup Fix    Disable VAT ID
 
 Disable Bank Account And Applicable Law
     [Documentation]    A test case for disabling bank account, applicable law.
-    Disable Bank Account
-    Disable Applicable Law
+    Retry Keyword With Popup Fix    Disable Bank Account
+    Retry Keyword With Popup Fix    Disable Applicable Law
 
 Set Fields Visibility Back to Normal
     [Documentation]    A test case for fileds visibility.

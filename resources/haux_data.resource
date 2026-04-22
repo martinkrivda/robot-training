@@ -134,6 +134,7 @@ ${Id Secondary Responsible Person}      c_secondary
 ${Id Add Contract Partners}             c_partner
 ${Edited Date}                          12.07.2025
 ${Name5}                                vod
+${Test}                                 test
 
 *** Keywords ***
 Go To Settings
@@ -167,7 +168,7 @@ Fill In Required Fields
     Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
     Click Element    (//li[contains(@class,"ui-menu-item")])[1]
     Wait Until Ready    ${Id Language}
-    Input Text    ${Id Profit Center}    ${Name}
+    Input Text    ${Id Profit Center}    ${Test}
     Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
     Click Element    (//li[contains(@class,"ui-menu-item")])[1]
     Wait Until Ready    ${Id Language}
@@ -1017,26 +1018,5 @@ Check Created Contract Relations
     Element Should Contain    xpath=//table[@id="tc_contract_relations_tbl"]//td    ${Edited Name}
 
 
-Retry Keyword With Popup Fix
-    [Arguments]    ${keyword_name}    @{args}
-
-    FOR    ${i}    IN RANGE    3
-        Log    🔁 Pokus ${i + 1}
-
-        Run Keyword And Ignore Error    Run Keyword    ${keyword_name}    @{args}
-
-        ${closed}=    Run Keyword And Return Status
-        ...    Wait Until Element Is Not Visible    ${Finish Button}    5s
-
-        IF    ${closed}
-            Log    ✅ Popup zmizel → hotovo
-            RETURN
-        END
-
-        Log    ⚠️ Popup nezmizel → zavírám ručně
-        Run Keyword And Ignore Error    Click Element    ${Close Button}
-    END
-
-    Fail    ❌ Nepodařilo se dokončit ani po retry
 
 
