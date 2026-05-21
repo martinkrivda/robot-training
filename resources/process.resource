@@ -93,7 +93,6 @@ ${Id Final Version Button}                  tc_merge_document_btn
 ${Create Final Version Button}              xpath=//div[@class="ui-dialog-buttonset"]//button[contains(@class, "ui-button") and normalize-space(.)="Vytvoření finálního znění"]
 ${File xPath}                               xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.pdf"]
 ${File xPath 2}                             xpath=//ul[@id="docs_left"]//li[normalize-space(.)="template_test.docx"]
-${DOWNLOAD_DIR}                             C:/Users/domin/Downloads
 ${Add Document}                             Smlouva
 ${Add Document 2}                           Kalkulace
 ${Add Document 3}                           Originál
