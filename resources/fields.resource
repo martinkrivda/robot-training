@@ -36,7 +36,7 @@ ${Id Number Sequence}                       c_number
 ${Close Button}                             xpath=//button[@title="Close"]
 ${Personal Space}                           //a[contains(@class, 'main_tabs') and @href="#tab_personal"]
 ${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
-${Id Field}                                 c_legalfield
+${Id Add Field}                             c_legalfield
 ${Id Confidentiality}                       c_confid
 ${Id Contract kind}                         c_kind
 ${Id Language}                              c_lang
@@ -78,7 +78,7 @@ ${Edited Date}                              12.07.2025
 ${Id VAT ID}                                c_vatid
 ${Id Contract Type}                         c_type
 ${Id Appl Law}                              c_appl_law
-${Id Profit Center}                         c_profit_center
+${Id Add Profit Center}                     c_profit_center
 ${Id Acc Area}                              c_acc_area
 ${Id Delivery To}                           c_delivery_to
 ${Id Unit}                                  c_unit
@@ -93,6 +93,31 @@ ${Number}                                   12
 ${Id Quantity}                              c_quant
 ${Id Price}                                 c_price
 ${Please Wait}                              please_wait
+${Id Add Contract Kind Button}              ts_add_contract_kind_btn
+${Id Add Contract Kind}                     s_kind
+${Contract Kind Name}                       dvtest2
+${Contract Kind Name Path}                  xpath=//td[contains(normalize-space(.), "dvtest2")]
+${Id Edit Contract Kind Button}             ts_edit_contract_kind_btn
+${Contract Kind Checkbox}                   xpath=//input[@type="checkbox" and @name="s_kind_disabled"]
+${Contract Kind Edited Name}                dvtestKindEdited
+${Contract Kind Edited Name Path}           xpath=//td[contains(normalize-space(.), "dvtestKindEdited")]
+${Id Add Field Button}                      ts_add_legal_field_btn
+${Add Field}                                s_field
+${Id Edit Field Button}                     ts_edit_legal_field_btn
+${Field Checkbox}                           id=s_field_disabled
+${Field Name Path}                          xpath=//td[contains(normalize-space(.), "dvtest")]
+${Field Name2}                              dvtest
+${Id Profit Center}                         settings_profcenter
+${Id Edit Profit Center Button}             ts_edit_profcenter_btn
+${Id Add Profit Center Button}              ts_add_profcenter_btn
+${Profit Center Name}                       test
+${Contract Type Checkbox}                   xpath=//input[@type='checkbox' and @id='s_disabled']
+${Id Add Contract Type}                     s_field1
+${Id Add Contract Type Description}         s_field2
+${Id Add Responsible}                       s_field3
+${Timeout2}                                 1s
+${Edited Name}                              dvtestEdited
+${Id Field}                                 settings_legal_fields
 
 
 *** Keywords ***
@@ -180,6 +205,8 @@ Check If Tender Number Is Required
 
 Edit Field Back To Normal
     Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Settings}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Go To Settings
     Wait Until Ready    ${Field Name}
     Click Element    ${Field Name}
@@ -197,9 +224,9 @@ Fill In Required Fields
     Wait Until Ready    ${Id Language}
     Select From List By Index    ${Id Number Sequence}    1
     Select From List By Index    ${Id Contract Type}    1
-    Select From List By Index    ${Id Field}    1
+    Select From List By Label    ${Id Add Field}    ${Field Name2}
     Select From List By Index    ${Id Confidentiality}    1
-    Select From List By Index    ${Id Contract kind}    1
+    Select From List By Label    ${Id Contract kind}    ${Contract Kind Name}
     Select From List By Index    ${Id Language}    1
     Select From List By Index    ${Id Contract Status}    1
     Select From List By Index    ${Id Primary Responsible Person}    1
@@ -209,7 +236,7 @@ Fill In Required Fields
     Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
     Click Element    (//li[contains(@class,"ui-menu-item")])[1]
     Wait Until Ready    ${Id Language}
-    Input Text    ${Id Profit Center}    ${Name}
+    Input Text    ${Id Add Profit Center}    ${Profit Center Name}
     Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
     Click Element    (//li[contains(@class,"ui-menu-item")])[1]
     Wait Until Ready    ${Id Language}
@@ -357,7 +384,11 @@ Add Packing
 
 Field Setup
     Open Browser And Logged In
-    Go To Settings
+    Go To Header Main Data Fields
+    Enable Fields Or Add Field
+    Enable Contract Kind Or Add Contract Kind
+    Go To Profit Center
+    Enable Profit Center Or Add Profit Center
     Wait Until Ready    ${Id Contract Items}
     Click Element    ${Id Contract Items}
     Wait Until Ready    ${Id Item Packing}
@@ -405,4 +436,129 @@ Disable Packing Item
     Click Button    ${Id Edit Item Packing Button}
     Wait Until Ready    ${Disabled Checkbox}
     Select Checkbox    ${Disabled Checkbox}
+    Click Element    ${Finish Button}
+
+Add Contract Kind
+    Wait Until Ready    ${Id Add Contract Kind Button}
+    Click Button    ${Id Add Contract Kind Button}
+    Wait Until Ready    ${Id Add Contract Kind}
+    Input Text    ${Id Add Contract Kind}    ${Contract Kind Name}
+    Click Element    ${Finish Button}
+
+Enable Contract Kind
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Contract Kind Button}
+    Wait Until Ready    ${Id Add Contract Kind}
+    Unselect Checkbox    ${Contract Kind Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Contract Kind Or Add Contract Kind
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Contract Kind
+        ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Contract Kind
+        ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Contract Kind
+
+Go To Header Main Data Fields
+    Go To Settings
+    Wait Until Ready    ${Id Proposal Lists}
+    Click Element    ${Id Proposal Lists}
+    Wait Until Ready    ${Id Field}
+    Click Element    ${Id Field}
+    Wait Until Ready    ${Id Add Field Button}
+
+Add Field In Header Main Data
+    Wait Until Ready    ${Id Add Field Button}
+    Click Button    ${Id Add Field Button}
+    Wait Until Ready    ${Add Field}
+    Input Text    ${Add Field}    ${Field Name2}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Field Name2}"]
+    Click Element    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Field Name2}"]
+
+Enable Field
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Field Button}
+    Wait Until Ready    ${Add Field}
+    Unselect Checkbox    ${Field Checkbox}
+    Click Element    ${Finish Button}
+    Wait Until Ready    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Field Name2}"]
+    Click Element    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Field Name2}"]
+
+Enable Fields Or Add Field
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Field Name2}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Field    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Field    xpath=//table[@id="ts_legal_fields_tbl"]//td[normalize-space(.)="${Field Name2}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}
+        Add Field In Header Main Data
+    END
+
+Go To Profit Center
+    Wait Until Ready    ${Id Profit Center}
+    Click Element    ${Id Profit Center}
+    Wait Until Ready    ${Id Add Profit Center Button}
+
+Enable Profit Center
+    [Arguments]    ${Path}
+    Wait Until Ready    ${Path}
+    Click Element    ${Path}
+    Click Button    ${Id Edit Profit Center Button}
+    Wait Until Ready    ${Contract Type Checkbox}
+    Unselect Checkbox    ${Contract Type Checkbox}
+    Click Element    ${Finish Button}
+
+Enable Profit Center Or Add Profit Center
+    ${edited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    ...    timeout=${Timeout2}
+    ${unedited_exists}=    Run Keyword And Return Status
+    ...    Element Should Be Visible
+    ...    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Profit Center Name}"]
+    ...    timeout=${Timeout2}
+
+    IF    ${edited_exists}
+        Enable Profit Center    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Edited Name}"]
+    END
+    IF    ${unedited_exists} and not ${edited_exists}
+        Enable Profit Center    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Profit Center Name}"]
+    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Profit Center
+
+Add Profit Center
+    Wait Until Ready    ${Id Add Profit Center Button}
+    Click Button    ${Id Add Profit Center Button}
+    Wait Until Ready    ${Id Add Contract Type}
+    Input Text    ${Id Add Contract Type}    ${Profit Center Name}
+    Input Text    ${Id Add Contract Type Description}    ${Profit Center Name}
+    Input Text    ${Id Add Responsible}    ${Profit Center Name}
     Click Element    ${Finish Button}

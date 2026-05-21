@@ -571,6 +571,8 @@ ${Id Unit}                                          c_unit
 ${Id Quantity}                                      c_quant
 ${Id Price}                                         c_price
 ${Date}                                             03.07.2025
+${Profit Center Name}                               test
+
 
 *** Keywords ***
 Wait Until Ready
@@ -615,6 +617,7 @@ Delete Contract If Exists
 Delete Contracts
     [Arguments]    ${schema_name}
     Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+    Sleep    2
     Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    ${Delete Contract Button}
     Wait Until Ready    ${Delete Button}
@@ -641,7 +644,8 @@ Create Contract
     Select From List By Index    ${Id Add Applicable Law}    1
     Select From List By Index    ${Id Add VAT ID}    1
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
 
 Create Contract Test 4
@@ -650,8 +654,9 @@ Create Contract Test 4
     Input Text    ${Id Contract Subject}    ${Contract Subject Name4}
     Input Text    ${Id Add Partner}    ${Add Partner1}
     Select From List By Label    ${Id Contract kind}    ${Contract kind1}
-    Input Text    ${Id Profit Center}    ${Name}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Input Text    ${Id Profit Center}    ${Profit Center Name}
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Valid Until}    ${Date}
     Click Element    ${Other Data Path}
@@ -1202,13 +1207,15 @@ Create Contract Test 1
     Select From List By Label    ${Id Add Secondary responsible person}    ${Secondary Responsible Person}
     Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 1}
-    Input Text    ${Id Profit Center}    ${Name}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Input Text    ${Id Profit Center}    ${Profit Center Name}
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
     Input Text    ${Id Add Contact information}    ${Number 1}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 1}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Publishing Date}    ${Add Valid Date 1}
     Input Text    ${Id Add Contact person}    ${Add Contact person 1}
@@ -1251,7 +1258,6 @@ Create Contract Item 1
     Wait Until Element Is Not Visible    ${Add Maturity 1}
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
-    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
     Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name}"]
     Wait Until Ready    ${Id Add Document Button}
     Click Element    ${Contract Items}
@@ -1312,13 +1318,15 @@ Create Contract Test 2
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
     Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 2}
-    Input Text    ${Id Profit Center}    ${Name}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Input Text    ${Id Profit Center}    ${Profit Center Name}
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 2}
     Input Text    ${Id Add Contact information}    ${Number 2}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 2}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
@@ -1359,7 +1367,6 @@ Create Contract Item 2
     Wait Until Element Is Not Visible    ${Add Maturity 1}
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 2}"]
-    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 2}"]
     Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 2}"]
     Wait Until Ready    ${Id Add Document Button}
     Click Element    ${Contract Items}
@@ -1418,13 +1425,15 @@ Create Contract Test 3
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
     Select From List By Index    ${Id Acc Area}    1
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 3}
-    Input Text    ${Id Profit Center}    ${Name}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Input Text    ${Id Profit Center}    ${Profit Center Name}
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
     Input Text    ${Id Add Contact information}    ${Number 3}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 3}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 3}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
@@ -1465,7 +1474,6 @@ Create Contract Item 3
     Wait Until Element Is Not Visible    ${Add Maturity 1}
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
-    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
     Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject Name 3}"]
     Wait Until Ready    ${Id Add Document Button}
     Click Element    ${Contract Items}

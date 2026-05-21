@@ -5,8 +5,8 @@ Documentation       A test suite for layout.
 Resource            ${EXECDIR}/resources/layout.resource
 Resource            ${EXECDIR}/resources/fields.resource
 
-Suite Setup         Save and Set Fields
-Suite Teardown      Restore Original Fields State
+# Suite Setup         Save and Set Fields
+# Suite Teardown      Restore Original Fields State
 
 
 *** Test Cases ***

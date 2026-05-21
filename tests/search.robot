@@ -4,9 +4,8 @@ Documentation       A test suite for search.
 
 Resource            ${EXECDIR}/resources/search.resource
 Resource            ${EXECDIR}/resources/fields.resource
-
-Suite Setup         Save and Set Fields
-Suite Teardown      Restore Original Fields State
+# Suite Setup    Save and Set Fields
+# Suite Teardown    Restore Original Fields State
 
 
 *** Test Cases ***

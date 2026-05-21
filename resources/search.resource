@@ -447,12 +447,14 @@ Create Contract Test 1
     Select From List By Label    ${Id Add Secondary responsible person}    ${Secondary Responsible Person}
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 1}
     Input Text    ${Id Profit Center}    ${Name4}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 1}
     Input Text    ${Id Add Contact information}    ${Number 1}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 1}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 1}
     Select From List By Label    ${Id Add Responsible accountant}    ${Primary Responsible Person}
@@ -560,12 +562,14 @@ Create Contract Test 2
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 2}
     Input Text    ${Id Profit Center}    ${Name4}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 2}
     Input Text    ${Id Add Contact information}    ${Number 2}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 2}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 2}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
@@ -673,12 +677,14 @@ Create Contract Test 3
     Select From List By Label    ${Id Add Secondary responsible person}    ${Primary Responsible Person}
     Select From List By Label    ${Id Add Organisational unit}    ${Add Organisational unit 3}
     Input Text    ${Id Profit Center}    ${Name4}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Select From List By Label    ${Id Add Business case}    ${Add Business case 3}
     Input Text    ${Id Add Contact information}    ${Number 3}
     Input Text    ${Id Add Contract partner}    ${Add Contract partner 3}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Input Text    ${Id Add Contact person}    ${Add Contact person 3}
     Select From List By Label    ${Id Add Responsible accountant}    ${Secondary Responsible Person}
@@ -764,11 +770,13 @@ Create Contract Test 4
     Select From List By Index    ${Id Secondary Responsible Person}    1
     Select From List By Index    ${Id Appl Law}    1
     Input Text    ${Id Add Contract Partners}    ${Add Contract partner 1}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Wait Until Ready    ${Id Language}
     Input Text    ${Id Profit Center}    ${Name4}
-    Wait Until Element Is Visible    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
+    Wait Until Element Is Visible
+    ...    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Click Element    //ul[contains(@class,"ui-autocomplete") and not(contains(@style,"display: none"))]/li[1]
     Wait Until Ready    ${Id Language}
     Input Text    ${Id Valid Until}    ${Edited Date}
@@ -1400,7 +1408,7 @@ Sort Column By Index
     Should Be Equal    ${desc_values}    ${sorted_desc}
 
     Click Element    xpath=${header_xpath}
-    Sleep    1s
+    Sleep    1.2s
     Wait Until Element Is Not Visible    ${Please Wait}
 
     ${asc_values}=    Get Column Values    ${column_index}    ${as_number}    ${as_date}    ${as_boolean}

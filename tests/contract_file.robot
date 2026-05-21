@@ -5,9 +5,9 @@ Documentation       A test suite for contract file.
 Resource            ${EXECDIR}/resources/contract_file.resource
 Resource            ${EXECDIR}/resources/fields.resource
 Resource            ${EXECDIR}/resources/hmain_data.resource
+# Suite Setup    Save and Set Fields
+# Suite Teardown    Restore Original Fields State
 
-Suite Setup         Save and Set Fields
-Suite Teardown      Restore Original Fields State
 
 *** Test Cases ***
 Add Edit Delete Contract Items

@@ -161,6 +161,7 @@ ${Id Valid Until}                               c_valid_until
 ${Id VAT}                                       c_vatid
 ${Timeout2}                                     1s
 
+
 *** Keywords ***
 Go To Settings
     Wait Until Ready    ${Settings}
@@ -305,14 +306,14 @@ Enable Contract Kind Or Add Contract Kind
     ...    timeout=${Timeout2}
 
     IF    ${edited_exists}
-        Enable Contract Kind    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
+        Enable Contract Kind
+        ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
     END
     IF    ${unedited_exists} and not ${edited_exists}
-        Enable Contract Kind    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+        Enable Contract Kind
+        ...    xpath=//table[@id="ts_contract_kinds_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Contract Kind
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Contract Kind
 
 Edit Contract Kind
     Wait Until Ready    ${Id Add Contract Kind Button}
@@ -368,7 +369,6 @@ Check Created Template
     Wait Until Ready    ${Settings}
     Wait Until Ready    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Element Is Not Visible    ${Please Wait}
-    Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Double Click Element    //tr[td[contains(., "${Contract Subject}")]]
     Wait Until Ready    ${Contract Name Detail}
     Element Should Contain    ${Contract Name Detail}    ${Contract Subject}
@@ -464,9 +464,7 @@ Enable Contract Type Or Add Contract Type
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Contract Type    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Contract Type
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Contract Type
 
 Edit Contract Type
     Wait Until Ready    xpath=//table[@id="ts_contract_type_tbl"]//td[normalize-space(.)="${Name}"]
@@ -523,9 +521,7 @@ Enable Sap Or Add Sap
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Sap    xpath=//table[@id="ts_sap_contract_kind_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Sap
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Sap
 
 Add Sap
     Wait Until Ready    ${Id Add SAP Button}
@@ -589,9 +585,7 @@ Enable Accounting area Or Add Accounting area
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Accounting area    xpath=//table[@id="ts_acc_area_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Accounting area
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Accounting area
 
 Add Accounting area
     Wait Until Ready    ${Id Add Accounting Area Button}
@@ -655,9 +649,7 @@ Enable Profit Center Or Add Profit Center
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Profit Center    xpath=//table[@id="ts_profcenter_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Profit Center
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Profit Center
 
 Add Profit Center
     Wait Until Ready    ${Id Add Profit Center Button}
@@ -723,9 +715,7 @@ Enable Contract Status Or Add Contract Status
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Contract Status    xpath=//table[@id="ts_contract_status_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Contract Status
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Contract Status
 
 Add Contract Status
     Wait Until Ready    ${Id Add Contract Status Button}
@@ -786,9 +776,7 @@ Enable Parner Role Or Add Partner Role
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Partner Role    xpath=//table[@id="ts_partner_roles_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Partner Role
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Partner Role
 
 Add Partner Role
     Wait Until Ready    ${Id Add Partner Roles Button}
@@ -971,10 +959,12 @@ Enable Organization Unit Or Add Organization Unit
     ...    timeout=${Timeout2}
 
     IF    ${edited_exists}
-        Enable Organization Unit    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
+        Enable Organization Unit
+        ...    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract Kind Edited Name}"]
     END
     IF    ${unedited_exists} and not ${edited_exists}
-        Enable Organization Unit    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
+        Enable Organization Unit
+        ...    xpath=//table[@id="ts_org_units_tbl"]//td[normalize-space(.)="${Contract Kind Name}"]
     END
     IF    not ${edited_exists} and not ${unedited_exists}
         Add Organization Unit
@@ -1040,9 +1030,7 @@ Enable Business Case Or Add Business Case
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Business Case    xpath=//table[@id="ts_business_case_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Business Case
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Business Case
 
 Add Business Case
     Wait Until Ready    ${Id Add Business Case Button}
@@ -1165,9 +1153,7 @@ Enable VAT ID Or Add VAD ID
     IF    ${unedited_exists} and not ${edited_exists}
         Enable VAT ID    xpath=//table[@id="ts_vatid_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add VAT ID
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add VAT ID
 
 Add VAT ID
     Wait Until Ready    ${Id Add VAT ID Button}
@@ -1227,9 +1213,7 @@ Enable Bank Account Or Add Bank Account
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Bank Account    xpath=//table[@id="ts_bank_account_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Bank Account
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Bank Account
 
 Add Bank Account
     Wait Until Ready    ${Id Add Bank Account Button}
@@ -1289,9 +1273,7 @@ Enable Applicable Law Or Add Applicable Law
     IF    ${unedited_exists} and not ${edited_exists}
         Enable Applicable Law    xpath=//table[@id="ts_appl_law_tbl"]//td[normalize-space(.)="${Name}"]
     END
-    IF    not ${edited_exists} and not ${unedited_exists}
-        Add Applicable Law
-    END
+    IF    not ${edited_exists} and not ${unedited_exists}    Add Applicable Law
 
 Add Applicable Law
     Wait Until Ready    ${Id Add Applicable Law Button}

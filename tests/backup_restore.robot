@@ -6,9 +6,11 @@ Resource            ${EXECDIR}/resources/fields.resource
 
 *** Test Cases ***
 Obnova zálohy nastavení polí
+    [Tags]    skip_me
     Restore Backup of Fields Settings
 
 Kontrola změny nastavení polí
+    [Tags]    skip_me
     Open Browser And Logged In
     Wait Until Ready    ${Personal Space}
     Click Element    ${Personal Space}

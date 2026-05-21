@@ -6,8 +6,8 @@ Resource            ${EXECDIR}/resources/haux_data.resource
 Resource            ${EXECDIR}/resources/fields.resource
 Resource            ${EXECDIR}/resources/hmain_data.resource
 
-Suite Setup         Save and Set Fields
-Suite Teardown      Restore Original Fields State
+# Suite Setup         Save and Set Fields
+# Suite Teardown      Restore Original Fields State
 
 *** Test Cases ***
 Add Edit Original Storage

@@ -5,8 +5,8 @@ Documentation       A test suite for header main data.
 Resource            ${EXECDIR}/resources/hmain_data.resource
 Resource            ${EXECDIR}/resources/fields.resource
 
-Suite Setup         Save and Set Fields
-Suite Teardown      Restore Original Fields State
+# Suite Setup         Save and Set Fields
+# Suite Teardown      Restore Original Fields State
 
 *** Test Cases ***
 Add Edit Templates
@@ -17,7 +17,7 @@ Add Edit Templates
 
 Add Edit Field
     [Documentation]    A test case for fields.
-    Go To Header Main Data Fields
+    hmain_data.Go To Header Main Data Fields
     Retry Keyword With Popup Fix    Enable Fields Or Add Field
     Retry Keyword With Popup Fix    Enable Contract Kind Or Add Contract Kind
     Retry Keyword With Popup Fix    Edit Field
@@ -43,7 +43,7 @@ Add Edit Accounting area
 
 Add Edit Profit Center
     [Documentation]    A test case for profit center.
-    Go To Profit Center
+    hmain_data.Go To Profit Center
     Retry Keyword With Popup Fix    Enable Profit Center Or Add Profit Center
     Retry Keyword With Popup Fix    Edit Profit Centrum
 

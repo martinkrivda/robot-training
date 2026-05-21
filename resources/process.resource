@@ -9,6 +9,7 @@ Library             String
 Library             DateTime
 Variables           ../credentials.py
 Resource            login.resource
+Library             ../tests/image_check.py
 
 
 *** Variables ***
@@ -50,6 +51,7 @@ ${Id Add Primary responsible person}        c_primary
 ${Id Add Contract partner}                  c_partner
 ${Add Contract partner 1}                   Agrofert,
 ${Contract Subject}                         ISS TEST 2.22.0
+${Contract Subject 2}                       ISS TEST 3.33.0
 ${Tab Contract Number}                      tab_contract_contract
 ${Edit Contract File}                       xpath=//ul[contains(@class,"cm_contract_contract") and contains(@class,"contextMenu") and not(contains(@class,"permanent"))]//a[@href="#contract_edit_data" and contains(., "Úprava smluvních údajů")]
 ${Id Add Valid Until}                       c_valid_until
@@ -112,6 +114,36 @@ ${Contract Signed Off}                      s_signed_off_contracts
 ${Protocols}                                xpath=//a[@href="#tc_contract_protocols"]
 ${Id Cover Sheet}                           tc_cover_sheet_btn
 ${Id Final Version Checkbox}                finalversion_chk
+${Id Add Profit Center}                     c_profit_center
+${Id Acc Area}                              c_acc_area
+${Id As Autor}                              id=r_creator
+${Profit Center Name}                       test
+${Id Contract Type}                         c_type
+${Edited Date}                              12.07.2025
+${Id Valid Until}                           c_valid_until
+${Id Appl Law}                              c_appl_law
+${Id VAT ID}                                c_vatid
+${Id Incident Contracts}                    s_incident_contracts
+${Display Differences}                      xpath=//a[@href="#signoff_display_diffs"]
+${Id Differences Next}                      diff_next
+${Differences Date}                         12.12.2026
+${Id Differences Date}                      partner_sig_date
+${Accept Differences}                       xpath=//button[normalize-space(.)="Akceptovat rozdíly"]
+${Accept Differences And Release}           xpath=//button[normalize-space(.)="Akceptovat rozdíly a uvolnit"]
+${Id Differences Comment}                   diffs_decision_comment
+${Differences Comment}                      Differences Test
+${Partner Signature Date}                   c_sign_partner
+${Release Contract}                         xpath=//a[@href="#signoff_release"]
+${Release Button}                           xpath=//button[normalize-space(.)="Uvolnění k vyhledávání"]
+${Id Release}                               released
+${Id Creation Status}                       creation_status
+${Search}                                   xpath=//a[@href="#tab_search"]
+${Search Button}                            xpath=//button[contains(@class,"search_contract_btn") and normalize-space(.)="Hledání"]
+${Search Button 2}                          xpath=//div[contains(@class,"ui-dialog-buttonset")]//button[normalize-space(.)="Hledání"]
+${Contract Delete Button}                   xpath=//div[@id="contract_top_menu"]//a[@href="#contract_delete_file"]
+${Switch To Contract File}                  xpath=//a[@href="#contract_switch"]
+${contract_number}                          ${EMPTY}
+${contract_number2}                         ${EMPTY}
 
 
 *** Keywords ***
@@ -146,6 +178,7 @@ Create Contract
     Select From List By Index    ${Id Number Sequence}    1
     Select From List By Index    ${Id Field}    1
     Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract Type}    1
     Select From List By Index    ${Id Language}    1
     Input Text    ${Id Contract Subject}    ${Contract Subject}
     Select From List By Index    ${Id Contract kind}    1
@@ -153,19 +186,64 @@ Create Contract
     Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
     Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
     Select From List By Label    ${Id Add Primary responsible person}    ${Primary Responsible Person}
+    Input Text    ${Id Add Profit Center}    ${Profit Center Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
     Select From List By Label    ${Id Add Secondary responsible person}    ${Secondary Responsible Person}
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Valid Until}    ${Edited Date}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
     Click Button    ${Create Contract File Button}
     Wait Until Element Is Not Visible    ${Id Number Sequence}
     Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    xpath=//table[@id='p_all_tbl']//tbody/tr[1]/td[3]
-    ${contract_number}=    Get Text    xpath=//table[@id='p_all_tbl']//tbody/tr[1]/td[3]
+    ${contract_number}=
+    ...    Get Text
+    ...    xpath=//table[@id='p_all_tbl']//tbody/tr[1]/td[3]
+    Set Suite Variable    ${contract_number}
     Log To Console    Contract Number: ${contract_number}
-    Log    Contract Number: ${contract_number}
+
+Create Contract 2
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Create Contract}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Create Contract}
+    Wait Until Ready    ${Id Number Sequence}
+    Element Should Not Contain    ${Id Number Sequence}    ${Number Sequence 2}
+    Select From List By Index    ${Id Number Sequence}    1
+    Select From List By Index    ${Id Field}    1
+    Select From List By Index    ${Id Confidentiality}    1
+    Select From List By Index    ${Id Contract Type}    1
+    Select From List By Index    ${Id Language}    1
+    Input Text    ${Id Contract Subject}    ${Contract Subject 2}
+    Select From List By Index    ${Id Contract kind}    1
+    Input Text    ${Id Add Contract partner}    ${Add Contract partner 1}
+    Wait Until Ready    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Click Element    xpath=//ul[contains(@class, "ui-autocomplete")]/li[1]
+    Select From List By Label    ${Id Add Primary responsible person}    ${Primary Responsible Person}
+    Input Text    ${Id Add Profit Center}    ${Profit Center Name}
+    Wait Until Element Is Visible    (//li[contains(@class,"ui-menu-item")])[1]
+    Click Element    (//li[contains(@class,"ui-menu-item")])[1]
+    Select From List By Label    ${Id Add Secondary responsible person}    ${Secondary Responsible Person}
+    Select From List By Index    ${Id Appl Law}    1
+    Input Text    ${Id Valid Until}    ${Edited Date}
+    Select From List By Index    ${Id VAT ID}    1
+    Select From List By Index    ${Id Acc Area}    1
+    Click Button    ${Create Contract File Button}
+    Wait Until Element Is Not Visible    ${Id Number Sequence}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id='p_all_tbl']//tbody/tr[1]/td[3]
+    ${contract_number2}=
+    ...    Get Text
+    ...    xpath=//table[@id='p_all_tbl']//tbody/tr[1]/td[3]
+    Set Suite Variable    ${contract_number2}
+    Log To Console    Contract Number: ${contract_number2}
 
 Edit Contract
     Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
-    Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
-    Double Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Open Context Menu    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    ${Switch To Contract File}
     Wait Until Ready    ${Tab Contract Number}
     # Click Element    xpath=//li[contains(@class,"cm_item")]//a[@href="#contract_edit_data"]
     Open Context Menu    ${Tab Contract Number}
@@ -173,6 +251,7 @@ Edit Contract
     Click Element    ${Edit Contract File}
     Wait Until Ready    ${Id Add Valid Until}
     Input Text    ${Id Add Valid Until}    ${Add Date}
+    Select From List By Index    ${Id Acc Area}    1
     Click Element    ${Id Number Sequence}
     Sleep    1
     Click Button    ${Update Contract File}
@@ -189,6 +268,30 @@ Check Edited Contract
     Wait Until Element Is Not Visible    ${Id Add Valid Until}
 
 Create Contract Item
+    Click Element    ${Contract Items}
+    Wait Until Ready    ${Id Add Item Button}
+    Click Button    ${Id Add Item Button}
+    Wait Until Ready    ${Id Add Commodity/service}
+    Select From List By Index    ${Id Add Commodity/service}    1
+    Input Text    ${Id Add Quantity}    ${Number 1}
+    Select From List By Index    ${Id Add Unit}    1
+    Input Text    ${Id Unit Price}    ${Maturity Number 1}
+    Select From List By Index    ${Id Add Order}    1
+    Select From List By Index    ${Id Add Currency}    1
+    Select From List By Index    ${Id Add Location}    1
+    Input Text    ${Id Add Delivery Date}    ${Add Date 1}
+    Input Text    ${Id Add Delivery To}    ${Add Valid Date 1}
+    Input Text    ${Id Add Discount}    ${Number 1}
+    Input Text    ${Id Add VAT rate}    ${Number 1}
+    Select From List By Index    ${Id Add Business case}    1
+    Click Element    ${Finish Button}
+    Wait Until Ready    ${Id Add Item Button}
+
+Create Contract Item 2
+    Wait Until Ready    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Open Context Menu    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Click Element    ${Switch To Contract File}
+    Wait Until Ready    ${Contract Items}
     Click Element    ${Contract Items}
     Wait Until Ready    ${Id Add Item Button}
     Click Button    ${Id Add Item Button}
@@ -267,7 +370,7 @@ Add Documents
     Choose File    ${Input File}    ${DOWNLOAD_DIR}/${latest_file}
     Wait Until Ready    ${Finish Button}
     Click Element    ${Finish Button}
-    Wait Until Element Is Not Visible    ${Id Add Document}
+    Wait Until Element Is Not Visible    ${Id Add Document}    30
 
     Wait Until Ready    ${Id Add Document Button}
     Click Element    ${Id Add Document Button}
@@ -275,7 +378,7 @@ Add Documents
     Select From List By Label    ${Id Add Document}    ${Add Document}
     Choose File    ${Input File}    ${File Path 2}
     Click Element    ${Finish Button}
-    Wait Until Element Is Not Visible    ${Id Add Document}
+    Wait Until Element Is Not Visible    ${Id Add Document}    30
 
     Wait Until Ready    ${Id Add Document Button}
     Click Element    ${Id Add Document Button}
@@ -283,7 +386,7 @@ Add Documents
     Select From List By Label    ${Id Add Document}    ${Add Document 2}
     Choose File    ${Input File}    ${File Path}
     Click Element    ${Finish Button}
-    Wait Until Element Is Not Visible    ${Id Add Document}
+    Wait Until Element Is Not Visible    ${Id Add Document}    30
 
 Add Final Version
     Wait Until Ready    ${Id Final Version Button}
@@ -322,10 +425,13 @@ Start SignOff Process
     Wait Until Ready    ${Id Add Signoff Schema}
     Select From List By Label    ${Id Add Signoff Schema}    ${SIGNOFF_SCHEMA}
     Click Element    ${Finish Button}
+    Sleep    1
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Personal Space}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Personal Space}
 
 Contract SignOff
-    Wait Until Element Is Not Visible    ${Please Wait}
-    Go To Personal Space
     Wait Until Ready    ${Contract To Process}
     Click Element    ${Contract To Process}
     Wait Until Ready    xpath=//table[@id="s_pending_decisions_tbl"]//td[normalize-space(.)="${Contract Subject}"]
@@ -335,13 +441,28 @@ Contract SignOff
     Wait Until Ready    ${Signoff Button}
     Click Button    ${Signoff Button}
 
-Check Signed Off Contract And Create Cover Sheet
-    Wait Until Ready    ${Contract Signed Off}
-    Click Element    ${Contract Signed Off}
-    Wait Until Ready    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
-    Click Element    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
-    Double Click Element
-    ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+Contract SignOff 2
+    Wait Until Ready    ${Contract To Process}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Contract To Process}
+    Wait Until Ready    xpath=//table[@id="s_pending_decisions_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Open Context Menu    xpath=//table[@id="s_pending_decisions_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Wait Until Ready    ${Contract Signoff}
+
+    Click Element    ${Contract Signoff}
+    Wait Until Ready    ${Signoff Button}
+    Click Button    ${Signoff Button}
+
+Check Signed Off Contract And Create Cover Sheet 2
+    Sleep    1
+    Wait Until Ready    ${Personal Space}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Personal Space}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Open Context Menu
+    ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Click Element    ${Switch To Contract File}
     Wait Until Ready    ${Protocols}
     Click Element    ${Protocols}
     Wait Until Ready    ${Id Cover Sheet}
@@ -351,7 +472,25 @@ Check Signed Off Contract And Create Cover Sheet
     Click Element    ${Create Button}
     Wait Until Element Is Not Visible    ${Please Wait}    30s
 
-Original
+Check Signed Off Contract And Create Cover Sheet
+    Sleep    1
+    Wait Until Ready    ${Contract Signed Off}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Contract Signed Off}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Open Context Menu    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    ${Switch To Contract File}
+    Wait Until Ready    ${Protocols}
+    Click Element    ${Protocols}
+    Wait Until Ready    ${Id Cover Sheet}
+    Click Button    ${Id Cover Sheet}
+    Wait Until Ready    ${Id Final Version Checkbox}
+    Select Checkbox    ${Id Final Version Checkbox}
+    Click Element    ${Create Button}
+    Wait Until Element Is Not Visible    ${Please Wait}    30s
+
+Add Original
     Wait Until Ready    ${Contract Documents}
     Click Element    ${Contract Documents}
     Wait Until Ready    ${Id Add Document Button}
@@ -362,7 +501,6 @@ Original
     Click Element    ${Finish Button}
     Wait Until Element Is Not Visible    ${Id Add Document}
 
-
 Wait Until Comparing Finished
     [Arguments]    ${max_attempts}=30
 
@@ -370,25 +508,168 @@ Wait Until Comparing Finished
 
     WHILE    True
         ${attempt}=    Evaluate    ${attempt} + 1
-        Run Keyword If    ${attempt} > ${max_attempts}
-        ...    Fail    Porovnávání stále běží i po ${max_attempts} pokusech
+        IF    ${attempt} > ${max_attempts}
+            Fail    Porovnávání stále běží i po ${max_attempts} pokusech
+        END
 
         Wait Until Ready    ${Personal Space}
-        Click Element      ${Personal Space}
+        Click Element    ${Personal Space}
 
         Wait Until Ready    ${Refresh}
-        Click Element      ${Refresh}
-        Sleep    1s
+        Click Element    ${Refresh}
+        Sleep    3s
 
         Wait Until Ready    ${Contract}
-        Click Element      ${Contract}
-        Sleep    1s
+        Wait Until Element Is Not Visible    ${Please Wait}
+        Click Element    ${Contract}
+        Sleep    3s
 
         ${is_visible}=    Run Keyword And Return Status
         ...    Page Should Contain Element
         ...    xpath=//span[starts-with(@id,'comparing_')]
 
-        Run Keyword If    not ${is_visible}    Exit For Loop
+        IF    not ${is_visible}    BREAK
 
         Log    Comparing stále běží – opakuji (${attempt}/${max_attempts})
     END
+
+Check File Differences
+    Capture Element Screenshot    id=diff_pics    diff.png
+
+    ${yellow_found}=    Image Contains Yellow    diff.png
+
+    Should Be True    ${yellow_found}    Nebyla nalezena žlutá zvýraznění!
+
+Test Differences
+    Go To Personal Space
+    Wait Until Ready    ${Id Incident Contracts}
+    Click Element    ${Id Incident Contracts}
+    Wait Until Ready    xpath=//table[@id="s_incident_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Open Context Menu    xpath=//table[@id="s_incident_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Ready    ${Display Differences}
+    Click Element    ${Display Differences}
+    Wait Until Ready    ${Id Differences Next}
+    Sleep    1
+    Check File Differences
+    Input Text    ${Id Differences Date}    ${Differences Date}
+    Wait Until Ready    ${Accept Differences}
+    Click Element    ${Accept Differences}
+    Wait Until Ready    ${Id Differences Comment}
+    Input Text    ${Id Differences Comment}    ${Differences Comment}
+    Click Button    ${Finish Button}
+
+Test Differences And Release
+    Wait Until Ready    ${Id Incident Contracts}
+    Click Element    ${Id Incident Contracts}
+    Wait Until Ready    xpath=//table[@id="s_incident_contracts_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Open Context Menu    xpath=//table[@id="s_incident_contracts_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Wait Until Ready    ${Display Differences}
+    Click Element    ${Display Differences}
+    Wait Until Ready    ${Id Differences Next}
+    Sleep    1
+    Check File Differences
+    Input Text    ${Id Differences Date}    ${Differences Date}
+    Wait Until Ready    ${Accept Differences And Release}
+    Click Element    ${Accept Differences And Release}
+    Wait Until Ready    ${Id Differences Comment}
+    Input Text    ${Id Differences Comment}    ${Differences Comment}
+    Click Button    ${Finish Button}
+    Wait Until Ready    ${Release Button}
+    Click Element    ${Release Button}
+    Wait Until Element Is Not Visible    ${Please Wait}
+
+Check Signature Date And Partner Signature Date
+    Wait Until Ready    ${Contract Signed Off}
+    Click Element    ${Contract Signed Off}
+    Wait Until Ready    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Open Context Menu    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    ${Switch To Contract File}
+    Wait Until Ready    ${Tab Contract Number}
+    # Click Element    xpath=//li[contains(@class,"cm_item")]//a[@href="#contract_edit_data"]
+    Open Context Menu    ${Tab Contract Number}
+    # Wait Until Ready    ${Edit Contract File}
+    Click Element    ${Edit Contract File}
+    Wait Until Ready    ${Id Add Valid Until}
+    Element Attribute Value Should Be    ${Partner Signature Date}    value    ${Differences Date}
+    Click Element    ${Close Button}
+
+Check Signature Date And Partner Signature Date 2
+    Wait Until Ready    ${Id Release}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Id Release}
+    Sleep    3
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Wait Until Ready    ${Id As Autor}
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Click Element    ${Id As Autor}
+    Wait Until Ready    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Open Context Menu    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Click Element    ${Switch To Contract File}
+    Wait Until Ready    ${Tab Contract Number}
+    # Click Element    xpath=//li[contains(@class,"cm_item")]//a[@href="#contract_edit_data"]
+    Open Context Menu    ${Tab Contract Number}
+    # Wait Until Ready    ${Edit Contract File}
+    Click Element    ${Edit Contract File}
+    Wait Until Ready    ${Id Add Valid Until}
+    Element Attribute Value Should Be    ${Partner Signature Date}    value    ${Differences Date}
+    Click Element    ${Close Button}
+
+Release Contract
+    Go To Personal Space
+    Wait Until Ready    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Open Context Menu    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Click Element    ${Release Contract}
+    Wait Until Ready    ${Release Button}
+    Click Element    ${Release Button}
+
+Check Released Contract
+    Wait Until Ready    ${Id Creation Status}
+    Element Should Contain    ${Id Creation Status}    Smluvní složka uvolněna k vyhledávání
+
+Search First Contract
+    Wait Until Ready    ${Search}
+    Click Element    ${Search}
+    Wait Until Ready    ${Search Button}
+    Click Button    ${Search Button}
+    Wait Until Ready    ${Id Number Sequence}
+    Input Text    ${Id Number Sequence}    ${contract_number}
+    Click Button    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Id Number Sequence}
+    Sleep    1
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Element Should Be Visible    xpath=//table[@id="search_results"]//td[normalize-space(.)="${contract_number}"]
+
+Search Second Contract
+    Wait Until Ready    ${Search Button}
+    Click Button    ${Search Button}
+    Wait Until Ready    ${Id Number Sequence}
+    Input Text    ${Id Number Sequence}    ${contract_number2}
+    Click Button    ${Search Button 2}
+    Wait Until Element Is Not Visible    ${Id Number Sequence}
+    Sleep    1
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Element Should Be Visible    xpath=//table[@id="search_results"]//td[normalize-space(.)="${contract_number2}"]
+
+Delete First Contract
+    Go To Personal Space
+    Wait Until Ready    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Open Context Menu    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject}"]
+    Sleep    2
+    Click Element    ${Switch To Contract File}
+    Wait Until Ready    ${Contract Delete Button}
+    Click Element    ${Contract Delete Button}
+    Wait Until Ready    ${Delete Button}
+    Click Element    ${Delete Button}
+
+Delete Second Contract
+    Go To Personal Space
+    Wait Until Ready    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Wait Until Element Is Not Visible    ${Please Wait}
+    Open Context Menu    xpath=//table[@id="r_creator_tbl"]//td[normalize-space(.)="${Contract Subject 2}"]
+    Click Element    ${Switch To Contract File}
+    Wait Until Ready    ${Contract Delete Button}
+    Click Element    ${Contract Delete Button}
+    Wait Until Ready    ${Delete Button}
+    Click Element    ${Delete Button}
+    Wait Until Ready    ${Personal Space}
