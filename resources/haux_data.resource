@@ -1034,6 +1034,7 @@ Check Created Contract Relations
     Click Element    ${Search Contract Relations Button}
     Wait Until Ready    ${Search Button}
     Click Element    ${Search Button}
+    Sleep    2
     Wait Until Element Is Visible    ${Contract}    timeout=5s
     Double Click Element    ${Contract}
     Wait Until Ready    ${Id Contract Relations To}

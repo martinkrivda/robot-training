@@ -176,6 +176,7 @@ Delete Contract If Exists
 Delete Contracts
     [Arguments]    ${schema_name}
     Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+    Sleep    2
     Click Element    ${Delete Contract Personal}
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
@@ -510,6 +511,7 @@ Check Completed Contract File
 
 Go To Forum
     Wait Until Ready    ${Forum}
+    Sleep    3
     Click Element    ${Forum}
 
 Add Forum Member
@@ -551,6 +553,7 @@ Contract SignOff
 
 Contract Release
     Wait Until Ready    ${Id Contracts Signed Off}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    ${Id Contracts Signed Off}
     Wait Until Element Is Enabled
     ...    xpath=//table[@id="s_signed_off_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]

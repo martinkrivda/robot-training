@@ -152,6 +152,21 @@ Check If Tender Number Is Not Visible
     Element Should Not Be Visible    ${Id Tender Number}
     Click Element    ${Close Button}
 
+Change Tender Number To Invisible
+    Click On Administration
+    Click On Fields
+    Wait Until Ready    ${Field Name}
+    Click Element    ${Field Name}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Contract creation1}
+    Click Element    ${Contract creation2}
+    Click Element    ${Sign-off2}
+    Click Element    ${Visibility2}
+    Click Element    ${Data source1}
+    Click Element    ${Value from SAP2}
+    Click Element    ${Finish Button}
+
 Edit Fields
     Wait Until Ready    ${Field Name}
     Click Element    ${Field Name}

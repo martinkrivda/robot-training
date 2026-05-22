@@ -386,6 +386,7 @@ Delete Test Contracts
 Delete Contracts
     [Arguments]    ${schema_name}
     Click Element    xpath=//table[@id="p_all_tbl"]//td[normalize-space(.)="${schema_name}"]
+    Sleep    2
     Wait Until Element Is Not Visible    ${Please Wait}
     Click Element    ${Delete Contract Button}
     Wait Until Ready    ${Delete Button}

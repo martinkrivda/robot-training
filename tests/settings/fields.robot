@@ -11,8 +11,9 @@ Resource            ${EXECDIR}/resources/fields.resource
 Turn Off/On Visibility of Header Field
     [Documentation]    A test case for visibility of fields.
     [Setup]    Field Setup
+    Change Tender Number To Invisible
     Check If Tender Number Is Not Visible
-    Go To Fields
+    fields.Go To Settings
     Edit Fields
     Check If Tender Number Is Visible
 
