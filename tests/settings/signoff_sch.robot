@@ -3,6 +3,7 @@ Documentation       A test suite for signoff schemas.
 ...                 Keywords are imported from signoff_sch.resource
 
 Resource            ${EXECDIR}/resources/signoff_sch.resource
+Resource            ${EXECDIR}/resources/fields.resource
 
 
 *** Test Cases ***

@@ -3,8 +3,7 @@ Documentation       A test suite for password change.
 ...                 Keywords are imported from change_pw.resource
 
 Resource            ${EXECDIR}/resources/change_pw.resource
-
-Test Teardown       Close Browser
+Resource            ${EXECDIR}/resources/fields.resource
 
 
 *** Test Cases ***

@@ -1242,6 +1242,7 @@ Test Searching Of Contract Subject
     Input Text    ${Id Contract Subject}    ${Search Contract Subject 2}
     Click Element    ${Search Button 2}
     Wait Until Element Is Not Visible    ${Id Contract Subject}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Element Should Not Be Visible
     ...    xpath=//table[@id='search_results']//tr/td[3][normalize-space(.)='${Contract Subject Name 4}']
     Element Should Be Visible
@@ -1268,6 +1269,7 @@ Test Searching Of Partner Contract Number
     Input Text    ${Search Partner Contract Number}    ${Add Number 2}
     Click Element    ${Search Button 2}
     Wait Until Element Is Not Visible    ${Search Partner Contract Number}
+    Wait Until Element Is Not Visible    ${Please Wait}
     Element Should Not Be Visible
     ...    xpath=//table[@id='search_results']//tr/td[6][normalize-space(.)='${Add Number 1}']
     Element Should Be Visible
@@ -1402,6 +1404,7 @@ Sort Column By Index
     Wait Until Element Is Visible    xpath=${header_xpath}
     Click Element    xpath=${header_xpath}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
 
     ${desc_values}=    Get Column Values    ${column_index}    ${as_number}    ${as_date}    ${as_boolean}
     ${sorted_desc}=    Copy List    ${desc_values}

@@ -2177,6 +2177,7 @@ Test Sorting Of Number Column
     Wait Until Ready    ${Number}
     Click Element    ${Number}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${ids_desc}=    Get IDs From Table Column    3
 
     ${numbers_desc}=    Create List
@@ -2192,6 +2193,7 @@ Test Sorting Of Number Column
 
     Click Element    ${Number}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${ids_asc}=    Get IDs From Table Column    3
 
     ${numbers_asc}=    Create List
@@ -2226,6 +2228,7 @@ Test Sorting Of Partner Number Column
     Wait Until Ready    ${Number Partner}
     Click Element    ${Number Partner}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_nums}=    Get Partner Numbers From Column    4
     ${expected_desc}=    Copy List    ${desc_nums}
     Sort List    ${expected_desc}
@@ -2234,6 +2237,7 @@ Test Sorting Of Partner Number Column
 
     Click Element    ${Number Partner}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_nums}=    Get Partner Numbers From Column    4
     ${expected_asc}=    Copy List    ${asc_nums}
     Sort List    ${expected_asc}
@@ -2267,6 +2271,7 @@ Test Sorting Of Partner ID Column
     Wait Until Ready    ${Partner ID}
     Click Element    ${Partner ID}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_ids}=    Get Partner IDs From Column    6
     ${sorted_desc}=    Copy List    ${desc_ids}
     Sort List    ${sorted_desc}
@@ -2275,6 +2280,7 @@ Test Sorting Of Partner ID Column
 
     Click Element    ${Partner ID}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_ids}=    Get Partner IDs From Column    6
     ${sorted_asc}=    Copy List    ${asc_ids}
     Sort List    ${sorted_asc}
@@ -2416,6 +2422,7 @@ Test Sorting Of Primary Responsible Column
     Wait Until Ready    ${Prim. Resp.}
     Click Element    ${Prim. Resp.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    10
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2424,6 +2431,7 @@ Test Sorting Of Primary Responsible Column
 
     Click Element    ${Prim. Resp.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    10
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2433,6 +2441,7 @@ Test Sorting Of Secondary Responsible Column
     Wait Until Ready    ${Sec. Resp.}
     Click Element    ${Sec. Resp.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    11
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2441,6 +2450,7 @@ Test Sorting Of Secondary Responsible Column
 
     Click Element    ${Sec. Resp.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    11
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2463,6 +2473,7 @@ Test Sorting Of Bank Account Column
     Wait Until Ready    ${Bank Account}
     Click Element    ${Bank Account}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_values}=    Get Column Text Values    12
     ${expected_desc}=    Copy List    ${desc_values}
     Sort List    ${expected_desc}
@@ -2471,6 +2482,7 @@ Test Sorting Of Bank Account Column
 
     Click Element    ${Bank Account}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_values}=    Get Column Text Values    12
     ${expected_asc}=    Copy List    ${asc_values}
     Sort List    ${expected_asc}
@@ -2494,6 +2506,7 @@ Test Sorting Of Accountant Column
     Wait Until Ready    ${Accountant}
     Click Element    ${Accountant}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    13
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2502,6 +2515,7 @@ Test Sorting Of Accountant Column
 
     Click Element    ${Accountant}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    13
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2525,6 +2539,7 @@ Test Sorting Of Appl. Law Column
     Wait Until Ready    ${Appl.law}
     Click Element    ${Appl.law}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    14
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2533,6 +2548,7 @@ Test Sorting Of Appl. Law Column
 
     Click Element    ${Appl.law}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    14
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2554,6 +2570,7 @@ Test Sorting Of Bonus Column
     Wait Until Ready    ${Bonus}
     Click Element    ${Bonus}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    15
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2562,6 +2579,7 @@ Test Sorting Of Bonus Column
 
     Click Element    ${Bonus}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    15
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2583,6 +2601,7 @@ Test Sorting Of Confidentiality Column
     Wait Until Ready    ${Confidentiality}
     Click Element    ${Confidentiality}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    16
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2591,6 +2610,7 @@ Test Sorting Of Confidentiality Column
 
     Click Element    ${Confidentiality}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    16
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2614,6 +2634,7 @@ Test Sorting Of Contact Person Column
     Wait Until Ready    ${Contact Person}
     Click Element    ${Contact Person}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    17
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2622,6 +2643,7 @@ Test Sorting Of Contact Person Column
 
     Click Element    ${Contact Person}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    17
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2656,6 +2678,7 @@ Test Sorting Of Contract Price Column
     Wait Until Ready    ${Contract Price}
     Click Element    ${Contract Price}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_prices}=    Get Price Values From Column    18
     ${sorted_desc}=    Copy List    ${desc_prices}
     Sort List    ${sorted_desc}
@@ -2664,6 +2687,7 @@ Test Sorting Of Contract Price Column
 
     Click Element    ${Contract Price}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_prices}=    Get Price Values From Column    18
     ${sorted_asc}=    Copy List    ${asc_prices}
     Sort List    ${sorted_asc}
@@ -2688,6 +2712,7 @@ Test Sorting Of Contract Price Currency Column
     Wait Until Ready    ${Contract Price Currency}
     Click Element    ${Contract Price Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    19
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2696,6 +2721,7 @@ Test Sorting Of Contract Price Currency Column
 
     Click Element    ${Contract Price Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    19
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2718,6 +2744,7 @@ Test Sorting Of Deposit Column
     Wait Until Ready    ${Deposit}
     Click Element    ${Deposit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    20
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2726,6 +2753,7 @@ Test Sorting Of Deposit Column
 
     Click Element    ${Deposit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    20
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2750,6 +2778,7 @@ Test Sorting Of Deposit Currency Column
     Wait Until Ready    ${Deposit Currency}
     Click Element    ${Deposit Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    21
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2758,6 +2787,7 @@ Test Sorting Of Deposit Currency Column
 
     Click Element    ${Deposit Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    21
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2779,6 +2809,7 @@ Test Sorting Of Deposit Text Column
     Wait Until Ready    ${Deposit Text}
     Click Element    ${Deposit Text}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    22
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2787,6 +2818,7 @@ Test Sorting Of Deposit Text Column
 
     Click Element    ${Deposit Text}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    22
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2806,6 +2838,7 @@ Test Sorting Of Doc.enclosed Column
     Wait Until Ready    ${Doc.enclosed}
     Click Element    ${Doc.enclosed}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    23
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2813,6 +2846,7 @@ Test Sorting Of Doc.enclosed Column
 
     Click Element    ${Doc.enclosed}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    23
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2832,6 +2866,7 @@ Test Sorting Of Doc.req. Column
     Wait Until Ready    ${Doc.req.}
     Click Element    ${Doc.req.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    24
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2839,6 +2874,7 @@ Test Sorting Of Doc.req. Column
 
     Click Element    ${Doc.req.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    24
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2868,6 +2904,7 @@ Test Sorting Of Doc.req.date Column
     Wait Until Ready    ${Doc.req.date}
     Click Element    ${Doc.req.date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    25
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -2877,6 +2914,7 @@ Test Sorting Of Doc.req.date Column
 
     Click Element    ${Doc.req.date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    25
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -2925,6 +2963,7 @@ Test Sorting Of Effective Date Column
     Wait Until Ready    ${Effective Date}
     Click Element    ${Effective Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    26
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -2934,6 +2973,7 @@ Test Sorting Of Effective Date Column
 
     Click Element    ${Effective Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    26
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -2955,6 +2995,7 @@ Test Sorting Of Eff.from sig Date Column
     Wait Until Ready    ${Eff.from sig Date}
     Click Element    ${Eff.from sig Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    27
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -2962,6 +3003,7 @@ Test Sorting Of Eff.from sig Date Column
 
     Click Element    ${Eff.from sig Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    27
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -2996,6 +3038,7 @@ Test Sorting Of Interest Column
     Wait Until Ready    ${Interest}
     Click Element    ${Interest}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    28
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3004,6 +3047,7 @@ Test Sorting Of Interest Column
 
     Click Element    ${Interest}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    28
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3025,6 +3069,7 @@ Test Sorting Of Internal Contact Column
     Wait Until Ready    ${Internal Contact}
     Click Element    ${Internal Contact}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    29
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3033,6 +3078,7 @@ Test Sorting Of Internal Contact Column
 
     Click Element    ${Internal Contact}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    29
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3054,6 +3100,7 @@ Test Sorting Of Int.part. Column
     Wait Until Ready    ${Int.part.}
     Click Element    ${Int.part.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    30
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3062,6 +3109,7 @@ Test Sorting Of Int.part. Column
 
     Click Element    ${Int.part.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    30
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3085,6 +3133,7 @@ Test Sorting Of Invoicing Date Column
     Wait Until Ready    ${Invoicing Date}
     Click Element    ${Invoicing Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    31
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3093,6 +3142,7 @@ Test Sorting Of Invoicing Date Column
 
     Click Element    ${Invoicing Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    31
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3111,6 +3161,7 @@ Test Sorting Of Irregular Payment Column
     Wait Until Ready    ${Irregular Payment}
     Click Element    ${Irregular Payment}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    32
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3118,6 +3169,7 @@ Test Sorting Of Irregular Payment Column
 
     Click Element    ${Irregular Payment}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    32
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3140,6 +3192,7 @@ Test Sorting Of Kind Column
     Wait Until Ready    ${Kind}
     Click Element    ${Kind}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    33
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3148,6 +3201,7 @@ Test Sorting Of Kind Column
 
     Click Element    ${Kind}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    33
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3169,6 +3223,7 @@ Test Sorting Of Language Column
     Wait Until Ready    ${Language}
     Click Element    ${Language}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    34
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3177,6 +3232,7 @@ Test Sorting Of Language Column
 
     Click Element    ${Language}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    34
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3207,6 +3263,7 @@ Test Sorting Of Lend Date Column
     Wait Until Ready    ${Lend Date}
     Click Element    ${Lend Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    35
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -3216,6 +3273,7 @@ Test Sorting Of Lend Date Column
 
     Click Element    ${Lend Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    35
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -3238,6 +3296,7 @@ Test Sorting Of Lent To Column
     Wait Until Ready    ${Lent To}
     Click Element    ${Lent To}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    36
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3246,6 +3305,7 @@ Test Sorting Of Lent To Column
 
     Click Element    ${Lent To}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    36
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3267,6 +3327,7 @@ Test Sorting Of Maturity 1 Column
     Wait Until Ready    ${Maturity 1}
     Click Element    ${Maturity 1}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    37
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3275,6 +3336,7 @@ Test Sorting Of Maturity 1 Column
 
     Click Element    ${Maturity 1}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    37
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3296,6 +3358,7 @@ Test Sorting Of Maturity 2 Column
     Wait Until Ready    ${Maturity 2}
     Click Element    ${Maturity 2}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    38
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3304,6 +3367,7 @@ Test Sorting Of Maturity 2 Column
 
     Click Element    ${Maturity 2}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    38
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3325,6 +3389,7 @@ Test Sorting Of Note Column
     Wait Until Ready    ${Note}
     Click Element    ${Note}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    39
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3333,6 +3398,7 @@ Test Sorting Of Note Column
 
     Click Element    ${Note}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    39
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3356,6 +3422,7 @@ Test Sorting Of Notice Period Column
     Wait Until Ready    ${Notice Period}
     Click Element    ${Notice Period}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    40
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3364,6 +3431,7 @@ Test Sorting Of Notice Period Column
 
     Click Element    ${Notice Period}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    40
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3385,6 +3453,7 @@ Test Sorting Of Notice Period Unit Column
     Wait Until Ready    ${Notice Period Unit}
     Click Element    ${Notice Period Unit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    41
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3393,6 +3462,7 @@ Test Sorting Of Notice Period Unit Column
 
     Click Element    ${Notice Period Unit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    41
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3411,6 +3481,7 @@ Test Sorting Of Notice Required Column
     Wait Until Ready    ${Notice Required}
     Click Element    ${Notice Required}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    42
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3418,6 +3489,7 @@ Test Sorting Of Notice Required Column
 
     Click Element    ${Notice Required}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    42
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3440,6 +3512,7 @@ Test Sorting Of Order nr. Column
     Wait Until Ready    ${Order nr.}
     Click Element    ${Order nr.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    43
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3448,6 +3521,7 @@ Test Sorting Of Order nr. Column
 
     Click Element    ${Order nr.}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    43
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3469,6 +3543,7 @@ Test Sorting Of Org.Unit Column
     Wait Until Ready    ${Org.Unit}
     Click Element    ${Org.Unit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    44
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3477,6 +3552,7 @@ Test Sorting Of Org.Unit Column
 
     Click Element    ${Org.Unit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    44
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3500,6 +3576,7 @@ Test Sorting Of Own Account Column
     Wait Until Ready    ${Own account}
     Click Element    ${Own account}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    45
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3508,6 +3585,7 @@ Test Sorting Of Own Account Column
 
     Click Element    ${Own account}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    45
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3529,6 +3607,7 @@ Test Sorting Of Postponement Condition Column
     Wait Until Ready    ${Postponement Condition}
     Click Element    ${Postponement Condition}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    46
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3537,6 +3616,7 @@ Test Sorting Of Postponement Condition Column
 
     Click Element    ${Postponement Condition}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    46
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3558,6 +3638,7 @@ Test Sorting Of Partner VAT ID Column
     Wait Until Ready    ${Partner VAT ID}
     Click Element    ${Partner VAT ID}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Column Text Values    47
     ${sorted_desc}=    Copy List    ${desc_texts}
     Sort List    ${sorted_desc}
@@ -3566,6 +3647,7 @@ Test Sorting Of Partner VAT ID Column
 
     Click Element    ${Partner VAT ID}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Column Text Values    47
     ${sorted_asc}=    Copy List    ${asc_texts}
     Sort List    ${sorted_asc}
@@ -3587,6 +3669,7 @@ Test Sorting Of Role Column
     Wait Until Ready    ${Role}
     Click Element    ${Role}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    48
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3595,6 +3678,7 @@ Test Sorting Of Role Column
 
     Click Element    ${Role}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    48
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3615,6 +3699,7 @@ Test Sorting Of Service Contract Column
     Wait Until Ready    ${Service Contract}
     Click Element    ${Service Contract}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    49
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3622,6 +3707,7 @@ Test Sorting Of Service Contract Column
 
     Click Element    ${Service Contract}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    49
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3644,6 +3730,7 @@ Test Sorting Of Text Status Column
     Wait Until Ready    ${Status}
     Click Element    ${Status}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    50
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3652,6 +3739,7 @@ Test Sorting Of Text Status Column
 
     Click Element    ${Status}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    50
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3684,6 +3772,7 @@ Test Sorting Of Original Storage Column
     Wait Until Ready    ${Original Storage}
     Click Element    ${Original Storage}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    51
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3692,6 +3781,7 @@ Test Sorting Of Original Storage Column
 
     Click Element    ${Original Storage}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    51
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3712,6 +3802,7 @@ Test Sorting Of Subsidy Column
     Wait Until Ready    ${Subsidy}
     Click Element    ${Subsidy}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    52
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3719,6 +3810,7 @@ Test Sorting Of Subsidy Column
 
     Click Element    ${Subsidy}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    52
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3738,6 +3830,7 @@ Test Sorting Of Supp.payment Column
     Wait Until Ready    ${Supp.payment}
     Click Element    ${Supp.payment}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    53
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3745,6 +3838,7 @@ Test Sorting Of Supp.payment Column
 
     Click Element    ${Supp.payment}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    53
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3764,6 +3858,7 @@ Test Sorting Of Tender Column
     Wait Until Ready    ${Tender}
     Click Element    ${Tender}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    54
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3771,6 +3866,7 @@ Test Sorting Of Tender Column
 
     Click Element    ${Tender}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    54
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3793,6 +3889,7 @@ Test Sorting Of Termination Method Column
     Wait Until Ready    ${Termination Method}
     Click Element    ${Termination Method}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    55
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3801,6 +3898,7 @@ Test Sorting Of Termination Method Column
 
     Click Element    ${Termination Method}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    55
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3822,6 +3920,7 @@ Test Sorting Of To Pay Column
     Wait Until Ready    ${To Pay}
     Click Element    ${To Pay}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    56
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3830,6 +3929,7 @@ Test Sorting Of To Pay Column
 
     Click Element    ${To Pay}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    56
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3856,6 +3956,7 @@ Test Sorting Of To Pay Currency Column
     Wait Until Ready    ${To Pay Currency}
     Click Element    ${To Pay Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    57
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3864,6 +3965,7 @@ Test Sorting Of To Pay Currency Column
 
     Click Element    ${To Pay Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    57
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3885,6 +3987,7 @@ Test Sorting Of To Pay Interval Column
     Wait Until Ready    ${To Pay Interval}
     Click Element    ${To Pay Interval}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    58
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -3893,6 +3996,7 @@ Test Sorting Of To Pay Interval Column
 
     Click Element    ${To Pay Interval}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    58
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -3921,6 +4025,7 @@ Test Sorting Of Valid Since Column
     Wait Until Ready    ${Valid Since}
     Click Element    ${Valid Since}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    59
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -3930,6 +4035,7 @@ Test Sorting Of Valid Since Column
 
     Click Element    ${Valid Since}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    59
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -3959,6 +4065,7 @@ Test Sorting Of Valid Until Column
     Wait Until Ready    ${Valid Until}
     Click Element    ${Valid Until}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    60
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -3968,6 +4075,7 @@ Test Sorting Of Valid Until Column
 
     Click Element    ${Valid Until}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    60
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -3992,6 +4100,7 @@ Test Sorting Of VAT ID Column
     Wait Until Ready    ${VAT ID}
     Click Element    ${VAT ID}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    61
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4000,6 +4109,7 @@ Test Sorting Of VAT ID Column
 
     Click Element    ${VAT ID}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    61
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4021,6 +4131,7 @@ Test Sorting Of Amount Per Year Column
     Wait Until Ready    ${Amount Per Year}
     Click Element    ${Amount Per Year}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    62
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4029,6 +4140,7 @@ Test Sorting Of Amount Per Year Column
 
     Click Element    ${Amount Per Year}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    62
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4053,6 +4165,7 @@ Test Sorting Of Amount Per Year Currency Column
     Wait Until Ready    ${Amount Per Year Currency}
     Click Element    ${Amount Per Year Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    63
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4061,6 +4174,7 @@ Test Sorting Of Amount Per Year Currency Column
 
     Click Element    ${Amount Per Year Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    63
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4085,6 +4199,7 @@ Test Sorting Of Item Column
     Wait Until Ready    ${Item}
     Click Element    ${Item}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    64
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4093,6 +4208,7 @@ Test Sorting Of Item Column
 
     Click Element    ${Item}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    64
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4116,6 +4232,7 @@ Test Sorting Of Quantity Column
     Wait Until Ready    ${Quantity}
     Click Element    ${Quantity}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    65
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4124,6 +4241,7 @@ Test Sorting Of Quantity Column
 
     Click Element    ${Quantity}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    65
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4148,6 +4266,7 @@ Test Sorting Of Unit Column
     Wait Until Ready    ${Unit}
     Click Element    ${Unit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    66
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4156,6 +4275,7 @@ Test Sorting Of Unit Column
 
     Click Element    ${Unit}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    66
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4177,6 +4297,7 @@ Test Sorting Of Unit Price Column
     Wait Until Ready    ${Unit Price}
     Click Element    ${Unit Price}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_prices}=    Get Price Values From Column    67
     ${sorted_desc}=    Copy List    ${desc_prices}
     Sort List    ${sorted_desc}
@@ -4185,6 +4306,7 @@ Test Sorting Of Unit Price Column
 
     Click Element    ${Unit Price}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_prices}=    Get Price Values From Column    67
     ${sorted_asc}=    Copy List    ${asc_prices}
     Sort List    ${sorted_asc}
@@ -4206,6 +4328,7 @@ Test Sorting Of Price Column
     Wait Until Ready    ${Price}
     Click Element    ${Price}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_prices}=    Get Price Values From Column    68
     ${sorted_desc}=    Copy List    ${desc_prices}
     Sort List    ${sorted_desc}
@@ -4214,6 +4337,7 @@ Test Sorting Of Price Column
 
     Click Element    ${Price}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_prices}=    Get Price Values From Column    68
     ${sorted_asc}=    Copy List    ${asc_prices}
     Sort List    ${sorted_asc}
@@ -4238,6 +4362,7 @@ Test Sorting Of Currency Column
     Wait Until Ready    ${Currency}
     Click Element    ${Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    69
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4246,6 +4371,7 @@ Test Sorting Of Currency Column
 
     Click Element    ${Currency}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    69
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4268,6 +4394,7 @@ Test Sorting Of Location Column
     Wait Until Ready    ${Location}
     Click Element    ${Location}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    70
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4276,6 +4403,7 @@ Test Sorting Of Location Column
 
     Click Element    ${Location}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    70
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4304,6 +4432,7 @@ Test Sorting Of Delivery Date Column
     Wait Until Ready    ${Delivery Date}
     Click Element    ${Delivery Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    71
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -4313,6 +4442,7 @@ Test Sorting Of Delivery Date Column
 
     Click Element    ${Delivery Date}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    71
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -4342,6 +4472,7 @@ Test Sorting Of Delivery To Column
     Wait Until Ready    ${Delivery To}
     Click Element    ${Delivery To}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_texts}=    Get Date Column Values From Column    72
     ${asc_dates}=    Convert To Dates    @{asc_texts}
     ${sorted_asc}=    Copy List    ${asc_dates}
@@ -4351,6 +4482,7 @@ Test Sorting Of Delivery To Column
 
     Click Element    ${Delivery To}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_texts}=    Get Date Column Values From Column    72
     ${desc_dates}=    Convert To Dates    @{desc_texts}
     ${sorted_desc}=    Copy List    ${desc_dates}
@@ -4373,6 +4505,7 @@ Test Sorting Of Discount Column
     Wait Until Ready    ${Discount}
     Click Element    ${Discount}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    73
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4381,6 +4514,7 @@ Test Sorting Of Discount Column
 
     Click Element    ${Discount}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    73
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4404,6 +4538,7 @@ Test Sorting Of Maturity Column
     Wait Until Ready    ${Maturity}
     Click Element    ${Maturity}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_prices}=    Get Price Values From Column    74
     ${sorted_desc}=    Copy List    ${desc_prices}
     Sort List    ${sorted_desc}
@@ -4412,6 +4547,7 @@ Test Sorting Of Maturity Column
 
     Click Element    ${Maturity}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_prices}=    Get Price Values From Column    74
     ${sorted_asc}=    Copy List    ${asc_prices}
     Sort List    ${sorted_asc}
@@ -4433,6 +4569,7 @@ Test Sorting Of VAT Rate Column
     Wait Until Ready    ${VAT Rate}
     Click Element    ${VAT Rate}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    75
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4441,6 +4578,7 @@ Test Sorting Of VAT Rate Column
 
     Click Element    ${VAT Rate}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    75
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4463,6 +4601,7 @@ Test Sorting Of Item Type Column
     Wait Until Ready    ${Item Type}
     Click Element    ${Item Type}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    76
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4471,6 +4610,7 @@ Test Sorting Of Item Type Column
 
     Click Element    ${Item Type}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    76
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4495,6 +4635,7 @@ Test Sorting Of VAT Sign Column
     Wait Until Ready    ${VAT Sign}
     Click Element    ${VAT Sign}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    77
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4503,6 +4644,7 @@ Test Sorting Of VAT Sign Column
 
     Click Element    ${VAT Sign}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    77
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4521,6 +4663,7 @@ Test Sorting Of GDPR Column
     Wait Until Ready    ${GDPR}
     Click Element    ${GDPR}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    78
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4528,6 +4671,7 @@ Test Sorting Of GDPR Column
 
     Click Element    ${GDPR}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    78
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}
@@ -4547,6 +4691,7 @@ Test Sorting Of Framework Contract Column
     Wait Until Ready    ${Framework Contract}
     Click Element    ${Framework Contract}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${asc_names}=    Get Column Text Values    79
     ${expected_asc}=    Copy List    ${asc_names}
     Sort List    ${expected_asc}
@@ -4554,6 +4699,7 @@ Test Sorting Of Framework Contract Column
 
     Click Element    ${Framework Contract}
     Sleep    1s
+    Wait Until Element Is Not Visible    ${Please Wait}
     ${desc_names}=    Get Column Text Values    79
     ${expected_desc}=    Copy List    ${desc_names}
     Sort List    ${expected_desc}

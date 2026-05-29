@@ -548,7 +548,7 @@ Test Differences
     Open Context Menu    xpath=//table[@id="s_incident_contracts_tbl"]//td[normalize-space(.)="${Contract Subject}"]
     Wait Until Ready    ${Display Differences}
     Click Element    ${Display Differences}
-    Wait Until Ready    ${Id Differences Next}
+    Wait Until Ready    ${Id Differences Date}
     Sleep    1
     Check File Differences
     Input Text    ${Id Differences Date}    ${Differences Date}

@@ -20,6 +20,7 @@ ${Contract Data Container}      contract_data_container
 ${First Row}                    xpath=//table[@id='${All Table}']/tbody/tr[1]
 ${First Row Highligh NoD}       odd highlight
 ${First Row Highligh ShowD}     odd detail dt-hasChild
+${Please Wait}                  please_wait
 
 
 *** Keywords ***
@@ -60,6 +61,7 @@ Go To My Contracts
     Click Element    ${Id My Contracts}
 
 Click On First Contract
+    Wait Until Element Is Not Visible    ${Please Wait}
     Wait Until Ready    ${All Table}
     Click Element    ${First Row}
 

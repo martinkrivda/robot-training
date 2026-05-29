@@ -4,6 +4,8 @@ Documentation       This is a resource file for fields.
 
 Library             OperatingSystem
 Library             SeleniumLibrary
+Library             Collections
+Library             Process
 Variables           ../credentials.py
 Resource            login.resource
 Resource            fields_setup.resource
@@ -118,6 +120,10 @@ ${Id Add Responsible}                       s_field3
 ${Timeout2}                                 1s
 ${Edited Name}                              dvtestEdited
 ${Id Field}                                 settings_legal_fields
+@{FAILED_TESTS}                             @{EMPTY}
+@{SCREENSHOTS}                              @{EMPTY}
+${APP_VERSION}                              ${EMPTY}
+${App Name}                                 id=app_name
 
 
 *** Keywords ***
@@ -577,3 +583,87 @@ Add Profit Center
     Input Text    ${Id Add Contract Type Description}    ${Profit Center Name}
     Input Text    ${Id Add Responsible}    ${Profit Center Name}
     Click Element    ${Finish Button}
+
+Collect Failure Data
+    IF    '${TEST STATUS}' == 'FAIL'
+        # Bezpečné získání čistého názvu souboru (např. commenting_sch.robot)
+        ${suite_file}=    Evaluate    os.path.basename(r"${SUITE_SOURCE}")    modules=os
+
+        # Spojíme data pomocí robustního oddělovače |||
+        ${test_with_error}=    Catenate    SEPARATOR=|||    ${suite_file}    ${TEST NAME}    ${TEST MESSAGE}
+        Append To List    ${FAILED_TESTS}    ${test_with_error}
+
+        # Uložení screenshotu do složky s logy
+        ${screenshot}=    Set Variable    ${OUTPUT DIR}${/}${TEST NAME}.png
+        Capture Page Screenshot    ${screenshot}
+        Append To List    ${SCREENSHOTS}    ${screenshot}
+
+        Set Global Variable    ${FAILED_TESTS}
+        Set Global Variable    ${SCREENSHOTS}
+    END
+
+Create Jira Ticket If Needed
+    ${fail_count}=    Get Length    ${FAILED_TESTS}
+
+    IF    ${fail_count} > 0
+        ${failed}=    Catenate    SEPARATOR=||    @{FAILED_TESTS}
+        ${screens}=    Catenate    SEPARATOR=||    @{SCREENSHOTS}
+
+        ${result}=    Run Process
+        ...    ${EXECDIR}/venv/Scripts/python.exe
+        ...    ${EXECDIR}/tests/jira_suite_report.py
+        ...    "${failed}"
+        ...    "${screens}"
+        ...    "${APP_VERSION}"
+        ...    stdout=STDOUT
+        ...    stderr=STDOUT
+
+        Should Be Equal As Integers    ${result.rc}    0
+        ...    msg=Python skript selhal! Výpis: ${result.stdout}
+    ELSE
+        Log    No failures → Jira ticket not created
+    END
+
+Run Final Teardown
+    Restore Original Fields State
+    Create Jira Ticket If Needed
+
+Init Setup
+    ${FAILED_TESTS}=    Create List
+    Set Global Variable    ${FAILED_TESTS}
+    ${SCREENSHOTS}=    Create List
+    Set Global Variable    ${SCREENSHOTS}
+
+    Save and Set Fields
+    Get App Version
+
+Get App Version
+    Open Browser And Logged In
+    Wait Until Ready    ${App Name}
+    ${version}=    Get Element Attribute    ${App Name}    title
+    Set Global Variable    ${APP_VERSION}    ${version}
+
+Check If Current Suite Failed
+    # Vytvoříme unikátní název proměnné pro každý .robot soubor (např. ${commenting_sch_FAILED})
+    # ${SUITE_NAME} je vestavěná proměnná Robotu, která obsahuje název aktuálního běžícího souboru
+    ${suite_status_var}=    Set Variable    \${${SUITE_NAME}_FAILED}
+
+    # Zkontrolujeme, zda tato proměnná už existuje a je nastavená na TRUE
+    ${already_failed}=    Run Keyword And Return Status    Variable Should Exist    ${suite_status_var}
+
+    IF    ${already_failed}
+        ${status}=    Get Variable Value    ${suite_status_var}
+        IF    ${status}
+            Skip    Přeskočeno, protože předchozí test v sadě "${SUITE_NAME}" selhal.
+        END
+    END
+
+Collect Failure Data And Track Status
+    # 1. ZDE SE SPUSTÍ TVŮJ PŮVODNÍ KÓD PRO SBĚR DAT (SCREENSHOTY ATD.)
+    Collect Failure Data
+
+    # 2. NOVINKA: Pokud test selhal, označíme aktuální soubor (.robot) za pokažený
+    IF    '${TEST STATUS}' == 'FAIL'
+        # Vytvoříme globální proměnnou specifickou pro tento .robot soubor a nastavíme ji na TRUE
+        Set Global Variable    \${${SUITE_NAME}_FAILED}    ${TRUE}
+    END

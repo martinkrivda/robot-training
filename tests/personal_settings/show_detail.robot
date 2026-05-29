@@ -3,6 +3,7 @@ Documentation       A test suite for show detail settings.
 ...                 Keywords are imported from show_detail.resource
 
 Resource            ${EXECDIR}/resources/show_detail.resource
+Resource            ${EXECDIR}/resources/fields.resource
 
 
 *** Test Cases ***

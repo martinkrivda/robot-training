@@ -3,6 +3,7 @@ Documentation       A test suite for translation in login page.
 ...                 Keywords are imported from login.resource
 
 Resource            ${EXECDIR}/resources/login.resource
+Resource            ${EXECDIR}/resources/fields.resource
 
 Suite Setup         Open Browser To Login Page
 Suite Teardown      Close Browser

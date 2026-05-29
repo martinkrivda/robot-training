@@ -102,17 +102,17 @@ Retype In Short Password
     Input Text    ${Id Retype New Password}    ${Wrong Complexity}
 
 PW Change Should Have Failed With Empty Fields
-    Wait Until Element Is Visible    ${Id Alert Area}
+    Wait Until Ready    ${Id Alert Area}
     Element Text Should Be    ${Id Alert Area}    ${PW Empty Fields Msg}
 
 PW Change Should Have Failed With Wrong Old PW
-    Wait Until Element Is Visible    ${Id Alert Area}
+    Wait Until Ready    ${Id Alert Area}
     Element Text Should Be    ${Id Alert Area}    ${Old PW Wrong Msg}
 
 PW Change Should Have Failed Without Matching PWs
-    Wait Until Element Is Visible    ${Id Alert Area}
+    Wait Until Ready    ${Id Alert Area}
     Element Text Should Be    ${Id Alert Area}    ${PW Not Matching Msg}
 
 PW Change Should Have Failed Without Required Complexity
-    Wait Until Element Is Visible    ${Id Alert Area}
+    Wait Until Ready    ${Id Alert Area}
     Element Text Should Be    ${Id Alert Area}    ${PW Required Complexity Msg}
