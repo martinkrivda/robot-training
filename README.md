@@ -4,9 +4,8 @@ This repository is designed to help you get started with [Robot Framework](https
 
 ## 🔧 Prerequisites
 
-- Python 3.8+
-- Google Chrome or Firefox
-- ChromeDriver or GeckoDriver available in your PATH
+- Python 3.10+ (3.12 recommended)
+- Google Chrome
 
 ## Install RobotFramework
 
@@ -39,65 +38,11 @@ venv\Scripts\activate
 
 You should now see (venv) in your terminal prompt.
 
-### ✅ 3. Install Robot Framework
-
-Upgrade pip and install Robot Framework:
-
-```bash
-pip install --upgrade pip
-pip install robotframework
-```
-
-Check that it’s installed:
-
-```bash
-robot --version
-```
-
-### ✅ 4. Install SeleniumLibrary
-
-Install the Selenium library for Robot Framework:
-
-```bash
-pip install robotframework-seleniumlibrary
-```
-
-### ✅ 5. Install Chrome and ChromeDriver (may be skipped)
+### ✅ 3. Install Chrome (may be skipped)
 
 🔹 a) Install Google Chrome
 If you don't already have it, download Chrome from:
 👉 https://www.google.com/chrome/
-
-Find your Chrome version by going to:
-Menu → Help → About Google Chrome
-
-🔹 b) Download Matching ChromeDriver
-Visit:
-👉 https://googlechromelabs.github.io/chrome-for-testing/
-
-Find and download the version that matches your Chrome version.
-
-Extract chromedriver.exe and move it to a folder like:
-
-```bash
-C:\Tools\chromedriver\
-```
-
-Add that folder to your system PATH:
-
-Control Panel → System → Advanced → Environment Variables
-
-Edit the Path variable and add:
-
-```bash
-C:\Tools\chromedriver\
-```
-
-Open a new terminal and test:
-
-```bash
-chromedriver --version
-```
 
 ## 🚀 Setup
 
@@ -111,7 +56,17 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+Create your own `.env` file by copying the example:
+```bash
+cp .env.example .env
+```
+Then edit `.env` and replace the placeholder values with your personal configuration.
+
+**Note:** The `.env` file is listed in `.gitignore`, so your credentials will not be committed to the repository.
+
 ## ▶️ Running Tests
+
+To run the entire test suite:
 
 ```bash
 robot tests/
@@ -140,7 +95,7 @@ robot tests/GoogleSearch.robot
 ### 🧩 Project Application
 
 - Implement automated tests for the **Centris** application:
-  - URL: [https://apps.iss-europe.eu/csmtest](https://apps.iss-europe.eu/csmtest)
+  - URL: [https://centristest.claudox.com/csmtest](https://centristest.claudox.com/csmtest)
   - Focus on the **Settings** section under **Contracts**
   - Use valid login credentials stored **outside the Git repository**, e.g.:
     - `.env` file with environment variables
