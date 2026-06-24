@@ -4,6 +4,8 @@ Documentation       A test suite for password change.
 
 Resource            ${EXECDIR}/resources/change_pw.resource
 Resource            ${EXECDIR}/resources/fields.resource
+Test Setup    Open Browser To Login Page
+Test Teardown    Close Browser
 
 
 *** Test Cases ***
@@ -39,6 +41,7 @@ Invalid Password Change (Empty Fields)
 
 Invalid Password Change (Wrong Old PW)
     [Documentation]    A test case for invalid password change with wrong old password.
+    [Setup]    NONE
     Type In Wrong Old Password
     Type In New Password
     Retype In New Password
@@ -48,6 +51,7 @@ Invalid Password Change (Wrong Old PW)
 
 Invalid Password Change (New PWs Not Matching)
     [Documentation]    A test case for invalid password change without matching new passwords.
+    [Setup]    NONE
     Type In Current Password
     Type In Random Password
     Retype In New Password
@@ -57,6 +61,7 @@ Invalid Password Change (New PWs Not Matching)
 
 Invalid Password Change (New PW Without Required Complexity)
     [Documentation]    A test case for invalid password change without matching new passwords.
+    [Setup]    NONE
     Type In Current Password
     Type In Short Password
     Retype In Short Password

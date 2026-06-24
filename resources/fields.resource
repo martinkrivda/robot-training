@@ -626,7 +626,7 @@ Create Jira Ticket If Needed
 
 Run Final Teardown
     Restore Original Fields State
-    Create Jira Ticket If Needed
+    # Create Jira Ticket If Needed
 
 Init Setup
     ${FAILED_TESTS}=    Create List
