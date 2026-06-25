@@ -46,7 +46,7 @@ ${Number Sequence}                          ISSTEST
 ${Add Confidentiality}                      Přísně tajné
 ${Add Language 4}                           Čeština
 ${Id Language}                              c_lang
-${Primary Responsible Person}               Vodárek, Dominik
+${Primary Responsible Person}               Admin, Adam
 ${Id Add Primary responsible person}        c_primary
 ${Id Add Contract partner}                  c_partner
 ${Add Contract partner 1}                   Agrofert,

@@ -942,16 +942,16 @@ Enable VAT ID
     Wait Until Ready    ${Contract Type Checkbox}
     Unselect Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
-    Wait Until Element Is Not Visible    ${Id Add Contract Type}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Add VAT ID
     [Arguments]    ${number}
     Wait Until Ready    ${Id Add VAT ID Button}
     Click Button    ${Id Add VAT ID Button}
-    Wait Until Ready    ${Id Add Contract Type}
-    Input Text    ${Id Add Contract Type}    ${number}
+    Wait Until Ready    ${Id Add Field1}
+    Input Text    ${Id Add Field1}    ${number}
     Click Element    ${Finish Button}
-    Wait Until Element Is Not Visible    ${Id Add Contract Type}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Disable VAT ID
     [Arguments]    ${number}
@@ -962,7 +962,7 @@ Disable VAT ID
     Wait Until Ready    ${Contract Type Checkbox}
     Select Checkbox    ${Contract Type Checkbox}
     Click Element    ${Finish Button}
-    Wait Until Element Is Not Visible    ${Id Add Contract Type}
+    Wait Until Element Is Not Visible    ${Id Add Field1}
 
 Go To Original Storage
     Wait Until Ready    ${Id Original Storage}

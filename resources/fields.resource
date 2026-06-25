@@ -37,7 +37,7 @@ ${Create Contract}                          //button[.//span[@class="title" and 
 ${Id Number Sequence}                       c_number
 ${Close Button}                             xpath=//button[@title="Close"]
 ${Personal Space}                           //a[contains(@class, 'main_tabs') and @href="#tab_personal"]
-${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
+${Settings}                                 //a[contains(@class, "main_tabs") and @href="#tab_settings"]
 ${Id Add Field}                             c_legalfield
 ${Id Confidentiality}                       c_confid
 ${Id Contract kind}                         c_kind
@@ -112,7 +112,7 @@ ${Field Name2}                              dvtest
 ${Id Profit Center}                         settings_profcenter
 ${Id Edit Profit Center Button}             ts_edit_profcenter_btn
 ${Id Add Profit Center Button}              ts_add_profcenter_btn
-${Profit Center Name}                       test
+${Profit Center Name}                       tes
 ${Contract Type Checkbox}                   xpath=//input[@type='checkbox' and @id='s_disabled']
 ${Id Add Contract Type}                     s_field1
 ${Id Add Contract Type Description}         s_field2
@@ -288,14 +288,14 @@ Delete Contract
     Wait Until Ready    ${Delete Button}
     Click Button    ${Delete Button}
 
-Edit Item Fields
+Edit Item Fields Invisible
     Go To Settings
     Wait Until Ready    ${Item Field Name}
     Click Element    ${Item Field Name}
     Wait Until Ready    ${Id Fields Edit Button}
     Click Button    ${Id Fields Edit Button}
     Wait Until Ready    ${Contract creation1}
-    Click Element    ${Visibility1}
+    Click Element    ${Visibility2}
     Click Element    ${Finish Button}
 
 Check If Packing Is Not Visible
@@ -311,6 +311,16 @@ Check If Packing Is Not Visible
     Wait Until Ready    ${Id Unit Price}
     Element Should Not Be Visible    ${Id Packing}
     Click Element    ${Close Button}
+
+Edit Item Fields Visible
+    Go To Settings
+    Wait Until Ready    ${Item Field Name}
+    Click Element    ${Item Field Name}
+    Wait Until Ready    ${Id Fields Edit Button}
+    Click Button    ${Id Fields Edit Button}
+    Wait Until Ready    ${Contract creation1}
+    Click Element    ${Visibility1}
+    Click Element    ${Finish Button}
 
 Check If Packing Is Visible
     Wait Until Ready    ${Personal Space}
@@ -626,7 +636,7 @@ Create Jira Ticket If Needed
 
 Run Final Teardown
     Restore Original Fields State
-    # Create Jira Ticket If Needed
+    Create Jira Ticket If Needed
 
 Init Setup
     ${FAILED_TESTS}=    Create List

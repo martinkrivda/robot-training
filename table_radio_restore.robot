@@ -4,8 +4,8 @@ Documentation       A test suite for fields_setup.
 
 Resource            ${EXECDIR}/resources/fields.resource
 
-# Suite Setup         Save and Set Fields
-# Suite Teardown      Restore Original Fields State
+Suite Setup         Save and Set Fields
+Suite Teardown      Restore Original Fields State
 
 
 *** Test Cases ***

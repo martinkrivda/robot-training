@@ -15,9 +15,9 @@ ${Delete Button}                            //button[normalize-space(.)="Odstran
 ${Id Alert}                                 alert_area
 ${Alert Message}                            Vyplňte prosím všechna povinná pole!
 ${Timeout}                                  5s
-${Personal Space}                           //a[@class="main_tabs" and @href="#tab_personal"]
+${Personal Space}                           //a[contains(@class, "main_tabs") and @href="#tab_personal"]
 ${Id Administration and Configuration}      admin_config
-${Settings}                                 //a[@class="main_tabs" and @href="#tab_settings"]
+${Settings}                                 //a[contains(@class, "main_tabs") and @href="#tab_settings"]
 ${Id Dependencies}                          settings_custom_dependencies
 ${Id Master Field Add Button}               ts_add_dep_master_btn
 ${Id Select Master Field}                   s_master_field
@@ -77,7 +77,7 @@ ${Id Primary Responsible Person}            c_primary
 ${Id Secondary Responsible Person}          c_secondary
 ${Id Add Contract Partners}                 c_partner
 ${Id Valid Until}                           c_valid_until
-${Name}                                     dvtest1
+${Name}                                     test
 ${Name2}                                    vod
 ${Edited Date}                              12.07.2025
 ${Id Org Unit}                              c_orgunit

@@ -31,8 +31,9 @@ Not Possible To Create a Contract Without a Required Field
 
 Turn Off/On Visibility of Item Field
     [Documentation]    A test case for visibility of item fields.
+    Edit Item Fields Invisible
     Check If Packing Is Not Visible
-    Edit Item Fields
+    Edit Item Fields Visible
     Check If Packing Is Visible
 
 Turn Off/On Required of Item Field
