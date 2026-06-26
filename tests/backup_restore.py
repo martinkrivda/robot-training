@@ -9,6 +9,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
 import time
 
+"""
+Set backup file on line 156: with open("backup_file.json" ...
+"""
+
 # Force UTF-8 encoding for stdout and stderr
 sys.stdout.reconfigure(encoding='utf-8')
 sys.stderr.reconfigure(encoding='utf-8')
